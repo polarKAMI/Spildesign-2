@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class UI_InventoryPage : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class UI_InventoryPage : MonoBehaviour
 
     List<UI_InventoryItem> listofUIItems = new List<UI_InventoryItem>();
 
+    public event Action<int> OnDescriptionRequested,
+        OnItemActionRequested;
 
     private void Awake()
     {
@@ -37,6 +40,14 @@ public class UI_InventoryPage : MonoBehaviour
             uiItem.OnItemEndDrag += HandleEndDrag;
             uiItem.OnRightMouseBtnClick += HandleShowItemActions;
             
+        }
+    }
+
+    public void UpdateData(int itemIndex, Sprite itemImage)
+    {
+        if (listofUIItems.Count > itemIndex)
+        {
+            listofUIItems[itemIndex].SetData(itemImage);
         }
     }
 
@@ -62,17 +73,42 @@ public class UI_InventoryPage : MonoBehaviour
 
     private void HandleItemSelection(UI_InventoryItem item)
     {
-        Debug.Log("lets go");
+       int index = listofUIItems.IndexOf(item);
+        if (index == -1)
+            return;
+        OnDescriptionRequested?.Invoke(index);
     }
 
     public void Show()
     {
         gameObject.SetActive(true);
-        itemDescription.ResetDescription(); 
+        itemDescription.ResetDescription();
+        ResetSelection();
+    }
+
+    private void ResetSelection()
+    {
+        itemDescription.ResetDescription();
+        DeselectAllItems();
+    }
+
+    private void DeselectAllItems()
+    {
+       foreach(UI_InventoryItem item in listofUIItems)
+        {
+            item.Deselect();
+        }
     }
 
     public void Hide()
     {
         gameObject.SetActive(false);
+    }
+
+    internal void UpdateDescription(int itemIndex, Sprite itemImage, string name, string description)
+    {
+        itemDescription.SetDescription(itemImage, name, description);
+        DeselectAllItems();
+        listofUIItems[itemIndex].Select();
     }
 }
