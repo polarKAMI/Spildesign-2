@@ -7,11 +7,9 @@ public class Scanner_Beam : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("ScanObject"))
+        if (other.CompareTag("ScanObject"))
         {
-            Debug.Log("Scan ya later animator"); 
-            
-            Destroy(other.gameObject); 
+            Debug.Log("Scan ya later animator");
         }
     }
 }
