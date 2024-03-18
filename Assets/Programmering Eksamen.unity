@@ -123,6 +123,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+<<<<<<< HEAD
 --- !u!1 &345087223
 GameObject:
   m_ObjectHideFlags: 0
@@ -266,6 +267,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70027b237c795f848806fe835538b76e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+=======
+>>>>>>> main
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -358,6 +361,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< HEAD
 --- !u!1 &1415483220
 GameObject:
   m_ObjectHideFlags: 0
@@ -694,12 +698,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 483fee67b99819743b4a326aaec41684, type: 3}
+=======
+>>>>>>> main
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 519420032}
+<<<<<<< HEAD
   - {fileID: 345087225}
   - {fileID: 1647825390}
   - {fileID: 717118531337371474}
   - {fileID: 1415483223}
+=======
+>>>>>>> main
