@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3934568074880862378}
   - component: {fileID: 4020939518934635826}
   - component: {fileID: 3185324914603039126}
+  - component: {fileID: 2239738546294574519}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -173,7 +174,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Maxhealth: 10
-  currentenemyhealth: 0
+  currentenemyhealth: 10
 --- !u!114 &3185324914603039126
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,3 +188,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: {fileID: 0}
+--- !u!114 &2239738546294574519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2952199648344862858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bb213eb4562db34e96a07f8e9fc8c1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Patrolpoints: []
+  Movespeed: 0
+  patroldestination: 0
