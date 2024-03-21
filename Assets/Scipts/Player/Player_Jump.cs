@@ -10,6 +10,7 @@ public class PlayerJump : MonoBehaviour
     private bool isChargingJump = false; // Flag to track if jump is currently being charged
     private bool hasReleasedSpace = true; // Flag to track if spacebar has been released since the last jump
     public float maxJumpForce = 5f; // Maximum jump force
+    public float minJumpForce = 2f; // Minimum jump force (when releasing spacebar early)
     public float jumpArcHeight = 5f; // Height of the jump arc
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
@@ -21,7 +22,7 @@ public class PlayerJump : MonoBehaviour
 
     private void Update()
     {
-        // Jump charging
+        // Start jump charging when holding down spacebar and grounded
         if (Input.GetKeyDown(KeyCode.Space) && IsGrounded() && hasReleasedSpace)
         {
             Debug.Log("Spacebar pressed");
@@ -30,25 +31,24 @@ public class PlayerJump : MonoBehaviour
             hasReleasedSpace = false;
         }
 
-        // Calculate current jump force based on charge duration
-        if (isChargingJump)
+        // Stop jump charging when releasing spacebar
+        if (Input.GetKeyUp(KeyCode.Space))
         {
             float chargeTime = Time.time - jumpStartTime;
-            Debug.Log("Charge time: " + chargeTime);
-            float chargeRatio = Mathf.Clamp01(chargeTime / jumpChargeDuration);
-            float currentJumpForce = maxJumpForce * chargeRatio;
-
-            if (chargeTime >= jumpChargeDuration)
+            if (chargeTime < jumpChargeDuration)
             {
+                // Calculate jump force based on charge duration
+                float chargeRatio = chargeTime / jumpChargeDuration;
+                float currentJumpForce = Mathf.Lerp(minJumpForce, maxJumpForce, chargeRatio);
                 Jump(currentJumpForce);
-                isChargingJump = false;
-                hasReleasedSpace = true; // Set flag to true after jump
             }
-        }
+            else
+            {
+                // Jump with max force if the spacebar was held down for the full charge duration
+                Jump(maxJumpForce);
+            }
 
-        // Reset hasReleasedSpace flag when grounded
-        if (IsGrounded())
-        {
+            isChargingJump = false;
             hasReleasedSpace = true;
         }
     }
