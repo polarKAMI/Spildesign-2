@@ -5,17 +5,15 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
-  - Scanbeam
-  - ScanObject
-  - ScanObject2
+  - Ladder
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - ScanLayer
+  - background
   - Water
   - UI
-  - 
+  - Ground
   - 
   - 
   - 
