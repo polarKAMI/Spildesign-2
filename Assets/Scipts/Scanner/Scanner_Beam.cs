@@ -11,5 +11,9 @@ public class Scanner_Beam : MonoBehaviour
         {
             Debug.Log("Scan ya later animator");
         }
+        if (other.CompareTag("ScanObject2"))
+        {
+            Debug.Log("This is getting out of hand, now there are 2 of them");
+        }
     }
 }
