@@ -8,15 +8,12 @@ using UnityEngine.EventSystems;
 public class UI_InventoryPage : MonoBehaviour
 {
     [SerializeField]
-    private UI_InventoryItem itemPrefab;
-
-    [SerializeField]
     private RectTransform contentPanel;
 
     [SerializeField]
     private UIInventoryDescription itemDescription;
 
-    List<UI_InventoryItem> listofUIItems = new List<UI_InventoryItem>();
+    List<Sprite> itemSprites = new List<Sprite>(); // Store sprites of items
 
     public event Action<int> OnDescriptionRequested,
         OnItemActionRequested;
@@ -26,58 +23,30 @@ public class UI_InventoryPage : MonoBehaviour
         Hide();
         itemDescription.ResetDescription();
     }
-    public void InitializeInventoryUI(int inventorysize)
+
+    // Method to load items into the carousel menu
+    public void LoadItems(List<Sprite> sprites)
     {
-        for (int i = 0; i < inventorysize; i++)
+        itemSprites = sprites;
+
+        // Update carousel images with item sprites
+        for (int i = 0; i < itemSprites.Count; i++)
         {
-            UI_InventoryItem uiItem =
-                Instantiate(itemPrefab, Vector3.zero, Quaternion.identity);
-            uiItem.transform.SetParent(contentPanel);
-            listofUIItems.Add(uiItem);
-            uiItem.OnItemClick += HandleItemSelection;
-            uiItem.OnItemBeginDrag += HandleBeginDrag;
-            uiItem.OnItemDroppedOn += HandleSwap;
-            uiItem.OnItemEndDrag += HandleEndDrag;
-            uiItem.OnRightMouseBtnClick += HandleShowItemActions;
+            Transform slot = contentPanel.GetChild(i);
+           
+           
+        }
+
+        // Clear remaining slots if item count is less than total slots
+        for (int i = itemSprites.Count; i < contentPanel.childCount; i++)
+        {
+            Transform slot = contentPanel.GetChild(i);
+            
             
         }
     }
 
-    public void UpdateData(int itemIndex, Sprite itemImage)
-    {
-        if (listofUIItems.Count > itemIndex)
-        {
-            listofUIItems[itemIndex].SetData(itemImage);
-        }
-    }
-
-    private void HandleShowItemActions(UI_InventoryItem item)
-    {
-
-    }
-
-    private void HandleEndDrag(UI_InventoryItem item)
-    {
-
-    }
-
-    private void HandleSwap(UI_InventoryItem item)
-    {
-
-    }
-
-    private void HandleBeginDrag(UI_InventoryItem item)
-    {
-
-    }
-
-    private void HandleItemSelection(UI_InventoryItem item)
-    {
-       int index = listofUIItems.IndexOf(item);
-        if (index == -1)
-            return;
-        OnDescriptionRequested?.Invoke(index);
-    }
+    // Handle other UI interactions as before...
 
     public void Show()
     {
@@ -89,15 +58,7 @@ public class UI_InventoryPage : MonoBehaviour
     private void ResetSelection()
     {
         itemDescription.ResetDescription();
-        DeselectAllItems();
-    }
-
-    private void DeselectAllItems()
-    {
-       foreach(UI_InventoryItem item in listofUIItems)
-        {
-            item.Deselect();
-        }
+        // DeselectAllItems(); // No need to deselect items in this context
     }
 
     public void Hide()
@@ -108,7 +69,6 @@ public class UI_InventoryPage : MonoBehaviour
     internal void UpdateDescription(int itemIndex, Sprite itemImage, string name, string description)
     {
         itemDescription.SetDescription(itemImage, name, description);
-        DeselectAllItems();
-        listofUIItems[itemIndex].Select();
+        // DeselectAllItems(); // No need to deselect items in this context
     }
 }

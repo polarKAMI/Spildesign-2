@@ -19,7 +19,7 @@ public class InventoryController : MonoBehaviour
 
     private void PrepareUI()
     {
-        inventoryUI.InitializeInventoryUI(inventoryData.Size);
+        
         inventoryUI.OnDescriptionRequested += HandleDescriptionRequest;
         inventoryUI.OnItemActionRequested += HandleItemActionRequest;
     }
@@ -80,6 +80,6 @@ public class InventoryController : MonoBehaviour
     {
         // Update UI to reflect the current item in the carousel
         List<InventoryItem> items = inventoryData.GetCurrentInventoryState().Values.ToList();
-        inventoryUI.UpdateData(currentItemIndex, items[currentItemIndex].Item.ItemImage);
+        
     }
 }
