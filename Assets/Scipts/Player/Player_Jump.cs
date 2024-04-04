@@ -5,12 +5,13 @@ using UnityEngine;
 public class PlayerJump : MonoBehaviour
 {
     private Rigidbody2D rb;
+    private bool canJump = true; // Flag to track if the player can jump
+    private bool isGrounded = false; // Flag to track if the player is grounded
+    private bool isChargingJump = false; // Flag to track if the player is charging the jump
     private float jumpStartTime; // Time when jump charging started
     private float jumpChargeDuration = 1f; // Duration to charge the jump in seconds
-    private bool isChargingJump = false; // Flag to track if jump is currently being charged
-    private bool hasReleasedSpace = true; // Flag to track if spacebar has been released since the last jump
-    public float maxJumpForce = 5f; // Maximum jump force
-    public float jumpArcHeight = 5f; // Height of the jump arc
+    public float maxJumpForce = 12f; // Maximum jump force
+    public float minJumpForce = 5f; // Minimum jump force (when releasing spacebar early)
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
 
@@ -21,48 +22,70 @@ public class PlayerJump : MonoBehaviour
 
     private void Update()
     {
-        // Jump charging
-        if (Input.GetKeyDown(KeyCode.Space) && IsGrounded() && hasReleasedSpace)
-        {
-            Debug.Log("Spacebar pressed");
-            jumpStartTime = Time.time;
-            isChargingJump = true;
-            hasReleasedSpace = false;
-        }
+        // Check if the player is grounded
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
 
-        // Calculate current jump force based on charge duration
-        if (isChargingJump)
+        // Check if the player can jump and is grounded
+        if (canJump && isGrounded)
         {
-            float chargeTime = Time.time - jumpStartTime;
-            Debug.Log("Charge time: " + chargeTime);
-            float chargeRatio = Mathf.Clamp01(chargeTime / jumpChargeDuration);
-            float currentJumpForce = maxJumpForce * chargeRatio;
-
-            if (chargeTime >= jumpChargeDuration)
+            // Start charging the jump when spacebar is pressed
+            if (Input.GetKeyDown(KeyCode.Space))
             {
-                Jump(currentJumpForce);
-                isChargingJump = false;
-                hasReleasedSpace = true; // Set flag to true after jump
+                StartChargingJump();
+            }
+
+            // Release the jump when spacebar is released
+            if (Input.GetKeyUp(KeyCode.Space))
+            {
+                ReleaseJump();
             }
         }
 
-        // Reset hasReleasedSpace flag when grounded
-        if (IsGrounded())
-        {
-            hasReleasedSpace = true;
-        }
+        // Update the jump charging
+        UpdateChargingJump();
+    }
+
+    private void StartChargingJump()
+    {
+        isChargingJump = true;
+        jumpStartTime = Time.time;
+    }
+
+    private void ReleaseJump()
+    {
+        isChargingJump = false;
+        float chargeTime = Time.time - jumpStartTime;
+
+        // Calculate jump force based on charge duration
+        float chargeRatio = Mathf.Clamp01(chargeTime / jumpChargeDuration);
+        float currentJumpForce = Mathf.Lerp(minJumpForce, maxJumpForce, chargeRatio);
+
+        // Jump with the calculated force
+        Jump(currentJumpForce);
     }
 
     private void Jump(float jumpForce)
     {
         // Apply the jump force directly upward
         rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+        canJump = false; // Set canJump to false after jumping
     }
 
-    private bool IsGrounded()
+    private void UpdateChargingJump()
     {
-        bool grounded = Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
-        Debug.Log("Grounded: " + grounded);
-        return grounded;
+        // Reset charging if spacebar is not held down
+        if (!Input.GetKey(KeyCode.Space))
+        {
+            isChargingJump = false;
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        // Check if the player has collided with an object on the ground layer
+        if (groundLayer == (groundLayer | (1 << collision.gameObject.layer)))
+        {
+            canJump = true; // Set canJump to true when grounded
+        }
     }
 }
