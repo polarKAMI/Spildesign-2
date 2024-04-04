@@ -14,21 +14,34 @@ public class playerattack2 : MonoBehaviour
     public MonoBehaviour PlayerMovement;
     public PlayerMovement playermovement;
 
+    private bool canAttack = true;
 
-    
+    public AudioClip attackSound; // Sound to play when attacking
+    public AudioClip secondSound; // Second sound to play after 1 second
+    public AudioSource audioSource;
+
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
 
     void Update()
     {
         
         
-        if (Input.GetKeyDown(KeyCode.E) & (currentAmmo > 0))
+        if (Input.GetKeyDown(KeyCode.E) & (currentAmmo > 0 && canAttack))
         {
+            audioSource.PlayOneShot(attackSound);
+
             Instantiate(Projectile, fireposition.position, fireposition.rotation);
             currentAmmo--;
 
             PlayerMovement.enabled = false;
 
+            canAttack = false;
             pushback();
+
+            Invoke("attack", 5f);
 
             if (currentAmmo == 0)
             {
@@ -78,8 +91,13 @@ public class playerattack2 : MonoBehaviour
     void Startscript()
     {
         PlayerMovement.enabled = true;
+        
     }
-    
 
-   
+    void attack()
+    {
+        audioSource.PlayOneShot(secondSound);
+        canAttack = true;
+    }
+
 }
