@@ -11,7 +11,7 @@ public class InventorySO : ScriptableObject
     private List<InventoryItem> inventoryItems;
 
     [SerializeField]
-    public int Size { get; private set; } = 20;
+    public int Size { get; private set; } = 16;
 
     public void Initialize()
     {

@@ -41,7 +41,6 @@ public class PlayerController : MonoBehaviour
             else
             {
                 uiManager.OpenInventory();
-                uiManager.CreateInventorySlots(16);
                 isInventoryOpen = true;
             }
         }
