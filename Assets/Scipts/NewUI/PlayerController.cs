@@ -2,8 +2,9 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] public GameObject inventoryUIManager;
+    [SerializeField] private GameObject inventoryUIManager;
     private bool isInventoryOpen = false; // Flag to track inventory state
+
     void Start()
     {
         // Ensure inventoryUIManager is assigned before using it
@@ -17,11 +18,25 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+
     void Update()
     {
+        // Toggle inventory when the I key is pressed
         if (Input.GetKeyDown(KeyCode.I))
         {
             ToggleInventory();
+        }
+
+        // Scroll inventory left when the A key is pressed
+        if (isInventoryOpen && Input.GetKeyDown(KeyCode.A))
+        {
+            ScrollInventoryLeft();
+        }
+
+        // Scroll inventory right when the D key is pressed
+        if (isInventoryOpen && Input.GetKeyDown(KeyCode.D))
+        {
+            ScrollInventoryRight();
         }
     }
 
@@ -47,6 +62,30 @@ public class PlayerController : MonoBehaviour
         else
         {
             Debug.LogError("InventoryUIManager is not initialized.");
+        }
+    }
+
+    void ScrollInventoryLeft()
+    {
+        if (inventoryUIManager != null)
+        {
+            // Get the InventoryUIManager component
+            InventoryUIManager uiManager = inventoryUIManager.GetComponent<InventoryUIManager>();
+
+            // Call the ScrollInventoryLeft function
+            uiManager.ScrollInventoryLeft();
+        }
+    }
+
+    void ScrollInventoryRight()
+    {
+        if (inventoryUIManager != null)
+        {
+            // Get the InventoryUIManager component
+            InventoryUIManager uiManager = inventoryUIManager.GetComponent<InventoryUIManager>();
+
+            // Call the ScrollInventoryRight function
+            uiManager.ScrollInventoryRight();
         }
     }
 }

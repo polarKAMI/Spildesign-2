@@ -3,13 +3,44 @@ using UnityEngine.UI;
 
 public class ItemUI : MonoBehaviour
 {
-    // Reference to the UI image for the item
-    public Image itemImage;
+    public int index = 0;
+    private Image itemImage;
+    private Transform cachedTransform; // Store the transform reference
 
-    // Method to set the sprite of the "Item" UI image
-    public void SetItemSprite(Sprite sprite)
+    private void Awake()
     {
-        // Set the sprite of the item image
-        itemImage.sprite = sprite; // Line 13
+        itemImage = GetComponent<Image>();
+        cachedTransform = transform; // Cache the transform reference
     }
+
+    // Method to set the index of the item
+    public void SetIndex(int newIndex)
+    {
+        index = newIndex;
+    }
+
+    // Method to get the index of the item
+    public int GetIndex()
+    {
+        return index;
+    }
+
+    // Method to update the item image
+    public void UpdateItem(Sprite sprite)
+    {
+        itemImage.sprite = sprite;
+    }
+
+    // Method to get the cached transform
+    public Transform GetCachedTransform()
+    {
+        return cachedTransform;
+    }
+
+    public void UpdateCachedTransform()
+    {
+        cachedTransform = transform;
+    }
+
+    // Other methods and properties...
 }
