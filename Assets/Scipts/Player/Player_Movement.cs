@@ -4,50 +4,50 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-<<<<<<< HEAD
-    private bool isFacingRight = true;
-    private float horizontal;
-    private float currentSpeed = 0f; // Current movement speed
-=======
     public bool isFacingRight = true;
     private float horizontal;
     public float currentSpeed = 0f; // Current movement speed
     public float baseSpeed = 2f; // Base movement speed
->>>>>>> main
     public float maxSpeed = 5f; // Maximum movement speed
     public float acceleration = 2f; // Acceleration rate
     public float deceleration = 4f; // Deceleration rate
     public float sprintSpeedMultiplier = 2f; // Speed multiplier when sprinting
+    public float sprintCostPerSecond = 10f; // Stamina cost per second of sprinting
+    public float staminaRegenPerSecond = 5f; // Stamina regeneration per second
+    public float maxStamina = 100f; // Maximum stamina
+    public float currentStamina; // Current stamina
     [SerializeField] private Rigidbody2D rb;
 
-<<<<<<< HEAD
-=======
     private void Start()
     {
         // Set the initial currentSpeed to the baseSpeed
         currentSpeed = baseSpeed;
+        currentStamina = maxStamina; // Set initial stamina to max
     }
 
->>>>>>> main
     private void Update()
     {
         horizontal = Input.GetAxisRaw("Horizontal");
 
         // Sprinting
-        float sprintMultiplier = Input.GetKey(KeyCode.LeftShift) ? sprintSpeedMultiplier : 1f;
+        bool isSprinting = Input.GetKey(KeyCode.LeftShift) && currentStamina > 0f;
+        float sprintMultiplier = isSprinting ? sprintSpeedMultiplier : 1f;
 
-        // Acceleration
-        if (horizontal != 0f)
+        // Calculate movement speed based on sprinting and stamina
+        float targetSpeed = isSprinting ? maxSpeed * sprintMultiplier : baseSpeed;
+        currentSpeed = Mathf.MoveTowards(currentSpeed, targetSpeed, acceleration * Time.deltaTime);
+
+        // Decrease stamina when sprinting
+        if (isSprinting)
         {
-            currentSpeed = Mathf.MoveTowards(currentSpeed, maxSpeed * sprintMultiplier, acceleration * Time.deltaTime);
+            currentStamina -= sprintCostPerSecond * Time.deltaTime;
+            currentStamina = Mathf.Clamp(currentStamina, 0f, maxStamina); // Clamp stamina between 0 and maxStamina
         }
         else
         {
-<<<<<<< HEAD
-            currentSpeed = Mathf.MoveTowards(currentSpeed, 0f, deceleration * Time.deltaTime);
-=======
-            currentSpeed = Mathf.MoveTowards(currentSpeed, baseSpeed, deceleration * Time.deltaTime);
->>>>>>> main
+            // Regenerate stamina when not sprinting
+            currentStamina += staminaRegenPerSecond * Time.deltaTime;
+            currentStamina = Mathf.Clamp(currentStamina, 0f, maxStamina); // Clamp stamina between 0 and maxStamina
         }
 
         Flip();
@@ -68,13 +68,8 @@ public class PlayerMovement : MonoBehaviour
             localScale.x *= -1f;
             transform.localScale = localScale;
 
-<<<<<<< HEAD
-            // Reset current speed to zero when flipping
-            currentSpeed = 0f;
-=======
             // Reset current speed to baseSpeed when flipping
             currentSpeed = baseSpeed;
->>>>>>> main
         }
     }
 }
