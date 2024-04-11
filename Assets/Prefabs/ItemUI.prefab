@@ -179,6 +179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c637003c48ccbc34890784b9b92bb3b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  index: 0
   itemImage: {fileID: 8179105651681254489}
 --- !u!225 &5919512764721273400
 CanvasGroup:

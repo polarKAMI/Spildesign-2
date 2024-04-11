@@ -4,12 +4,12 @@ using UnityEngine.UI;
 public class ItemUI : MonoBehaviour
 {
     public int index = 0;
-    private Image itemImage;
+    public Image itemImage;
     private Transform cachedTransform; // Store the transform reference
 
     private void Awake()
     {
-        itemImage = GetComponent<Image>();
+        Image itemImage = transform.Find("Item").GetComponent<Image>();
         cachedTransform = transform; // Cache the transform reference
     }
 

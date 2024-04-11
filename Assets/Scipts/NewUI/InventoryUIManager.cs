@@ -21,6 +21,14 @@ public class InventoryUIManager : MonoBehaviour
 
     public void CloseInventory()
     {
+        // Close the options panel if it's active
+        OptionsPanelManager optionsPanelManager = FindObjectOfType<OptionsPanelManager>();
+        if (optionsPanelManager != null)
+        {
+            optionsPanelManager.ToggleOptionsPanel(false);
+        }
+
+        // Close the inventory panel
         inventoryPanelObject.SetActive(false);
         ClearInventoryUI();
     }
@@ -29,7 +37,7 @@ public class InventoryUIManager : MonoBehaviour
     {
         if (!isMoving)
         {
-            ShiftInventorySlots(1);
+            ShiftInventorySlots(-1);
         }
     }
 
@@ -37,7 +45,7 @@ public class InventoryUIManager : MonoBehaviour
     {
         if (!isMoving)
         {
-            ShiftInventorySlots(-1);
+            ShiftInventorySlots(1);
         }
     }
 
@@ -87,6 +95,15 @@ public class InventoryUIManager : MonoBehaviour
 
     private void ClearInventoryUI()
     {
+        // Call ResetOptions from OptionsPanelManager script if it's available
+        OptionsPanelManager optionsPanelManager = FindObjectOfType<OptionsPanelManager>();
+        if (optionsPanelManager != null)
+        {
+            optionsPanelManager.ResetOptions();
+            optionsPanelManager.ToggleOptionsPanel(false); // Toggle options panel off
+        }
+
+        // Destroy inventory slots
         foreach (GameObject slot in inventorySlots)
         {
             Destroy(slot);

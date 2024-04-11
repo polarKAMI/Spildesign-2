@@ -101,7 +101,7 @@ public class OptionsPanelManager : MonoBehaviour
     }
 
     // Method to reset the selected index and disable all option borders
-    void ResetOptions()
+    public void ResetOptions()
     {
         selectedIndex = 0;
         foreach (var border in optionBorders)
