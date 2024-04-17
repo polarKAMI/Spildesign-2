@@ -42,5 +42,8 @@ public class ItemUI : MonoBehaviour
         cachedTransform = transform;
     }
 
-    // Other methods and properties...
+    public bool IsHighlighted()
+    {
+        return Mathf.Approximately(cachedTransform.localPosition.z, 0f);
+    }
 }

@@ -37,7 +37,7 @@ public class InventoryUIManager : MonoBehaviour
     {
         if (!isMoving)
         {
-            ShiftInventorySlots(-1);
+            ShiftInventorySlots(1);
         }
     }
 
@@ -45,7 +45,7 @@ public class InventoryUIManager : MonoBehaviour
     {
         if (!isMoving)
         {
-            ShiftInventorySlots(1);
+            ShiftInventorySlots(-1);
         }
     }
 
@@ -56,7 +56,7 @@ public class InventoryUIManager : MonoBehaviour
 
         // Create inventory slots based on inventorySO data
         int slotCount = inventorySO.Size;
-        float angleStep = 360f / slotCount;
+        float angleStep = -360f / slotCount;
         float radius = 100f; // Adjust as needed
         float startingAngle = 180f; // Adjust as needed
 

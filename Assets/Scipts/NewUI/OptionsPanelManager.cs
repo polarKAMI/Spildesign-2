@@ -5,8 +5,8 @@ public class OptionsPanelManager : MonoBehaviour
     public GameObject optionsPanel; // Reference to the options panel GameObject
     public GameObject[] optionBorders; // Array of GameObjects representing the borders for each option
     public GameObject slotsPanel; // Reference to the slots panel GameObject
+    public InventoryUIManager inventoryUIManager;
 
-    private int selectedIndex = 0; // Index of the currently selected option
     private bool isOptionsPanelActive = false; // Flag to track if the options panel is active
 
     void Start()
@@ -23,12 +23,6 @@ public class OptionsPanelManager : MonoBehaviour
     {
         if (slotsPanel.activeSelf)
         {
-            // Check if the options panel is already active and trying to be opened again
-            if (isOptionsPanelActive && open)
-            {
-                return; // Exit the method without further action
-            }
-
             optionsPanel.SetActive(open); // Set the options panel GameObject to active or inactive based on the 'open' parameter
             if (open)
             {
@@ -57,56 +51,64 @@ public class OptionsPanelManager : MonoBehaviour
             ToggleOptionsPanel(false);
         }
 
-        // Check for input to scroll through options (if the options panel is active)
-        if (isOptionsPanelActive)
+        // Check for input to select the highlighted item (if the options panel is active)
+        if (isOptionsPanelActive && Input.GetKeyDown(KeyCode.Return))
         {
-            if (Input.GetKeyDown(KeyCode.W))
-            {
-                // Decrement the selected index and loop back to the last option if it goes below 0
-                if (selectedIndex == 0)
-                {
-                    SelectOption(optionBorders.Length - 1);
-                }
-                else
-                {
-                    SelectOption(selectedIndex - 1);
-                }
-            }
-            else if (Input.GetKeyDown(KeyCode.S))
-            {
-                // Increment the selected index and loop back to the first option if it exceeds the maximum index
-                if (selectedIndex == optionBorders.Length - 1)
-                {
-                    SelectOption(0);
-                }
-                else
-                {
-                    SelectOption(selectedIndex + 1);
-                }
-            }
+            SelectHighlightedItem();
         }
     }
 
-    // Method to select an option by index
     void SelectOption(int index)
     {
         // Remove the border highlight from the previously selected option
-        optionBorders[selectedIndex].SetActive(false);
-
-        // Set the new selected index (clamping within the bounds of the options array)
-        selectedIndex = Mathf.Clamp(index, 0, optionBorders.Length - 1);
+        optionBorders[index].SetActive(false);
 
         // Highlight the selected option with a border
-        optionBorders[selectedIndex].SetActive(true);
+        optionBorders[index].SetActive(true);
     }
 
     // Method to reset the selected index and disable all option borders
     public void ResetOptions()
     {
-        selectedIndex = 0;
         foreach (var border in optionBorders)
         {
             border.SetActive(false);
         }
+    }
+
+    public void SelectHighlightedItem()
+    {
+        ItemUI highlightedItem = GetHighlightedItem();
+        if (highlightedItem != null)
+        {
+            HandleSelectedItem(highlightedItem);
+        }
+        else
+        {
+            Debug.LogError("No highlighted item found.");
+        }
+    }
+
+    private ItemUI GetHighlightedItem()
+    {
+        // Get all ItemUI components in the inventory panel
+        ItemUI[] itemUIs = inventoryUIManager.GetComponentsInChildren<ItemUI>();
+
+        // Find the highlighted ItemUI
+        foreach (ItemUI itemUI in itemUIs)
+        {
+            if (itemUI.IsHighlighted())
+            {
+                return itemUI;
+            }
+        }
+        return null; // Return null if no highlighted ItemUI is found
+    }
+
+    private void HandleSelectedItem(ItemUI itemUI)
+    {
+        // Here, you can implement the logic for what happens when a highlighted item is selected.
+        // For example, you can use the item's data to perform an action, equip an item, etc.
+        Debug.Log("Selected Highlighted Item: " + itemUI.GetIndex());
     }
 }
