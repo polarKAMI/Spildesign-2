@@ -12,7 +12,7 @@ public class PlayerMovement : MonoBehaviour
     public float acceleration = 2f; // Acceleration rate
     public float deceleration = 4f; // Deceleration rate
     public float sprintSpeedMultiplier = 2f; // Speed multiplier when sprinting
-    public float sprintCostPerSecond = 10f; // Stamina cost per second of sprinting
+    public float sprintCostPerSecond = 20f; // Stamina cost per second of sprinting
     public float staminaRegenPerSecond = 5f; // Stamina regeneration per second
     public float maxStamina = 100f; // Maximum stamina
     public float currentStamina; // Current stamina

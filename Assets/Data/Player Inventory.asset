@@ -15,21 +15,17 @@ MonoBehaviour:
   inventoryItems:
   - Item: {fileID: 11400000, guid: b1ed830bc737fe44b9ae26c6c1c590d5, type: 2}
   - Item: {fileID: 11400000, guid: 20f45b71a926e6b40b1cf5696d02edcf, type: 2}
-  - Item: {fileID: 0}
-  - Item: {fileID: 0}
-  - Item: {fileID: 0}
-  - Item: {fileID: 0}
-  - Item: {fileID: 0}
-  - Item: {fileID: 0}
-  - Item: {fileID: 0}
-  - Item: {fileID: 0}
-  - Item: {fileID: 0}
-  - Item: {fileID: 0}
-  - Item: {fileID: 0}
-  - Item: {fileID: 0}
-  - Item: {fileID: 0}
-  - Item: {fileID: 0}
-  - Item: {fileID: 0}
-  - Item: {fileID: 0}
-  - Item: {fileID: 0}
-  - Item: {fileID: 0}
+  - Item: {fileID: 11400000, guid: b1ed830bc737fe44b9ae26c6c1c590d5, type: 2}
+  - Item: {fileID: 11400000, guid: 20f45b71a926e6b40b1cf5696d02edcf, type: 2}
+  - Item: {fileID: 11400000, guid: b1ed830bc737fe44b9ae26c6c1c590d5, type: 2}
+  - Item: {fileID: 11400000, guid: 20f45b71a926e6b40b1cf5696d02edcf, type: 2}
+  - Item: {fileID: 11400000, guid: b1ed830bc737fe44b9ae26c6c1c590d5, type: 2}
+  - Item: {fileID: 11400000, guid: 20f45b71a926e6b40b1cf5696d02edcf, type: 2}
+  - Item: {fileID: 11400000, guid: b1ed830bc737fe44b9ae26c6c1c590d5, type: 2}
+  - Item: {fileID: 11400000, guid: 20f45b71a926e6b40b1cf5696d02edcf, type: 2}
+  - Item: {fileID: 11400000, guid: b1ed830bc737fe44b9ae26c6c1c590d5, type: 2}
+  - Item: {fileID: 11400000, guid: 20f45b71a926e6b40b1cf5696d02edcf, type: 2}
+  - Item: {fileID: 11400000, guid: b1ed830bc737fe44b9ae26c6c1c590d5, type: 2}
+  - Item: {fileID: 11400000, guid: 20f45b71a926e6b40b1cf5696d02edcf, type: 2}
+  - Item: {fileID: 11400000, guid: b1ed830bc737fe44b9ae26c6c1c590d5, type: 2}
+  - Item: {fileID: 11400000, guid: 20f45b71a926e6b40b1cf5696d02edcf, type: 2}
