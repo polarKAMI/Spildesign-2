@@ -13,6 +13,8 @@ public class InventoryUIManager : MonoBehaviour
 
     private bool isMoving = false;
 
+    private int currentIndex = -1;
+
     public void OpenInventory()
     {
         inventoryPanelObject.SetActive(true);
@@ -54,8 +56,8 @@ public class InventoryUIManager : MonoBehaviour
         // Clear existing inventory UI
         ClearInventoryUI();
 
-        // Create inventory slots based on inventorySO data
-        int slotCount = inventorySO.Size;
+        // Always show 16 slots
+        int slotCount = 16;
         float angleStep = -360f / slotCount;
         float radius = 100f; // Adjust as needed
         float startingAngle = 180f; // Adjust as needed
@@ -84,7 +86,7 @@ public class InventoryUIManager : MonoBehaviour
             itemUI.SetIndex(i);
 
             // Update the item image
-            itemUI.UpdateItem(inventoryItem.Item.ItemImage);
+            itemUI.UpdateItem(inventoryItem.Item?.ItemImage);
 
             // Store the transform of the ItemUI instance
             itemUITransforms.Add(itemUI.GetCachedTransform());
@@ -109,6 +111,76 @@ public class InventoryUIManager : MonoBehaviour
             Destroy(slot);
         }
         inventorySlots.Clear();
+    }
+    public void UpdateInventoryItems(int direction)
+    {
+        // Get the current inventory state
+        Dictionary<int, InventoryItem> currentInventoryState = inventorySO.GetCurrentInventoryState();
+        int itemCount = currentInventoryState.Count;
+
+        // Calculate the start index based on the middle of the inventory list
+        int startIndex = itemCount / 2;
+
+        // If itemCount is odd, round down to the nearest integer
+        if (itemCount % 2 == 1)
+        {
+            startIndex = Mathf.FloorToInt((float)itemCount / 2);
+        }
+        else
+        {
+            startIndex = Mathf.FloorToInt((float)itemCount / 2) - 1;
+        }
+
+        // If currentIndex is not initialized or out of bounds, set it to startIndex
+        if (currentIndex == -1 || currentIndex >= itemCount || currentIndex < 0)
+        {
+            currentIndex = startIndex;
+        }
+        else
+        {
+            // Update currentIndex based on the direction
+            currentIndex += direction;
+
+            // Loop around the inventory list if currentIndex goes out of bounds
+            while (currentIndex < 0)
+            {
+                currentIndex += itemCount;
+            }
+
+            currentIndex %= itemCount;
+        }
+
+        // Find the index of the item at the highest z-position
+        int highestZIndex = GetHighestZIndex();
+
+        // Get the inventory item at the current index
+        InventoryItem inventoryItem = currentInventoryState[currentIndex];
+
+        // Get the ItemUI component from the inventory slot at highest z-position
+        ItemUI itemUI = inventorySlots[highestZIndex].GetComponentInChildren<ItemUI>();
+
+        // Update the item image with the inventory item at the current index
+        itemUI.UpdateItem(inventoryItem.Item?.ItemImage);
+
+        // Debug the updated item index
+        Debug.Log($"Updated to item index: {currentIndex}");
+    }
+
+    private int GetHighestZIndex()
+    {
+        float highestZ = float.MinValue;
+        int highestZIndex = -1;
+
+        for (int i = 0; i < inventorySlots.Count; i++)
+        {
+            if (inventorySlots[i].transform.localPosition.z > highestZ)
+            {
+                highestZ = inventorySlots[i].transform.localPosition.z;
+                highestZIndex = i;
+            }
+        }
+
+        return highestZIndex;
     }
 
     private void SortInventorySlotsByZPosition()
@@ -203,14 +275,8 @@ public class InventoryUIManager : MonoBehaviour
         // Smoothly move items to their new positions
         StartCoroutine(SmoothMoveItems(itemUITransforms, newPositions, 0.13f)); // Adjust duration as needed
 
-        // Update the cached transform for all ItemUI instances
-        foreach (var slot in inventoryPanel.GetComponentsInChildren<ItemUI>())
-        {
-            slot.UpdateCachedTransform();
-        }
-
-        // Sort the inventory slots based on their z-axis position
-        SortInventorySlotsByZPosition();
+        // Update the item at highest z-position after moving
+        UpdateInventoryItems(direction);
 
         // Set a coroutine to reset the isMoving flag after a delay
         StartCoroutine(ResetIsMovingFlag(0.14f)); // Adjust delay to match the animation duration

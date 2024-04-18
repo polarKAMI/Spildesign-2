@@ -9,9 +9,15 @@ public class InventorySO : ScriptableObject
 {
     [SerializeField]
     private List<InventoryItem> inventoryItems;
-
+   
     [SerializeField]
-    public int Size { get; private set; } = 16;
+    private int size = 0;
+
+    public int Size
+    {
+        get { return Mathf.Min(size, 16); } // Ensure size doesn't exceed 16
+        private set { size = value; }
+    }
 
     public void Initialize()
     {
@@ -52,7 +58,8 @@ public class InventorySO : ScriptableObject
 
     internal InventoryItem GetItemAt(int itemIndex)
     {
-        return inventoryItems[itemIndex];
+        int itemCount = inventoryItems.Count;
+        return inventoryItems[itemIndex % itemCount];
     }
 }
 
