@@ -43,8 +43,6 @@ public class InventorySO : ScriptableObject
         }
     }
 
-    
-
     public Dictionary<int, InventoryItem> GetCurrentInventoryState() 
     {
         Dictionary<int, InventoryItem> returnValue = new Dictionary<int, InventoryItem>();
@@ -63,18 +61,6 @@ public class InventorySO : ScriptableObject
         int itemCount = inventoryItems.Count;
         return inventoryItems[itemIndex % itemCount];
     }
-
-    public bool ContainsItem(ItemSO item)
-    {
-        foreach (var inventoryItem in inventoryItems)
-        {
-            if (!inventoryItem.IsEmpty && inventoryItem.Item == item)
-            {
-                return true; // Item already exists in the inventory
-            }
-        }
-        return false; // Item does not exist in the inventory
-    }
 }
 
 [Serializable]
@@ -91,8 +77,6 @@ public struct InventoryItem
             Item = this.Item,
         };
     }
-
-    
 
     public static InventoryItem GetEmptyItem()
         => new InventoryItem
