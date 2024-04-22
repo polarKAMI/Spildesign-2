@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class InventoryUIManager : MonoBehaviour
 {
@@ -17,6 +18,9 @@ public class InventoryUIManager : MonoBehaviour
     public bool isEmptyInventory = false; // Flag to track if the inventory is empty
 
     public GameObject border;
+
+    public TMP_Text itemCounterText; // Reference to TextMeshPro component
+    public GameObject itemCounter; // Reference to ItemCounter GameObject
 
 
     private int currentIndex = -1;
@@ -139,8 +143,16 @@ public class InventoryUIManager : MonoBehaviour
                 itemUITransforms.Add(itemUI.GetCachedTransform());
             }
             SortInventorySlotsByZPosition();
+            UpdateItemCounter();
         }
 
+    }
+    private void UpdateItemCounter()
+    {
+        if (itemCounterText != null && inventorySO != null)
+        {
+            itemCounterText.text = inventorySO.Size.ToString();
+        }
     }
 
 
