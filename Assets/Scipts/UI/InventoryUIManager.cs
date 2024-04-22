@@ -12,12 +12,17 @@ public class InventoryUIManager : MonoBehaviour
     private List<GameObject> inventorySlots = new List<GameObject>(); // Keep track of inventory slots
 
     private bool isMoving = false;
+   
+    public GameObject emptyInventoryImage; // Reference to the empty inventory image
+    private bool isEmptyInventory = false; // Flag to track if the inventory is empty
+
+    public GameObject border;
+
 
     private int currentIndex = -1;
 
     public void OpenInventory()
     {
-        inventoryPanelObject.SetActive(true);
         UpdateInventoryUI();
     }
 
@@ -37,7 +42,7 @@ public class InventoryUIManager : MonoBehaviour
 
     public void ScrollInventoryLeft()
     {
-        if (!isMoving)
+        if (!isMoving && !isEmptyInventory)
         {
             ShiftInventorySlots(1);
         }
@@ -45,7 +50,7 @@ public class InventoryUIManager : MonoBehaviour
 
     public void ScrollInventoryRight()
     {
-        if (!isMoving)
+        if (!isMoving && !isEmptyInventory)
         {
             ShiftInventorySlots(-1);
         }
@@ -56,44 +61,86 @@ public class InventoryUIManager : MonoBehaviour
         // Clear existing inventory UI
         ClearInventoryUI();
 
-        // Always show 16 slots
-        int slotCount = 16;
-        float angleStep = -360f / slotCount;
-        float radius = 100f; // Adjust as needed
-        float startingAngle = 180f; // Adjust as needed
+        // Get the current inventory size
+        int inventorySize = inventorySO.Size;
 
-        // List to store the transforms of ItemUI instances
-        List<Transform> itemUITransforms = new List<Transform>();
-
-        for (int i = 0; i < slotCount; i++)
+        // Check if the inventory is empty
+        if (inventorySize == 0)
         {
-            float angle = (startingAngle + i * angleStep) * Mathf.Deg2Rad;
-            float x = Mathf.Sin(angle) * radius;
-            float z = Mathf.Cos(angle) * radius;
+            // Show the empty inventory image
+            emptyInventoryImage.SetActive(true);
 
-            z += radius;
 
-            GameObject slot = Instantiate(inventorySlotPrefab, inventoryPanel);
-            inventorySlots.Add(slot);
+            // Set the flag to indicate empty inventory
+            isEmptyInventory = true;
 
-            // Set position of inventory slot
-            slot.transform.localPosition = new Vector3(x / 1.5f, 0f, z / 2f);
-
-            InventoryItem inventoryItem = inventorySO.GetItemAt(i);
-
-            // Get the ItemUI component from the inventory slot prefab
-            ItemUI itemUI = slot.GetComponentInChildren<ItemUI>();
-            itemUI.SetIndex(i);
-            itemUI.SetActualIndex(i);
-
-            // Update the item image
-            itemUI.UpdateItem(inventoryItem);
+            // Disable options panel
+            OptionsPanelManager optionsPanelManager = FindObjectOfType<OptionsPanelManager>();
+            if (optionsPanelManager != null)
+            {
+                optionsPanelManager.ToggleOptionsPanel(false);
+            }
             
-
-            // Store the transform of the ItemUI instance
-            itemUITransforms.Add(itemUI.GetCachedTransform());
+            if (border != null)
+            {
+                border.SetActive(false);
+            }
+            // Return without creating inventory slots if the inventory is empty
+            return;
         }
-        SortInventorySlotsByZPosition();
+        else
+        {
+            inventoryPanelObject.SetActive(true);
+            // Hide the empty inventory image
+            emptyInventoryImage.SetActive(false);
+
+            // Reset the flag
+            isEmptyInventory = false;
+
+            if (border != null)
+            {
+                border.SetActive(true);
+            }
+
+            // Always show 16 slots
+            int slotCount = 16;
+            float angleStep = -360f / slotCount;
+            float radius = 100f; // Adjust as needed
+            float startingAngle = 180f; // Adjust as needed
+
+            // List to store the transforms of ItemUI instances
+            List<Transform> itemUITransforms = new List<Transform>();
+
+            for (int i = 0; i < slotCount; i++)
+            {
+                float angle = (startingAngle + i * angleStep) * Mathf.Deg2Rad;
+                float x = Mathf.Sin(angle) * radius;
+                float z = Mathf.Cos(angle) * radius;
+
+                z += radius;
+
+                GameObject slot = Instantiate(inventorySlotPrefab, inventoryPanel);
+                inventorySlots.Add(slot);
+
+                // Set position of inventory slot
+                slot.transform.localPosition = new Vector3(x / 1.5f, 0f, z / 2f);
+
+                InventoryItem inventoryItem = inventorySO.GetItemAt(i);
+
+                // Get the ItemUI component from the inventory slot prefab
+                ItemUI itemUI = slot.GetComponentInChildren<ItemUI>();
+                itemUI.SetIndex(i);
+                itemUI.SetActualIndex(i);
+
+                // Update the item image
+                itemUI.UpdateItem(inventoryItem);
+
+                // Store the transform of the ItemUI instance
+                itemUITransforms.Add(itemUI.GetCachedTransform());
+            }
+            SortInventorySlotsByZPosition();
+        }
+
     }
 
 
@@ -113,6 +160,12 @@ public class InventoryUIManager : MonoBehaviour
             Destroy(slot);
         }
         inventorySlots.Clear();
+
+        if (emptyInventoryImage != null)
+        {
+            emptyInventoryImage.SetActive(false);
+        }
+
     }
     public void UpdateInventoryItems(int direction)
     {
@@ -163,9 +216,6 @@ public class InventoryUIManager : MonoBehaviour
 
         // Update the item image with the inventory item at the current index
         itemUI.UpdateItem(inventoryItem);
-
-        // Debug the updated item index
-        Debug.Log($"Updated to item index: {currentIndex}");
     }
 
     private int GetHighestZIndex()
