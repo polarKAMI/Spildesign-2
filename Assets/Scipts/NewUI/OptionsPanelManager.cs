@@ -149,7 +149,8 @@ public class OptionsPanelManager : MonoBehaviour
     private void HandleOptionTwo(ItemUI itemUI)
     {
         Debug.Log("Handling option 2");
-        // Add your logic here
+        itemUI.inventoryItem.Ammo();
+        RemoveSelectedItemFromInventory();
     }
 
     private void HandleOptionThree(ItemUI itemUI)
