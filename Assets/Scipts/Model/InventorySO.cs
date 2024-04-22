@@ -9,20 +9,16 @@ public class InventorySO : ScriptableObject
 {
     [SerializeField]
     private List<InventoryItem> inventoryItems;
-   
-    [SerializeField]
-    private int size = 0;
 
-    public int Size
-    {
-        get { return Mathf.Min(size, 16); } // Ensure size doesn't exceed 16
-        private set { size = value; }
-    }
+    [SerializeField]
+    private int maxSize = 16; // Max size of the inventory
+
+    public int Size => inventoryItems.Count;
 
     public void Initialize()
     {
         inventoryItems = new List<InventoryItem>();
-        for (int i = 0; i < Size; i++)
+        for (int i = 0; i < maxSize; i++)
         {
             inventoryItems.Add(InventoryItem.GetEmptyItem());
         }
@@ -30,16 +26,26 @@ public class InventorySO : ScriptableObject
 
     public void AddItem(ItemSO item)
     {
-        for (int i = 0; i < inventoryItems.Count; i++)
+        // Increase the size of the inventory if it's not at max size
+        if (Size < maxSize)
         {
-            if (inventoryItems[i].IsEmpty)
-            {
-                inventoryItems[i] = new InventoryItem
-                {
-                    Item = item
+            inventoryItems.Add(new InventoryItem { Item = item });
+        }
+        else
+        {
+            Debug.LogWarning("Inventory is at max size.");
+        }
+    }
 
-                };
-            }
+    public void RemoveItemAt(int index)
+    {
+        if (index >= 0 && index < Size)
+        {
+            inventoryItems.RemoveAt(index);
+        }
+        else
+        {
+            Debug.LogError("Invalid index to remove item.");
         }
     }
 
