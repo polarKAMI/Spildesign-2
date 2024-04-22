@@ -57,9 +57,6 @@ public class OptionsPanelManager : MonoBehaviour
         if (isOptionsPanelActive && Input.GetKeyDown(KeyCode.Return))
         {
             SelectHighlightedItem();
-
-            // Remove the selected item from the inventory
-            RemoveSelectedItemFromInventory();
         }
     }
 
@@ -118,12 +115,47 @@ public class OptionsPanelManager : MonoBehaviour
         ItemUI highlightedItem = GetHighlightedItem();
         if (highlightedItem != null)
         {
-            HandleSelectedItem(highlightedItem);
+            int selectedOption = selectedIndex; // Assuming selectedIndex holds the current selected option index
+
+            switch (selectedOption)
+            {
+                case 0: // First option selected
+                    HandleOptionOne(highlightedItem);
+                    break;
+                case 1: // Second option selected
+                    HandleOptionTwo(highlightedItem);
+                    break;
+                case 2: // Third option selected
+                    HandleOptionThree(highlightedItem);
+                    break;
+                default:
+                    Debug.LogError("Invalid option selected!");
+                    break;
+            }
         }
         else
         {
             Debug.LogError("No highlighted item found.");
         }
+    }
+
+    private void HandleOptionOne(ItemUI itemUI)
+    {
+        Debug.Log("Handling option 1");
+        itemUI.inventoryItem.Use();
+        RemoveSelectedItemFromInventory();
+    }
+
+    private void HandleOptionTwo(ItemUI itemUI)
+    {
+        Debug.Log("Handling option 2");
+        // Add your logic here
+    }
+
+    private void HandleOptionThree(ItemUI itemUI)
+    {
+        Debug.Log("Handling option 3");
+        RemoveSelectedItemFromInventory();
     }
 
     public ItemUI GetHighlightedItem()
@@ -140,23 +172,6 @@ public class OptionsPanelManager : MonoBehaviour
             }
         }
         return null; // Return null if no highlighted ItemUI is found
-    }
-
-    private void HandleSelectedItem(ItemUI itemUI)
-    {
-        // Get the InventoryItem from the highlighted ItemUI
-        InventoryItem inventoryItem = itemUI.inventoryItem;
-
-        if (inventoryItem.Item != null)
-        {
-            // Here, you can implement the logic for what happens when a highlighted item is selected.
-            // For example, you can use the item's data to perform an action, equip an item, etc.
-            Debug.Log("Selected Highlighted Item: " + inventoryItem.Item.Name); // Accessing the item's name
-        }
-        else
-        {
-            Debug.LogError("No highlighted item found.");
-        }
     }
 
     public void ChangeSelectedIndex(int changeAmount)

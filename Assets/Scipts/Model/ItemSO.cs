@@ -1,13 +1,11 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Inventory.Model
 {
-
     [CreateAssetMenu]
-    public class ItemSO : ScriptableObject
+    public class ItemSO : ScriptableObject, IUsable
     {
         public int ID => GetInstanceID();
 
@@ -21,5 +19,10 @@ namespace Inventory.Model
         [field: SerializeField]
         public Sprite ItemImage { get; set; }
 
+        public virtual void Use()
+        {
+            // Default behavior for using the item
+            Debug.Log($"Using {Name}.");
+        }
     }
 }
