@@ -51,7 +51,7 @@ public class InventoryUIManager : MonoBehaviour
         }
     }
 
-    private void UpdateInventoryUI()
+    public void UpdateInventoryUI()
     {
         // Clear existing inventory UI
         ClearInventoryUI();
@@ -84,6 +84,7 @@ public class InventoryUIManager : MonoBehaviour
             // Get the ItemUI component from the inventory slot prefab
             ItemUI itemUI = slot.GetComponentInChildren<ItemUI>();
             itemUI.SetIndex(i);
+            itemUI.SetActualIndex(i);
 
             // Update the item image
             itemUI.UpdateItem(inventoryItem);

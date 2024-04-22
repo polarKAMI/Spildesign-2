@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 
 public class OptionsPanelManager : MonoBehaviour
@@ -56,6 +57,41 @@ public class OptionsPanelManager : MonoBehaviour
         if (isOptionsPanelActive && Input.GetKeyDown(KeyCode.Return))
         {
             SelectHighlightedItem();
+
+            // Remove the selected item from the inventory
+            RemoveSelectedItemFromInventory();
+        }
+    }
+
+    void RemoveSelectedItemFromInventory()
+    {
+        // Get the highlighted ItemUI
+        ItemUI highlightedItem = GetHighlightedItem();
+
+        if (highlightedItem != null)
+        {
+            // Get the actual index of the highlighted item in InventorySO
+            int actualIndex = highlightedItem.GetIndex();
+
+            // If actualIndex is greater than or equal to the inventory size, loop it back
+            while (actualIndex >= inventoryUIManager.inventorySO.Size)
+            {
+                actualIndex -= inventoryUIManager.inventorySO.Size;
+            }
+
+            Debug.Log("Actual index of highlighted item: " + actualIndex); // Debug log
+
+            // Remove the item from the InventorySO
+            inventoryUIManager.inventorySO.RemoveItemAt(actualIndex);
+
+            // Update the inventory UI
+            inventoryUIManager.UpdateInventoryUI();
+
+            Debug.Log("Inventory size after removal: " + inventoryUIManager.inventorySO.Size); // Debug log
+        }
+        else
+        {
+            Debug.LogError("No highlighted item found.");
         }
     }
 
@@ -90,7 +126,7 @@ public class OptionsPanelManager : MonoBehaviour
         }
     }
 
-    private ItemUI GetHighlightedItem()
+    public ItemUI GetHighlightedItem()
     {
         // Get all ItemUI components in the inventory panel
         ItemUI[] itemUIs = inventoryUIManager.GetComponentsInChildren<ItemUI>();

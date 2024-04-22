@@ -4,13 +4,15 @@ using UnityEngine.UI;
 public class ItemUI : MonoBehaviour
 {
     public int index = 0;
+    public int actualIndex = -1; // Actual index in InventorySO
     public Image itemImage;
     public InventoryItem inventoryItem; // Store the reference to the InventoryItem
     private Transform cachedTransform; // Store the transform reference
 
     private void Awake()
     {
-        Image itemImage = transform.Find("Item").GetComponent<Image>();
+        Image itemImageComponent = transform.Find("Item").GetComponent<Image>();
+        itemImage = itemImageComponent;
         cachedTransform = transform; // Cache the transform reference
     }
 
@@ -24,6 +26,18 @@ public class ItemUI : MonoBehaviour
     public int GetIndex()
     {
         return index;
+    }
+
+    // Method to set the actual index in InventorySO
+    public void SetActualIndex(int newIndex)
+    {
+        actualIndex = newIndex;
+    }
+
+    // Method to get the actual index from InventorySO
+    public int GetActualIndex()
+    {
+        return actualIndex;
     }
 
     public void UpdateItem(InventoryItem inventoryItem)
