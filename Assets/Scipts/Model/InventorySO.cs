@@ -22,14 +22,11 @@ public class InventorySO : ScriptableObject
         }
     }
 
-    public void AddItem(ItemSO item)
+    public void AddItem(InventoryItem item)
     {
-        // Increase the size of the inventory if it's not at max size
         if (Size < maxSize)
         {
-            InventoryItem newItem = ScriptableObject.CreateInstance<InventoryItem>();
-            newItem.Item = item;
-            inventoryItems.Add(newItem);
+            inventoryItems.Add(item);
         }
         else
         {

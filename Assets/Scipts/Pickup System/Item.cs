@@ -7,7 +7,7 @@ public class Item : MonoBehaviour
 {
     [field: SerializeField]
 
-    public ItemSO InventoryItem {  get; private set; }
+    public InventoryItem InventoryItem { get; private set; }
 
     [SerializeField]
     private AudioSource audiosource;
@@ -17,10 +17,10 @@ public class Item : MonoBehaviour
 
     private void Start()
     {
-        GetComponent<SpriteRenderer>().sprite = InventoryItem.ItemImage;
+        GetComponent<SpriteRenderer>().sprite = InventoryItem.itemIcon;
     }
 
-    
+
 
     public void DestroyItem()
     {
@@ -39,7 +39,7 @@ public class Item : MonoBehaviour
             currentTime += Time.deltaTime;
             transform.localScale = Vector3.Lerp(startScale, endScale, currentTime / duration);
             yield return null;
-        }   
+        }
         Destroy(gameObject);
     }
 

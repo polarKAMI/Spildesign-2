@@ -9,6 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85916fe3cf614fc47bc8a985bed969c9, type: 3}
-  m_Name: health
+  m_Script: {fileID: 11500000, guid: 699d567da1ca98e43b1456fe08039960, type: 3}
+  m_Name: Health
   m_EditorClassIdentifier: 
+  <Name>k__BackingField: Health
+  <Description>k__BackingField: 
+  <ItemImage>k__BackingField: {fileID: 21300000, guid: c4b2bc5645dc70343a16bfbe388992ca, type: 3}

@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 699d567da1ca98e43b1456fe08039960, type: 3}
-  m_Name: JOSEF STALIN
+  m_Script: {fileID: 11500000, guid: 00e3cec6931a2aa4588d1a9cc85e7bed, type: 3}
+  m_Name: MedKit
   m_EditorClassIdentifier: 
-  <Name>k__BackingField: Josef Stalin
-  <Description>k__BackingField: ALL HAIL THE SOVIET UNION
-  <ItemImage>k__BackingField: {fileID: 21300000, guid: dd1054a46ff5704468e28af56bbf2f3b, type: 3}
+  Item: {fileID: 0}
+  healthRestoreAmount: 0
+  ammoRestoreAmount: 5

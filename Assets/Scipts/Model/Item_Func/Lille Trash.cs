@@ -1,13 +1,15 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Inventory/Medkit")]
-public class MedKit : InventoryItem
+[CreateAssetMenu(menuName = "Inventory/Lille Trash")]
+public class LilleTrash : InventoryItem
 {
-    
-    public int ammoRestoreAmount = 5;
+    public int AmmoRestoreAmount;
 
     public override void Use()
     {
+        // Implement the specific use behavior for consumable items
+        Debug.Log($"Using {itemName} to restore {AmmoRestoreAmount} health.");
+
         // Find the player GameObject by tag (assuming it's tagged as "Player")
         GameObject player = GameObject.FindGameObjectWithTag("Player");
 
@@ -15,28 +17,23 @@ public class MedKit : InventoryItem
         if (player != null)
         {
             // Get the Health component from the player GameObject
-            Health health = player.GetComponent<Health>();
+            playerattack2 attack = player.GetComponent<playerattack2>();
 
             // Check if the Health component is found
-            if (health != null)
+            if (attack != null)
             {
                 // Set the player's current health to its maximum health
-                health.currenthealth = health.Maxhealth;
-                Debug.Log("Player's health restored to maximum.");
+                attack.AddAmmo(AmmoRestoreAmount);
+                Debug.Log("Player's ammo + 10.");
             }
             else
             {
-                Debug.LogWarning("Health component not found on the player GameObject.");
+                Debug.LogWarning("Attack component not found on the player GameObject.");
             }
         }
         else
         {
             Debug.LogWarning("Player GameObject not found.");
         }
-    }
-
-    public override void Ammo()
-    {
-        Debug.Log($"Using {itemName} to restore {ammoRestoreAmount} ammo.");
     }
 }
