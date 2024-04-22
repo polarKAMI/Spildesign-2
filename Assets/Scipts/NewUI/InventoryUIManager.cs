@@ -86,7 +86,8 @@ public class InventoryUIManager : MonoBehaviour
             itemUI.SetIndex(i);
 
             // Update the item image
-            itemUI.UpdateItem(inventoryItem.Item?.ItemImage);
+            itemUI.UpdateItem(inventoryItem);
+            
 
             // Store the transform of the ItemUI instance
             itemUITransforms.Add(itemUI.GetCachedTransform());
@@ -160,7 +161,7 @@ public class InventoryUIManager : MonoBehaviour
         ItemUI itemUI = inventorySlots[highestZIndex].GetComponentInChildren<ItemUI>();
 
         // Update the item image with the inventory item at the current index
-        itemUI.UpdateItem(inventoryItem.Item?.ItemImage);
+        itemUI.UpdateItem(inventoryItem);
 
         // Debug the updated item index
         Debug.Log($"Updated to item index: {currentIndex}");

@@ -5,6 +5,7 @@ public class ItemUI : MonoBehaviour
 {
     public int index = 0;
     public Image itemImage;
+    public InventoryItem inventoryItem; // Store the reference to the InventoryItem
     private Transform cachedTransform; // Store the transform reference
 
     private void Awake()
@@ -25,10 +26,10 @@ public class ItemUI : MonoBehaviour
         return index;
     }
 
-    // Method to update the item image
-    public void UpdateItem(Sprite sprite)
+    public void UpdateItem(InventoryItem inventoryItem)
     {
-        itemImage.sprite = sprite;
+        this.inventoryItem = inventoryItem; // Store the reference
+        itemImage.sprite = inventoryItem.Item?.ItemImage;
     }
 
     // Method to get the cached transform
