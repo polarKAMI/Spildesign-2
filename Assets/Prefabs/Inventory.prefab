@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1977321520348339214
 RectTransform:
   m_ObjectHideFlags: 0
@@ -527,7 +527,8 @@ MonoBehaviour:
   inventoryPanel: {fileID: 1223190297334298488}
   inventoryPanelObject: {fileID: 3584200793305196336}
   inventorySO: {fileID: 11400000, guid: 4c6fb867845186c4d91bf2a8904605ff, type: 2}
-  emptyInventoryImage: {fileID: 0}
+  emptyInventoryImage: {fileID: 421342492782024947}
+  border: {fileID: 1695244090652130968}
 --- !u!114 &7729047371335439063
 MonoBehaviour:
   m_ObjectHideFlags: 0
