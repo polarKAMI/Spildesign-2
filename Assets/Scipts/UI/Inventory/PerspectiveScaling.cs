@@ -9,7 +9,6 @@ public class PerspectiveScalingAndOpacity : MonoBehaviour
     private float minScale = 1f;
     private float maxScale = 0.3f;
     private float minAlpha = 1f;
-    private float maxAlpha = 0f;
 
     private CanvasGroup canvasGroup;
 

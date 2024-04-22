@@ -76,8 +76,6 @@ public class OptionsPanelManager : MonoBehaviour
                 actualIndex -= inventoryUIManager.inventorySO.Size;
             }
 
-            Debug.Log("Actual index of highlighted item: " + actualIndex); // Debug log
-
             // Remove the item from the InventorySO
             inventoryUIManager.inventorySO.RemoveItemAt(actualIndex);
 
@@ -141,20 +139,18 @@ public class OptionsPanelManager : MonoBehaviour
 
     private void HandleOptionOne(ItemUI itemUI)
     {
-        Debug.Log("Handling option 1");
         itemUI.inventoryItem.Use();
         RemoveSelectedItemFromInventory();
     }
 
     private void HandleOptionTwo(ItemUI itemUI)
     {
-        Debug.Log("Handling option 2");
-        // Add your logic here
+        itemUI.inventoryItem.Ammo();
+        RemoveSelectedItemFromInventory();
     }
 
     private void HandleOptionThree(ItemUI itemUI)
     {
-        Debug.Log("Handling option 3");
         RemoveSelectedItemFromInventory();
     }
 

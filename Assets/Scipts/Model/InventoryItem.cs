@@ -16,4 +16,9 @@ public class InventoryItem : ScriptableObject, IUsable
         // Default behavior for using the item
         Debug.Log($"Using {itemName}.");
     }
+
+    public virtual void Ammo()
+    {
+        Debug.Log($"Using {itemName}.");
+    }
 }

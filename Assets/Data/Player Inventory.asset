@@ -12,8 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eed5994fe85cd2c49922645d52b8cb5c, type: 3}
   m_Name: Player Inventory
   m_EditorClassIdentifier: 
-  inventoryItems:
-  - Item: {fileID: 11400000, guid: b1ed830bc737fe44b9ae26c6c1c590d5, type: 2}
-  - Item: {fileID: 11400000, guid: 20f45b71a926e6b40b1cf5696d02edcf, type: 2}
-  - Item: {fileID: 11400000, guid: 20f45b71a926e6b40b1cf5696d02edcf, type: 2}
-  size: 0
+  inventoryItems: []
+  maxSize: 16

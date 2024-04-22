@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00e3cec6931a2aa4588d1a9cc85e7bed, type: 3}
   m_Name: New Med Kit
   m_EditorClassIdentifier: 
-  Item: {fileID: 0}
+  Item: {fileID: 11400000, guid: 20f45b71a926e6b40b1cf5696d02edcf, type: 2}
   healthRestoreAmount: 10
+  ammoRestoreAmount: 5
