@@ -18,6 +18,7 @@ public class OptionsPanelManager : MonoBehaviour
         {
             border.SetActive(false);
         }
+
     }
 
     // Method to toggle the options panel (open or close)
@@ -42,7 +43,7 @@ public class OptionsPanelManager : MonoBehaviour
     void Update()
     {
         // Check for input to open the options panel (only if it's not already active)
-        if (!isOptionsPanelActive && Input.GetKeyDown(KeyCode.C))
+        if (!isOptionsPanelActive && Input.GetKeyDown(KeyCode.C) && !inventoryUIManager.isEmptyInventory == true)
         {
             ToggleOptionsPanel(true);
         }

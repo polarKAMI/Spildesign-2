@@ -14,7 +14,7 @@ public class InventoryUIManager : MonoBehaviour
     private bool isMoving = false;
    
     public GameObject emptyInventoryImage; // Reference to the empty inventory image
-    private bool isEmptyInventory = false; // Flag to track if the inventory is empty
+    public bool isEmptyInventory = false; // Flag to track if the inventory is empty
 
     public GameObject border;
 
