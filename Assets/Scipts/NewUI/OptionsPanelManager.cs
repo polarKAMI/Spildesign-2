@@ -7,6 +7,7 @@ public class OptionsPanelManager : MonoBehaviour
     public GameObject slotsPanel; // Reference to the slots panel GameObject
     public InventoryUIManager inventoryUIManager;
 
+    private int selectedIndex = 0; // Index of the currently selected option
     private bool isOptionsPanelActive = false; // Flag to track if the options panel is active
 
     void Start()
@@ -107,8 +108,43 @@ public class OptionsPanelManager : MonoBehaviour
 
     private void HandleSelectedItem(ItemUI itemUI)
     {
-        // Here, you can implement the logic for what happens when a highlighted item is selected.
-        // For example, you can use the item's data to perform an action, equip an item, etc.
-        Debug.Log("Selected Highlighted Item: " + itemUI.GetIndex());
+        // Get the InventoryItem from the highlighted ItemUI
+        InventoryItem inventoryItem = itemUI.inventoryItem;
+
+        if (inventoryItem.Item != null)
+        {
+            // Here, you can implement the logic for what happens when a highlighted item is selected.
+            // For example, you can use the item's data to perform an action, equip an item, etc.
+            Debug.Log("Selected Highlighted Item: " + inventoryItem.Item.Name); // Accessing the item's name
+        }
+        else
+        {
+            Debug.LogError("No highlighted item found.");
+        }
+    }
+
+    public void ChangeSelectedIndex(int changeAmount)
+    {
+        int newIndex = selectedIndex + changeAmount;
+
+        // Loop back to the last option if it goes below 0
+        if (newIndex < 0)
+        {
+            newIndex = optionBorders.Length - 1;
+        }
+        // Loop back to the first option if it exceeds the maximum index
+        else if (newIndex >= optionBorders.Length)
+        {
+            newIndex = 0;
+        }
+
+        // Deactivate the previously selected border
+        optionBorders[selectedIndex].SetActive(false);
+
+        // Activate the new selected border
+        optionBorders[newIndex].SetActive(true);
+
+        // Update the selected index
+        selectedIndex = newIndex;
     }
 }

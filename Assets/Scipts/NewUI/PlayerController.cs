@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
                 Debug.LogError("InventoryUIManager GameObject not found in the scene.");
             }
         }
+
     }
 
     void Update()
@@ -37,6 +38,24 @@ public class PlayerController : MonoBehaviour
         if (isInventoryOpen && Input.GetKeyDown(KeyCode.D))
         {
             ScrollInventoryRight();
+        }
+
+        // Check for input to select options in the options panel (if the options panel is active)
+        if (isInventoryOpen && Input.GetKeyDown(KeyCode.W))
+        {
+            // Get the OptionsPanelManager component
+            OptionsPanelManager optionsPanelManager = inventoryUIManager.GetComponent<OptionsPanelManager>();
+
+            // Call the ChangeSelectedIndex method from OptionsPanelManager with -1 as argument
+            optionsPanelManager.ChangeSelectedIndex(-1);
+        }
+        else if (isInventoryOpen && Input.GetKeyDown(KeyCode.S))
+        {
+            // Get the OptionsPanelManager component
+            OptionsPanelManager optionsPanelManager = inventoryUIManager.GetComponent<OptionsPanelManager>();
+
+            // Call the ChangeSelectedIndex method from OptionsPanelManager with 1 as argument
+            optionsPanelManager.ChangeSelectedIndex(1);
         }
     }
 
