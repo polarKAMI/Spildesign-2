@@ -61,4 +61,5 @@ public class ItemUI : MonoBehaviour
     {
         return Mathf.Approximately(cachedTransform.localPosition.z, 0f);
     }
+
 }

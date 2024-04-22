@@ -1,6 +1,4 @@
 using Inventory.Model;
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,7 +18,7 @@ public class InventorySO : ScriptableObject
         inventoryItems = new List<InventoryItem>();
         for (int i = 0; i < maxSize; i++)
         {
-            inventoryItems.Add(InventoryItem.GetEmptyItem());
+            inventoryItems.Add(GetEmptyItem());
         }
     }
 
@@ -29,7 +27,9 @@ public class InventorySO : ScriptableObject
         // Increase the size of the inventory if it's not at max size
         if (Size < maxSize)
         {
-            inventoryItems.Add(new InventoryItem { Item = item });
+            InventoryItem newItem = ScriptableObject.CreateInstance<InventoryItem>();
+            newItem.Item = item;
+            inventoryItems.Add(newItem);
         }
         else
         {
@@ -49,7 +49,7 @@ public class InventorySO : ScriptableObject
         }
     }
 
-    public Dictionary<int, InventoryItem> GetCurrentInventoryState() 
+    public Dictionary<int, InventoryItem> GetCurrentInventoryState()
     {
         Dictionary<int, InventoryItem> returnValue = new Dictionary<int, InventoryItem>();
         for (int i = 0; i < inventoryItems.Count; i++)
@@ -57,7 +57,7 @@ public class InventorySO : ScriptableObject
             if (inventoryItems[i].IsEmpty)
                 continue;
             returnValue[i] = inventoryItems[i];
-            
+
         }
         return returnValue;
     }
@@ -67,24 +67,8 @@ public class InventorySO : ScriptableObject
         int itemCount = inventoryItems.Count;
         return inventoryItems[itemIndex % itemCount];
     }
-}
 
-[Serializable]
-public struct InventoryItem
-{
-    public ItemSO Item;
-
-    public bool IsEmpty => Item == null;
-
-    public InventoryItem ChangeItem(int newQuantity)
-    {
-        return new InventoryItem
-        {
-            Item = this.Item,
-        };
-    }
-
-    public static InventoryItem GetEmptyItem()
+    private InventoryItem GetEmptyItem()
         => new InventoryItem
         {
             Item = null,
