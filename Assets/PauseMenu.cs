@@ -8,14 +8,33 @@ using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
     [SerializeField] GameObject pauseMenu;
+   
 
+    void Update()
+    {
+        Debug.Log("Update method called"); // Debug statement to check if Update is called
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Debug.Log("Escape key pressed");
+            if (!pauseMenu.activeSelf)
+            {
+                Debug.Log("Pause");
+                Pause();
+            }
+            else
+            {
+                Debug.Log("Resume");
+                Resume();
+            }
+        }
+    }
 
     public void Pause()
     {
         pauseMenu.SetActive(true);
         Time.timeScale = 0;
     }
-
 
     public void MainMenu()
     {
@@ -34,7 +53,5 @@ public class PauseMenu : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         Time.timeScale = 1;
     }
-
-    
-
 }
+
