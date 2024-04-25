@@ -10,6 +10,8 @@ public class InventoryItem : ScriptableObject, IUsable
     public string itemName => Item?.Name;
     public Sprite itemIcon => Item?.ItemImage;
 
+    public bool isKey;
+
     // Implement Use() from IUsable
     public virtual void Use()
     {
