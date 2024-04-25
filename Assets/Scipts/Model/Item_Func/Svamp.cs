@@ -1,10 +1,10 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Inventory/Medkit")]
-public class MedKit : InventoryItem
+[CreateAssetMenu(menuName = "Inventory/Svamp")]
+public class Svamp : InventoryItem
 {
-    
-    public int ammoRestoreAmount = 5;
+
+    public int ammoRestoreAmount = 2;
 
     public override void Use()
     {
@@ -21,7 +21,7 @@ public class MedKit : InventoryItem
             if (health != null)
             {
                 // Set the player's current health to its maximum health
-                health.currenthealth = health.Maxhealth;
+                health.AddHealth(5);
                 Debug.Log("Player's health restored to maximum.");
             }
             else

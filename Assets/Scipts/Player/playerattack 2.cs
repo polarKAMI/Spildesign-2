@@ -29,12 +29,12 @@ public class playerattack2 : MonoBehaviour
     {
         
         
-        if (Input.GetKeyDown(KeyCode.E) & (currentAmmo > 0 && canAttack))
+        if (Input.GetKeyDown(KeyCode.E) & (currentAmmo >= 10 && canAttack))
         {
             audioSource.PlayOneShot(attackSound);
 
             Instantiate(Projectile, fireposition.position, fireposition.rotation);
-            currentAmmo--;
+            currentAmmo -= 5;
 
             PlayerMovement.enabled = false;
 
@@ -43,10 +43,7 @@ public class playerattack2 : MonoBehaviour
 
             Invoke("attack", 5f);
 
-            if (currentAmmo == 0)
-            {
-                Invoke("Reload", 5f);
-            }
+           
         }
 
        
@@ -103,6 +100,7 @@ public class playerattack2 : MonoBehaviour
     {
         audioSource.PlayOneShot(secondSound);
         canAttack = true;
+        Debug.Log("Can attack");
     }
 
 }

@@ -8,7 +8,7 @@ public class LilleTrash : InventoryItem
     public override void Use()
     {
         // Implement the specific use behavior for consumable items
-        Debug.Log($"Using {itemName} to restore {AmmoRestoreAmount} health.");
+        Debug.Log($"Using {itemName} to get {AmmoRestoreAmount} ammo.");
 
         // Find the player GameObject by tag (assuming it's tagged as "Player")
         GameObject player = GameObject.FindGameObjectWithTag("Player");
@@ -35,5 +35,19 @@ public class LilleTrash : InventoryItem
         {
             Debug.LogWarning("Player GameObject not found.");
         }
+    }
+
+
+    public override void Ammo()
+    {
+        Debug.Log($"Using {itemName} to get {AmmoRestoreAmount} ammo.");
+
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+
+        playerattack2 attack = player.GetComponent<playerattack2>();
+
+        attack.AddAmmo(AmmoRestoreAmount);
+
+
     }
 }
