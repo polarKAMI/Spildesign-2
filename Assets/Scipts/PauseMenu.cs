@@ -8,7 +8,6 @@ using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
     [SerializeField] GameObject pauseMenu;
-   
 
     void Update()
     {
@@ -42,6 +41,10 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1;
     }
 
+   public void Logopen()
+    {
+        pauseMenu.SetActive(false);
+    }
     public void Resume()
     {
         pauseMenu.SetActive(false);
