@@ -140,19 +140,41 @@ public class OptionsPanelManager : MonoBehaviour
 
     private void HandleOptionOne(ItemUI itemUI)
     {
-        itemUI.inventoryItem.Use();
-        RemoveSelectedItemFromInventory();
+        if (itemUI.inventoryItem.isKey)
+        {
+            itemUI.inventoryItem.Use(); // Use the key directly without removing it
+        }
+        else
+        {
+            itemUI.inventoryItem.Use(); // Use the non-key item
+            RemoveSelectedItemFromInventory(); // Remove the non-key item from inventory
+        }
     }
+
 
     private void HandleOptionTwo(ItemUI itemUI)
     {
-        itemUI.inventoryItem.Ammo();
-        RemoveSelectedItemFromInventory();
+        if (!itemUI.inventoryItem.isKey)
+        {
+            itemUI.inventoryItem.Ammo();
+            RemoveSelectedItemFromInventory();
+        }
+        else
+        {
+            Debug.Log("Cannot remove key item.");
+        }
     }
 
     private void HandleOptionThree(ItemUI itemUI)
     {
-        RemoveSelectedItemFromInventory();
+        if (!itemUI.inventoryItem.isKey)
+        {
+            RemoveSelectedItemFromInventory();
+        }
+        else
+        {
+            Debug.Log("Cannot remove key item.");
+        }
     }
 
     public ItemUI GetHighlightedItem()

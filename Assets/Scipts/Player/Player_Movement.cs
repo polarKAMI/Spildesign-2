@@ -14,6 +14,8 @@ public class PlayerMovement : MonoBehaviour
     public float sprintSpeedMultiplier = 2f; // Speed multiplier when sprinting
     [SerializeField] private Rigidbody2D rb;
 
+    private bool movementEnabled = true; // Flag to track if movement is enabled
+
     private void Start()
     {
         // Set the initial currentSpeed to the baseSpeed
@@ -22,6 +24,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        if (!movementEnabled)
+            return; // Exit Update() if movement is disabled
+
         horizontal = Input.GetAxisRaw("Horizontal");
 
         // Sprinting
@@ -42,6 +47,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (!movementEnabled)
+            return; // Exit FixedUpdate() if movement is disabled
+
         // Apply horizontal movement
         rb.velocity = new Vector2(horizontal * currentSpeed, rb.velocity.y);
     }
@@ -58,5 +66,17 @@ public class PlayerMovement : MonoBehaviour
             // Reset current speed to baseSpeed when flipping
             currentSpeed = baseSpeed;
         }
+    }
+
+    // Function to enable movement
+    public void EnableMovement()
+    {
+        movementEnabled = true;
+    }
+
+    // Function to disable movement
+    public void DisableMovement()
+    {
+        movementEnabled = false;
     }
 }

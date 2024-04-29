@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 684771bbf7ec1524a8eff458ea79ee3a, type: 3}
-  m_Name: GoblinKey
+  m_Script: {fileID: 11500000, guid: a116eaf9574e0404b812ff5057f99495, type: 3}
+  m_Name: MainKey3
   m_EditorClassIdentifier: 
-  Item: {fileID: 11400000, guid: 684810770f9ac554a80cfa0220527a63, type: 2}
+  Item: {fileID: 11400000, guid: 06f487346c8f78d43b601993410609af, type: 2}
   isKey: 1
   inventory: {fileID: 11400000, guid: 4c6fb867845186c4d91bf2a8904605ff, type: 2}

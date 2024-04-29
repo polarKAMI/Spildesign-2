@@ -12,6 +12,9 @@ public class InventorySO : ScriptableObject
     private int maxSize = 16; // Max size of the inventory
 
     public int Size => inventoryItems.Count;
+    // Singleton instance
+    private static InventorySO instance;
+    public static InventorySO Instance => instance ?? (instance = Resources.Load<InventorySO>("Player Inventory"));
 
     public void Initialize()
     {
@@ -70,4 +73,8 @@ public class InventorySO : ScriptableObject
         {
             Item = null,
         };
+    public void RemoveItem(InventoryItem item)
+    {
+        inventoryItems.Remove(item);
+    }
 }

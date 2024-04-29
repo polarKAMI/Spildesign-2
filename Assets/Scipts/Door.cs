@@ -11,6 +11,7 @@ public class Door : MonoBehaviour
         if (!isOpen && key == requiredKey && key is GoblinKey)
         {
             OpenDoor();
+            key.RemoveFromInventory();
         }
         else if (key == null)
         {
@@ -29,4 +30,5 @@ public class Door : MonoBehaviour
         isOpen = true;
         Debug.Log("Door opened!");
     }
+
 }

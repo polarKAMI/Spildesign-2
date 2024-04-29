@@ -25,9 +25,21 @@ public class InventoryUIManager : MonoBehaviour
 
     private int currentIndex = -1;
 
+    private PlayerMovement playerMovement;
+    private void Start()
+    {
+        playerMovement = FindObjectOfType<PlayerMovement>(); // Find the PlayerMovement script in the scene
+    }
     public void OpenInventory()
     {
+        // Update inventory UI
         UpdateInventoryUI();
+
+        // Disable player movement when opening inventory
+        if (playerMovement != null)
+        {
+            playerMovement.DisableMovement();
+        }
     }
 
     public void CloseInventory()
@@ -42,6 +54,12 @@ public class InventoryUIManager : MonoBehaviour
         // Close the inventory panel
         inventoryPanelObject.SetActive(false);
         ClearInventoryUI();
+
+        // Enable player movement when closing inventory
+        if (playerMovement != null)
+        {
+            playerMovement.EnableMovement();
+        }
     }
 
     public void ScrollInventoryLeft()
