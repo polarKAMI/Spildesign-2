@@ -48,6 +48,8 @@ public class Lygtemanden : MonoBehaviour
                 MoveTowards(player.position);
             }
         }
+
+        rb.freezeRotation = true;
     }
 
     void MoveTowards(Vector2 targetPosition)
