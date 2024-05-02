@@ -8,8 +8,8 @@ public class PlayerJump : MonoBehaviour
     private bool isChargingJump = false; // Flag to track if the player is charging the jump
     private float jumpStartTime; // Time when jump charging started
     private float jumpChargeDuration = 1f; // Duration to charge the jump in seconds
-    public float maxJumpForce = 5f; // Maximum jump force
-    public float minJumpForce = 2f; // Minimum jump force (when releasing spacebar early)
+    public float maxJumpForce = 12f; // Maximum jump force
+    public float minJumpForce = 5f; // Minimum jump force (when releasing spacebar early)
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
 
