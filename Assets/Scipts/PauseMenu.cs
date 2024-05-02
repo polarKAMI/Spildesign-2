@@ -8,24 +8,28 @@ using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
     [SerializeField] GameObject pauseMenu;
+    private PlayerMovement playerMovement;
 
-    void Update()
+    private void Start()
     {
-        Debug.Log("Update method called"); // Debug statement to check if Update is called
-
-        if (Input.GetKeyDown(KeyCode.Escape))
+        playerMovement = FindObjectOfType<PlayerMovement>();
+    }
+    public void Menu()
+    {
+        if (!pauseMenu.activeSelf)
         {
-            Debug.Log("Escape key pressed");
-            if (!pauseMenu.activeSelf)
+            if (playerMovement != null)
             {
-                Debug.Log("Pause");
-                Pause();
+                playerMovement.DisableMovement();
             }
-            else
-            {
-                Debug.Log("Resume");
-                Resume();
-            }
+            GlobalInputMapping.SetActiveInputMappings(GlobalInputMapping.menuInputMapping);
+            Pause();
+        }
+        else
+        {
+            playerMovement.EnableMovement();
+            GlobalInputMapping.SetActiveInputMappings(GlobalInputMapping.inGameInputMapping);
+            Resume();
         }
     }
 

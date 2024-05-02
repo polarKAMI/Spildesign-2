@@ -29,7 +29,7 @@ public class PlayerMovement : MonoBehaviour
         horizontal = input;
 
         // Sprinting
-        float sprintMultiplier = Input.GetKey(KeyCode.LeftShift) ? sprintSpeedMultiplier : 1f;
+        float sprintMultiplier = Input.GetKey(GlobalInputMapping.activeInputMappings["Sprint"]) ? sprintSpeedMultiplier : 1f;
 
         // Acceleration
         if (horizontal != 0f)

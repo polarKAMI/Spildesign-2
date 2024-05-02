@@ -6,6 +6,9 @@ public class PlayerController : MonoBehaviour
     private OptionsPanelManager optionsPanelManager;
     private PlayerJump playerJump;
     private PlayerMovement playerMovement;
+    private Shoot Shoot;
+    public PauseMenu pauseMenu;
+
     private bool isInventoryOpen = false; // Flag to track inventory state
 
     private KeyCode moveLeftKey;
@@ -32,6 +35,17 @@ public class PlayerController : MonoBehaviour
         optionsPanelManager = inventoryUIManager.GetComponent<OptionsPanelManager>();
         playerJump = GetComponent<PlayerJump>();
         playerMovement = GetComponent<PlayerMovement>();
+        Shoot = GetComponent<Shoot>();
+        pauseMenu = GameObject.FindObjectOfType<PauseMenu>();
+
+        if (pauseMenu != null)
+        {
+            Debug.Log("pauseMenu successfully found in the scene.");
+        }
+        else
+        {
+            Debug.LogWarning("pauseMenu not found in the scene.");
+        }
         moveLeftKey = GlobalInputMapping.activeInputMappings["MoveLeft"];
         moveRightKey = GlobalInputMapping.activeInputMappings["MoveRight"];
     }
@@ -122,7 +136,6 @@ public class PlayerController : MonoBehaviour
             playerMovement.Move(0f);
         }
 
-
         if (GlobalInputMapping.activeInputMappings == GlobalInputMapping.inGameInputMapping)
             {
                 if (Input.GetKeyDown(GlobalInputMapping.activeInputMappings["Jump"]))
@@ -137,18 +150,39 @@ public class PlayerController : MonoBehaviour
 
                 else if (Input.GetKeyDown(GlobalInputMapping.activeInputMappings["Shoot"]))
                 {
-                    //
+                    Shoot.Shooting();
                 }
 
                 else if (Input.GetKeyDown(GlobalInputMapping.activeInputMappings["Interact"]))
                 {
-                    //
+                Collider2D playerCollider = GameObject.FindGameObjectWithTag("Player").GetComponent<Collider2D>();
+
+                if (playerCollider != null)
+                {
+                    Collider2D[] overlappingColliders = Physics2D.OverlapBoxAll(playerCollider.bounds.center, playerCollider.bounds.size, 0f);
+
+                    foreach (Collider2D collider in overlappingColliders)
+                    {
+                        IInteractable interactable = collider.gameObject.GetComponent<IInteractable>();
+                        if (interactable != null)
+                        {
+                            interactable.Interact();
+                        }
+                    }
                 }
+            }
 
                 else if (Input.GetKeyDown(GlobalInputMapping.activeInputMappings["Menu"]))
                 {
-                    //menu
+                if (pauseMenu != null)
+                {
+                    pauseMenu.Menu();
                 }
+                else
+                {
+                    Debug.LogWarning("PauseMenu reference is null.");
+                }
+            }
 
                 else if (Input.GetKeyDown(GlobalInputMapping.activeInputMappings["Inventory"]))
                 {
@@ -181,7 +215,7 @@ public class PlayerController : MonoBehaviour
 
                 else if (Input.GetKeyDown(GlobalInputMapping.activeInputMappings["Menu"]))
                 {
-                    //menu
+                    pauseMenu.Menu();
                 }
             }
             else if (GlobalInputMapping.activeInputMappings == GlobalInputMapping.optionsInputMapping)
@@ -207,7 +241,7 @@ public class PlayerController : MonoBehaviour
 
                 else if (Input.GetKeyDown(GlobalInputMapping.activeInputMappings["Menu"]))
                 {
-                    //menu
+                     pauseMenu.Menu();
                 }
                 else if (Input.GetKeyDown(GlobalInputMapping.activeInputMappings["Inventory"]))
                 {
@@ -216,8 +250,11 @@ public class PlayerController : MonoBehaviour
             }
             else if (GlobalInputMapping.activeInputMappings == GlobalInputMapping.menuInputMapping)
             {
-                //menu keybinds
-            }
+                if (Input.GetKeyDown(GlobalInputMapping.activeInputMappings["Menu"]))
+                {
+                 pauseMenu.Menu();
+                }
+        }
 
         }
 

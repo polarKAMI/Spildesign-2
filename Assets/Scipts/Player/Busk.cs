@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class Busk : MonoBehaviour
+public class Busk : MonoBehaviour, IInteractable
 {
     public KeyCode enterKey = KeyCode.F; // Key to press to enter the layer
     public LayerMask targetLayer; // Layer to enter
@@ -15,13 +15,9 @@ public class Busk : MonoBehaviour
         originalPosition = transform.position; // Store the original position
         spriteRenderer = GetComponent<SpriteRenderer>(); // Get the sprite renderer component
     }
-
-    void Update()
+    public void Interact()
     {
-        if (Input.GetKeyDown(enterKey) && canEnter)
-        {
-            EnterLayer();
-        }
+        EnterLayer();
     }
 
     void EnterLayer()

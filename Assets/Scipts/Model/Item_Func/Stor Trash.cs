@@ -17,7 +17,7 @@ public class StorTrash : InventoryItem
         if (player != null)
         {
             // Get the Health component from the player GameObject
-            playerattack2 attack = player.GetComponent<playerattack2>();
+            Shoot attack = player.GetComponent<Shoot>();
 
             // Check if the Health component is found
             if (attack != null)
@@ -44,7 +44,7 @@ public class StorTrash : InventoryItem
 
         GameObject player = GameObject.FindGameObjectWithTag("Player");
 
-        playerattack2 attack = player.GetComponent<playerattack2>();
+        Shoot attack = player.GetComponent<Shoot>();
 
         attack.AddAmmo(AmmoRestoreAmount);
 

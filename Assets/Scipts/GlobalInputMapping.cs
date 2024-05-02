@@ -9,6 +9,7 @@ public static class GlobalInputMapping
     public static Dictionary<string, KeyCode> inventoryInputMapping = new Dictionary<string, KeyCode>();
     public static Dictionary<string, KeyCode> optionsInputMapping = new Dictionary<string, KeyCode>();
     public static Dictionary<string, KeyCode> menuInputMapping = new Dictionary<string, KeyCode>();
+    public static Dictionary<string, KeyCode> logInputMapping = new Dictionary<string, KeyCode>();
     // Reference to the currently active dictionary
     public static Dictionary<string, KeyCode> activeInputMappings;
     private static bool isInitialized = false;

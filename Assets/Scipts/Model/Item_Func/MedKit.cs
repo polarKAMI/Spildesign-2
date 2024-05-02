@@ -41,7 +41,7 @@ public class MedKit : InventoryItem
 
         GameObject player = GameObject.FindGameObjectWithTag("Player");
 
-        playerattack2 attack = player.GetComponent<playerattack2>();
+        Shoot attack = player.GetComponent<Shoot>();
 
         attack.AddAmmo(ammoRestoreAmount);
     }

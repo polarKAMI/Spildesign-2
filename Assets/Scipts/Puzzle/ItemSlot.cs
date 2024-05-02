@@ -3,7 +3,7 @@ using Unity.VisualScripting;
 using UnityEditor.PackageManager;
 using UnityEngine;
 
-public class ItemSlot : MonoBehaviour
+public class ItemSlot : MonoBehaviour, IInteractable
 {
     public InventoryItem requiredItem; // The item required to be inserted into this slot
 
@@ -13,12 +13,15 @@ public class ItemSlot : MonoBehaviour
 
     public SpriteRenderer itemRenderer;
 
-    private bool isPlayerInside = false; // Flag to track if the player is inside the slot area
-
     public bool isMatch = false;
     private bool doorOpened = false;
 
     // Method to insert an item into the slot
+
+    public void Interact()
+    {
+        OnInteractKeyPressed();
+    }
     public void InsertItem(InventoryItem item)
     {
         if (item == null)
@@ -50,34 +53,6 @@ public class ItemSlot : MonoBehaviour
             Debug.LogWarning("Slot is already occupied.");
         }
     }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            isPlayerInside = true;
-            Debug.Log("Player entered the slot area.");
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            isPlayerInside = false;
-            Debug.Log("Player exited the slot area.");
-        }
-    }
-
-    private void Update()
-    {
-        // Check if the player is inside and interacts with the slot
-        if (isPlayerInside && !doorOpened && currentItem != null && Input.GetKeyDown(KeyCode.Q))
-        {
-            OnInteractKeyPressed();
-        }
-    }
-
     private void OnInteractKeyPressed()
     {
         if (currentItem != null)
@@ -101,8 +76,6 @@ public class ItemSlot : MonoBehaviour
             }
         }
     }
-
-    // Function to check combination after inserting item
     private void CheckCombination()
     {
         if (requiredItem != null && currentItem != null)
