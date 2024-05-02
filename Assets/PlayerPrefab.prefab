@@ -12,7 +12,11 @@ GameObject:
   - component: {fileID: 8498726502904179371}
   - component: {fileID: 8465569590667647264}
   - component: {fileID: 5243854593743133241}
-  - component: {fileID: 5412625417947613736}
+<<<<<<< HEAD
+  - component: {fileID: 5679051854090077881}
+  - component: {fileID: 2920676575798118074}
+=======
+>>>>>>> main
   m_Layer: 0
   m_Name: PlayerPrefab
   m_TagString: Player
@@ -160,7 +164,8 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &5412625417947613736
+<<<<<<< HEAD
+--- !u!114 &5679051854090077881
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -169,10 +174,35 @@ MonoBehaviour:
   m_GameObject: {fileID: 6962521040237784850}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72dd86f608a4e5641a4fac97c9f1d7c8, type: 3}
+  m_Script: {fileID: 11500000, guid: e8410ce2d7094de43bc990db3cddde5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventoryData: {fileID: 11400000, guid: 4c6fb867845186c4d91bf2a8904605ff, type: 2}
+  maxJumpForce: 5
+  jumpArcHeight: 5
+  groundCheck: {fileID: 7692616281327199669}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+--- !u!114 &2920676575798118074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6962521040237784850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a90e50ed9c965a4a83458751b198d20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentSpeed: 5
+  maxSpeed: 5
+  acceleration: 2
+  deceleration: 4
+  sprintSpeedMultiplier: 2
+  rb: {fileID: 5243854593743133241}
+=======
+>>>>>>> main
 --- !u!1 &8626581659729463117
 GameObject:
   m_ObjectHideFlags: 0
