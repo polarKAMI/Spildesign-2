@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -22,12 +20,13 @@ public class PlayerMovement : MonoBehaviour
         currentSpeed = baseSpeed;
     }
 
-    private void Update()
+    public void Move(float input)
     {
         if (!movementEnabled)
-            return; // Exit Update() if movement is disabled
+            return; // Exit Move() if movement is disabled
 
-        horizontal = Input.GetAxisRaw("Horizontal");
+        // Assign input value to horizontal
+        horizontal = input;
 
         // Sprinting
         float sprintMultiplier = Input.GetKey(KeyCode.LeftShift) ? sprintSpeedMultiplier : 1f;
@@ -39,19 +38,27 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            currentSpeed = Mathf.MoveTowards(currentSpeed, baseSpeed, deceleration * Time.deltaTime);
+            // Decelerate if no input
+            currentSpeed = Mathf.MoveTowards(currentSpeed, 0f, deceleration * Time.deltaTime);
         }
 
         Flip();
+        
     }
 
     private void FixedUpdate()
     {
         if (!movementEnabled)
-            return; // Exit FixedUpdate() if movement is disabled
+            rb.velocity = Vector2.zero;
+         // Exit FixedUpdate() if movement is disabled
+        else
+        {
+            // Apply horizontal movement
+            rb.velocity = new Vector2(horizontal * currentSpeed, rb.velocity.y);
 
-        // Apply horizontal movement
-        rb.velocity = new Vector2(horizontal * currentSpeed, rb.velocity.y);
+        }
+
+
     }
 
     private void Flip()
@@ -68,15 +75,17 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    // Function to enable movement
     public void EnableMovement()
     {
         movementEnabled = true;
     }
 
-    // Function to disable movement
     public void DisableMovement()
     {
         movementEnabled = false;
+        Move(0f);
+        currentSpeed = 0f;
+        horizontal = 0f;
     }
+
 }

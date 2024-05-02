@@ -32,14 +32,12 @@ public class InventoryUIManager : MonoBehaviour
     }
     public void OpenInventory()
     {
-        // Update inventory UI
-        UpdateInventoryUI();
-
-        // Disable player movement when opening inventory
         if (playerMovement != null)
         {
             playerMovement.DisableMovement();
         }
+        // Update inventory UI
+        UpdateInventoryUI();
     }
 
     public void CloseInventory()
@@ -286,9 +284,16 @@ public class InventoryUIManager : MonoBehaviour
         float elapsedTime = 0f;
         while (elapsedTime < duration)
         {
-            for (int i = 0; i < itemUITransforms.Count; i++)
+            if (itemUITransforms == null)
             {
-                itemUITransforms[i].localPosition = Vector3.Lerp(itemUITransforms[i].localPosition, targetPositions[i], elapsedTime / duration);
+                yield return null;
+            }
+            else
+            {
+                for (int i = 0; i < itemUITransforms.Count; i++)
+                {
+                    itemUITransforms[i].localPosition = Vector3.Lerp(itemUITransforms[i].localPosition, targetPositions[i], elapsedTime / duration);
+                }
             }
             elapsedTime += Time.deltaTime;
             SortInventorySlotsByZPosition();

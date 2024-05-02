@@ -699,6 +699,7 @@ MonoBehaviour:
   - {fileID: 6574782472293548783}
   slotsPanel: {fileID: 3584200793305196336}
   inventoryUIManager: {fileID: 8533119159983381853}
+  isOptionsPanelActive: 0
 --- !u!1 &3316170263060174607
 GameObject:
   m_ObjectHideFlags: 0

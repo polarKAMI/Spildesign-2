@@ -9,7 +9,7 @@ public class OptionsPanelManager : MonoBehaviour
     public InventoryUIManager inventoryUIManager;
 
     private int selectedIndex = 0; // Index of the currently selected option
-    private bool isOptionsPanelActive = false; // Flag to track if the options panel is active
+    public bool isOptionsPanelActive = false; // Flag to track if the options panel is active
 
     void Start()
     {
@@ -31,33 +31,14 @@ public class OptionsPanelManager : MonoBehaviour
             {
                 isOptionsPanelActive = true; // Set the flag to indicate that the options panel is now active
                 SelectOption(0); // Select the first option when opening the panel
+                GlobalInputMapping.SetActiveInputMappings(GlobalInputMapping.optionsInputMapping);
             }
             else
             {
                 isOptionsPanelActive = false; // Set the flag to indicate that the options panel is now inactive
                 ResetOptions(); // Reset options when closing the panel
+                GlobalInputMapping.SetActiveInputMappings(GlobalInputMapping.inventoryInputMapping);
             }
-        }
-    }
-
-    void Update()
-    {
-        // Check for input to open the options panel (only if it's not already active)
-        if (!isOptionsPanelActive && Input.GetKeyDown(KeyCode.C) && !inventoryUIManager.isEmptyInventory == true)
-        {
-            ToggleOptionsPanel(true);
-        }
-
-        // Check for input to close the options panel
-        if (Input.GetKeyDown(KeyCode.Backspace))
-        {
-            ToggleOptionsPanel(false);
-        }
-
-        // Check for input to select the highlighted item (if the options panel is active)
-        if (isOptionsPanelActive && Input.GetKeyDown(KeyCode.Return))
-        {
-            SelectHighlightedItem();
         }
     }
 
