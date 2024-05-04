@@ -45,6 +45,8 @@ public static class GlobalInputMapping
             menuInputMapping["Select"] = KeyCode.E;
             menuInputMapping["Menu"] = KeyCode.Escape;
 
+            logInputMapping["Menu"] = KeyCode.Escape;
+
             SetActiveInputMappings(inGameInputMapping);
             isInitialized = true;
         }     

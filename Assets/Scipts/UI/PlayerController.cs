@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     private PlayerMovement playerMovement;
     private Shoot Shoot;
     public PauseMenu pauseMenu;
+    private LogMenu logMenu;
 
     private bool isInventoryOpen = false; // Flag to track inventory state
 
@@ -37,6 +38,7 @@ public class PlayerController : MonoBehaviour
         playerMovement = GetComponent<PlayerMovement>();
         Shoot = GetComponent<Shoot>();
         pauseMenu = GameObject.FindObjectOfType<PauseMenu>();
+        logMenu = GameObject.FindObjectOfType<LogMenu>();
 
         if (pauseMenu != null)
         {
@@ -268,6 +270,13 @@ public class PlayerController : MonoBehaviour
                     pauseMenu.MenuOptionSelect();
                 }
 
+        }
+        else if (GlobalInputMapping.activeInputMappings == GlobalInputMapping.logInputMapping)
+        {
+            if (Input.GetKeyDown(GlobalInputMapping.activeInputMappings["Menu"]))
+            {
+                logMenu.Pause();
+            }
         }
 
         }

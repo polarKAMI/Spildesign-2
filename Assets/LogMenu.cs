@@ -5,29 +5,26 @@ using UnityEngine;
 public class LogMenu : MonoBehaviour
 {
     [SerializeField] GameObject logMenu;
-    [SerializeField] GameObject pauseMenu;
+    [SerializeField] PauseMenu pauseMenu;
     [SerializeField] GameObject NSLog;
     [SerializeField] GameObject WildLifeLog;
     [SerializeField] GameObject GBLog;
 
-    void Update()
+    private void Start()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            logMenu.SetActive(false);
-            WildLifeLog.SetActive(false);
-        }
+        pauseMenu = FindObjectOfType<PauseMenu>();
     }
     public void Pause()
     {
-        pauseMenu.SetActive(true);
-        Time.timeScale = 0;
         logMenu.SetActive(false);
+        pauseMenu.Menu();
+        Time.timeScale = 0;       
     }
 
     public void LogOpen()
     {
-        logMenu.SetActive(false);
+        logMenu.SetActive(true);
+        GlobalInputMapping.SetActiveInputMappings(GlobalInputMapping.logInputMapping);
     }
     public void NSReturn()
     {

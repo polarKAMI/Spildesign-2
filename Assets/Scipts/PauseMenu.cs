@@ -12,6 +12,7 @@ public class PauseMenu : MonoBehaviour
     public GameObject[] menuBorders;
     public InventoryUIManager inventoryManager;
     private OptionsPanelManager optionsPanelManager;
+    private LogMenu logMenu;
 
     private int selectedIndex = 0;
 
@@ -21,6 +22,7 @@ public class PauseMenu : MonoBehaviour
         playerMovement = FindObjectOfType<PlayerMovement>();
         inventoryManager = FindObjectOfType<InventoryUIManager>();
         optionsPanelManager = FindObjectOfType<OptionsPanelManager>();
+        logMenu = FindObjectOfType<LogMenu>();
         
         foreach (var border in menuBorders)
         {
@@ -42,21 +44,6 @@ public class PauseMenu : MonoBehaviour
         }
         else
         {
-
-            if (optionsPanelManager.isOptionsPanelActive)
-            {
-                GlobalInputMapping.SetActiveInputMappings(GlobalInputMapping.optionsInputMapping);
-            }
-            else if (inventoryManager.isOpen)
-            {
-                GlobalInputMapping.SetActiveInputMappings(GlobalInputMapping.inventoryInputMapping);
-            }
-            else
-            {
-                GlobalInputMapping.SetActiveInputMappings(GlobalInputMapping.inGameInputMapping);
-                playerMovement.EnableMovement();
-            }
-
             Resume();
         }
 
@@ -120,11 +107,26 @@ public class PauseMenu : MonoBehaviour
     {
         pauseMenu.SetActive(false);
         ResetOptions();
+        logMenu.LogOpen();
     }
     public void Resume()
     {
         pauseMenu.SetActive(false);
         Time.timeScale = 1;
+
+        if (optionsPanelManager.isOptionsPanelActive)
+        {
+            GlobalInputMapping.SetActiveInputMappings(GlobalInputMapping.optionsInputMapping);
+        }
+        else if (inventoryManager.isOpen)
+        {
+            GlobalInputMapping.SetActiveInputMappings(GlobalInputMapping.inventoryInputMapping);
+        }
+        else
+        {
+            GlobalInputMapping.SetActiveInputMappings(GlobalInputMapping.inGameInputMapping);
+            playerMovement.EnableMovement();
+        }
     }
 
     public void Restart()
