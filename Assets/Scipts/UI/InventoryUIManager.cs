@@ -22,7 +22,7 @@ public class InventoryUIManager : MonoBehaviour
     public TMP_Text itemCounterText; // Reference to TextMeshPro component
     public GameObject itemCounter; // Reference to ItemCounter GameObject
 
-
+    public bool isOpen = false;
     private int currentIndex = -1;
 
     private PlayerMovement playerMovement;
@@ -38,6 +38,7 @@ public class InventoryUIManager : MonoBehaviour
         }
         // Update inventory UI
         UpdateInventoryUI();
+        isOpen = true;
     }
 
     public void CloseInventory()
@@ -58,6 +59,8 @@ public class InventoryUIManager : MonoBehaviour
         {
             playerMovement.EnableMovement();
         }
+
+        isOpen = false;
     }
 
     public void ScrollInventoryLeft()

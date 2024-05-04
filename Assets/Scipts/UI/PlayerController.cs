@@ -254,6 +254,20 @@ public class PlayerController : MonoBehaviour
                 {
                  pauseMenu.Menu();
                 }
+
+                else if (Input.GetKeyDown(GlobalInputMapping.activeInputMappings["ScrollUp"]))
+                {
+                    pauseMenu.ChangeSelectedIndex(-1);
+                }
+                else if (Input.GetKeyDown(GlobalInputMapping.activeInputMappings["ScrollDown"]))
+                {
+                    pauseMenu.ChangeSelectedIndex(1);
+                }
+                else if (Input.GetKeyDown(GlobalInputMapping.activeInputMappings["Select"]))
+                {
+                    pauseMenu.MenuOptionSelect();
+                }
+
         }
 
         }
