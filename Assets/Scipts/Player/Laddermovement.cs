@@ -33,7 +33,7 @@ public class Laddermovement : MonoBehaviour
         }
         else
         {
-            rb.gravityScale = 4f;
+            rb.gravityScale = 2f;
         }
     }
 

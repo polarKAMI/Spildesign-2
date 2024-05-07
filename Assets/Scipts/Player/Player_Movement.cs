@@ -5,19 +5,21 @@ public class PlayerMovement : MonoBehaviour
     public bool isFacingRight = true;
     private float horizontal;
     public float currentSpeed = 0f; // Current movement speed
-    public float baseSpeed = 2f; // Base movement speed
-    public float maxSpeed = 5f; // Maximum movement speed
-    public float acceleration = 2f; // Acceleration rate
+    public float baseSpeed = 1.5f; // Base movement speed
+    public float maxSpeed = 3f; // Maximum movement speed
+    public float acceleration = 3f; // Acceleration rate
     public float deceleration = 4f; // Deceleration rate
-    public float sprintSpeedMultiplier = 2f; // Speed multiplier when sprinting
+    public float sprintSpeedMultiplier = 1.3f; // Speed multiplier when sprinting
+    public bool isSprinting = false;
     [SerializeField] private Rigidbody2D rb;
+    public InventoryUIManager inventoryUIManager;
 
-    private bool movementEnabled = true; // Flag to track if movement is enabled
+    public bool movementEnabled = true; // Flag to track if movement is enabled
 
     private void Start()
     {
         // Set the initial currentSpeed to the baseSpeed
-        currentSpeed = baseSpeed;
+        currentSpeed = baseSpeed;   
     }
 
     public void Move(float input)
@@ -32,33 +34,29 @@ public class PlayerMovement : MonoBehaviour
         float sprintMultiplier = Input.GetKey(GlobalInputMapping.activeInputMappings["Sprint"]) ? sprintSpeedMultiplier : 1f;
 
         // Acceleration
-        if (horizontal != 0f)
+        if(horizontal != 0f && isSprinting)
         {
             currentSpeed = Mathf.MoveTowards(currentSpeed, maxSpeed * sprintMultiplier, acceleration * Time.deltaTime);
         }
+        if (horizontal != 0f)
+        {
+            currentSpeed = Mathf.MoveTowards(currentSpeed, maxSpeed, acceleration * Time.deltaTime);
+        }
         else
         {
-            // Decelerate if no input
-            currentSpeed = Mathf.MoveTowards(currentSpeed, 0f, deceleration * Time.deltaTime);
+            currentSpeed = 0f;
         }
 
         Flip();
         
     }
 
+
     private void FixedUpdate()
     {
-        if (!movementEnabled)
-            rb.velocity = Vector2.zero;
-         // Exit FixedUpdate() if movement is disabled
-        else
-        {
-            // Apply horizontal movement
+        if (movementEnabled) {
             rb.velocity = new Vector2(horizontal * currentSpeed, rb.velocity.y);
-
-        }
-
-
+        }   
     }
 
     private void Flip()

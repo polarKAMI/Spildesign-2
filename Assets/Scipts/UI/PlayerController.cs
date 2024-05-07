@@ -150,7 +150,8 @@ public class PlayerController : MonoBehaviour
                     playerJump.ReleaseJump();
                 }
 
-                else if (Input.GetKeyDown(GlobalInputMapping.activeInputMappings["Shoot"]))
+               
+            else if (Input.GetKeyDown(GlobalInputMapping.activeInputMappings["Shoot"]))
                 {
                     Shoot.Shooting();
                 }
@@ -174,7 +175,7 @@ public class PlayerController : MonoBehaviour
                 }
             }
 
-                else if (Input.GetKeyDown(GlobalInputMapping.activeInputMappings["Menu"]))
+                else if (Input.GetKeyDown(GlobalInputMapping.activeInputMappings["Menu"]) && !playerJump.isJumping && !playerJump.isSliding)
                 {
                 if (pauseMenu != null)
                 {
@@ -186,7 +187,7 @@ public class PlayerController : MonoBehaviour
                 }
             }
 
-                else if (Input.GetKeyDown(GlobalInputMapping.activeInputMappings["Inventory"]))
+                else if (Input.GetKeyDown(GlobalInputMapping.activeInputMappings["Inventory"]) && !playerJump.isJumping && !playerJump.isSliding)
                 {
                   ToggleInventory();
                 }
