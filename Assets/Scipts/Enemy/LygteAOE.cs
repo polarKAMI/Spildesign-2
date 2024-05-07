@@ -16,7 +16,7 @@ public class LygteAOE : MonoBehaviour
         if (otherHealth != null)
         {
             // Deal initial damage to the player
-            healthScript.Takedamage(damageAmount);
+            healthScript.TakeDamage(damageAmount);
             // Start taking continuous damage if not already taking damage
             if (!isTakingDamage)
             {
@@ -42,7 +42,7 @@ public class LygteAOE : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(1f);
-            healthScript.Takedamage(damageAmount);
+            healthScript.TakeDamage(damageAmount);
         }
     }
 }

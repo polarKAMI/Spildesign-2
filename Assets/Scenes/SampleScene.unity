@@ -3967,7 +3967,7 @@ GameObject:
   - component: {fileID: 420574103}
   m_Layer: 0
   m_Name: Enemy_skft
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -25602,11 +25602,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2103752632763426906, guid: 91c2682628b903f4087f1199c6451f20, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 23.6
+      value: -0.4
       objectReference: {fileID: 0}
     - target: {fileID: 2103752632763426906, guid: 91c2682628b903f4087f1199c6451f20, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -37.73
+      value: -1.9
       objectReference: {fileID: 0}
     - target: {fileID: 2103752632763426906, guid: 91c2682628b903f4087f1199c6451f20, type: 3}
       propertyPath: m_LocalPosition.z
@@ -25854,7 +25854,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2952199648344862858, guid: 03082abe237912a44b5cfcac83dc827f, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3185324914603039126, guid: 03082abe237912a44b5cfcac83dc827f, type: 3}
       propertyPath: health

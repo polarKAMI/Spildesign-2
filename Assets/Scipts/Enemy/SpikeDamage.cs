@@ -12,7 +12,7 @@ public class SpikeDamage : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            health.Takedamage(10);
+            health.TakeDamage(10);
         }
     }
 }

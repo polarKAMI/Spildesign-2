@@ -21,7 +21,7 @@ public class MedKit : InventoryItem
             if (health != null)
             {
                 // Set the player's current health to its maximum health
-                health.currenthealth = health.Maxhealth;
+                health.currentHealth = health.MaxHealth;
                 Debug.Log("Player's health restored to maximum.");
             }
             else

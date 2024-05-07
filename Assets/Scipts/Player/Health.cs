@@ -5,35 +5,79 @@ using UnityEngine.SceneManagement;
 
 public class Health : MonoBehaviour
 {
-    
+    public int MaxHealth = 10;
+    public int currentHealth;
 
-    public int Maxhealth = 10;
-    public int currenthealth;
+    private SpriteRenderer spriteRenderer;
+    private Coroutine flickerCoroutine;
+    private bool isFlickering = false;
 
     void Start()
     {
-        currenthealth = Maxhealth;
+        currentHealth = MaxHealth;
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
-
 
     public void AddHealth(int amount)
     {
-        Debug.Log(currenthealth);
-        currenthealth += amount;
+        currentHealth += amount;
+        Debug.Log(currentHealth);
     }
-    public void Takedamage(int amount)
+
+    public void TakeDamage(int amount)
     {
-        currenthealth -= amount;
-        Debug.Log(currenthealth);
-
-        if (currenthealth <= 0)
+        if (!isFlickering) // Only take damage if not flickering
         {
-            SceneManager.LoadScene("SampleScene");
-            Start();
+            currentHealth -= amount;
+            Debug.Log(currentHealth);
+
+            if (currentHealth <= 0)
+            {
+                SceneManager.LoadScene("SampleScene");
+                Start();
+            }
+            else
+            {
+                if (flickerCoroutine != null)
+                    StopCoroutine(flickerCoroutine);
+
+                flickerCoroutine = StartCoroutine(FlickerSprite(2f, 0.2f));
+            }
         }
-           
+    }
 
 
+    IEnumerator FlickerSprite(float duration, float flickerInterval)
+    {
+        isFlickering = true;
 
+        // Find all objects tagged "Enemy" and ignore collisions with them
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (GameObject enemy in enemies)
+        {
+            Physics2D.IgnoreCollision(GetComponent<Collider2D>(), enemy.GetComponent<Collider2D>(), true);
+        }
+
+        float timer = 0f;
+
+        while (timer < duration)
+        {
+            spriteRenderer.color = new Color(spriteRenderer.color.r, spriteRenderer.color.g, spriteRenderer.color.b, 0f);
+            yield return new WaitForSeconds(flickerInterval);
+
+            spriteRenderer.color = new Color(spriteRenderer.color.r, spriteRenderer.color.g, spriteRenderer.color.b, 1f);
+            yield return new WaitForSeconds(flickerInterval);
+
+            timer += flickerInterval * 2;
+        }
+
+        spriteRenderer.color = new Color(spriteRenderer.color.r, spriteRenderer.color.g, spriteRenderer.color.b, 1f); // Ensure sprite is fully visible at the end
+        isFlickering = false;
+
+        // Re-enable collisions with objects tagged as "Enemy"
+        foreach (GameObject enemy in enemies)
+        {
+            Physics2D.IgnoreCollision(GetComponent<Collider2D>(), enemy.GetComponent<Collider2D>(), false);
+        }
     }
 }

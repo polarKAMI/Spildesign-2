@@ -12,7 +12,7 @@ public class Damagescript : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            health.Takedamage(1);
+            health.TakeDamage(1);
         }
     }
 
