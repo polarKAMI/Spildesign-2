@@ -9,11 +9,13 @@ public class PlayerJump : MonoBehaviour
     private bool isChargingJump = false; // Flag to track if the player is charging the jump
     public bool isJumping = false; // Flag to track if the player is in the air
     public bool isSliding = false; // Flag to track if the player is sliding
+    public bool isSideStep = false;
     private float jumpStartTime; // Time when jump charging started
     private float jumpTime; // Time spent in the air
     private float jumpChargeDuration = 1f; // Duration to charge the jump in seconds
     public float maxJumpForce = 12f; // Maximum jump force
     public float minJumpForce = 5f; // Minimum jump force (when releasing spacebar early)
+    public float sideStepSpeed = 20f;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
 
@@ -34,17 +36,22 @@ public class PlayerJump : MonoBehaviour
 
     public void ReleaseJump()
     {
-        if (canJump && isChargingJump && isGrounded)
-        {
-            isChargingJump = false;
-            float chargeTime = Time.time - jumpStartTime;
+        float chargeTime = Time.time - jumpStartTime;
 
+        if (canJump && isChargingJump && isGrounded && chargeTime >= 0.3f)
+        {
+            isChargingJump = false;   
             // Calculate jump force based on charge duration
             float chargeRatio = Mathf.Clamp01(chargeTime / jumpChargeDuration);
             float currentJumpForce = Mathf.Lerp(minJumpForce, maxJumpForce, chargeRatio);
 
             // Jump with the calculated force
             Jump(currentJumpForce);
+        }
+        else if (canJump && isChargingJump && isGrounded && chargeTime <= 0.3f)
+        {
+            isChargingJump = false;
+            SideStep(sideStepSpeed);
         }
         else
         {
@@ -86,6 +93,12 @@ public class PlayerJump : MonoBehaviour
             isSliding = false;
             playerMovement.EnableMovement();
         }
+        else if(isSideStep && Mathf.Abs(rb.velocity.x) < 0.01f)
+        {
+            rb.drag = 0f;
+            isSideStep = false;
+            playerMovement.EnableMovement();
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -116,5 +129,15 @@ public class PlayerJump : MonoBehaviour
         float slideForce = 1f * jumpTime; // Adjust this value as needed
         Vector2 slideDirection = playerMovement.isFacingRight ? Vector2.right : Vector2.left;
         rb.AddForce(slideDirection * slideForce, ForceMode2D.Impulse);
+        Debug.Log("slide");
+    }
+
+    private void SideStep(float sideStepSpeed)
+    {
+        playerMovement.DisableMovement();
+        isSideStep = true;
+        rb.drag = 20f;
+        Vector2 sideStepDirection = playerMovement.isFacingRight ? Vector2.right : Vector2.left;
+        rb.AddForce(sideStepDirection * sideStepSpeed, ForceMode2D.Impulse);
     }
 }

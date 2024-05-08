@@ -30,6 +30,14 @@ public class EnemyAI : MonoBehaviour
     private Rigidbody2D rb;
     private float distanceToTarget; // Distance to the target calculated by A* pathfinding
 
+    [Header("Health")]
+    public int maxHealth = 10;
+    public int currentHealth;
+
+    [Header("Attack")]
+    public Health health;
+    public int attackDamage = 2;
+
     private void Awake()
     {
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
@@ -47,7 +55,9 @@ public class EnemyAI : MonoBehaviour
     {
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>(); // Get the Rigidbody2D component
+        currentHealth = maxHealth;
         InvokeRepeating("UpdatePath", 0f, pathUpdateSeconds);
+
     }
 
     private void FixedUpdate()
@@ -70,7 +80,11 @@ public class EnemyAI : MonoBehaviour
             else if (rb.velocity.x < -0.05f)
             {
                 transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
-            }        
+            }       
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
     }
 
 
@@ -173,4 +187,30 @@ public class EnemyAI : MonoBehaviour
         isLaunching = false; // Reset the flag after the cooldown period
     }
 
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            Attack();
+        }
+    }
+    public void Attack()
+    {
+        health.TakeDamage(attackDamage);
+        DamageCooldown();
+    }
+    private IEnumerator DamageCooldown()
+    {      
+        yield return new WaitForSeconds(2f);
+    }
+
+    public void TakeDamage(int amount)
+    {
+        currentHealth -= amount;
+    }
+
+    public void Die()
+    {
+        Destroy(gameObject);
+    }
 }

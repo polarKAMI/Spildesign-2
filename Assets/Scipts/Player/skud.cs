@@ -4,31 +4,42 @@ using UnityEngine;
 
 public class skud : MonoBehaviour
 {
-    public enemyhealth health;
     private void Start()
     {
-       
         Invoke("DestroyObject", 0.5f);
     }
 
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Enemy")
+        if (collision.gameObject.CompareTag("Enemy"))
         {
-            health.Takedamage(5);
-
-            if (health.currentenemyhealth <= 0)
+            // Check if the collided object has the EnemyAI script
+            EnemyAI enemyAI = collision.gameObject.GetComponent<EnemyAI>();
+            enemyhealth enemyHealth = collision.gameObject.GetComponent<enemyhealth>();
+            if (enemyAI != null)
             {
-                Destroy(collision.gameObject);
-                health.currentenemyhealth = health.Maxhealth;
+                // If the collided object has the EnemyAI script, apply damage
+                enemyAI.TakeDamage(5);
             }
+            if (enemyHealth != null)
+            {
+                enemyHealth.Takedamage(5);
+
+                if (enemyHealth.currentenemyhealth <= 0)
+                {
+                    Destroy(collision.gameObject);
+                    enemyHealth.currentenemyhealth = enemyHealth.Maxhealth;
+                }
+            }
+
+        
+        // Destroy the projectile regardless of whether damage was applied
+        Destroy(gameObject);
         }
     }
 
     private void DestroyObject()
     {
-        
         Destroy(gameObject);
     }
 }

@@ -55,7 +55,14 @@ public class Health : MonoBehaviour
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
         foreach (GameObject enemy in enemies)
         {
-            Physics2D.IgnoreCollision(GetComponent<Collider2D>(), enemy.GetComponent<Collider2D>(), true);
+            if (enemy != null)
+            {
+                Collider2D enemyCollider = enemy.GetComponent<Collider2D>();
+                if (enemyCollider != null)
+                {
+                    Physics2D.IgnoreCollision(GetComponent<Collider2D>(), enemyCollider, true);
+                }
+            }
         }
 
         float timer = 0f;
@@ -77,7 +84,15 @@ public class Health : MonoBehaviour
         // Re-enable collisions with objects tagged as "Enemy"
         foreach (GameObject enemy in enemies)
         {
-            Physics2D.IgnoreCollision(GetComponent<Collider2D>(), enemy.GetComponent<Collider2D>(), false);
+            if (enemy != null)
+            {
+                Collider2D enemyCollider = enemy.GetComponent<Collider2D>();
+                if (enemyCollider != null)
+                {
+                    Physics2D.IgnoreCollision(GetComponent<Collider2D>(), enemyCollider, false);
+                }
+            }
         }
     }
 }
+
