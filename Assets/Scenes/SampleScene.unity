@@ -3981,7 +3981,7 @@ Transform:
   m_GameObject: {fileID: 420574096}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 13.59, y: -37.77, z: -0.117892854}
+  m_LocalPosition: {x: 12.69, y: -37.77, z: -0.117892854}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4091,12 +4091,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 280984019770476026}
-  activeDistance: 5
-  chaseDistance: 30
+  activeDistance: 6
+  chaseDistance: 6
   pathUpdateSeconds: 0.5
   launchAngle: 45
-  minLaunchForce: 10
-  maxLaunchForce: 20
+  minLaunchForce: 1
+  maxLaunchForce: 15
   startColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   endColor: {r: 1, g: 1, b: 1, a: 1}
   colorChangeDuration: 1
@@ -4104,6 +4104,10 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  maxHealth: 10
+  currentHealth: 0
+  health: {fileID: 2025619434}
+  attackDamage: 2
 --- !u!1 &464161919
 GameObject:
   m_ObjectHideFlags: 0
@@ -5225,7 +5229,7 @@ GameObject:
   - component: {fileID: 616674373}
   m_Layer: 0
   m_Name: RandomSkrald (4)
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -25600,13 +25604,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 1748848850549437778, guid: 91c2682628b903f4087f1199c6451f20, type: 3}
+      propertyPath: sideStepSpeed
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 2103752632763426906, guid: 91c2682628b903f4087f1199c6451f20, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.4
+      value: 7.96
       objectReference: {fileID: 0}
     - target: {fileID: 2103752632763426906, guid: 91c2682628b903f4087f1199c6451f20, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.9
+      value: -37.7
       objectReference: {fileID: 0}
     - target: {fileID: 2103752632763426906, guid: 91c2682628b903f4087f1199c6451f20, type: 3}
       propertyPath: m_LocalPosition.z
@@ -25639,6 +25647,14 @@ PrefabInstance:
     - target: {fileID: 2103752632763426906, guid: 91c2682628b903f4087f1199c6451f20, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618419400288623798, guid: 91c2682628b903f4087f1199c6451f20, type: 3}
+      propertyPath: climbSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618419400288623798, guid: 91c2682628b903f4087f1199c6451f20, type: 3}
+      propertyPath: ladderTopYOffSet
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 8409016707700205266, guid: 91c2682628b903f4087f1199c6451f20, type: 3}
       propertyPath: inventoryUIManager

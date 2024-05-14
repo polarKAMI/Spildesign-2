@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
+using Unity.Burst.CompilerServices;
 
 public class EnemyAI : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class EnemyAI : MonoBehaviour
     public float activeDistance = 5f;
     public float chaseDistance = 30f;
     public float pathUpdateSeconds = 0.5f;
+    private bool isJumping = false;
 
     [Header("Physics")]
     public float launchAngle = 45f;
@@ -24,7 +26,6 @@ public class EnemyAI : MonoBehaviour
     public LayerMask groundLayer; // Assign the Ground layer mask in the Inspector
 
     private bool isConcealed = true;
-    private bool isLaunching = false; // Flag to track if the enemy is currently in the launching state
     private float launchCooldownTime = 2f; // Adjust as needed
     private Seeker seeker;
     private Rigidbody2D rb;
@@ -68,12 +69,16 @@ public class EnemyAI : MonoBehaviour
             {
                 StartCoroutine(ChangeColorAndActivate());
             }
-            else if (TargetInDistance() && seeker.IsDone() && IsGrounded() && !isLaunching)
+            else if (TargetInDistance() && seeker.IsDone() && IsGrounded() && !isJumping)
             {
                 LaunchEnemy();
             }
-        } 
-            if (rb.velocity.x > 0.05f)
+        }
+        else if (!TargetInDistance() && !isConcealed)
+        {
+            StartCoroutine(CheckAndConceal()); // Call the function when the player is outside target range
+        }
+        if (rb.velocity.x > 0.05f)
             {
                 transform.localScale = new Vector3(-1f * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
             }
@@ -123,9 +128,10 @@ public class EnemyAI : MonoBehaviour
     }
 
     private IEnumerator ChangeColorAndActivate()
-    {
-        isConcealed = false;
+    { 
         yield return StartCoroutine(ChangeColor());
+        yield return new WaitForSeconds(1f);
+        isConcealed = false;
     }
 
     private IEnumerator ChangeColor()
@@ -140,51 +146,174 @@ public class EnemyAI : MonoBehaviour
         spriteRenderer.color = endColor; // Ensure final color is set
     }
 
+    private IEnumerator CheckAndConceal()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(2f); // Wait for 2 seconds
+            if (!TargetInDistance())
+            {
+                yield return StartCoroutine(ReverseChangeColorAndDeactivate());
+                break; // Exit the loop if target is no longer in chase range
+            }
+        }
+    }
+
+    private IEnumerator ReverseChangeColorAndDeactivate()
+    {
+        float elapsedTime = 0;
+        while (elapsedTime < colorChangeDuration)
+        {
+            spriteRenderer.color = Color.Lerp(endColor, startColor, elapsedTime / colorChangeDuration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        spriteRenderer.color = startColor; // Ensure final color is set
+        isConcealed = true; // Set isConcealed back to true
+    }
+
     private bool TargetInDistance()
     {
         float distance = Vector3.Distance(transform.position, target.position);
         return isConcealed ? distance < activeDistance : distance < chaseDistance;
     }
 
+    private Vector2 PredictedLandingPosition(Vector2 launchDirection, float launchForce)
+    {
+        // Create a new GameObject as a child of the enemy GameObject
+        GameObject tempObject = new GameObject("TempRigidbody");
+        tempObject.transform.parent = transform; // Set the enemy as the parent
+        Rigidbody2D tempRb = tempObject.AddComponent<Rigidbody2D>();
+        tempRb.isKinematic = false;
+        tempRb.gravityScale = rb.gravityScale; // Use the same gravity scale as the actual Rigidbody
+        Debug.Log("tempRb: " + tempRb.transform.position);
+        // Apply launch force to the temporary Rigidbody
+        tempRb.velocity = launchDirection.normalized * launchForce;
+
+        // Store the current simulation mode
+        var prevSimulationMode = Physics2D.simulationMode;
+
+        // Set the simulation mode to Script
+        Physics2D.simulationMode = SimulationMode2D.Script;
+        Debug.Log("tempRb2: " + tempRb.transform.position);
+        
+        float simulationTime = 21.0f; // seconds
+        bool didSim = Physics2D.Simulate(Time.fixedDeltaTime * simulationTime);
+        Debug.Log("didSim: " + didSim);
+        
+        Vector2 predictedPosition = tempObject.transform.position + transform.position;
+
+        Physics2D.simulationMode = prevSimulationMode;
+        Debug.Log("tempRb3: " + tempRb.transform.position);
+       
+        Destroy(tempObject);
+        return predictedPosition;
+    }
+
     private void LaunchEnemy()
     {
-        isLaunching = true; // Set the flag to indicate that the enemy is launching
-
-        // Calculate the direction vector from the enemy to the target
+        isJumping = true; // Set the flag to indicate that the enemy is jumping
+        float initialYpos = transform.position.y;
         Vector2 directionToTarget = (target.position - transform.position).normalized;
-
-        // If the target is to the left of the enemy, flip the launch angle horizontally
         float adjustedLaunchAngle = launchAngle;
+
         if (directionToTarget.x < 0)
         {
             adjustedLaunchAngle = 180 - launchAngle;
         }
 
-        // Calculate the launch direction based on the adjusted launch angle
         Vector2 launchDirection = Quaternion.Euler(0, 0, adjustedLaunchAngle) * Vector2.right;
-
-        // Call your method to launch the enemy using the calculated launch direction
-        LaunchLogic(launchDirection);
-
-        StartCoroutine(LaunchCooldown()); // Start the cooldown coroutine
-    }
-    private void LaunchLogic(Vector2 launchDirection)
-    {
-        // Convert launch angle to radians
-        float angleInRadians = launchAngle * Mathf.Deg2Rad;
 
         // Calculate launch force based on distance to target
         float launchForce = Mathf.Clamp(distanceToTarget, minLaunchForce, maxLaunchForce);
+        
+        Vector2 predictedLandingPos = PredictedLandingPosition(launchDirection, launchForce);
+        Debug.Log("predicted x pos: " + predictedLandingPos.x + " predicted y pos: " + predictedLandingPos.y);
+        
+        // Check if there's ground at the predicted landing position
+        RaycastHit2D hit = Physics2D.Raycast(predictedLandingPos, Vector2.down, 10f, groundLayer);
+        Debug.Log("y pos: " + initialYpos);
+        Debug.Log("predicted y pos: " + hit.point.y + " collider: " + hit.collider);
 
-        // Apply launch force to the enemy
-        rb.velocity = launchDirection.normalized * launchForce;
+        if (hit.collider != null && Mathf.Abs(hit.point.y - initialYpos) < 1f)
+        {
+            Debug.Log("ez jump");
+            rb.velocity = launchDirection.normalized * launchForce;
+        }
+        else
+        {
+            float cand1, cand2;
+
+            Vector2 minLandingPos = PredictedLandingPosition(launchDirection, minLaunchForce);
+            Debug.Log("predicted min x pos: " + minLandingPos.x + " predicted min y pos: " + minLandingPos.y);
+            Vector2 maxLandingPos = PredictedLandingPosition(launchDirection, maxLaunchForce);
+            Debug.Log("predicted max x pos: " + maxLandingPos.x + " predicted max y pos: " + maxLandingPos.y);
+
+            RaycastHit2D minHit = Physics2D.Raycast(minLandingPos, Vector2.down, 10f, groundLayer);
+            Debug.Log("predicted min y RAY: " + minHit.point.y + " collider: " + minHit.collider);
+            RaycastHit2D maxHit = Physics2D.Raycast(maxLandingPos, Vector2.down, 10f, groundLayer);
+            Debug.Log("predicted max y RAY: " + maxHit.point.y + " collider: " + maxHit.collider);
+            if (minHit.collider != null && Mathf.Abs(minHit.point.y - initialYpos) < 1f)
+            {
+                cand1 = findBestBetween(minLaunchForce, launchForce, launchDirection, initialYpos);
+            }
+            else
+            {
+                cand1 = -1f;
+            }
+
+            if (maxHit.collider != null && Mathf.Abs(maxHit.point.y - initialYpos) < 1f)
+            {
+                cand2 = findBestBetween(maxLaunchForce, launchForce, launchDirection, initialYpos);
+            }
+            else
+            {
+                cand2 = -1f;
+            }
+            if (cand1 == -1f || Mathf.Abs(cand1 - launchForce) > Mathf.Abs(cand2 - launchForce))
+            {
+                Debug.Log("cand2 jump " + cand2);
+                rb.velocity = launchDirection.normalized * cand2;
+            }
+            else
+            {
+                Debug.Log("cand1 jump " + cand1);
+                rb.velocity = launchDirection.normalized * cand1;
+            }
+        }
+
+        StartCoroutine(LaunchCooldown());
     }
+
+    private float findBestBetween(float hitsGround, float hitsHole, Vector2 launchDirection, float initialYpos)
+    {
+        Debug.Log("leder efter sted at lande :D" + hitsGround + ", " + hitsHole);
+        if (Mathf.Abs(hitsGround - hitsHole) > 0.1f)
+        {
+            float mid = hitsHole + (hitsGround - hitsHole) / 2;
+            Vector2 midLandPos = PredictedLandingPosition(launchDirection, mid);
+            RaycastHit2D midHit = Physics2D.Raycast(midLandPos, Vector2.down, 10f, groundLayer);
+            if (midHit.collider != null && Mathf.Abs(midHit.point.y - initialYpos) < 1f)
+            {
+                return findBestBetween(mid, hitsHole, launchDirection, initialYpos);
+            }
+            else
+            {
+                return findBestBetween(hitsGround, mid, launchDirection, initialYpos);
+            }
+        }
+        else
+        {
+            return hitsGround;
+        }
+    }
+
 
     private IEnumerator LaunchCooldown()
     {
         yield return new WaitUntil(() => IsGrounded()); // Wait until the enemy becomes grounded again
         yield return new WaitForSeconds(launchCooldownTime);
-        isLaunching = false; // Reset the flag after the cooldown period
+        isJumping = false; // Reset the flag after the cooldown period
     }
 
     public void OnCollisionEnter2D(Collision2D collision)

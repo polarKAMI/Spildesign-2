@@ -10,6 +10,7 @@ public static class GlobalInputMapping
     public static Dictionary<string, KeyCode> optionsInputMapping = new Dictionary<string, KeyCode>();
     public static Dictionary<string, KeyCode> menuInputMapping = new Dictionary<string, KeyCode>();
     public static Dictionary<string, KeyCode> logInputMapping = new Dictionary<string, KeyCode>();
+    public static Dictionary<string, KeyCode> climbInputMapping = new Dictionary<string, KeyCode>();
     // Reference to the currently active dictionary
     public static Dictionary<string, KeyCode> activeInputMappings;
     private static bool isInitialized = false;
@@ -46,6 +47,13 @@ public static class GlobalInputMapping
             menuInputMapping["Menu"] = KeyCode.Escape;
 
             logInputMapping["Menu"] = KeyCode.Escape;
+
+            climbInputMapping["MoveUp"] = KeyCode.W;
+            climbInputMapping["MoveDown"] = KeyCode.S;
+            climbInputMapping["Off-"] = KeyCode.A;
+            climbInputMapping["Off+"] = KeyCode.D;
+            climbInputMapping["Off"] = KeyCode.E;
+            climbInputMapping["Menu"] = KeyCode.Escape;
 
             SetActiveInputMappings(inGameInputMapping);
             isInitialized = true;

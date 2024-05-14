@@ -9,11 +9,14 @@ public class PlayerController : MonoBehaviour
     private Shoot Shoot;
     public PauseMenu pauseMenu;
     private LogMenu logMenu;
+    private LadderMovement ladderMovement;
 
     private bool isInventoryOpen = false; // Flag to track inventory state
 
     private KeyCode moveLeftKey;
     private KeyCode moveRightKey;
+    private KeyCode ladderUp;
+    private KeyCode ladderDown;
 
     bool leftKeyPressed = false;
     bool rightKeyPressed = false;
@@ -39,6 +42,7 @@ public class PlayerController : MonoBehaviour
         Shoot = GetComponent<Shoot>();
         pauseMenu = GameObject.FindObjectOfType<PauseMenu>();
         logMenu = GameObject.FindObjectOfType<LogMenu>();
+        ladderMovement = GetComponent<LadderMovement>();
 
         if (pauseMenu != null)
         {
@@ -50,6 +54,7 @@ public class PlayerController : MonoBehaviour
         }
         moveLeftKey = GlobalInputMapping.activeInputMappings["MoveLeft"];
         moveRightKey = GlobalInputMapping.activeInputMappings["MoveRight"];
+       
     }
 
 
@@ -279,7 +284,45 @@ public class PlayerController : MonoBehaviour
                 logMenu.Pause();
             }
         }
+        else if (GlobalInputMapping.activeInputMappings == GlobalInputMapping.climbInputMapping)
+        {
+            float verticalInput = 0f;
+            ladderUp = GlobalInputMapping.activeInputMappings["MoveUp"];
+            ladderDown = GlobalInputMapping.activeInputMappings["MoveDown"];
 
+            if (Input.GetKey(ladderDown))
+            {
+                verticalInput = -1f;
+            }
+            else if (Input.GetKey(ladderUp))
+            {
+                verticalInput = 1f;
+            }
+            else
+            {
+ 
+                verticalInput = 0f;
+            }
+
+            ladderMovement.Climb(verticalInput);
+
+            if (Input.GetKeyDown(GlobalInputMapping.activeInputMappings["Off+"]))
+            {
+                ladderMovement.PushOffLadder(1);
+            }
+            else if (Input.GetKeyDown(GlobalInputMapping.activeInputMappings["Off-"]))
+            {
+                ladderMovement.PushOffLadder(-1);
+            }
+            else if (Input.GetKeyDown(GlobalInputMapping.activeInputMappings["Off"]))
+            {
+                ladderMovement.StopClimbing();
+            }
+            else if (Input.GetKeyDown(GlobalInputMapping.activeInputMappings["Menu"]))
+            {
+                pauseMenu.Menu();
+            }
+        }
         }
 
         void ToggleInventory()

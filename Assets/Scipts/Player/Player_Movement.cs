@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     public bool isSprinting = false;
     [SerializeField] private Rigidbody2D rb;
     public InventoryUIManager inventoryUIManager;
+    private PlayerJump playerJump;
 
     public bool movementEnabled = true; // Flag to track if movement is enabled
 
@@ -20,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
     {
         // Set the initial currentSpeed to the baseSpeed
         currentSpeed = baseSpeed;   
+        playerJump = GetComponent<PlayerJump>();
     }
 
     public void Move(float input)
@@ -54,7 +56,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (movementEnabled) {
+        if (movementEnabled && playerJump.isGrounded) {
             rb.velocity = new Vector2(horizontal * currentSpeed, rb.velocity.y);
         }   
     }

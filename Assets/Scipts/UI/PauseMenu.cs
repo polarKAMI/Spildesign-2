@@ -13,6 +13,7 @@ public class PauseMenu : MonoBehaviour
     public InventoryUIManager inventoryManager;
     private OptionsPanelManager optionsPanelManager;
     private LogMenu logMenu;
+    private LadderMovement ladderMovement;
 
     private int selectedIndex = 0;
 
@@ -22,6 +23,7 @@ public class PauseMenu : MonoBehaviour
         playerMovement = FindObjectOfType<PlayerMovement>();
         inventoryManager = FindObjectOfType<InventoryUIManager>();
         optionsPanelManager = FindObjectOfType<OptionsPanelManager>();
+        ladderMovement = FindObjectOfType<LadderMovement>();
         logMenu = FindObjectOfType<LogMenu>();
         
         foreach (var border in menuBorders)
@@ -121,6 +123,10 @@ public class PauseMenu : MonoBehaviour
         else if (inventoryManager.isOpen)
         {
             GlobalInputMapping.SetActiveInputMappings(GlobalInputMapping.inventoryInputMapping);
+        }
+        else if (ladderMovement.isClimbing)
+        {
+            GlobalInputMapping.SetActiveInputMappings(GlobalInputMapping.climbInputMapping);
         }
         else
         {

@@ -4,8 +4,9 @@ public class PlayerJump : MonoBehaviour
 {
     private Rigidbody2D rb;
     public PlayerMovement playerMovement;
+    private LadderMovement ladderMovement;
     private bool canJump = true; // Flag to track if the player can jump
-    private bool isGrounded = false; // Flag to track if the player is grounded
+    public bool isGrounded = false; // Flag to track if the player is grounded
     private bool isChargingJump = false; // Flag to track if the player is charging the jump
     public bool isJumping = false; // Flag to track if the player is in the air
     public bool isSliding = false; // Flag to track if the player is sliding
@@ -23,6 +24,7 @@ public class PlayerJump : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         playerMovement = GetComponent<PlayerMovement>();
+        ladderMovement = GetComponent<LadderMovement>(); 
     }
 
     public void StartChargingJump()
@@ -38,7 +40,7 @@ public class PlayerJump : MonoBehaviour
     {
         float chargeTime = Time.time - jumpStartTime;
 
-        if (canJump && isChargingJump && isGrounded && chargeTime >= 0.3f)
+        if (canJump && isChargingJump && isGrounded && chargeTime >= 0.15f)
         {
             isChargingJump = false;   
             // Calculate jump force based on charge duration
@@ -48,7 +50,7 @@ public class PlayerJump : MonoBehaviour
             // Jump with the calculated force
             Jump(currentJumpForce);
         }
-        else if (canJump && isChargingJump && isGrounded && chargeTime <= 0.3f)
+        else if (canJump && isChargingJump && isGrounded && chargeTime <= 0.15f)
         {
             isChargingJump = false;
             SideStep(sideStepSpeed);
@@ -87,39 +89,47 @@ public class PlayerJump : MonoBehaviour
         }
 
         // Enable movement after sliding is complete
-        if (isSliding && Mathf.Abs(rb.velocity.x) < 0.01f)
+        if (!ladderMovement.isClimbing)
         {
-            rb.drag = 0f;
-            isSliding = false;
-            playerMovement.EnableMovement();
+            if (isSliding && Mathf.Abs(rb.velocity.x) < 0.01f)
+            {
+                rb.drag = 0f;
+                isSliding = false;
+                playerMovement.EnableMovement();
+            }
+            else if (isSideStep && Mathf.Abs(rb.velocity.x) < 0.01f)
+            {
+                rb.drag = 0f;
+                isSideStep = false;
+                playerMovement.EnableMovement();
+            }
         }
-        else if(isSideStep && Mathf.Abs(rb.velocity.x) < 0.01f)
-        {
-            rb.drag = 0f;
-            isSideStep = false;
-            playerMovement.EnableMovement();
-        }
+       
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         // Check if the player has collided with an object on the ground layer
-        if (groundLayer == (groundLayer | (1 << collision.gameObject.layer)))
+        if(GlobalInputMapping.activeInputMappings == GlobalInputMapping.inGameInputMapping)
         {
-            // Check if the jump time is above 0.9 and slide if true
-            if (isJumping && jumpTime > 1.5f)
+            if (groundLayer == (groundLayer | (1 << collision.gameObject.layer)))
             {
-                isSliding = true;
-                Slide(jumpTime);
-            }
-            else
-            {
-                playerMovement.EnableMovement();
-            }
+                // Check if the jump time is above 0.9 and slide if true
+                if (isJumping && jumpTime > 1.5f)
+                {
+                    isSliding = true;
+                    Slide(jumpTime);
+                }
+                else
+                {
+                    playerMovement.EnableMovement();
+                }
 
-            canJump = true; // Set canJump to true when grounded
-            isJumping = false; // Reset isJumping when grounded
+                canJump = true; // Set canJump to true when grounded
+                isJumping = false; // Reset isJumping when grounded
+            }
         }
+        
     }
 
     private void Slide(float jumpTime)
