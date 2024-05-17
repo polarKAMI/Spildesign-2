@@ -47,6 +47,12 @@ public static class GlobalInputMapping
             menuInputMapping["Menu"] = KeyCode.Escape;
 
             logInputMapping["Menu"] = KeyCode.Escape;
+            logInputMapping["Select+"] = KeyCode.D;
+            logInputMapping["Select-"] = KeyCode.A;
+            logInputMapping["Select"] = KeyCode.E;
+            logInputMapping["ScrollUp"] = KeyCode.W;
+            logInputMapping["ScrollDown"] = KeyCode.S;
+            logInputMapping["Deselect"] = KeyCode.Q;
 
             climbInputMapping["MoveUp"] = KeyCode.W;
             climbInputMapping["MoveDown"] = KeyCode.S;

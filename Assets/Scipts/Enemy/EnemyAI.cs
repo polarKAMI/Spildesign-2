@@ -24,6 +24,7 @@ public class EnemyAI : MonoBehaviour
     public float colorChangeDuration = 1.0f;
     public SpriteRenderer spriteRenderer;
     public LayerMask groundLayer; // Assign the Ground layer mask in the Inspector
+    public LogSO log;
 
     private bool isConcealed = true;
     private float launchCooldownTime = 2f; // Adjust as needed
@@ -340,6 +341,13 @@ public class EnemyAI : MonoBehaviour
 
     public void Die()
     {
+        if (!log.Collected)
+        {
+            // Add the log to the LogManager
+            LogManager.AddLog(log);
+            // Set the collected flag to true
+            log.Collected = true;
+        }
         Destroy(gameObject);
     }
 }

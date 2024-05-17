@@ -73,11 +73,8 @@ public class OptionsPanelManager : MonoBehaviour
     }
 
     void SelectOption(int index)
-    {
-        // Remove the border highlight from the previously selected option
+    {      
         optionBorders[index].SetActive(false);
-
-        // Highlight the selected option with a border
         optionBorders[index].SetActive(true);
     }
 

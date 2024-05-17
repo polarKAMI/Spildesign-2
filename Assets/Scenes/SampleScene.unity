@@ -1237,6 +1237,7 @@ MonoBehaviour:
   inventoryData: {fileID: 11400000, guid: 4c6fb867845186c4d91bf2a8904605ff, type: 2}
   audioSource: {fileID: 106033959}
   pickupDuration: 0.3
+  log: {fileID: 0}
 --- !u!82 &106033959
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4104,6 +4105,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  log: {fileID: 0}
   maxHealth: 10
   currentHealth: 0
   health: {fileID: 2025619434}
@@ -7941,6 +7943,7 @@ MonoBehaviour:
   inventoryData: {fileID: 11400000, guid: 4c6fb867845186c4d91bf2a8904605ff, type: 2}
   audioSource: {fileID: 867675100}
   pickupDuration: 0.3
+  log: {fileID: 0}
 --- !u!82 &867675100
 AudioSource:
   m_ObjectHideFlags: 0
@@ -10565,6 +10568,7 @@ MonoBehaviour:
   inventoryData: {fileID: 11400000, guid: 4c6fb867845186c4d91bf2a8904605ff, type: 2}
   audioSource: {fileID: 1037382737}
   pickupDuration: 0.3
+  log: {fileID: 0}
 --- !u!82 &1037382737
 AudioSource:
   m_ObjectHideFlags: 0
@@ -12089,7 +12093,7 @@ PrefabInstance:
     - target: {fileID: 1593403970983876611, guid: 3c0c0cc778cefb44fb3ded1cd4475e57, type: 3}
       propertyPath: pauseMenu
       value: 
-      objectReference: {fileID: 1899689013}
+      objectReference: {fileID: 1286705052}
     - target: {fileID: 3749511241267246561, guid: 3c0c0cc778cefb44fb3ded1cd4475e57, type: 3}
       propertyPath: m_Name
       value: LogCanvas
@@ -13387,10 +13391,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba44adf9e13bcc9408900a9274013a62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventoryItem: {fileID: 11400000, guid: ef1281cab7d01c045a169458e3668ca1, type: 2}
+  inventoryItem: {fileID: 11400000, guid: ba900e5c959df9f4e938d29fe67cdd30, type: 2}
   inventoryData: {fileID: 11400000, guid: 4c6fb867845186c4d91bf2a8904605ff, type: 2}
   audioSource: {fileID: 1219524869}
   pickupDuration: 0.3
+  log: {fileID: 11400000, guid: d885305af0d969541ac453494b32d80e, type: 2}
 --- !u!82 &1219524869
 AudioSource:
   m_ObjectHideFlags: 0
@@ -15089,6 +15094,7 @@ MonoBehaviour:
   inventoryData: {fileID: 11400000, guid: 4c6fb867845186c4d91bf2a8904605ff, type: 2}
   audioSource: {fileID: 1323313034}
   pickupDuration: 0.3
+  log: {fileID: 0}
 --- !u!1 &1330430435
 GameObject:
   m_ObjectHideFlags: 0
@@ -18042,6 +18048,7 @@ MonoBehaviour:
   inventoryData: {fileID: 11400000, guid: 4c6fb867845186c4d91bf2a8904605ff, type: 2}
   audioSource: {fileID: 1497658926}
   pickupDuration: 0.3
+  log: {fileID: 0}
 --- !u!82 &1497658926
 AudioSource:
   m_ObjectHideFlags: 0
@@ -18235,6 +18242,55 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 16.17, y: -45.74, z: -0.5605957}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1510320669
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1510320671}
+  - component: {fileID: 1510320670}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1510320670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1510320669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19baa7ad6783ad24b94e5278ad5c3446, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  notesLogs: []
+  itemsLogs: []
+  entitiesLogs: []
+  federationLogs: []
+  miscLogs: []
+--- !u!4 &1510320671
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1510320669}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 19.346651, y: -47.901367, z: 0.5723235}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -18476,6 +18532,7 @@ MonoBehaviour:
   inventoryData: {fileID: 11400000, guid: 4c6fb867845186c4d91bf2a8904605ff, type: 2}
   audioSource: {fileID: 1528331033}
   pickupDuration: 0.3
+  log: {fileID: 0}
 --- !u!82 &1528331033
 AudioSource:
   m_ObjectHideFlags: 0
@@ -22607,11 +22664,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &1899689013 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7985920189768008102, guid: a03e60318c1e98847a0a0138c7527395, type: 3}
-  m_PrefabInstance: {fileID: 926716274}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1906205602
 GameObject:
   m_ObjectHideFlags: 0
@@ -25117,10 +25169,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba44adf9e13bcc9408900a9274013a62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventoryItem: {fileID: 11400000, guid: e9deaa145879f4f4e9ad0acae6e28d2a, type: 2}
+  inventoryItem: {fileID: 11400000, guid: 82a59d8b28963414492c6910b32856db, type: 2}
   inventoryData: {fileID: 11400000, guid: 4c6fb867845186c4d91bf2a8904605ff, type: 2}
   audioSource: {fileID: 2131591805}
   pickupDuration: 0.3
+  log: {fileID: 11400000, guid: 4521b463f84d81e40a03ff8fea38e891, type: 2}
 --- !u!82 &2131591805
 AudioSource:
   m_ObjectHideFlags: 0
@@ -25614,7 +25667,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2103752632763426906, guid: 91c2682628b903f4087f1199c6451f20, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -37.7
+      value: -53.95
       objectReference: {fileID: 0}
     - target: {fileID: 2103752632763426906, guid: 91c2682628b903f4087f1199c6451f20, type: 3}
       propertyPath: m_LocalPosition.z
@@ -25972,6 +26025,7 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 1510320671}
   - {fileID: 1848465411}
   - {fileID: 901763870}
   - {fileID: 1121380591}

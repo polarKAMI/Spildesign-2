@@ -7,6 +7,7 @@ public class Item : MonoBehaviour, IInteractable
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private float pickupDuration = 0.3f;
 
+    public LogSO log;
     public InventoryItem InventoryItem => inventoryItem;
 
     private void Start()
@@ -23,6 +24,12 @@ public class Item : MonoBehaviour, IInteractable
     {
         // Add the item to the inventory data
         inventoryData.AddItem(inventoryItem);
+       
+        if (!log.Collected)
+        {
+            LogManager.AddLog(log);
+            log.Collected = true;
+        }
 
         StartCoroutine(AnimatePickup());
     }

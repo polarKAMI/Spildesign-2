@@ -283,6 +283,45 @@ public class PlayerController : MonoBehaviour
             {
                 logMenu.Pause();
             }
+            else if (Input.GetKeyDown(GlobalInputMapping.activeInputMappings["Select+"]) && !logMenu.entryList)
+            {
+                logMenu.ChangeSelectedIndex(1);
+            }
+            else if (Input.GetKeyDown(GlobalInputMapping.activeInputMappings["Select-"]) && !logMenu.entryList)
+            {
+                logMenu.ChangeSelectedIndex(-1);
+            }
+            else if (Input.GetKeyDown(GlobalInputMapping.activeInputMappings["Select"]))
+            {
+                if (!logMenu.entryList)
+                {
+                    logMenu.SelectCategory();
+                }
+                else if (logMenu.entryList)
+                {
+
+                }
+            }
+            else if (Input.GetKeyDown(GlobalInputMapping.activeInputMappings["Deselect"]))
+            {
+                if(!logMenu.entryList)
+                {
+                    logMenu.Pause();
+                }
+                else if (logMenu.entryList)
+                {
+                    logMenu.DeselectCategory();
+                }
+            }
+            else if (Input.GetKeyDown(GlobalInputMapping.activeInputMappings["ScrollUp"]) && logMenu.entryList)
+            {
+                logMenu.ChangeSelectedEntry(-1);
+            }
+            else if (Input.GetKeyDown(GlobalInputMapping.activeInputMappings["ScrollDown"]) && logMenu.entryList)
+            {
+                logMenu.ChangeSelectedEntry(1);
+            }
+
         }
         else if (GlobalInputMapping.activeInputMappings == GlobalInputMapping.climbInputMapping)
         {
