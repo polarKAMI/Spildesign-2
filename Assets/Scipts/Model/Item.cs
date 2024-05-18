@@ -9,6 +9,7 @@ public class Item : MonoBehaviour, IInteractable
 
     public LogSO log;
     public InventoryItem InventoryItem => inventoryItem;
+    public NotificationManager notificationManager;
 
     private void Start()
     {
@@ -32,6 +33,7 @@ public class Item : MonoBehaviour, IInteractable
         }
 
         StartCoroutine(AnimatePickup());
+        notificationManager.ShowNotification("new item;");
     }
 
     private IEnumerator AnimatePickup()
