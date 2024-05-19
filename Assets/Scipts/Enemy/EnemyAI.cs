@@ -25,6 +25,7 @@ public class EnemyAI : MonoBehaviour
     public SpriteRenderer spriteRenderer;
     public LayerMask groundLayer; // Assign the Ground layer mask in the Inspector
     public LogSO log;
+    public NotificationManager notificationManager;
 
     private bool isConcealed = true;
     private float launchCooldownTime = 2f; // Adjust as needed
@@ -347,6 +348,7 @@ public class EnemyAI : MonoBehaviour
             LogManager.AddLog(log);
             // Set the collected flag to true
             log.Collected = true;
+            notificationManager.ShowNotification("new log;");
         }
         Destroy(gameObject);
     }
