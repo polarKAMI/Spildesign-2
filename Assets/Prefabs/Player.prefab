@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1652866291335753970}
   - component: {fileID: 6211131296470994453}
   - component: {fileID: 313453586278069113}
+  - component: {fileID: 297122874798139885}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -92,6 +93,21 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1104684323196932873}
   m_Enabled: 1
+--- !u!114 &297122874798139885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1104684323196932873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf246112c123f4249a9a835d63ac4f33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offset: {x: 0, y: 0, z: 0}
+  damping: 0
+  target: {fileID: 2103752632763426906}
 --- !u!1 &1644882701374204269
 GameObject:
   m_ObjectHideFlags: 0
@@ -276,10 +292,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerMovement: {fileID: 8409016707700205266}
+  isGrounded: 0
   isJumping: 0
   isSliding: 0
+  isSideStep: 0
   maxJumpForce: 6
   minJumpForce: 1
+  sideStepSpeed: 6
   groundCheck: {fileID: 4410998964329908569}
   groundLayer:
     serializedVersion: 2
@@ -341,8 +360,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b243428f740a34a4e8c301f49e61ac15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Maxhealth: 10
-  currenthealth: -6
+  MaxHealth: 10
+  currentHealth: 0
 --- !u!114 &3618419400288623798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -355,9 +374,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53b25a94182014945837ec8e0c8ff1d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isLadder: 0
   isClimbing: 0
-  rb: {fileID: 1917689589979223453}
+  ladderTopYOffSet: 0.7
+  climbSpeed: 3
 --- !u!82 &6910116808746037475
 AudioSource:
   m_ObjectHideFlags: 0
