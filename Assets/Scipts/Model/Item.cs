@@ -30,10 +30,10 @@ public class Item : MonoBehaviour, IInteractable
         {
             LogManager.AddLog(log);
             log.Collected = true;
+            notificationManager.ShowNotification("new item;");
         }
 
         StartCoroutine(AnimatePickup());
-        notificationManager.ShowNotification("new item;");
     }
 
     private IEnumerator AnimatePickup()
