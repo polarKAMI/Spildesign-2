@@ -80,7 +80,7 @@ public class PlayerJump : MonoBehaviour
     private void Update()
     {
         // Check if the player is grounded
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, 2f, groundLayer);
 
         // Update jump time if the player is in the air
         if (isJumping)

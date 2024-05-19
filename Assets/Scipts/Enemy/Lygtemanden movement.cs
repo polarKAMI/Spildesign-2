@@ -24,7 +24,7 @@ public class Lygtemandenmovement : MonoBehaviour
             transform.position = Vector2.MoveTowards(transform.position, Patrolpoints[0].position, Movespeed * Time.deltaTime);
             if (Vector2.Distance(transform.position, Patrolpoints[0].position) < .2f)
             {
-                transform.localScale = new Vector3(-1, 1, 1);
+                transform.localScale = new Vector3(-3.5f, 3.5f, 1);
                 patroldestination = 1;
             }
         }
@@ -34,7 +34,7 @@ public class Lygtemandenmovement : MonoBehaviour
             transform.position = Vector2.MoveTowards(transform.position, Patrolpoints[1].position, Movespeed * Time.deltaTime);
             if (Vector2.Distance(transform.position, Patrolpoints[1].position) < .2f)
             {
-                transform.localScale = new Vector3(1, 1, 1);
+                transform.localScale = new Vector3(3.5f, 3.5f, 1);
                 patroldestination = 0;
             }
         }
