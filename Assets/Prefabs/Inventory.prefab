@@ -603,7 +603,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!114 &8206721102050216795
 MonoBehaviour:
@@ -666,6 +666,7 @@ MonoBehaviour:
   border: {fileID: 1695244090652130968}
   itemCounterText: {fileID: 2500784290906216589}
   itemCounter: {fileID: 8889379660870414837}
+  isOpen: 0
 --- !u!114 &7729047371335439063
 MonoBehaviour:
   m_ObjectHideFlags: 0

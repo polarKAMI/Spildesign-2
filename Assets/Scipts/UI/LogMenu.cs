@@ -152,7 +152,7 @@ public class LogMenu : MonoBehaviour
             }
         }
     }
-    
+
     private void DescriptionBoxClear()
     {
         specsTXT.text = null; descTXT.text = null; logNameTXT.text = null; itemImage.sprite = null;

@@ -11,10 +11,10 @@ public class CameraFollow : MonoBehaviour
 
     private Vector3 vel = Vector3.zero;
 
-    
-   private void Update()
+
+    private void Update()
     {
-       Vector3 targetPosition = target.position + offset;
+        Vector3 targetPosition = target.position + offset;
         targetPosition.z = transform.position.z;
         transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref vel, damping);
 

@@ -1172,7 +1172,7 @@ GameObject:
   - component: {fileID: 2991049907114516135}
   - component: {fileID: 1042564608004514314}
   - component: {fileID: 70288967964947055}
-  - component: {fileID: 1593403970983876611}
+  - component: {fileID: 1141521686901111666}
   m_Layer: 5
   m_Name: LogCanvas
   m_TagString: Untagged
@@ -1221,7 +1221,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_TargetDisplay: 0
 --- !u!114 &1042564608004514314
 MonoBehaviour:
@@ -1263,7 +1263,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &1593403970983876611
+--- !u!114 &1141521686901111666
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1276,7 +1276,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   logMenu: {fileID: 7439841081485269001}
-  pauseMenu: {fileID: 0}
+  pauseMenu: {fileID: 1430371618258489323, guid: a03e60318c1e98847a0a0138c7527395, type: 3}
   categoryBorders:
   - {fileID: 580634917999554646}
   - {fileID: 6692782358585594994}

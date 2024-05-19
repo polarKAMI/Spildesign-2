@@ -106,7 +106,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   offset: {x: 0, y: 0, z: 0}
-  damping: 0
+  damping: 0.2
   target: {fileID: 2103752632763426906}
 --- !u!1 &1644882701374204269
 GameObject:
