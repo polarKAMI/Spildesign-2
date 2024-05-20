@@ -22,9 +22,9 @@ public class Lygtemandenmovement : MonoBehaviour
         if (patroldestination == 0)
         {
             transform.position = Vector2.MoveTowards(transform.position, Patrolpoints[0].position, Movespeed * Time.deltaTime);
+            lygtemandenScript.FaceTarget(Patrolpoints[0].position); // Ensure facing towards the patrol point
             if (Vector2.Distance(transform.position, Patrolpoints[0].position) < .2f)
             {
-                transform.localScale = new Vector3(-3.5f, 3.5f, 1);
                 patroldestination = 1;
             }
         }
@@ -32,9 +32,9 @@ public class Lygtemandenmovement : MonoBehaviour
         if (patroldestination == 1)
         {
             transform.position = Vector2.MoveTowards(transform.position, Patrolpoints[1].position, Movespeed * Time.deltaTime);
+            lygtemandenScript.FaceTarget(Patrolpoints[1].position); // Ensure facing towards the patrol point
             if (Vector2.Distance(transform.position, Patrolpoints[1].position) < .2f)
             {
-                transform.localScale = new Vector3(3.5f, 3.5f, 1);
                 patroldestination = 0;
             }
         }

@@ -18,28 +18,28 @@ public class Busk : MonoBehaviour, IInteractable
     public void Interact()
     {
         EnterLayer();
+        Debug.Log("Har trykket E for busk");
     }
 
     void EnterLayer()
     {
-        // Change the layer of the GameObject to the target layer
-        gameObject.layer = LayerMask.NameToLayer("Bush");
-        // Disable the script so the player can't re-enter the layer
-        enabled = false;
+       
+       // er inde 
         isin = true;
+        Debug.Log("Er inde i busk");
 
-        // Change the z value of the position
+        // Change the z value of the position busken kommer foran
         Vector3 newPosition = originalPosition;
         newPosition.z = -0.6f;
         transform.position = newPosition;
 
-        // Set the alpha level to 100
+        // Set the alpha level to 100 den bliver gennemsigtig
         Color color = spriteRenderer.color;
         color.a = 0.5f;
         spriteRenderer.color = color;
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerEnter2D(Collider2D other) // ved ikke hvad g'r
     {
         // Check if the player enters the trigger
         if (other.CompareTag("Player"))
@@ -48,14 +48,15 @@ public class Busk : MonoBehaviour, IInteractable
         }
     }
 
-    void OnTriggerExit2D(Collider2D other)
+    void OnTriggerExit2D(Collider2D other) // ved ikke gvad g'r
     {
         // Check if the player exits the trigger
         if (other.CompareTag("Player"))
         {
             canEnter = false;
-            enabled = true;
+            
             isin = false;
+            Debug.Log("Er ude af busk");
 
             // Change the z value of the position
             Vector3 newPosition = originalPosition;
@@ -68,4 +69,7 @@ public class Busk : MonoBehaviour, IInteractable
             spriteRenderer.color = color;
         }
     }
+
+
+    // bush er forkert
 }

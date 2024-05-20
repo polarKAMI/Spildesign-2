@@ -7,22 +7,25 @@ public class Lygtemanden : MonoBehaviour
     public Transform player; // Reference to the player object
     public float moveSpeed = 5f; // Movement speed of the enemy
     public float detectionRange = 5f; // Range within which the enemy detects the player
-    public float stopRange = 2f;
+    public float stopRange = 2f; // Range within which the enemy stops chasing
     public LayerMask obstacleLayer; // Layer mask for the obstacles (e.g., bush)
-    public Busk busk;
 
-    private Rigidbody2D rb;
-    private Vector3 initialPosition;
-    private bool isChasing = false;
-    private bool isStopped = false;
+    public PlayerMovement Playermovement_script;
 
-    public float resumePatrollingDistance = 10f;
 
-    private Coroutine flipCoroutine;
-    private Vector2 lastPlayerPosition;
+    private Rigidbody2D rb; // Rigidbody2D component for physics interactions
+    private Vector3 initialPosition; // Initial position of the enemy
+    public bool isChasing = false; // Is the enemy chasing the player?
+    public bool isStopped = false; // Is the enemy stopped?
 
-    // Reference to Lygtemandenmovement script
-    private Lygtemandenmovement movementScript;
+    public float resumePatrollingDistance = 10f; // Distance to resume patrolling after chasing
+
+    private Coroutine flipCoroutine; // Coroutine for flipping
+    private Vector2 lastPlayerPosition; // Last known player position
+
+    private Lygtemandenmovement movementScript; // Reference to the movement script
+
+    public bool isHidingHandled = false; // Flag to check if hiding is handled
 
     void Start()
     {
@@ -30,6 +33,8 @@ public class Lygtemanden : MonoBehaviour
         initialPosition = transform.position;
         movementScript = GetComponent<Lygtemandenmovement>();
         IgnorePlayerCollision();
+
+        Playermovement_script = player.GetComponent<PlayerMovement>();
     }
 
     void FixedUpdate()
@@ -37,16 +42,27 @@ public class Lygtemanden : MonoBehaviour
         if (!isChasing)
         {
             // Check for player within detection range
-            if (player != null && Vector2.Distance(transform.position, player.position) <= detectionRange)
+            if (player != null && IsPlayerInFront())
             {
-                // Check if player is not under a bush
-                Collider2D[] obstacles = Physics2D.OverlapCircleAll(player.position, 0.5f, obstacleLayer);
-                if (obstacles.Length == 0)
-                {
-                    isChasing = true;
-                    // Disable Lygtemandenmovement script when chasing
-                    movementScript.enabled = false;
-                }
+
+
+                
+                
+                    if (Playermovement_script.PlayerHidden == true)
+                    {
+                        // keep patrolling??
+                        Collider2D[] obstacles = Physics2D.OverlapCircleAll(player.position, 0.5f, obstacleLayer);
+                    Debug.Log(" Lygte kan ikke se dig");
+                    }
+                    else
+                    {
+                        isChasing = true;
+                        // Disable Lygtemandenmovement script when chasing
+                        movementScript.enabled = false;
+                    Debug.Log("Lygte chaser");
+                    }
+                
+
             }
         }
         else
@@ -78,7 +94,7 @@ public class Lygtemanden : MonoBehaviour
                 if (isStopped)
                 {
 
-                    StartCoroutine(ResumeMovementAfterDelay());
+                    StartCoroutine(ResumeMovementAfterDelay()); // might be this
                 }
 
                 // Check if player is further away than resumePatrollingDistance
@@ -99,7 +115,22 @@ public class Lygtemanden : MonoBehaviour
         rb.freezeRotation = true;
     }
 
-    void MoveTowards(Vector2 targetPosition)
+    bool IsPlayerInFront()
+    {
+        Vector2 directionToPlayer = (player.position - transform.position).normalized;
+
+        // Determine the facing direction based on the local scale's x value
+        Vector2 facingDirection = transform.localScale.x > 0 ? Vector2.left : Vector2.right;
+
+        float dotProduct = Vector2.Dot(facingDirection, directionToPlayer);
+
+        // Check if the player is within detection range and in front of the Lygtemanden
+        return dotProduct > 0 && Vector2.Distance(transform.position, player.position) <= detectionRange;
+    }
+
+
+
+    void MoveTowards(Vector2 targetPosition) // This handles the chase
     {
         Debug.Log("Is chasing");
         // Calculate the direction towards the player
@@ -125,7 +156,7 @@ public class Lygtemanden : MonoBehaviour
         }
     }
 
-    IEnumerator FlipTowardsPlayerDelayed()
+    IEnumerator FlipTowardsPlayerDelayed() //  flips the enemy towards the player if they have moved and if the lygtemanden is stooped.
     {
         while (isStopped)
         {
@@ -189,21 +220,22 @@ public class Lygtemanden : MonoBehaviour
         }
     }
 
-    // Add method to enable Enemymovement script after a delay
-    public void ResumePatrollingAfterDelay()
+    
+    public void ResumePatrollingAfterDelay() // starts the coroutine to resume patrolling.
     {
         StartCoroutine(ResumePatrollingCoroutine());
     }
 
-    IEnumerator ResumePatrollingCoroutine()
+    IEnumerator ResumePatrollingCoroutine() // handles the logic for resuming patrolling after a delay.
     {
         yield return new WaitForSeconds(1f); // Wait for 1 second
         isChasing = false;
         movementScript.enabled = true; // Enable Enemymovement script after the delay
         Debug.Log("Is patrolling again");
+        
     }
 
-    void IgnorePlayerCollision()
+    void IgnorePlayerCollision() // ignores collisions with player objects.
     {
         Collider2D myCollider = GetComponent<Collider2D>();
 
@@ -218,14 +250,14 @@ public class Lygtemanden : MonoBehaviour
         }
     }
 
-    IEnumerator StopMovementCoroutine()
+    IEnumerator StopMovementCoroutine() // stops the enemy's movement.
     {
         rb.velocity = Vector2.zero;
         Debug.Log("Is stopped");
         yield return null; // Ensure movement is stopped immediately
     }
 
-    IEnumerator ResumeMovementAfterDelay()
+    IEnumerator ResumeMovementAfterDelay() //  resumes the enemy's movement after a delay.
     {
         yield return new WaitForSeconds(2f);
         isStopped = false;
@@ -234,55 +266,72 @@ public class Lygtemanden : MonoBehaviour
 
 
 
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        // Check if the player entered the trigger of a bush
-        if (other.gameObject.CompareTag("Bush") && busk.isin)
-        {
+    private Coroutine flipCoroutine3; // Reference to the flip coroutine
 
-            StartCoroutine(HandleBushCollision());
-           
-        }
-    }
-
-
-   
-
-    IEnumerator FlipGameObjectCoroutine()
+    IEnumerator FlipGameObjectCoroutine() // flips the enemy's direction after chase.
     {
 
-        
+
         // Step 1: Stop all movement
         rb.velocity = Vector2.zero;
+        Debug.Log("Is trying to find player");
 
-        // Step 2: Move a little bit in the current direction
-        Vector2 currentDirection = rb.velocity.normalized;
-        rb.MovePosition(rb.position + currentDirection * 1f); // Move a little bit
+        StartCoroutine(Getpatrollingbitch());
 
-        // Wait for a short duration before flipping
-        yield return new WaitForSeconds(1f);
-
-        // Step 3: Perform the flips
-        for (int i = 0; i < 3; i++)
+        // Step 2: Perform the flips
+        for (int i = 0; i < 2; i++)
         {
             // Flip the x scale
             transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
-
-            // Wait for 1 second between each flip
+            Debug.Log("Flipped " + (i + 1) + " time(s)");
+            // Wait for 3 seconds between each flip
             yield return new WaitForSeconds(3f);
+        }
+
+        // Reset the flipCoroutine reference to null after finishing
+        flipCoroutine3 = null;
+        Debug.Log("Flip coroutine finished");
+
+        
+
+    }
+
+    public IEnumerator HandleBushCollision() // handles the logic when the enemy collides with a bush, including stopping chasing and resuming patrolling.
+    {
+        // Perform the flipping first
+        if (flipCoroutine3 == null)
+        {
+            flipCoroutine3 = StartCoroutine(FlipGameObjectCoroutine());
+            Debug.Log("Flip has started");
+            // Wait for the flipping to finish
+            yield return flipCoroutine3;
         }
     }
 
-    IEnumerator HandleBushCollision()
+    IEnumerator Getpatrollingbitch()
     {
-        // Perform the flipping first
-        yield return FlipGameObjectCoroutine();
-
+        yield return new WaitForSeconds(7f);
+        Debug.Log("Started patrolling after 7 seconds");
         // After flipping, set isChasing to false and enable the movement script
         isChasing = false;
+        isStopped = false;
         movementScript.enabled = true;
+        isHidingHandled = false;
 
-        StopCoroutine(FlipGameObjectCoroutine());
-        StopCoroutine(HandleBushCollision());
     }
+
+    public void FaceTarget(Vector2 targetPosition)
+    {
+        Vector2 direction = targetPosition - (Vector2)transform.position;
+        if (direction.x > 0)
+        {
+            transform.localScale = new Vector3(-3.5f, transform.localScale.y, transform.localScale.z);
+        }
+        else if (direction.x < 0)
+        {
+            transform.localScale = new Vector3(3.5f, transform.localScale.y, transform.localScale.z);
+        }
+    }
+
+
 }

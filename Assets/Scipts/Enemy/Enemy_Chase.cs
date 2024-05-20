@@ -7,11 +7,10 @@ public class Enemy_Chase : MonoBehaviour
     public Transform player; // Reference to the player object
     public float moveSpeed = 5f; // Movement speed of the enemy
     public float detectionRange = 5f; // Range within which the enemy detects the player
-    public LayerMask obstacleLayer; // Layer mask for the obstacles (e.g., bush)
-    public Busk busk;
+   
 
     private Rigidbody2D rb;
-    private Vector3 initialPosition;
+  
     private bool isChasing = false;
 
     public float resumePatrollingDistance = 10f;
@@ -24,7 +23,7 @@ public class Enemy_Chase : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        initialPosition = transform.position;
+      
         movementScript = GetComponent<EnemyMovement>();
         iScriptEnabled = GetComponent<Enemy_Chase>();
     }
@@ -36,14 +35,12 @@ public class Enemy_Chase : MonoBehaviour
             // Check for player within detection range
             if (player != null && Vector2.Distance(transform.position, player.position) <= detectionRange)
             {
-                // Check if player is not under a bush
-                Collider2D[] obstacles = Physics2D.OverlapCircleAll(player.position, 0.5f, obstacleLayer);
-                if (obstacles.Length == 0)
-                {
+               
+                
                     isChasing = true;
                     // Disable Lygtemandenmovement script when chasing
                     movementScript.enabled = false;
-                }
+                
             }
         }
         else
@@ -75,12 +72,12 @@ public class Enemy_Chase : MonoBehaviour
             if (moveDirection.x > 0)
             {
                 // Facing right
-                transform.localScale = new Vector3(-1, transform.localScale.y, transform.localScale.z);
+                transform.localScale = new Vector3(1.7f, transform.localScale.y, transform.localScale.z);
             }
             else if (moveDirection.x < 0)
             {
                 // Facing left
-                transform.localScale = new Vector3(1, transform.localScale.y, transform.localScale.z);
+                transform.localScale = new Vector3(-1.7f, transform.localScale.y, transform.localScale.z);
             }
 
             // Check if the enemy is on the ground (optional)
@@ -99,7 +96,7 @@ public class Enemy_Chase : MonoBehaviour
     bool IsGrounded()
     {
         // Define a raycast origin slightly below the enemy's position
-        Vector2 raycastOrigin = transform.position - new Vector3(0f, 0.1f, 0f);
+        Vector2 raycastOrigin = transform.position - new Vector3(0f, 1f, 0f);
 
         // Define the length of the raycast
         float raycastDistance = 0.5f;
@@ -153,7 +150,7 @@ public class Enemy_Chase : MonoBehaviour
         {
             // Apply an impulse force when colliding with the circle collider
             float scaleX = transform.localScale.x;
-            Vector2 boostDirection = (scaleX > 0) ? Vector2.left : Vector2.right;
+            Vector2 boostDirection = (scaleX < 0) ? Vector2.left : Vector2.right;
 
             // Apply an impulse force upwards and in the boost direction
             rb.AddForce(Vector2.up * Jumpforce, ForceMode2D.Impulse);
