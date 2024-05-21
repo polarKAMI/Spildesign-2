@@ -19,7 +19,7 @@ public class OutlineController : MonoBehaviour
     {
         if (player != null && material != null)
         {
-            float distance = Vector3.Distance(transform.position, player.position);
+            float distance = Vector3.Distance(player.position, transform.position);
             material.SetFloat("_DistanceToPlayer", distance);
             material.SetFloat("_ProximityDistance", proximityDistance);
         }
