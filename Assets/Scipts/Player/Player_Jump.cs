@@ -79,8 +79,11 @@ public class PlayerJump : MonoBehaviour
 
     private void Update()
     {
-        // Check if the player is grounded
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, 2f, groundLayer);
+        // Check if the player is grounded only if they are not climbing
+        if (!ladderMovement.isClimbing)
+        {
+            isGrounded = Physics2D.OverlapCircle(groundCheck.position, 2f, groundLayer);
+        }
 
         // Update jump time if the player is in the air
         if (isJumping)
@@ -104,7 +107,6 @@ public class PlayerJump : MonoBehaviour
                 playerMovement.EnableMovement();
             }
         }
-       
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
