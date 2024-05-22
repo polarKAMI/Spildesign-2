@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
@@ -12,16 +13,38 @@ public class Health : MonoBehaviour
     private Coroutine flickerCoroutine;
     private bool isFlickering = false;
 
+    public GameObject DamageOverlay;
+
     void Start()
     {
         currentHealth = MaxHealth;
         spriteRenderer = GetComponent<SpriteRenderer>();
+        UpdateDamageOverlay();
     }
+
+
+    public void UpdateDamageOverlay()
+    {
+        if (DamageOverlay != null)
+        {
+            Image overlayImage = DamageOverlay.GetComponent<Image>();
+            if (overlayImage != null)
+            {
+                float alpha = 1f - (float)currentHealth / MaxHealth;
+                overlayImage.color = new Color(overlayImage.color.r, overlayImage.color.g, overlayImage.color.b, alpha);
+                Debug.Log($"Updated DamageOverlay: Health={currentHealth}, Alpha={alpha}");
+            }
+        }
+    }
+
 
     public void AddHealth(int amount)
     {
         currentHealth += amount;
+        currentHealth = Mathf.Clamp(currentHealth, 0, MaxHealth); // Ensure health stays within bounds
         Debug.Log(currentHealth);
+        UpdateDamageOverlay();
+
     }
 
     public void TakeDamage(int amount)
@@ -30,6 +53,8 @@ public class Health : MonoBehaviour
         {
             currentHealth -= amount;
             Debug.Log(currentHealth);
+            UpdateDamageOverlay();
+
 
             if (currentHealth <= 0)
             {

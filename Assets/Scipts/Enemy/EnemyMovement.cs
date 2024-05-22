@@ -9,17 +9,24 @@ public class EnemyMovement : MonoBehaviour
     public Transform[] Patrolpoints;
     public float Movespeed;
     public int patroldestination;
-  
 
+    Enemy_Chase enemymovement;
+
+    private void Start()
+    {
+        enemymovement = GetComponent<Enemy_Chase>();
+        IgnorePlayerCollision();
+    }
     // Update is called once per frame
     void Update()
     {
         if (patroldestination == 0)
         {
             transform.position = Vector2.MoveTowards(transform.position, Patrolpoints[0].position, Movespeed * Time.deltaTime);
+            enemymovement.FaceTarget(Patrolpoints[0].position);
             if (Vector2.Distance(transform.position, Patrolpoints[0].position) < .2f)
             {
-                transform.localScale = new Vector3(1.7f, 1.5f, 1);
+              
                 patroldestination = 1;
             }
         }
@@ -27,10 +34,27 @@ public class EnemyMovement : MonoBehaviour
         if (patroldestination == 1)
         {
             transform.position = Vector2.MoveTowards(transform.position, Patrolpoints[1].position, Movespeed * Time.deltaTime);
+            enemymovement.FaceTarget(Patrolpoints[1].position);
             if (Vector2.Distance(transform.position, Patrolpoints[1].position) < .2f)
             {
-                transform.localScale = new Vector3(-1.7f, 1.5f, 1);
+               
                 patroldestination = 0;
+            }
+        }
+    }
+
+
+    void IgnorePlayerCollision()
+    {
+        Collider2D myCollider = GetComponent<Collider2D>();
+
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        foreach (GameObject player in players)
+        {
+            Collider2D playerCollider = player.GetComponent<Collider2D>();
+            if (playerCollider != null && myCollider != null)
+            {
+                Physics2D.IgnoreCollision(myCollider, playerCollider);
             }
         }
     }

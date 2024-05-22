@@ -20,12 +20,23 @@ public class Enemy_Chase : MonoBehaviour
     private EnemyMovement movementScript;
     private Enemy_Chase iScriptEnabled;
 
+    private Damagescript damagescript;
+
+    
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
       
         movementScript = GetComponent<EnemyMovement>();
         iScriptEnabled = GetComponent<Enemy_Chase>();
+
+      damagescript = GetComponentInChildren<Damagescript>();
+        IgnorePlayerCollision();
+
+
+
+
     }
 
     void FixedUpdate()
@@ -57,6 +68,11 @@ public class Enemy_Chase : MonoBehaviour
             if (player != null)
             {
                 MoveTowards(player.position);
+
+                if (damagescript.PlayerHasBeenDamaged == true) // hvis player har taget skade s[ venter enemy i 2 sek
+                {
+                    StartCoroutine(HandleDamageStatus());
+                }
             }
         }
 
@@ -88,10 +104,39 @@ public class Enemy_Chase : MonoBehaviour
             }
             // Check if the enemy is on the ground (optional)
 
+           
+
+        }
+
+
+
+    }
+
+
+    IEnumerator HandleDamageStatus()
+    {
+        // Stop movement
+        rb.velocity = Vector2.zero;
+        isChasing = false;
+
+        // Wait for 2 seconds
+        yield return new WaitForSeconds(2f);
+
+        // Reset damage status
+        damagescript.ResetDamageStatus();
+
+        // Resume chasing if the player is still within detection range
+        if (player != null && Vector2.Distance(transform.position, player.position) <= detectionRange)
+        {
+            isChasing = true;
+        }
+        else
+        {
+            // Resume patrolling if the player is out of range
+            movementScript.enabled = true;
         }
     }
 
-   
 
     bool IsGrounded()
     {
@@ -136,7 +181,7 @@ public class Enemy_Chase : MonoBehaviour
 
     IEnumerator ResumePatrollingCoroutine()
     {
-        yield return new WaitForSeconds(1f); // Wait for 1 second
+        yield return new WaitForSeconds(2f); // Wait for 1 second
         isChasing = false;
         movementScript.enabled = true; // Enable Enemymovement script after the delay
     }
@@ -172,6 +217,35 @@ public class Enemy_Chase : MonoBehaviour
             iScriptEnabled.enabled = true;
         }
     }
-   
+
+
+    public void FaceTarget(Vector2 targetPosition)
+    {
+        Vector2 direction = targetPosition - (Vector2)transform.position;
+        if (direction.x > 0)
+        {
+            transform.localScale = new Vector3(1.7f, transform.localScale.y, transform.localScale.z);
+        }
+        else if (direction.x < 0)
+        {
+            transform.localScale = new Vector3(-1.7f, transform.localScale.y, transform.localScale.z);
+        }
+    }
+
+
+    void IgnorePlayerCollision()
+    {
+        Collider2D myCollider = GetComponent<Collider2D>();
+
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        foreach (GameObject player in players)
+        {
+            Collider2D playerCollider = player.GetComponent<Collider2D>();
+            if (playerCollider != null && myCollider != null)
+            {
+                Physics2D.IgnoreCollision(myCollider, playerCollider);
+            }
+        }
+    }
 }
 
