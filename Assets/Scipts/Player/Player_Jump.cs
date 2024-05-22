@@ -17,6 +17,7 @@ public class PlayerJump : MonoBehaviour
     public float maxJumpForce = 12f; // Maximum jump force
     public float minJumpForce = 5f; // Minimum jump force (when releasing spacebar early)
     public float sideStepSpeed = 20f;
+    [SerializeField] private CameraFollow cameraFollow;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
 
@@ -24,7 +25,8 @@ public class PlayerJump : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         playerMovement = GetComponent<PlayerMovement>();
-        ladderMovement = GetComponent<LadderMovement>(); 
+        ladderMovement = GetComponent<LadderMovement>();
+        cameraFollow = Camera.main.GetComponent<CameraFollow>();
     }
 
     public void StartChargingJump()
@@ -98,6 +100,7 @@ public class PlayerJump : MonoBehaviour
             {
                 rb.drag = 0f;
                 isSliding = false;
+                cameraFollow.StopShake();
                 playerMovement.EnableMovement();
             }
             else if (isSideStep && Mathf.Abs(rb.velocity.x) < 0.01f)
@@ -121,6 +124,7 @@ public class PlayerJump : MonoBehaviour
                 {
                     isSliding = true;
                     Slide(jumpTime);
+                    cameraFollow.StartShake();
                 }
                 else
                 {
@@ -136,7 +140,7 @@ public class PlayerJump : MonoBehaviour
 
     private void Slide(float jumpTime)
     {
-        rb.drag = 10f;
+        rb.drag = 5f;
         // Slide the player using forces
         float slideForce = 1f * jumpTime; // Adjust this value as needed
         Vector2 slideDirection = playerMovement.isFacingRight ? Vector2.right : Vector2.left;

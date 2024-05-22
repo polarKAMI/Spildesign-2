@@ -6176,6 +6176,14 @@ PrefabInstance:
       propertyPath: damping
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 297122874798139885, guid: 91c2682628b903f4087f1199c6451f20, type: 3}
+      propertyPath: shakeFrequency
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 297122874798139885, guid: 91c2682628b903f4087f1199c6451f20, type: 3}
+      propertyPath: shakeMagnitude
+      value: 0.007
+      objectReference: {fileID: 0}
     - target: {fileID: 1644882701374204269, guid: 91c2682628b903f4087f1199c6451f20, type: 3}
       propertyPath: m_Name
       value: Player
@@ -6206,11 +6214,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2103752632763426906, guid: 91c2682628b903f4087f1199c6451f20, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 13.36
+      value: 13.62
       objectReference: {fileID: 0}
     - target: {fileID: 2103752632763426906, guid: 91c2682628b903f4087f1199c6451f20, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.62
+      value: -2.44
       objectReference: {fileID: 0}
     - target: {fileID: 2103752632763426906, guid: 91c2682628b903f4087f1199c6451f20, type: 3}
       propertyPath: m_LocalPosition.z
@@ -43438,7 +43446,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 307934584}
-  proximityDistance: 1
+  proximityDistance: 5
 --- !u!1 &1973866926
 GameObject:
   m_ObjectHideFlags: 0

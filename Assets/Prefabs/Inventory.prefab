@@ -304,7 +304,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -10.6, y: 26.8}
+  m_AnchoredPosition: {x: -10.6, y: 23.8}
   m_SizeDelta: {x: 12.7426, y: 11.796}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8241566481821472618
@@ -337,8 +337,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 47d61ec4b55ff5d4da8f961e4b91f180, type: 2}
+  m_sharedMaterial: {fileID: 6189151967186334453, guid: 47d61ec4b55ff5d4da8f961e4b91f180, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -718,7 +718,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &6186421207193835197
 RectTransform:
   m_ObjectHideFlags: 0
@@ -794,7 +794,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1223190297334298488
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1322,7 +1322,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 6.8, y: 26.8}
+  m_AnchoredPosition: {x: 6.8, y: 23.4}
   m_SizeDelta: {x: 16.6216, y: 11.7962}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6330864164726973917
@@ -1355,8 +1355,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: /16
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 47d61ec4b55ff5d4da8f961e4b91f180, type: 2}
+  m_sharedMaterial: {fileID: 6189151967186334453, guid: 47d61ec4b55ff5d4da8f961e4b91f180, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
