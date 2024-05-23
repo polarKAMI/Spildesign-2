@@ -1,10 +1,11 @@
 using UnityEngine;
 
-public class Door : MonoBehaviour
+public class Door : MonoBehaviour, IInteractable
 {
     public InventoryItem requiredKey;
 
     private bool isOpen = false;
+    public PlayerController playerController;
 
     public void TryOpenDoor(GoblinKey key)
     {
@@ -29,6 +30,18 @@ public class Door : MonoBehaviour
         gameObject.SetActive(false);
         isOpen = true;
         Debug.Log("Door opened!");
+    }
+
+    public void Interact()
+    {
+        if (playerController != null)
+        {
+            playerController.ToggleInventory(); // Call ToggleInventory method on PlayerController
+        }
+        else
+        {
+            Debug.LogWarning("PlayerController reference is not assigned to the door.");
+        }
     }
 
 }

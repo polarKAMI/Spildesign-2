@@ -380,7 +380,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-        void ToggleInventory()
+        public void ToggleInventory()
         {
             if (inventoryUIManager != null)
             {

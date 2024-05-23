@@ -13,6 +13,7 @@ public class LadderMovement : MonoBehaviour, IInteractable
     public float ladderTopYOffSet = 0.7f;
     private float pushOffVelocityX = 0f;
     private bool isPushingOff = false;
+    private Collider2D platformCollider;
 
     [SerializeField] private float climbSpeed = 3f;
 
@@ -51,8 +52,15 @@ public class LadderMovement : MonoBehaviour, IInteractable
         rb.velocity = new Vector2(0, 0);
         ladderTransform = ladder;
         SnapToLadder();
-        Collider2D ladderCollider = ladder.GetComponent<Collider2D>();
-        ladderTopY = ladderCollider.bounds.max.y;
+
+        // Get the platform collider
+        platformCollider = ladder.Find("ladderPlatform")?.GetComponent<Collider2D>();
+        if (platformCollider != null)
+        {
+            Debug.Log("Platform collider detected: " + platformCollider.name);
+            platformCollider.isTrigger = true; // Set the platform collider to trigger
+            ladderTopY = platformCollider.bounds.max.y;
+        }
     }
 
     public void StopClimbing()
@@ -65,6 +73,12 @@ public class LadderMovement : MonoBehaviour, IInteractable
         // Reset the push-off flag and velocity
         isPushingOff = false;
         pushOffVelocityX = 0f;
+
+        // Reset the platform collider to non-trigger
+        if (platformCollider != null)
+        {
+            platformCollider.isTrigger = false;
+        }
     }
 
     public void PushOffLadder(int direction)
