@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class Health : MonoBehaviour
 {
+    [SerializeField] GameObject GameOverScreen;
+
     public int MaxHealth = 10;
     public int currentHealth;
 
@@ -33,8 +35,8 @@ public class Health : MonoBehaviour
 
             if (currentHealth <= 0)
             {
-                SceneManager.LoadScene("SampleScene");
-                Start();
+                Time.timeScale = 0;
+                GameOverScreen.SetActive(true);
             }
             else
             {
