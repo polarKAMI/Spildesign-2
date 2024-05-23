@@ -346,7 +346,7 @@ MonoBehaviour:
   maxJumpForce: 6
   minJumpForce: 1
   sideStepSpeed: 6
-  cameraFollow: {fileID: 0}
+  cameraFollow: {fileID: 297122874798139885}
   groundCheck: {fileID: 4410998964329908569}
   groundLayer:
     serializedVersion: 2
@@ -408,6 +408,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b243428f740a34a4e8c301f49e61ac15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameOverMenu: {fileID: 0}
   MaxHealth: 10
   currentHealth: 0
 --- !u!114 &3618419400288623798
@@ -656,6 +657,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventoryUIManager: {fileID: 0}
   pauseMenu: {fileID: 0}
+  GameOverMenu: {fileID: 0}
 --- !u!1 &6869590306758707312
 GameObject:
   m_ObjectHideFlags: 0

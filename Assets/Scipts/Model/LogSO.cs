@@ -32,4 +32,8 @@ public class LogSO : ScriptableObject
         get { return collected; }
         set { collected = value; }
     }
+    public void ResetCollected()
+    {
+        collected = false;
+    }
 }

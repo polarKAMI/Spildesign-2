@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Health : MonoBehaviour
 {
-    [SerializeField] GameObject GameOverScreen;
+    public GameOverMenu gameOverMenu;
 
     public int MaxHealth = 10;
     public int currentHealth;
@@ -18,6 +18,10 @@ public class Health : MonoBehaviour
     {
         currentHealth = MaxHealth;
         spriteRenderer = GetComponent<SpriteRenderer>();
+        if (gameOverMenu == null)
+        {
+            gameOverMenu = FindObjectOfType<GameOverMenu>();
+        }
     }
 
     public void AddHealth(int amount)
@@ -36,7 +40,7 @@ public class Health : MonoBehaviour
             if (currentHealth <= 0)
             {
                 Time.timeScale = 0;
-                GameOverScreen.SetActive(true);
+                if (gameOverMenu != null) { gameOverMenu.GameOver(); }
             }
             else
             {
