@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7217e05988107de438afd6edcd4e29bb, type: 3}
+  m_Name: note #4
+  m_EditorClassIdentifier: 
+  <Name>k__BackingField: 
+  <Description>k__BackingField: "Ok, I\u2019m officially starting to get creeped
+    out by this place. I\u2019ve gone deeper into the forest, and I can\u2019t tell
+    if it\u2019s night or day anymore. The trees are too close to each other, no
+    light is coming down from the skies. I also haven\u2019t seen any animals so
+    far, but I don\u2019t think I\u2019m alone. I sometimes see glowing lights in
+    the distance, and sometimes I even think I hear laughing. I tried following one
+    of the lights, I thought it might lead me out of this godforsaken forest, but
+    after like 5 minutes my foot fell in a very deep hole filled with water. I\u2019d
+    ended up in a swamp of some kind, so I turned around real fast. \r\n"
+  <Specs>k__BackingField: 
+  <LogImage>k__BackingField: {fileID: 21300000, guid: 61724c85deda61e43832f62db0fcbad3, type: 3}
+  isNote: 1
+  isItem: 0
+  isEntity: 0
+  isFederation: 0
+  isMisc: 0
+  collected: 0

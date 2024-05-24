@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7217e05988107de438afd6edcd4e29bb, type: 3}
+  m_Name: Blood alter cave
+  m_EditorClassIdentifier: 
+  <Name>k__BackingField: 
+  <Description>k__BackingField: "Okay this place is getting really freaking weird.
+    I went into another cave, trying to find my way out. That was a big mistake.
+    I had to crawl through a small tunnel, almost getting myself stuck in there.
+    When I emerged, there was a freaking goblin there, charging me. I couldn\u2019t
+    crawl back, I had to kill him. This place is really creepy. There are 2 pillars
+    made of stones stacked upon each other, they have some weird symbols engraved
+    and painted with something that looks an awful lot like blood. There\u2019s also
+    this big slab of stone in between them, and that is definitely covered in blood.
+    I really need to get out of here\r"
+  <Specs>k__BackingField: 
+  <LogImage>k__BackingField: {fileID: 21300000, guid: 61724c85deda61e43832f62db0fcbad3, type: 3}
+  isNote: 1
+  isItem: 0
+  isEntity: 0
+  isFederation: 0
+  isMisc: 0
+  collected: 0
