@@ -21,7 +21,10 @@ public class PlayerMovement : MonoBehaviour
     Lygtemanden lygtemandenscript; // reference til lygtemanden script iforhold til busk collider
     private Busk currentBusk; // Reference to the current Busk script the player is interacting with
 
-
+    private bool isSlowed = false;
+    private float slowDuration;
+    private float slowAmount;
+    private float slowTimer;
 
     // Stamina variables
     public float maxStamina = 100f; // Maximum stamina
@@ -55,6 +58,14 @@ public class PlayerMovement : MonoBehaviour
         // Initialize stamina
         currentStamina = maxStamina;
 
+    }
+
+    public void ApplySlow(float duration, float amount)
+    {
+        slowDuration = duration;
+        slowAmount = amount;
+        slowTimer = duration;
+        isSlowed = true;
     }
 
     public void Sprinting()
@@ -92,14 +103,29 @@ public class PlayerMovement : MonoBehaviour
         // Assign input value to horizontal
         horizontal = input;
 
-        float sprintMultiplier = 1.2f;
+        // Apply slow effect if active
+        float speedFactor = 1f;
+        if (isSlowed)
+        {
+            slowTimer -= Time.deltaTime;
+            if (slowTimer <= 0)
+            {
+                isSlowed = false;
+            }
+            else
+            {
+                speedFactor = Mathf.Lerp(1f, slowAmount, slowTimer / slowDuration);
+            }
+        }
 
-
+        // Calculate effective max speed
+        float effectiveMaxSpeed = maxSpeed * speedFactor;
         if (horizontal != 0f)
         {
-            if (isSprinting && currentStamina > 0f) // løber
+            if (isSprinting && currentStamina > 0f)
             {
-                currentSpeed = Mathf.MoveTowards(currentSpeed, maxSpeed * sprintMultiplier, acceleration * Time.deltaTime);
+                effectiveMaxSpeed *= sprintSpeedMultiplier;
+                currentSpeed = Mathf.MoveTowards(currentSpeed, effectiveMaxSpeed, acceleration * Time.deltaTime);
                 currentStamina -= staminaDecreaseRate * Time.deltaTime;
                 Debug.Log($"Current Stamina: {currentStamina}");
                 if (currentStamina <= 0f)
@@ -109,26 +135,24 @@ public class PlayerMovement : MonoBehaviour
             }
             else
             {
-                currentSpeed = Mathf.MoveTowards(currentSpeed, maxSpeed, acceleration * Time.deltaTime); // Går
+                currentSpeed = Mathf.MoveTowards(currentSpeed, effectiveMaxSpeed, acceleration * Time.deltaTime);
                 RecoverStamina();
             }
         }
         else
         {
-            currentSpeed = 0f;
+            currentSpeed = Mathf.MoveTowards(currentSpeed, 0f, deceleration * Time.deltaTime);
             RecoverStamina();
         }
 
         Flip();
-        
     }
-
 
     private void FixedUpdate()
     {
-        if (movementEnabled && playerJump.isGrounded) {
+        if (movementEnabled && playerJump.isGrounded && !playerJump.isSliding)
+        {
             rb.velocity = new Vector2(horizontal * currentSpeed, rb.velocity.y);
-
         }
 
         if (currentBusk != null && currentBusk.isin) // Player is hiding
@@ -141,16 +165,13 @@ public class PlayerMovement : MonoBehaviour
             PlayerHidden = false;
         }
 
-
         if (currentBusk != null && currentBusk.isin && !lygtemandenscript.isHidingHandled && (lygtemandenscript.isChasing || lygtemandenscript.isStopped)) // Player is hiding
         {
             Debug.Log("Player hidden from lygtemanden");
             lygtemandenscript.isHidingHandled = true;
             StartCoroutine(lygtemandenscript.HandleBushCollision());
-            
         }
     }
-
     private void Flip()
     {
         if ((horizontal > 0 && !isFacingRight) || (horizontal < 0 && isFacingRight))
