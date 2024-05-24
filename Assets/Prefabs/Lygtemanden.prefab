@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 362824054915574728}
   - component: {fileID: 6054648646147582716}
   - component: {fileID: 5926487482312208325}
+  - component: {fileID: 1185843094266402688}
   m_Layer: 0
   m_Name: Triangle
   m_TagString: Untagged
@@ -166,6 +167,72 @@ PolygonCollider2D:
       - {x: -1.0799999, y: 0.815}
       - {x: -1.1, y: 0.835}
   m_UseDelaunayMesh: 0
+--- !u!60 &1185843094266402688
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4886874099049754074}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 256
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 18.9, y: 14.17}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -1.12, y: 0.835}
+      - {x: -1.1999999, y: 0.755}
+      - {x: -2.51, y: -0.765}
+      - {x: -2.6699998, y: -0.92499995}
+      - {x: -2.81, y: -1.0849999}
+      - {x: -3.4499998, y: -1.8349999}
+      - {x: -3.59, y: -1.995}
+      - {x: -3.6699998, y: -2.085}
+      - {x: -3.81, y: -2.245}
+      - {x: -3.8899999, y: -2.335}
+      - {x: -3.9599998, y: -2.415}
+      - {x: -4.04, y: -2.5049999}
+      - {x: -4.11, y: -2.585}
+      - {x: -4.19, y: -2.675}
+      - {x: -4.25, y: -2.745}
+      - {x: -4.25, y: -2.7549999}
+      - {x: -4.23, y: -2.7749999}
+      - {x: -1.1, y: -2.7749999}
+      - {x: -1.0799999, y: -2.7549999}
+      - {x: -1.0799999, y: 0.815}
+      - {x: -1.1, y: 0.835}
+  m_UseDelaunayMesh: 0
 --- !u!1 &7014405951625710621
 GameObject:
   m_ObjectHideFlags: 0
@@ -181,7 +248,7 @@ GameObject:
   - component: {fileID: 5438530250963522737}
   - component: {fileID: 4374955917792689153}
   - component: {fileID: 8763951553328448075}
-  - component: {fileID: 1721155047968273901}
+  - component: {fileID: 5008614421017948641}
   m_Layer: 0
   m_Name: Lygtemanden
   m_TagString: Enemy
@@ -379,9 +446,12 @@ MonoBehaviour:
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 128
-  busk: {fileID: 0}
+  Playermovement_script: {fileID: 0}
+  isChasing: 0
+  isStopped: 0
   resumePatrollingDistance: 9
---- !u!95 &1721155047968273901
+  isHidingHandled: 0
+--- !u!95 &5008614421017948641
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0

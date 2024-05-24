@@ -191,7 +191,7 @@ MonoBehaviour:
   Patrolpoints:
   - {fileID: 0}
   - {fileID: 0}
-  Movespeed: 3
+  Movespeed: 2
   patroldestination: 0
 --- !u!114 &7075128103608045482
 MonoBehaviour:
@@ -209,7 +209,7 @@ MonoBehaviour:
   moveSpeed: 3
   detectionRange: 5
   resumePatrollingDistance: 10
-  Jumpforce: 4
+  Jumpforce: 2.5
 --- !u!1 &4386382970520650292
 GameObject:
   m_ObjectHideFlags: 0
@@ -301,3 +301,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: {fileID: 0}
+  PlayerHasBeenDamaged: 0

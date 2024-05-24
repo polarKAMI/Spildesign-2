@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -20,7 +21,19 @@ public class PlayerMovement : MonoBehaviour
     Lygtemanden lygtemandenscript; // reference til lygtemanden script iforhold til busk collider
     private Busk currentBusk; // Reference to the current Busk script the player is interacting with
 
-    
+
+
+    // Stamina variables
+    public float maxStamina = 100f; // Maximum stamina
+    public float currentStamina; // Current stamina
+    public float staminaDecreaseRate = 10f; // Rate at which stamina decreases when sprinting
+    public float staminaRecoveryRate = 5f; // Rate at which stamina recovers when not sprinting
+    public AudioClip staminaDepletedClip; // Audio clip to play when stamina is depleted
+
+    private AudioSource audioSourceRun;
+
+    private bool isRecoveringStamina = true;
+
 
 
     private void Start()
@@ -37,7 +50,38 @@ public class PlayerMovement : MonoBehaviour
             Debug.LogError("Lygtemanden script not found in the scene.");
         }
 
+        audioSourceRun = GetComponent<AudioSource>();
+
+        // Initialize stamina
+        currentStamina = maxStamina;
+
+    }
+
+    public void Sprinting()
+    {
        
+
+        if (isSprinting)
+        {
+
+        }
+        else
+        {
+            isSprinting = true;
+        }
+    }
+
+
+    public void NotSprinting()
+    {
+        if (!isSprinting)
+        {
+
+        }
+        else
+        {
+            isSprinting = false;
+        }
     }
 
     public void Move(float input)
@@ -48,21 +92,31 @@ public class PlayerMovement : MonoBehaviour
         // Assign input value to horizontal
         horizontal = input;
 
-        // Sprinting
-        float sprintMultiplier = Input.GetKey(GlobalInputMapping.activeInputMappings["Sprint"]) ? sprintSpeedMultiplier : 1f;
+        float sprintMultiplier = 1.2f;
 
-        // Acceleration
-        if(horizontal != 0f && isSprinting)
-        {
-            currentSpeed = Mathf.MoveTowards(currentSpeed, maxSpeed * sprintMultiplier, acceleration * Time.deltaTime);
-        }
+
         if (horizontal != 0f)
         {
-            currentSpeed = Mathf.MoveTowards(currentSpeed, maxSpeed, acceleration * Time.deltaTime);
+            if (isSprinting && currentStamina > 0f) // løber
+            {
+                currentSpeed = Mathf.MoveTowards(currentSpeed, maxSpeed * sprintMultiplier, acceleration * Time.deltaTime);
+                currentStamina -= staminaDecreaseRate * Time.deltaTime;
+                Debug.Log($"Current Stamina: {currentStamina}");
+                if (currentStamina <= 0f)
+                {
+                    StartCoroutine(HandleStaminaDepletion());
+                }
+            }
+            else
+            {
+                currentSpeed = Mathf.MoveTowards(currentSpeed, maxSpeed, acceleration * Time.deltaTime); // Går
+                RecoverStamina();
+            }
         }
         else
         {
             currentSpeed = 0f;
+            RecoverStamina();
         }
 
         Flip();
@@ -147,6 +201,25 @@ public class PlayerMovement : MonoBehaviour
                 Debug.Log("Exited bush");
                 currentBusk = null;
             }
+        }
+    }
+
+
+    private IEnumerator HandleStaminaDepletion()
+    {
+        isRecoveringStamina = false; // Pause stamina recovery
+        audioSourceRun.PlayOneShot(staminaDepletedClip);
+        yield return new WaitForSeconds(staminaDepletedClip.length);
+        currentStamina = maxStamina;
+        isRecoveringStamina = true; // Pause stamina recovery
+        Debug.Log($"Stamina reset to: {currentStamina}"); // Log the reset stamina
+    }
+
+    private void RecoverStamina()
+    {
+        if (isRecoveringStamina && currentStamina < maxStamina)
+        {
+            currentStamina += staminaRecoveryRate * Time.deltaTime;
         }
     }
 

@@ -18,7 +18,7 @@ public class Shoot : MonoBehaviour
     private bool canAttack = true;
 
     public Image ammoBar;
-    public Image Ammoboarder;
+    
 
 
     public GameObject reloadobject;

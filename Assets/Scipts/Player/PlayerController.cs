@@ -134,6 +134,16 @@ public class PlayerController : MonoBehaviour
                 horizontalInput = 0f;
             }
 
+            if (Input.GetKeyDown(GlobalInputMapping.activeInputMappings["Sprint"]))
+            {
+                playerMovement.Sprinting();
+            }
+            else if (Input.GetKeyUp(GlobalInputMapping.activeInputMappings["Sprint"])) 
+                {
+                playerMovement.NotSprinting();
+
+            }
+
             // Apply horizontal input
             playerMovement.Move(horizontalInput);
         }
