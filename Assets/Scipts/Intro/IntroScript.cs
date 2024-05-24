@@ -66,5 +66,6 @@ public class IntroScript : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         SceneManager.LoadScene("SampleScene");
+        GlobalInputMapping.SetActiveInputMappings(GlobalInputMapping.inGameInputMapping);
     }
 }

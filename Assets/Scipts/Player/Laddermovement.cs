@@ -30,15 +30,10 @@ public class LadderMovement : MonoBehaviour, IInteractable
         {
             if (collider.CompareTag("Ladder"))
             {
-                if (isClimbing)
-                {
-                    StopClimbing();
-                }
-                else
-                {
+               
+                
                     StartClimbing(collider.transform);
-                }
-                return; // Exit loop after interacting with one ladder
+               
             }
         }
     }
@@ -52,6 +47,7 @@ public class LadderMovement : MonoBehaviour, IInteractable
         rb.velocity = new Vector2(0, 0);
         ladderTransform = ladder;
         SnapToLadder();
+        Debug.Log("Started klipning");
 
         // Get the platform collider
         platformCollider = ladder.Find("ladderPlatform")?.GetComponent<Collider2D>();
@@ -69,6 +65,8 @@ public class LadderMovement : MonoBehaviour, IInteractable
         rb.gravityScale = 2f;
         playerMovement.EnableMovement();
         GlobalInputMapping.SetActiveInputMappings(GlobalInputMapping.inGameInputMapping);
+
+        Debug.Log("Stopped klipning");
 
         // Reset the push-off flag and velocity
         isPushingOff = false;
