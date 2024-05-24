@@ -75,7 +75,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: 2
   m_Sprite: {fileID: -2135585597343286014, guid: 5aa8b770bc43046bc8d993d0d5b7f4a5, type: 3}
   m_Color: {r: 0, g: 1, b: 0.05740881, a: 1}
   m_FlipX: 0
@@ -144,8 +144,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5aa4a8e84a3db614d9685bea2ef739fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  requiredItem: {fileID: 11400000, guid: e9deaa145879f4f4e9ad0acae6e28d2a, type: 2}
-  inventory: {fileID: 0}
+  requiredItem: {fileID: 11400000, guid: 44a7c1df0da10cf42b36448cc656eb3a, type: 2}
+  inventory: {fileID: 11400000, guid: 11e48b70b9dbf6844882d31264001a4f, type: 2}
   itemRenderer: {fileID: 2479035407104836851}
   isMatch: 0
 --- !u!1 &2178368482105165899
@@ -223,7 +223,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: 2
   m_Sprite: {fileID: -2135585597343286014, guid: 5aa8b770bc43046bc8d993d0d5b7f4a5, type: 3}
   m_Color: {r: 0, g: 0.1387968, b: 1, a: 1}
   m_FlipX: 0
@@ -292,8 +292,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5aa4a8e84a3db614d9685bea2ef739fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  requiredItem: {fileID: 11400000, guid: 113126e1fc0cc524894fd1a1787055cd, type: 2}
-  inventory: {fileID: 0}
+  requiredItem: {fileID: 11400000, guid: 3271ed1ba723d8f42beb84539c2f27fe, type: 2}
+  inventory: {fileID: 11400000, guid: 11e48b70b9dbf6844882d31264001a4f, type: 2}
   itemRenderer: {fileID: 6130547759686402158}
   isMatch: 0
 --- !u!1 &2563125524427228101
@@ -539,7 +539,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.4433962, g: 0.3241812, b: 0.4432326, a: 1}
   m_FlipX: 0
@@ -626,7 +626,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: 2
   m_Sprite: {fileID: -2135585597343286014, guid: 5aa8b770bc43046bc8d993d0d5b7f4a5, type: 3}
   m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
@@ -695,8 +695,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5aa4a8e84a3db614d9685bea2ef739fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  requiredItem: {fileID: 11400000, guid: caba15e5d48033d4c85952eadfeddca3, type: 2}
-  inventory: {fileID: 0}
+  requiredItem: {fileID: 11400000, guid: 0e89aa31dbf3ab647bb61a42c7a8e778, type: 2}
+  inventory: {fileID: 11400000, guid: 11e48b70b9dbf6844882d31264001a4f, type: 2}
   itemRenderer: {fileID: 4350702127966626855}
   isMatch: 0
 --- !u!1 &5383157422564584864
