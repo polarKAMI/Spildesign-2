@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Shoot : MonoBehaviour
 {
@@ -16,6 +17,8 @@ public class Shoot : MonoBehaviour
 
     private bool canAttack = true;
 
+    public Image ammoBar;
+    public Image Ammoboarder;
 
 
     public GameObject reloadobject;
@@ -29,11 +32,14 @@ public class Shoot : MonoBehaviour
         {
             Debug.LogError("Rigidbody2D component not found. This script requires a Rigidbody2D component.");
         }
+
+        UpdateAmmoUI();
     }
     public void AddAmmo(int amount)
     {
         Debug.Log(currentAmmo);
         currentAmmo += amount;
+        UpdateAmmoUI();
     }
     void Startscript()
     {
@@ -52,6 +58,7 @@ public class Shoot : MonoBehaviour
 
         Instantiate(Projectile, fireposition.position, fireposition.rotation);
         currentAmmo -= 5;
+        UpdateAmmoUI();
 
         PlayerMovement.enabled = false;
 
@@ -78,5 +85,25 @@ public class Shoot : MonoBehaviour
         Instantiate(reloadobject);
 
         Invoke("attack", 5f);
+    }
+
+
+    private void UpdateAmmoUI()
+    {
+        if (ammoBar != null)
+        {
+            ammoBar.fillAmount = (float)currentAmmo / maxAmmo;
+
+        }
+
+       if (currentAmmo == maxAmmo)
+        {
+            ammoBar.color = Color.red;
+        }
+
+       if(currentAmmo < maxAmmo)
+        {
+            ammoBar.color = Color.white;
+        }
     }
 }

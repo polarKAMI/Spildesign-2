@@ -25,10 +25,15 @@ public class InventoryUIManager : MonoBehaviour
     public bool isOpen = false;
     private int currentIndex = -1;
 
+    public GameObject ammoBar; // Reference to the AmmoBar UI GameObject
+    public GameObject ammoBarBoarder; // Reference to the AmmoBar UI GameObject
+
     private PlayerMovement playerMovement;
     private void Start()
     {
         playerMovement = FindObjectOfType<PlayerMovement>(); // Find the PlayerMovement script in the scene
+        ammoBar.SetActive(false);
+        ammoBarBoarder.SetActive(false);
     }
     public void OpenInventory()
     {
@@ -39,6 +44,16 @@ public class InventoryUIManager : MonoBehaviour
         // Update inventory UI
         UpdateInventoryUI();
         isOpen = true;
+
+        if (ammoBar != null)
+        {
+            ammoBar.SetActive(true);
+        }
+
+        if (ammoBar != null)
+        {
+            ammoBarBoarder.SetActive(true);
+        }
     }
 
     public void CloseInventory()
@@ -61,6 +76,16 @@ public class InventoryUIManager : MonoBehaviour
         }
 
         isOpen = false;
+
+        if (ammoBar != null)
+        {
+            ammoBar.SetActive(false);
+        }
+
+        if (ammoBar != null)
+        {
+            ammoBarBoarder.SetActive(false);
+        }
     }
 
     public void ScrollInventoryLeft()

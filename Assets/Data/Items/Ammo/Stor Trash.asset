@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Stor Trash
   m_EditorClassIdentifier: 
   Item: {fileID: 11400000, guid: 5e85ac618cdc00046b664baa3344a7b4, type: 2}
-  AmmoRestoreAmount: 20
+  isKey: 0
+  AmmoRestoreAmount: 10

@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Lille Trash
   m_EditorClassIdentifier: 
   Item: {fileID: 11400000, guid: 0ae4bff623fa26c43bca909941c7c64a, type: 2}
-  AmmoRestoreAmount: 10
+  isKey: 0
+  AmmoRestoreAmount: 5
