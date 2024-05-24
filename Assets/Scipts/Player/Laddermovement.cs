@@ -14,6 +14,7 @@ public class LadderMovement : MonoBehaviour, IInteractable
     private float pushOffVelocityX = 0f;
     private bool isPushingOff = false;
     private Collider2D platformCollider;
+    private Collider2D ladderCollider; // Add this field
 
     [SerializeField] private float climbSpeed = 3f;
 
@@ -30,10 +31,7 @@ public class LadderMovement : MonoBehaviour, IInteractable
         {
             if (collider.CompareTag("Ladder"))
             {
-               
-                
-                    StartClimbing(collider.transform);
-               
+                StartClimbing(collider.transform);
             }
         }
     }
@@ -47,7 +45,15 @@ public class LadderMovement : MonoBehaviour, IInteractable
         rb.velocity = new Vector2(0, 0);
         ladderTransform = ladder;
         SnapToLadder();
-        Debug.Log("Started klipning");
+        Debug.Log("Started climbing");
+
+        // Get the ladder collider
+        ladderCollider = ladder.GetComponent<Collider2D>();
+        if (ladderCollider != null)
+        {
+            Debug.Log("Climbing on ladder collider: " + ladderCollider.name);
+            ladderTopY = ladderCollider.bounds.max.y; // Set ladderTopY based on the ladder collider bounds
+        }
 
         // Get the platform collider
         platformCollider = ladder.Find("ladderPlatform")?.GetComponent<Collider2D>();
@@ -55,8 +61,10 @@ public class LadderMovement : MonoBehaviour, IInteractable
         {
             Debug.Log("Platform collider detected: " + platformCollider.name);
             platformCollider.isTrigger = true; // Set the platform collider to trigger
-            ladderTopY = platformCollider.bounds.max.y;
+            ladderTopY = platformCollider.bounds.max.y; // Override ladderTopY if platformCollider is found
         }
+
+        Debug.Log("Ladder top Y: " + ladderTopY);
     }
 
     public void StopClimbing()
@@ -66,7 +74,7 @@ public class LadderMovement : MonoBehaviour, IInteractable
         playerMovement.EnableMovement();
         GlobalInputMapping.SetActiveInputMappings(GlobalInputMapping.inGameInputMapping);
 
-        Debug.Log("Stopped klipning");
+        Debug.Log("Stopped climbing");
 
         // Reset the push-off flag and velocity
         isPushingOff = false;
@@ -104,19 +112,29 @@ public class LadderMovement : MonoBehaviour, IInteractable
         if (isClimbing)
         {
             vertical = input;
-            Debug.Log("vertical is" + vertical);
+            Debug.Log("vertical is " + vertical);
         }
         else
         {
             vertical = 0f; // No input, stop climbing
         }
     }
+
     private void FixedUpdate()
     {
         if (isClimbing)
         {
+            // Log the ladder collider
+            if (ladderCollider != null)
+            {
+                Debug.Log("Currently climbing on ladder collider: " + ladderCollider.name);
+            }
+
             // Set vertical velocity based on climbing input
             rb.velocity = new Vector2(0, vertical * climbSpeed);
+            Debug.Log("Player Y Position: " + transform.position.y);
+            Debug.Log("ladderTopY + ladderTopYOffSet: " + (ladderTopY + ladderTopYOffSet));
+
 
             if (transform.position.y >= ladderTopY + ladderTopYOffSet)
             {
