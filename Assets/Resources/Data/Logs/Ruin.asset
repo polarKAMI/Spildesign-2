@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7217e05988107de438afd6edcd4e29bb, type: 3}
+  m_Name: Ruin
+  m_EditorClassIdentifier: 
+  <Name>k__BackingField: Ruin
+  <Description>k__BackingField: "This is interesting. I found some ruins made of
+    stone. It doesn\u2019t look like any of the buildings I\u2019ve seen in old pictures,
+    from before The Exodus. They must be extremely old, belonging to an ancient civilization.
+    I wish I could stay longer to study them, but I gotta move on. My supplies are
+    running out, I can\u2019t get hung up on these small details. I\u2019ve made
+    a mark of the location, so we can return eventually. But for now I gotta move
+    on, I need to find a way back to the ship. "
+  <Specs>k__BackingField: 
+  <LogImage>k__BackingField: {fileID: 21300000, guid: 61724c85deda61e43832f62db0fcbad3, type: 3}
+  isNote: 1
+  isItem: 0
+  isEntity: 0
+  isFederation: 0
+  isMisc: 0
+  collected: 0

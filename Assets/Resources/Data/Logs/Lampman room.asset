@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7217e05988107de438afd6edcd4e29bb, type: 3}
+  m_Name: Lampman room
+  m_EditorClassIdentifier: 
+  <Name>k__BackingField: Lampman Room
+  <Description>k__BackingField: "How did humans ever live here? This entire place
+    is one big hellscape. I saw a lamppost and hoped maybe there\u2019d be someone
+    near it to help me. But nope there was nobody there. Well, not nobody. The *******
+    lamppost transformed into some creature and started chasing me. The light did
+    something weird to me, my ears are still ringing. Maybe this is the Ignis Fatuus
+    I was reading about. It looks nothing like the description, maybe it\u2019s changed
+    since the Exodus. If I ever get back, I\u2019ll have to update the database."
+  <Specs>k__BackingField: 
+  <LogImage>k__BackingField: {fileID: 21300000, guid: 61724c85deda61e43832f62db0fcbad3, type: 3}
+  isNote: 0
+  isItem: 0
+  isEntity: 0
+  isFederation: 0
+  isMisc: 0
+  collected: 0
