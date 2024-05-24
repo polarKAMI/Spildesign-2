@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 4020939518934635826}
   - component: {fileID: 2239738546294574519}
   - component: {fileID: 7075128103608045482}
+  - component: {fileID: 5887025506993406715}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -191,7 +192,7 @@ MonoBehaviour:
   Patrolpoints:
   - {fileID: 0}
   - {fileID: 0}
-  Movespeed: 2
+  Movespeed: 5
   patroldestination: 0
 --- !u!114 &7075128103608045482
 MonoBehaviour:
@@ -210,6 +211,27 @@ MonoBehaviour:
   detectionRange: 5
   resumePatrollingDistance: 10
   Jumpforce: 2.5
+--- !u!95 &5887025506993406715
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2952199648344862858}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1816c619bdbe05b41914c4e9fa21db67, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &4386382970520650292
 GameObject:
   m_ObjectHideFlags: 0

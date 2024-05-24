@@ -61,7 +61,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (!isInventoryOpen)
+        if (!isInventoryOpen || !ladderMovement.isClimbing)
         {
             float horizontalInput = 0f;
 
@@ -135,15 +135,7 @@ public class PlayerController : MonoBehaviour
                 horizontalInput = 0f;
             }
 
-            if (Input.GetKeyDown(GlobalInputMapping.activeInputMappings["Sprint"]))
-            {
-                playerMovement.Sprinting();
-            }
-            else if (Input.GetKeyUp(GlobalInputMapping.activeInputMappings["Sprint"])) 
-                {
-                playerMovement.NotSprinting();
-
-            }
+          
 
             // Apply horizontal input
             playerMovement.Move(horizontalInput);
@@ -156,7 +148,17 @@ public class PlayerController : MonoBehaviour
 
         if (GlobalInputMapping.activeInputMappings == GlobalInputMapping.inGameInputMapping)
             {
-                if (Input.GetKeyDown(GlobalInputMapping.activeInputMappings["Jump"]))
+            if (Input.GetKeyDown(GlobalInputMapping.activeInputMappings["Sprint"]))
+            {
+                playerMovement.Sprinting();
+            }
+            else if (Input.GetKeyUp(GlobalInputMapping.activeInputMappings["Sprint"]))
+            {
+                playerMovement.NotSprinting();
+
+            }
+
+            else if (Input.GetKeyDown(GlobalInputMapping.activeInputMappings["Jump"]))
                 {
                     playerJump.StartChargingJump();
                 }
