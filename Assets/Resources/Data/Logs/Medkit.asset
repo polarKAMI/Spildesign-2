@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7217e05988107de438afd6edcd4e29bb, type: 3}
+  m_Name: Medkit
+  m_EditorClassIdentifier: 
+  <Name>k__BackingField: Medkit
+  <Description>k__BackingField: "Description:\r\nThis civilian survival kit was one
+    of the most produced survival equipment during the Exodus of Humans. Produced
+    by the company \u201CREDACTED\u201D, this kit was extremely popular among the
+    civilians of the former Kingdom of Denmark. As such, this kit was widely available
+    in many stores at the time, and many can still be found littering the land. Contained
+    within this are several items believed to help people survive the societal collapse
+    following the Exodus of Humans. These items include, but are not limited to:
+    \r\nCompass\r\nBandaids\r\nPainkillers\r\nAntibiotics\r\nBatteries\r\nRope\r\nInstructional
+    survival manual\r"
+  <Specs>k__BackingField: "Specs:\r\nWeight: 115 grams\r\nHeal: Heals a moderate
+    amount of health\r"
+  <LogImage>k__BackingField: {fileID: 21300000, guid: 5208841f8300093419318d5ca51c3272, type: 3}
+  isNote: 0
+  isItem: 1
+  isEntity: 0
+  isFederation: 0
+  isMisc: 0
+  collected: 0

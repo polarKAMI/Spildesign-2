@@ -9,6 +9,7 @@ public class GameOverMenu : MonoBehaviour
 {
     [SerializeField] GameObject GameOverScreen;
     private PlayerMovement playerMovement;
+    [SerializeField] private InventorySO InventorySO;
     public GameObject[] menuBorders;
     private int selectedIndex = 0;
     private void Start()
@@ -28,6 +29,13 @@ public class GameOverMenu : MonoBehaviour
             {
                 playerMovement.DisableMovement();
             }
+            if (InventorySO != null)
+            {
+                InventorySO.WipeInventory();
+            }
+            ResetAllLogs();
+            GameOverScreen.SetActive(true);
+            Time.timeScale = 0;
             GlobalInputMapping.SetActiveInputMappings(GlobalInputMapping.GameOverInputMapping);
             SelectOption(0);
         }
@@ -64,6 +72,7 @@ public class GameOverMenu : MonoBehaviour
     }
     public void Restart()
     {
+        ResetAllLogs();
         GlobalInputMapping.SetActiveInputMappings(GlobalInputMapping.inGameInputMapping);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         Time.timeScale = 1;
@@ -91,5 +100,14 @@ public class GameOverMenu : MonoBehaviour
 
         // Update the selected index
         selectedIndex = newIndex;
+    }
+    private void ResetAllLogs()
+    {
+        LogSO[] allLogs = Resources.LoadAll<LogSO>("");
+        foreach (LogSO log in allLogs)
+        {
+            log.ResetCollected();
+            Debug.Log($"{log.Name} collected reset to {log.Collected}"); // Add logging to verify
+        }
     }
 }

@@ -77,4 +77,13 @@ public class InventorySO : ScriptableObject
     {
         inventoryItems.Remove(item);
     }
+
+    public void WipeInventory()
+    {
+        while (inventoryItems.Count > 0)
+        {
+            RemoveItem(inventoryItems[0]);
+            Debug.Log("ja, jeg bliver callet");
+        }
+    }
 }
