@@ -6293,13 +6293,25 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0.82
       objectReference: {fileID: 0}
+    - target: {fileID: 1748848850549437778, guid: 91c2682628b903f4087f1199c6451f20, type: 3}
+      propertyPath: maxJumpForce
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1748848850549437778, guid: 91c2682628b903f4087f1199c6451f20, type: 3}
+      propertyPath: minJumpForce
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1748848850549437778, guid: 91c2682628b903f4087f1199c6451f20, type: 3}
+      propertyPath: sideStepSpeed
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 2103752632763426906, guid: 91c2682628b903f4087f1199c6451f20, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 25.52
+      value: 57.7
       objectReference: {fileID: 0}
     - target: {fileID: 2103752632763426906, guid: 91c2682628b903f4087f1199c6451f20, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -44.99
+      value: -14.3
       objectReference: {fileID: 0}
     - target: {fileID: 2103752632763426906, guid: 91c2682628b903f4087f1199c6451f20, type: 3}
       propertyPath: m_LocalPosition.z
@@ -6332,6 +6344,10 @@ PrefabInstance:
     - target: {fileID: 2103752632763426906, guid: 91c2682628b903f4087f1199c6451f20, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5068230747265035539, guid: 91c2682628b903f4087f1199c6451f20, type: 3}
+      propertyPath: audioSource
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6211131296470994453, guid: 91c2682628b903f4087f1199c6451f20, type: 3}
       propertyPath: orthographic size

@@ -83,14 +83,13 @@ public class LadderMovement : MonoBehaviour, IInteractable
 
     public void PushOffLadder(int direction)
     {
+        // Set flag to indicate the player is pushing off the ladder
+        isPushingOff = true;
         // Determine the direction of the push
         pushOffVelocityX = direction * climbSpeed * 1.3f;
 
         // Apply the impulse force to push the player off the ladder
         rb.AddForce(new Vector2(pushOffVelocityX, 0f), ForceMode2D.Impulse);
-
-        // Set flag to indicate the player is pushing off the ladder
-        isPushingOff = true;
 
         // Stop climbing
         StopClimbing();
