@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60433cdb97498974ba8f1ff900bd0535, type: 3}
   m_Name: Lille Trash
   m_EditorClassIdentifier: 
-  Item: {fileID: 11400000, guid: 0ae4bff623fa26c43bca909941c7c64a, type: 2}
+  Item: {fileID: 11400000, guid: 29a7ad5fab591854abd8928d588c55dc, type: 2}
+  isKey: 0
   AmmoRestoreAmount: 10

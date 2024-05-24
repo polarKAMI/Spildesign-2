@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 684771bbf7ec1524a8eff458ea79ee3a, type: 3}
   m_Name: GoblinKey
   m_EditorClassIdentifier: 
-  Item: {fileID: 11400000, guid: 684810770f9ac554a80cfa0220527a63, type: 2}
+  Item: {fileID: 11400000, guid: f6cf63db82fd28348ae637142a012ea1, type: 2}
   isKey: 1
-  inventory: {fileID: 11400000, guid: 4c6fb867845186c4d91bf2a8904605ff, type: 2}
+  inventory: {fileID: 11400000, guid: 11e48b70b9dbf6844882d31264001a4f, type: 2}

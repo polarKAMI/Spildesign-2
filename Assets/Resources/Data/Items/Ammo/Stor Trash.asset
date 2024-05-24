@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b35de69ac96ebe94e8fb8db657e4454b, type: 3}
   m_Name: Stor Trash
   m_EditorClassIdentifier: 
-  Item: {fileID: 11400000, guid: 5e85ac618cdc00046b664baa3344a7b4, type: 2}
+  Item: {fileID: 11400000, guid: a746edad24b7daf4090f513190fdffeb, type: 2}
+  isKey: 0
   AmmoRestoreAmount: 20
