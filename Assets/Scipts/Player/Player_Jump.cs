@@ -103,14 +103,12 @@ public class PlayerJump : MonoBehaviour
                 {
                     isJumping = false;
                     isFalling = true;
-                    playerMovement.DisableMovement();
                     fallTime += jumpTime; // Add the time spent jumping to fallTime
                     Debug.Log("free fallin");
                 }
                 else if (!isJumping)
                 {
                     isFalling = true;
-                    playerMovement.DisableMovement();
                     fallTime += jumpTime; // Add the time spent jumping to fallTime
                     Debug.Log("free fallin");
                 }

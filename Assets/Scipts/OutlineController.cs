@@ -3,7 +3,7 @@ using UnityEngine;
 public class OutlineController : MonoBehaviour
 {
     public Transform player;  // Reference to the player's transform
-    public float proximityDistance = 5.0f;  // Distance at which the outline should appear
+    public float proximityDistance = 1.5f;  // Distance at which the outline should appear
     private Material material;
 
     void Start()
