@@ -13,8 +13,12 @@ MonoBehaviour:
   m_Name: Goblin Key
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Goblin Key
-  <Description>k__BackingField: "Grim lille n\xF8gle"
-  <Specs>k__BackingField: "-1 v\xE6rdighed"
+  <Description>k__BackingField: "This object does not appear in the database. Please
+    describe this object to make sure the database is updated.\r\nDescription:\r\nI
+    found this thing at the bottom of a deep hole.\r"
+  <Specs>k__BackingField: 'Specs:
+
+    1 kg'
   <LogImage>k__BackingField: {fileID: 21300000, guid: 8cd09d0332d5d4b40acbbd4c417930db, type: 3}
   isNote: 0
   isItem: 1

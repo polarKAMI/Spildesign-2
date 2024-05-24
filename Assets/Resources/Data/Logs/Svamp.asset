@@ -13,13 +13,24 @@ MonoBehaviour:
   m_Name: Svamp
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Svamp
-  <Description>k__BackingField: Dette er verdens dummeste svamp, den har faktisk
-    slet ingen hjerne
-  <Specs>k__BackingField: +10 Retardation
+  <Description>k__BackingField: "Description:\r\nBoletus edulis is a mushroom growing
+    in the forests of Europe. It is an edible mushroom, and has been part of European
+    kitchens for thousands of years, dating back to Roman times. The mushroom is
+    densely packed with several nutrients making it a healthy snack for mushroom
+    gatherers. Boletus edulis is usually found growing near the base of hardwood-
+    or pine trees.\r\r"
+  <Specs>k__BackingField: 'Specs:
+
+    Height: 10-15 cm
+
+    Weight: 20 grams
+
+    Heal:
+    Heals a small amount of health'
   <LogImage>k__BackingField: {fileID: 21300000, guid: 485673946d1351446abcfe10c3468217, type: 3}
   isNote: 0
   isItem: 1
   isEntity: 0
   isFederation: 0
   isMisc: 0
-  collected: 0
+  collected: 1
