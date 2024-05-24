@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
+    public GameOverMenu gameOverMenu;
+
     public int MaxHealth = 10;
     public int currentHealth;
 
@@ -13,66 +14,20 @@ public class Health : MonoBehaviour
     private Coroutine flickerCoroutine;
     private bool isFlickering = false;
 
-    public GameObject DamageOverlay;
-
     void Start()
     {
         currentHealth = MaxHealth;
         spriteRenderer = GetComponent<SpriteRenderer>();
-        UpdateDamageOverlay();
-    }
-
-
-    public void UpdateDamageOverlay()
-    {
-        if (DamageOverlay != null)
+        if (gameOverMenu == null)
         {
-            Image overlayImage = DamageOverlay.GetComponent<Image>();
-            if (overlayImage != null)
-            {
-                float alpha = 1f - (float)currentHealth / MaxHealth;
-                overlayImage.color = new Color(overlayImage.color.r, overlayImage.color.g, overlayImage.color.b, alpha);
-                Debug.Log($"Updated DamageOverlay: Health={currentHealth}, Alpha={alpha}");
-            }
-
-            if (currentHealth > 9)
-            {
-                AudioManager_Playerhurt.instance.StopCurrentSound();
-                Debug.Log("Audio stopped");
-            }
-
-
-
-         if (currentHealth < 8 && currentHealth > 3)
-            {
-                AudioManager_Playerhurt.instance.Hurt();
-                Debug.Log("hurt is playing");
-            }
-
-         if (currentHealth < 3 && currentHealth > 0)
-            {
-                AudioManager_Playerhurt.instance.Reallyhurt();
-                Debug.Log("Reallyhurt is playing");
-            }
-
-
-            if (currentHealth < 2)
-            {
-                AudioManager_Playerhurt.instance.Dead();
-                Debug.Log("dead is playing");
-            }
-
+            gameOverMenu = FindObjectOfType<GameOverMenu>();
         }
     }
-
 
     public void AddHealth(int amount)
     {
         currentHealth += amount;
-        currentHealth = Mathf.Clamp(currentHealth, 0, MaxHealth); // Ensure health stays within bounds
         Debug.Log(currentHealth);
-        UpdateDamageOverlay();
-
     }
 
     public void TakeDamage(int amount)
@@ -81,13 +36,11 @@ public class Health : MonoBehaviour
         {
             currentHealth -= amount;
             Debug.Log(currentHealth);
-            UpdateDamageOverlay();
-
 
             if (currentHealth <= 0)
             {
-                SceneManager.LoadScene("SampleScene");
-                Start();
+                Time.timeScale = 0;
+                if (gameOverMenu != null) { gameOverMenu.GameOver(); }
             }
             else
             {

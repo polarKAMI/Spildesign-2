@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3878612888679824496
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7612691046192725077}
+  - component: {fileID: 1164540904355862785}
+  m_Layer: 0
+  m_Name: TextUpdater
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7612691046192725077
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3878612888679824496}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 640, y: 360, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1164540904355862785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3878612888679824496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36251524d10aa2b459e6c87f885cbe18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiText: {fileID: 0}
+  timeText: {fileID: 0}
+  logText: {fileID: 0}
+  typingSpeed: 0.07
+  message: "Second day of my mission and I think I might be in trouble. |I wanted
+    to return to the ship to resupply, but I fell down a hillside and it\u2019s too
+    steep for me to get back up. |Oh well, it shouldn\u2019t be too much of an issue.
+    |I haven\u2019t encountered anything dangerous yet, so I should probably be fine.
+    |I\u2019ll continue through the forest, maybe I\u2019ll be able to loop my way
+    back to the ship eventually. |Hopefully I can gather a bunch of data while I\u2019m
+    at it."
+  newTime: 17:47
+  secondaryMessage: New log added.
+  pauseDuration: 0.5

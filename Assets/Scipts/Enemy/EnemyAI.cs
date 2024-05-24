@@ -11,7 +11,7 @@ public class EnemyAI : MonoBehaviour
     public float activeDistance = 5f;
     public float chaseDistance = 30f;
     public float pathUpdateSeconds = 0.5f;
-    private bool isJumping = false;
+    public bool isJumping = false;
 
     [Header("Physics")]
     public float launchAngle = 45f;
@@ -40,6 +40,7 @@ public class EnemyAI : MonoBehaviour
     [Header("Attack")]
     public Health health;
     public int attackDamage = 2;
+    public bool hasDealtDamage;
 
     private void Awake()
     {
@@ -215,6 +216,7 @@ public class EnemyAI : MonoBehaviour
     private void LaunchEnemy()
     {
         isJumping = true; // Set the flag to indicate that the enemy is jumping
+        hasDealtDamage = false;
         float initialYpos = transform.position.y;
         Vector2 directionToTarget = (target.position - transform.position).normalized;
         float adjustedLaunchAngle = launchAngle;
@@ -318,21 +320,17 @@ public class EnemyAI : MonoBehaviour
         isJumping = false; // Reset the flag after the cooldown period
     }
 
-    public void OnCollisionEnter2D(Collision2D collision)
+    public void OnTriggerEnter2D(Collider2D other)
     {
-        if (collision.gameObject.tag == "Player")
+        if (other.CompareTag("Player") && !IsGrounded() && !hasDealtDamage)
         {
             Attack();
+            hasDealtDamage = true; // Set the flag to true after dealing damage during a jump
         }
     }
     public void Attack()
     {
         health.TakeDamage(attackDamage);
-        DamageCooldown();
-    }
-    private IEnumerator DamageCooldown()
-    {      
-        yield return new WaitForSeconds(2f);
     }
 
     public void TakeDamage(int amount)

@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     public PauseMenu pauseMenu;
     private LogMenu logMenu;
     private LadderMovement ladderMovement;
+    public GameOverMenu GameOverMenu;
 
     private bool isInventoryOpen = false; // Flag to track inventory state
 
@@ -370,11 +371,26 @@ public class PlayerController : MonoBehaviour
             else if (Input.GetKeyDown(GlobalInputMapping.activeInputMappings["Menu"]))
             {
                 pauseMenu.Menu();
+            } 
+        }
+        else if (GlobalInputMapping.activeInputMappings == GlobalInputMapping.GameOverInputMapping)
+        {
+           if (Input.GetKeyDown(GlobalInputMapping.activeInputMappings["MoveUp"]))
+            {
+                GameOverMenu.ChangeSelectedIndex(-1);
+            }
+            if (Input.GetKeyDown(GlobalInputMapping.activeInputMappings["MoveDown"]))
+            {
+                GameOverMenu.ChangeSelectedIndex(1);
+            }
+            else if (Input.GetKeyDown(GlobalInputMapping.activeInputMappings["Select"]))
+            {
+                GameOverMenu.MenuOptionSelect();
             }
         }
-        }
+    }
 
-        void ToggleInventory()
+        public void ToggleInventory()
         {
             if (inventoryUIManager != null)
             {

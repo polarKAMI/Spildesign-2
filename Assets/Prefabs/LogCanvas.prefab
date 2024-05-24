@@ -1276,7 +1276,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   logMenu: {fileID: 7439841081485269001}
-  pauseMenu: {fileID: 1430371618258489323, guid: a03e60318c1e98847a0a0138c7527395, type: 3}
+  pauseMenu: {fileID: 0}
   categoryBorders:
   - {fileID: 580634917999554646}
   - {fileID: 6692782358585594994}
