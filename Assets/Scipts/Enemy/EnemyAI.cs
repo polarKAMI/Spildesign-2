@@ -229,15 +229,15 @@ public class EnemyAI : MonoBehaviour
         Vector2 launchDirection = Quaternion.Euler(0, 0, adjustedLaunchAngle) * Vector2.right;
 
         // Calculate launch force based on distance to target
-        float launchForce = Mathf.Clamp(distanceToTarget, minLaunchForce, maxLaunchForce);
+        float launchForce = Mathf.Clamp(Mathf.Abs(distanceToTarget), minLaunchForce, maxLaunchForce);
         
         Vector2 predictedLandingPos = PredictedLandingPosition(launchDirection, launchForce);
-        Debug.Log("predicted x pos: " + predictedLandingPos.x + " predicted y pos: " + predictedLandingPos.y);
+        Debug.Log("AAA predicted x pos: " + predictedLandingPos.x + " predicted y pos: " + predictedLandingPos.y + " calculated launch force: " + launchForce + " launch direction: " + launchDirection);
         
         // Check if there's ground at the predicted landing position
         RaycastHit2D hit = Physics2D.Raycast(predictedLandingPos, Vector2.down, 10f, groundLayer);
-        Debug.Log("y pos: " + initialYpos);
-        Debug.Log("predicted y pos: " + hit.point.y + " collider: " + hit.collider);
+        Debug.Log("BBB y pos: " + initialYpos);
+        Debug.Log("CCC predicted y hit: " + hit.point.y + " collider: " + hit.collider);
 
         if (hit.collider != null && Mathf.Abs(hit.point.y - initialYpos) < 1f)
         {
@@ -249,14 +249,14 @@ public class EnemyAI : MonoBehaviour
             float cand1, cand2;
 
             Vector2 minLandingPos = PredictedLandingPosition(launchDirection, minLaunchForce);
-            Debug.Log("predicted min x pos: " + minLandingPos.x + " predicted min y pos: " + minLandingPos.y);
+            Debug.Log("DDD predicted min x pos: " + minLandingPos.x + " predicted min y pos: " + minLandingPos.y);
             Vector2 maxLandingPos = PredictedLandingPosition(launchDirection, maxLaunchForce);
-            Debug.Log("predicted max x pos: " + maxLandingPos.x + " predicted max y pos: " + maxLandingPos.y);
+            Debug.Log("EEE predicted max x pos: " + maxLandingPos.x + " predicted max y pos: " + maxLandingPos.y);
 
             RaycastHit2D minHit = Physics2D.Raycast(minLandingPos, Vector2.down, 10f, groundLayer);
-            Debug.Log("predicted min y RAY: " + minHit.point.y + " collider: " + minHit.collider);
+            Debug.Log("FFF predicted min y RAY: " + minHit.point.y + " collider: " + minHit.collider);
             RaycastHit2D maxHit = Physics2D.Raycast(maxLandingPos, Vector2.down, 10f, groundLayer);
-            Debug.Log("predicted max y RAY: " + maxHit.point.y + " collider: " + maxHit.collider);
+            Debug.Log("GGG predicted max y RAY: " + maxHit.point.y + " collider: " + maxHit.collider);
             if (minHit.collider != null && Mathf.Abs(minHit.point.y - initialYpos) < 1f)
             {
                 cand1 = findBestBetween(minLaunchForce, launchForce, launchDirection, initialYpos);

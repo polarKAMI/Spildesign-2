@@ -22,9 +22,9 @@ MonoBehaviour:
     since the Exodus. If I ever get back, I\u2019ll have to update the database."
   <Specs>k__BackingField: 
   <LogImage>k__BackingField: {fileID: 21300000, guid: 61724c85deda61e43832f62db0fcbad3, type: 3}
-  isNote: 0
+  isNote: 1
   isItem: 0
-  isEntity: 0
+  isEntity: 1
   isFederation: 0
   isMisc: 0
-  collected: 0
+  collected: 1

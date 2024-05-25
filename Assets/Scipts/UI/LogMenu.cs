@@ -17,6 +17,7 @@ public class LogMenu : MonoBehaviour
 
     [SerializeField] GameObject logEntryPrefab;
     [SerializeField] Transform viewportContent;
+    [SerializeField] ScrollRect scrollRect;
 
     [Header("Description Box Elements")]
     public TMP_Text specsTXT;
@@ -193,6 +194,8 @@ public class LogMenu : MonoBehaviour
 
         HighlightLogEntry(entryIndex);
         DescriptionBoxDisplay(entryIndex);
+
+        ScrollToSelectedEntry(entryIndex);
     }
 
     private void DisableBorderOnEntry(int index)
@@ -210,5 +213,33 @@ public class LogMenu : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void ScrollToSelectedEntry(int index)
+    {
+        RectTransform selectedEntryRect = viewportContent.GetChild(index).GetComponent<RectTransform>();
+        RectTransform viewportRect = scrollRect.viewport.GetComponent<RectTransform>();
+        RectTransform contentRect = scrollRect.content;
+
+        // Calculate the position of the selected entry relative to the viewport
+        Vector2 viewportLocalPos = viewportRect.localPosition;
+        Vector2 selectedEntryLocalPos = selectedEntryRect.localPosition;
+        Vector2 contentLocalPos = contentRect.localPosition;
+
+        // Calculate the offset needed to move the selected entry into view
+        float offset = selectedEntryLocalPos.y - viewportLocalPos.y;
+
+        // Ensure the selected entry is within the viewport bounds
+        if (selectedEntryLocalPos.y < viewportLocalPos.y)
+        {
+            contentLocalPos.y -= offset;
+        }
+        else if (selectedEntryLocalPos.y > viewportLocalPos.y + viewportRect.rect.height - selectedEntryRect.rect.height)
+        {
+            contentLocalPos.y -= offset - viewportRect.rect.height + selectedEntryRect.rect.height;
+        }
+
+        // Apply the new content position
+        contentRect.localPosition = contentLocalPos;
     }
 }

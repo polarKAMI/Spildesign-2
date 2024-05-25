@@ -19,7 +19,7 @@ MonoBehaviour:
     poor bastard. I found this small thing though, I wonder what it does."
   <Specs>k__BackingField: 
   <LogImage>k__BackingField: {fileID: 21300000, guid: 61724c85deda61e43832f62db0fcbad3, type: 3}
-  isNote: 0
+  isNote: 1
   isItem: 0
   isEntity: 0
   isFederation: 0
