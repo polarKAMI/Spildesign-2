@@ -37,9 +37,11 @@ public class Shoot : MonoBehaviour
     }
     public void AddAmmo(int amount)
     {
-        Debug.Log(currentAmmo);
+       
         currentAmmo += amount;
+        currentAmmo = Mathf.Clamp(currentAmmo, 0, maxAmmo); // Ensure currentAmmo stays within bounds
         UpdateAmmoUI();
+        Debug.Log(currentAmmo);
     }
     void Startscript()
     {
@@ -54,11 +56,21 @@ public class Shoot : MonoBehaviour
     }
     public void Shooting()
     {
+
+        if (currentAmmo != maxAmmo)
+        {
+            Debug.Log("Cannot shoot: Ammo is not at max");
+            return;
+        }
+
+
         Instantiate(Firesoundobject);
 
         Instantiate(Projectile, fireposition.position, fireposition.rotation);
         currentAmmo -= 5;
         UpdateAmmoUI();
+
+
 
         PlayerMovement.enabled = false;
 
@@ -82,7 +94,6 @@ public class Shoot : MonoBehaviour
 
         canAttack = false;
 
-        Instantiate(reloadobject);
 
         Invoke("attack", 5f);
     }
@@ -96,9 +107,13 @@ public class Shoot : MonoBehaviour
 
         }
 
+
+
+
        if (currentAmmo == maxAmmo)
         {
             ammoBar.color = Color.red;
+            Instantiate(reloadobject);
         }
 
        if(currentAmmo < maxAmmo)

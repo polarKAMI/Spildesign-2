@@ -27,10 +27,11 @@ public class PlayerMovement : MonoBehaviour
     public float maxStamina = 100f; // Maximum stamina
     public float currentStamina; // Current stamina
     public float staminaDecreaseRate = 10f; // Rate at which stamina decreases when sprinting
-    public float staminaRecoveryRate = 5f; // Rate at which stamina recovers when not sprinting
-    public AudioClip staminaDepletedClip; // Audio clip to play when stamina is depleted
+    public float staminaRecoveryRate = 2f; // Rate at which stamina recovers when not sprinting
+   
+   
 
-    private AudioSource audioSourceRun;
+    public GameObject breathingGameObject;
 
     private bool isRecoveringStamina = true;
 
@@ -50,7 +51,7 @@ public class PlayerMovement : MonoBehaviour
             Debug.LogError("Lygtemanden script not found in the scene.");
         }
 
-        audioSourceRun = GetComponent<AudioSource>();
+        
 
         // Initialize stamina
         currentStamina = maxStamina;
@@ -208,8 +209,12 @@ public class PlayerMovement : MonoBehaviour
     private IEnumerator HandleStaminaDepletion()
     {
         isRecoveringStamina = false; // Pause stamina recovery
-        audioSourceRun.PlayOneShot(staminaDepletedClip);
-        yield return new WaitForSeconds(staminaDepletedClip.length);
+        Instantiate(breathingGameObject);
+
+
+
+        yield return new WaitForSeconds(6f);
+
         currentStamina = maxStamina;
         isRecoveringStamina = true; // Pause stamina recovery
         Debug.Log($"Stamina reset to: {currentStamina}"); // Log the reset stamina

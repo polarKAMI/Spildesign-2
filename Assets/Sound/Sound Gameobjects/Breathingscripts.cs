@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ReloadSoundObject : MonoBehaviour
+public class Breathingscripts : MonoBehaviour
 {
+ 
     public AudioSource audioSourceToPlay2; // Reference to your AudioSource
 
     void Start()
@@ -13,7 +14,7 @@ public class ReloadSoundObject : MonoBehaviour
         PlayAudio2();
     }
 
-    void PlayAudio2()
+   private void PlayAudio2()
     {
         // Play the audio clip
         audioSourceToPlay2.Play();
@@ -21,3 +22,5 @@ public class ReloadSoundObject : MonoBehaviour
         Destroy(gameObject, audioSourceToPlay2.clip.length);
     }
 }
+
+

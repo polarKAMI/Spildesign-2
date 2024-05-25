@@ -188,7 +188,7 @@ public class PlayerController : MonoBehaviour
                         if (interactable != null)
                         {
                             interactable.Interact();
-                            Debug.Log("Hejsa");
+                           
                         }
                     }
                 }
