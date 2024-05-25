@@ -23,9 +23,12 @@ public class Lygtemanden : MonoBehaviour
     private Coroutine flipCoroutine; // Coroutine for flipping
     private Vector2 lastPlayerPosition; // Last known player position
 
+    private bool disabled = false;
+
     private Lygtemandenmovement movementScript; // Reference to the movement script
 
     public bool isHidingHandled = false; // Flag to check if hiding is handled
+    public Animator animator;
 
     void Start()
     {
@@ -33,13 +36,22 @@ public class Lygtemanden : MonoBehaviour
         initialPosition = transform.position;
         movementScript = GetComponent<Lygtemandenmovement>();
         IgnorePlayerCollision();
-
+        DisableMovement();
         Playermovement_script = player.GetComponent<PlayerMovement>();
+    }
+
+    void DisableMovement()
+    {
+        movementScript.enabled = false;
+        disabled = true;
+        Debug.Log("Er jeg i kørestol ven");
     }
 
     void FixedUpdate()
     {
-        if (!isChasing)
+        if (disabled == true)
+        { 
+          if (!isChasing)
         {
             // Check for player within detection range
             if (player != null && IsPlayerInFront())
@@ -59,6 +71,8 @@ public class Lygtemanden : MonoBehaviour
                         isChasing = true;
                         // Disable Lygtemandenmovement script when chasing
                         movementScript.enabled = false;
+                    animator.SetBool("IsSpawned", true);
+                    animator.SetBool("HasCaught", true);
                     Debug.Log("Lygte chaser");
                     }
                 
@@ -113,6 +127,7 @@ public class Lygtemanden : MonoBehaviour
         }
 
         rb.freezeRotation = true;
+        }
     }
 
     bool IsPlayerInFront()
