@@ -13,20 +13,16 @@ public class Shoot : MonoBehaviour
     public Rigidbody2D rb;
 
     public MonoBehaviour PlayerMovement;
-    public PlayerMovement playermovement;
-
-    private bool canAttack = true;
-
+    public Animator animator;
     public Image ammoBar;
-    
-
 
     public GameObject reloadobject;
     public GameObject Firesoundobject;
 
+   private bool IsShooting = false; // Define IsShooting variable
+
     private void Start()
     {
-
         rb = GetComponent<Rigidbody2D>();
         if (rb == null)
         {
@@ -35,75 +31,57 @@ public class Shoot : MonoBehaviour
 
         UpdateAmmoUI();
     }
+
     public void AddAmmo(int amount)
     {
-        Debug.Log(currentAmmo);
         currentAmmo += amount;
         UpdateAmmoUI();
     }
+
     void Startscript()
     {
         PlayerMovement.enabled = true;
-
     }
-    void attack()
+
+    IEnumerator StopShootingCoroutine()
     {
-
-        canAttack = true;
-        Debug.Log("Can attack");
+       
+        // Wait for the duration of the shooting animation
+        yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(1).length);
+        // Reset shooting flag after animation is finished
+        animator.SetBool("IsShooting", false);
+        IsShooting = false;
     }
+
     public void Shooting()
     {
-        Instantiate(Firesoundobject);
-
-        Instantiate(Projectile, fireposition.position, fireposition.rotation);
-        currentAmmo -= 5;
-        UpdateAmmoUI();
-
-        PlayerMovement.enabled = false;
-
-        // Get the local scale of the GameObject
-        Vector3 localScale = transform.localScale;
-
-        // Check if Scale X is greater than 0
-        if (localScale.x > 0)
+        if (!IsShooting) // Check if shooting animation is already triggered
         {
-            // Apply impulse to push the GameObject to the left
-            rb.AddForce(Vector2.left * pushbackForce, ForceMode2D.Impulse);
-            Invoke("Startscript", 0.3f);
+            Instantiate(Firesoundobject);
+            Instantiate(Projectile, fireposition.position, fireposition.rotation);
+            currentAmmo -= 5;
+            UpdateAmmoUI();
+            animator.SetBool("IsShooting", true); // Start shooting animation
+            PlayerMovement.enabled = false;
+
+            // Apply pushback force based on the direction
+            Vector3 localScale = transform.localScale;
+            Vector2 pushbackDirection = localScale.x > 0 ? Vector2.left : Vector2.right;
+            rb.AddForce(pushbackDirection * pushbackForce, ForceMode2D.Impulse);
+
+            Instantiate(reloadobject);
+
+            StartCoroutine(StopShootingCoroutine()); // Start the coroutine to stop shooting animation
+            IsShooting = true; // Set shooting flag to true
         }
-        // Check if Scale X is less than 0
-        else if (localScale.x < 0)
-        {
-            // Apply impulse to push the GameObject to the right
-            rb.AddForce(Vector2.right * pushbackForce, ForceMode2D.Impulse);
-            Invoke("Startscript", 0.3f);
-        }
-
-        canAttack = false;
-
-        Instantiate(reloadobject);
-
-        Invoke("attack", 5f);
     }
-
 
     private void UpdateAmmoUI()
     {
         if (ammoBar != null)
         {
             ammoBar.fillAmount = (float)currentAmmo / maxAmmo;
-
-        }
-
-       if (currentAmmo == maxAmmo)
-        {
-            ammoBar.color = Color.red;
-        }
-
-       if(currentAmmo < maxAmmo)
-        {
-            ammoBar.color = Color.white;
+            ammoBar.color = currentAmmo == maxAmmo ? Color.red : Color.white;
         }
     }
 }

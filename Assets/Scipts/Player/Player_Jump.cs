@@ -23,6 +23,7 @@ public class PlayerJump : MonoBehaviour
     [SerializeField] private CameraFollow cameraFollow;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
+    public Animator animator;
 
     private void Awake()
     {
@@ -47,7 +48,7 @@ public class PlayerJump : MonoBehaviour
 
         if (canJump && isChargingJump && isGrounded && chargeTime >= 0.15f)
         {
-            isChargingJump = false;   
+            isChargingJump = false;
             // Calculate jump force based on charge duration
             float chargeRatio = Mathf.Clamp01(chargeTime / jumpChargeDuration);
             float currentJumpForce = Mathf.Lerp(minJumpForce, maxJumpForce, chargeRatio);
@@ -80,6 +81,7 @@ public class PlayerJump : MonoBehaviour
         }
         canJump = false; // Set canJump to false after jumping
         isJumping = true; // Set isJumping to true after jumping
+        animator.SetBool("IsJumping", true); // Trigger jump animation
     }
 
     private void Update()
@@ -113,23 +115,23 @@ public class PlayerJump : MonoBehaviour
                     fallTime += jumpTime; // Add the time spent jumping to fallTime
                     Debug.Log("free fallin");
                 }
-            }   
+            }
         }
 
         if (isGrounded)
         {
             isFalling = false;
         }
-       
+
         if (isFalling)
         {
             fallTime += Time.deltaTime;
         }
         if (isSliding)
-    {
-        // Allow a short delay before checking velocity
-        StartCoroutine(DelayedSlideCheck());
-    }
+        {
+            // Allow a short delay before checking velocity
+            StartCoroutine(DelayedSlideCheck());
+        }
         // Enable movement after sliding is complete
         if (!ladderMovement.isClimbing)
         {
@@ -169,7 +171,7 @@ public class PlayerJump : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         // Check if the player has collided with an object on the ground layer
-        if(GlobalInputMapping.activeInputMappings == GlobalInputMapping.inGameInputMapping)
+        if (GlobalInputMapping.activeInputMappings == GlobalInputMapping.inGameInputMapping)
         {
             if (groundLayer == (groundLayer | (1 << collision.gameObject.layer)))
             {
@@ -181,7 +183,7 @@ public class PlayerJump : MonoBehaviour
                     Slide(jumpTime);
                     cameraFollow.StartShake();
                 }
-                else if(isFalling && fallTime > 2f)
+                else if (isFalling && fallTime > 2f)
                 {
                     cameraFollow.StartViolentShake();
                     playerMovement.EnableMovement();
@@ -198,9 +200,9 @@ public class PlayerJump : MonoBehaviour
                 isJumping = false; // Reset isJumping when grounded
                 isFalling = false;
                 fallTime = 0f;
+                animator.SetBool("IsJumping", false); // Reset jump animation
             }
         }
-        
     }
 
     private void StopShake()
@@ -220,10 +222,13 @@ public class PlayerJump : MonoBehaviour
 
     private void SideStep(float sideStepSpeed)
     {
-        if (!isSliding) { playerMovement.DisableMovement();
+        if (!isSliding)
+        {
+            playerMovement.DisableMovement();
             isSideStep = true;
             rb.drag = 20f;
             Vector2 sideStepDirection = playerMovement.isFacingRight ? Vector2.right : Vector2.left;
-            rb.AddForce(sideStepDirection * sideStepSpeed, ForceMode2D.Impulse); }
+            rb.AddForce(sideStepDirection * sideStepSpeed, ForceMode2D.Impulse);
+        }
     }
 }

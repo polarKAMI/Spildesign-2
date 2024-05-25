@@ -34,7 +34,7 @@ public class PlayerMovement : MonoBehaviour
     public AudioClip staminaDepletedClip; // Audio clip to play when stamina is depleted
 
     private AudioSource audioSourceRun;
-
+    public Animator animator;
     private bool isRecoveringStamina = true;
 
 
@@ -150,6 +150,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        animator.SetFloat("Speed", Mathf.Abs(currentSpeed));
         if (movementEnabled && playerJump.isGrounded && !playerJump.isSliding)
         {
             rb.velocity = new Vector2(horizontal * currentSpeed, rb.velocity.y);
