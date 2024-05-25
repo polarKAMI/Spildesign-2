@@ -25,7 +25,7 @@ MonoBehaviour:
   <Specs>k__BackingField: "Specs:\r\nWeight: 115 grams\r\nHeal: Heals a moderate
     amount of health\r"
   <LogImage>k__BackingField: {fileID: 21300000, guid: 5208841f8300093419318d5ca51c3272, type: 3}
-  isNote: 0
+  isNote: 1
   isItem: 1
   isEntity: 0
   isFederation: 0

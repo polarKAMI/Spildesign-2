@@ -297,11 +297,11 @@ public class PlayerController : MonoBehaviour
             {
                 logMenu.Pause();
             }
-            else if (Input.GetKeyDown(GlobalInputMapping.activeInputMappings["Select+"]) && !logMenu.entryList)
+            else if (Input.GetKeyDown(GlobalInputMapping.activeInputMappings["Select+"]) && !logMenu.entryList && !logMenu.logSelected)
             {
                 logMenu.ChangeSelectedIndex(1);
             }
-            else if (Input.GetKeyDown(GlobalInputMapping.activeInputMappings["Select-"]) && !logMenu.entryList)
+            else if (Input.GetKeyDown(GlobalInputMapping.activeInputMappings["Select-"]) && !logMenu.entryList && !logMenu.logSelected)
             {
                 logMenu.ChangeSelectedIndex(-1);
             }
@@ -311,29 +311,49 @@ public class PlayerController : MonoBehaviour
                 {
                     logMenu.SelectCategory();
                 }
-                else if (logMenu.entryList)
+                else if (!logMenu.logSelected)
                 {
-
+                    logMenu.SelectLog();
                 }
             }
             else if (Input.GetKeyDown(GlobalInputMapping.activeInputMappings["Deselect"]))
             {
-                if(!logMenu.entryList)
+                if(!logMenu.entryList && !logMenu.logSelected)
                 {
                     logMenu.Pause();
                 }
-                else if (logMenu.entryList)
+                else if (logMenu.entryList && !logMenu.logSelected)
                 {
                     logMenu.DeselectCategory();
+                }
+                else if (logMenu.logSelected)
+                {
+                    logMenu.DeselectLog();
                 }
             }
             else if (Input.GetKeyDown(GlobalInputMapping.activeInputMappings["ScrollUp"]) && logMenu.entryList)
             {
-                logMenu.ChangeSelectedEntry(-1);
+                if (!logMenu.logSelected)
+                {
+                    logMenu.ChangeSelectedEntry(-1);
+                }
             }
             else if (Input.GetKeyDown(GlobalInputMapping.activeInputMappings["ScrollDown"]) && logMenu.entryList)
             {
-                logMenu.ChangeSelectedEntry(1);
+                if (!logMenu.logSelected)
+                {
+                    logMenu.ChangeSelectedEntry(1);
+                }
+            }
+
+            // Handle continuous scrolling
+            if (Input.GetKey(GlobalInputMapping.activeInputMappings["ScrollUp"]) && logMenu.entryList && logMenu.logSelected)
+            {
+                logMenu.ScrollContent(1);
+            }
+            else if (Input.GetKey(GlobalInputMapping.activeInputMappings["ScrollDown"]) && logMenu.entryList && logMenu.logSelected)
+            {
+                logMenu.ScrollContent(-1);
             }
 
         }

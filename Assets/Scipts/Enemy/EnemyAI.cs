@@ -188,6 +188,19 @@ public class EnemyAI : MonoBehaviour
         tempObject.transform.parent = transform; // Set the enemy as the parent
         Rigidbody2D tempRb = tempObject.AddComponent<Rigidbody2D>();
         tempRb.isKinematic = false;
+        CircleCollider2D parentCollider = GetComponent<CircleCollider2D>();
+        Debug.Log("parent collider radius: " + parentCollider.radius);
+        
+        if (parentCollider != null)
+        {
+            CircleCollider2D circleCollider = tempObject.AddComponent<CircleCollider2D>();
+            circleCollider.radius = parentCollider.radius;
+        }
+        else
+        {
+            Debug.LogWarning("Parent does not have a Collider2D component.");
+        }
+
         tempRb.gravityScale = rb.gravityScale; // Use the same gravity scale as the actual Rigidbody
         Debug.Log("tempRb: " + tempRb.transform.position);
         // Apply launch force to the temporary Rigidbody

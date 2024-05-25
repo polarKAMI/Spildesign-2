@@ -25,4 +25,4 @@ MonoBehaviour:
   isEntity: 0
   isFederation: 0
   isMisc: 0
-  collected: 1
+  collected: 0
