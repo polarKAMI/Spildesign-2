@@ -10,7 +10,7 @@ public class Lygtemandenmovement : MonoBehaviour
 
     // Reference to Lygtemanden script
     private Lygtemanden lygtemandenScript;
-
+  
     void Start()
     {
         lygtemandenScript = GetComponent<Lygtemanden>();
