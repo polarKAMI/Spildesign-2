@@ -18,6 +18,7 @@ public class Shoot : MonoBehaviour
 
     public GameObject reloadobject;
     public GameObject Firesoundobject;
+    public GameObject addammosound;
 
    private bool IsShooting = false; // Define IsShooting variable
 
@@ -35,7 +36,20 @@ public class Shoot : MonoBehaviour
     public void AddAmmo(int amount)
     {
         currentAmmo += amount;
+        currentAmmo = Mathf.Clamp(currentAmmo, 0, maxAmmo); // Ensure currentAmmo stays within bounds
         UpdateAmmoUI();
+        Debug.Log(currentAmmo);
+
+        if (currentAmmo != maxAmmo)
+        {
+            Instantiate(addammosound);
+        }
+
+        if (currentAmmo == maxAmmo)
+        {
+            Instantiate(reloadobject);
+        }
+       
     }
 
     void Startscript()
@@ -57,6 +71,12 @@ public class Shoot : MonoBehaviour
     {
         if (!IsShooting) // Check if shooting animation is already triggered
         {
+            if (currentAmmo != maxAmmo)
+            {
+                Debug.Log("Cannot shoot: Ammo is not at max");
+                return;
+            }
+
             Instantiate(Firesoundobject);
             Instantiate(Projectile, fireposition.position, fireposition.rotation);
             currentAmmo -= 5;
@@ -69,7 +89,7 @@ public class Shoot : MonoBehaviour
             Vector2 pushbackDirection = localScale.x > 0 ? Vector2.left : Vector2.right;
             rb.AddForce(pushbackDirection * pushbackForce, ForceMode2D.Impulse);
 
-            Instantiate(reloadobject);
+           
 
             StartCoroutine(StopShootingCoroutine()); // Start the coroutine to stop shooting animation
             IsShooting = true; // Set shooting flag to true
