@@ -8,12 +8,13 @@ public class Damagescript : MonoBehaviour
 
     public bool PlayerHasBeenDamaged = false;
 
-
+    public GameObject Bitesound;
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
+            Instantiate(Bitesound);
             health.TakeDamage(1);
            PlayerHasBeenDamaged=true;
             Debug.Log("Player has taken damage from enemy");

@@ -6,6 +6,7 @@ public class LadderMovement : MonoBehaviour, IInteractable
 {
     private Rigidbody2D rb;
     private PlayerMovement playerMovement;
+    private PlayerJump playerJump;
     public bool isClimbing = false;
     private Transform ladderTransform;
     private float vertical;
@@ -24,6 +25,7 @@ public class LadderMovement : MonoBehaviour, IInteractable
     {
         rb = GetComponent<Rigidbody2D>();
         playerMovement = GetComponent<PlayerMovement>();
+        playerJump = GetComponent<PlayerJump>();
     }
 
     public void Interact()
@@ -43,6 +45,9 @@ public class LadderMovement : MonoBehaviour, IInteractable
         playerMovement.DisableMovement();
         GlobalInputMapping.SetActiveInputMappings(GlobalInputMapping.climbInputMapping);
         isClimbing = true;
+        playerJump.isFalling = false;
+        playerJump.isJumping = false;
+        playerJump.isSliding = false;
         rb.gravityScale = 0f;
         rb.velocity = new Vector2(0, 0);
         ladderTransform = ladder;

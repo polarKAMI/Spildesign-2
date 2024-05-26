@@ -44,6 +44,8 @@ public class EnemyAI : MonoBehaviour
     public int attackDamage = 2;
     public bool hasDealtDamage;
 
+    public Animator animator; 
+
     private void Awake()
     {
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
@@ -73,11 +75,17 @@ public class EnemyAI : MonoBehaviour
         {
             if (isConcealed)
             {
+                animator.SetBool("IsTransformed", true);
                 StartCoroutine(ChangeColorAndActivate());
             }
             else if (TargetInDistance() && seeker.IsDone() && IsGrounded() && !isJumping)
             {
                 LaunchEnemy();
+                animator.SetBool("IsGrounded", false);
+            }
+            else if (TargetInDistance() && seeker.IsDone() && IsGrounded() && isJumping)
+            {
+                animator.SetBool("IsGrounded", true);
             }
         }
         else if (!TargetInDistance() && !isConcealed)
@@ -128,28 +136,15 @@ public class EnemyAI : MonoBehaviour
 
         // Calculate the position of the bottom edge of the circle collider
         Vector2 bottomEdge = (Vector2)transform.position - Vector2.up * circleCollider.radius;
-
         // Perform overlap circle check at the bottom edge position
         return Physics2D.OverlapCircle(bottomEdge, 0.05f, groundLayer) != null;
+
     }
 
     private IEnumerator ChangeColorAndActivate()
     { 
-        yield return StartCoroutine(ChangeColor());
         yield return new WaitForSeconds(1f);
         isConcealed = false;
-    }
-
-    private IEnumerator ChangeColor()
-    {
-        float elapsedTime = 0;
-        while (elapsedTime < colorChangeDuration)
-        {
-            spriteRenderer.color = Color.Lerp(startColor, endColor, elapsedTime / colorChangeDuration);
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
-        spriteRenderer.color = endColor; // Ensure final color is set
     }
 
     private IEnumerator CheckAndConceal()
@@ -248,6 +243,7 @@ public class EnemyAI : MonoBehaviour
         float initialYpos = transform.position.y;
         Vector2 directionToTarget = (target.position - transform.position).normalized;
         float adjustedLaunchAngle = launchAngle;
+        animator.SetBool("IsJumping", true);
 
         if (directionToTarget.x < 0)
         {
