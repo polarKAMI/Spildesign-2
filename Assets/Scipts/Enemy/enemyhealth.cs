@@ -23,4 +23,8 @@ public class enemyhealth : MonoBehaviour
         
         
     }
+    void isdead();
+    {
+        if currentenemyhealth == <0;
+    }
 }

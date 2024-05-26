@@ -24,6 +24,7 @@ public class PlayerJump : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
     public Animator animator;
+    private bool collideonce = false;
 
     private void Awake()
     {
@@ -74,10 +75,12 @@ public class PlayerJump : MonoBehaviour
         if (playerMovement.isFacingRight)
         {
             rb.velocity = new Vector2(jumpForce, jumpForce / .7f);
+            collideonce = false;
         }
         else
         {
             rb.velocity = new Vector2(-jumpForce, jumpForce / .7f);
+            collideonce = false;
         }
         canJump = false; // Set canJump to false after jumping
         isJumping = true; // Set isJumping to true after jumping
@@ -86,6 +89,7 @@ public class PlayerJump : MonoBehaviour
 
     private void Update()
     {
+        
         // Check if the player is grounded only if they are not climbing
         if (!ladderMovement.isClimbing)
         {
@@ -108,12 +112,14 @@ public class PlayerJump : MonoBehaviour
                     isFalling = true;
                     fallTime += jumpTime; // Add the time spent jumping to fallTime
                     Debug.Log("free fallin");
+                    collideonce = false;
                 }
                 else if (!isJumping)
                 {
                     isFalling = true;
                     fallTime += jumpTime; // Add the time spent jumping to fallTime
                     Debug.Log("free fallin");
+                    collideonce = false;
                 }
             }
         }
@@ -126,6 +132,7 @@ public class PlayerJump : MonoBehaviour
         if (isFalling)
         {
             fallTime += Time.deltaTime;
+            animator.SetBool("IsFalling", true);
         }
         if (isSliding)
         {
@@ -173,8 +180,9 @@ public class PlayerJump : MonoBehaviour
         // Check if the player has collided with an object on the ground layer
         if (GlobalInputMapping.activeInputMappings == GlobalInputMapping.inGameInputMapping)
         {
-            if (groundLayer == (groundLayer | (1 << collision.gameObject.layer)))
+            if (!collideonce && groundLayer == (groundLayer | (1 << collision.gameObject.layer)))
             {
+                collideonce = true;
                 // Check if the jump time is above 0.9 and slide if true
                 if (isJumping && jumpTime > 1f)
                 {
@@ -190,17 +198,25 @@ public class PlayerJump : MonoBehaviour
                     playerMovement.ApplySlow(2f, 0.01f);
                     Invoke("StopShake", 0.3f);
                     isFalling = false;
+                    animator.SetBool("IsLanded", true);
+
+                }
+                else if (isFalling)
+                {
+                    animator.SetBool("IsLanded", true);
                 }
                 else
                 {
                     playerMovement.EnableMovement();
                 }
 
+                Debug.Log("SmokeWeedErryday");
                 canJump = true; // Set canJump to true when grounded
                 isJumping = false; // Reset isJumping when grounded
                 isFalling = false;
                 fallTime = 0f;
-                animator.SetBool("IsJumping", false); // Reset jump animation
+                animator.SetBool("IsJumping", false);// Reset jump animation
+                animator.SetBool("IsFalling", false);
             }
         }
     }
