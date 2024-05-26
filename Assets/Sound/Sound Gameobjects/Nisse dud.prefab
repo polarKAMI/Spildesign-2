@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7727714798818539018}
   - component: {fileID: 1584380386078998684}
   m_Layer: 0
-  m_Name: "Spiller d\xF8r sound"
+  m_Name: Nisse dud
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -56,15 +56,15 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: d0bfb83388e9cee419be858bd23bb28c, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 733528c7dae6e074792665205d60eb2d, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.344
+  m_Volume: 0.337
   m_Pitch: 1
   Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 79
+  Priority: 158
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
