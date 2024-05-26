@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7217e05988107de438afd6edcd4e29bb, type: 3}
+  m_Name: Personal Log #2
+  m_EditorClassIdentifier: 
+  <Name>k__BackingField: Personal Log #2
+  <Description>k__BackingField: "When I get back, I\u2019m gonna tell those ****wits
+    in research to install A/C in this thing. It\u2019s freaking hot when walking
+    around all day carrying this stupid EnHan thing. They also need to fix the boots,
+    I have no grip when trying to go uphill. I fell down a hill and can\u2019t get
+    back up, I\u2019ll have to find another way back to my ship.\r\n"
+  <Specs>k__BackingField: Audio log recorded by Scout.
+  <LogImage>k__BackingField: {fileID: 0}
+  isNote: 0
+  isItem: 0
+  isEntity: 0
+  isFederation: 0
+  isMisc: 1
+  collected: 0

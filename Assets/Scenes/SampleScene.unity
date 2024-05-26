@@ -8615,11 +8615,11 @@ PrefabInstance:
       objectReference: {fileID: 1964744035}
     - target: {fileID: 2103752632763426906, guid: 91c2682628b903f4087f1199c6451f20, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 52.83
+      value: -12.99
       objectReference: {fileID: 0}
     - target: {fileID: 2103752632763426906, guid: 91c2682628b903f4087f1199c6451f20, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -20.72
+      value: -53.84
       objectReference: {fileID: 0}
     - target: {fileID: 2103752632763426906, guid: 91c2682628b903f4087f1199c6451f20, type: 3}
       propertyPath: m_LocalPosition.z
@@ -29422,6 +29422,138 @@ PrefabInstance:
       propertyPath: notificationText
       value: 
       objectReference: {fileID: 1775653895}
+    - target: {fileID: 3013705821907404134, guid: 668a898832c51fd4fbdd8e63d7382879, type: 3}
+      propertyPath: allLogs.Array.size
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3013705821907404134, guid: 668a898832c51fd4fbdd8e63d7382879, type: 3}
+      propertyPath: startLogs.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3013705821907404134, guid: 668a898832c51fd4fbdd8e63d7382879, type: 3}
+      propertyPath: allLogs.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: f24af2bda4f39ae4297db806d6ae21c4, type: 2}
+    - target: {fileID: 3013705821907404134, guid: 668a898832c51fd4fbdd8e63d7382879, type: 3}
+      propertyPath: allLogs.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 72741da3087bb6a41a5716e9ce140f14, type: 2}
+    - target: {fileID: 3013705821907404134, guid: 668a898832c51fd4fbdd8e63d7382879, type: 3}
+      propertyPath: allLogs.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: a57fddba40b4e6e4bac4f34ee110f65e, type: 2}
+    - target: {fileID: 3013705821907404134, guid: 668a898832c51fd4fbdd8e63d7382879, type: 3}
+      propertyPath: allLogs.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: 103f359564018ad4b87e9ba347bf2ee4, type: 2}
+    - target: {fileID: 3013705821907404134, guid: 668a898832c51fd4fbdd8e63d7382879, type: 3}
+      propertyPath: allLogs.Array.data[4]
+      value: 
+      objectReference: {fileID: 11400000, guid: 690c2b5bc849a9a4791528a10945f05a, type: 2}
+    - target: {fileID: 3013705821907404134, guid: 668a898832c51fd4fbdd8e63d7382879, type: 3}
+      propertyPath: allLogs.Array.data[5]
+      value: 
+      objectReference: {fileID: 11400000, guid: 738f2cddb94db6d47bbb942e7b426539, type: 2}
+    - target: {fileID: 3013705821907404134, guid: 668a898832c51fd4fbdd8e63d7382879, type: 3}
+      propertyPath: allLogs.Array.data[6]
+      value: 
+      objectReference: {fileID: 11400000, guid: 2d69180169e50f1469428e19e32b51e0, type: 2}
+    - target: {fileID: 3013705821907404134, guid: 668a898832c51fd4fbdd8e63d7382879, type: 3}
+      propertyPath: allLogs.Array.data[7]
+      value: 
+      objectReference: {fileID: 11400000, guid: be450e834e885914abd476a47ea06536, type: 2}
+    - target: {fileID: 3013705821907404134, guid: 668a898832c51fd4fbdd8e63d7382879, type: 3}
+      propertyPath: allLogs.Array.data[8]
+      value: 
+      objectReference: {fileID: 11400000, guid: e5ea7130e28fd5442b6a3fd4583a7b96, type: 2}
+    - target: {fileID: 3013705821907404134, guid: 668a898832c51fd4fbdd8e63d7382879, type: 3}
+      propertyPath: allLogs.Array.data[9]
+      value: 
+      objectReference: {fileID: 11400000, guid: 8c857656038e5a948925367aa8c96e56, type: 2}
+    - target: {fileID: 3013705821907404134, guid: 668a898832c51fd4fbdd8e63d7382879, type: 3}
+      propertyPath: allLogs.Array.data[10]
+      value: 
+      objectReference: {fileID: 11400000, guid: 8546ef497d5717346a5f1a0ccc4549b3, type: 2}
+    - target: {fileID: 3013705821907404134, guid: 668a898832c51fd4fbdd8e63d7382879, type: 3}
+      propertyPath: allLogs.Array.data[11]
+      value: 
+      objectReference: {fileID: 11400000, guid: 4903fbafbbd487543bb0f6b3fb97c38c, type: 2}
+    - target: {fileID: 3013705821907404134, guid: 668a898832c51fd4fbdd8e63d7382879, type: 3}
+      propertyPath: allLogs.Array.data[12]
+      value: 
+      objectReference: {fileID: 11400000, guid: a8c00fcd6f973b94c83ef34d03034dbb, type: 2}
+    - target: {fileID: 3013705821907404134, guid: 668a898832c51fd4fbdd8e63d7382879, type: 3}
+      propertyPath: allLogs.Array.data[13]
+      value: 
+      objectReference: {fileID: 11400000, guid: 1e2ba78f036900a408e26b1cf29b0a1b, type: 2}
+    - target: {fileID: 3013705821907404134, guid: 668a898832c51fd4fbdd8e63d7382879, type: 3}
+      propertyPath: allLogs.Array.data[14]
+      value: 
+      objectReference: {fileID: 11400000, guid: 8271d042f0de6e74b94377b01e66de1f, type: 2}
+    - target: {fileID: 3013705821907404134, guid: 668a898832c51fd4fbdd8e63d7382879, type: 3}
+      propertyPath: allLogs.Array.data[15]
+      value: 
+      objectReference: {fileID: 11400000, guid: de2f230c7e2cf8146946967234468987, type: 2}
+    - target: {fileID: 3013705821907404134, guid: 668a898832c51fd4fbdd8e63d7382879, type: 3}
+      propertyPath: allLogs.Array.data[16]
+      value: 
+      objectReference: {fileID: 11400000, guid: d71a995ef79b9fa42a0b6ceeed1a6c51, type: 2}
+    - target: {fileID: 3013705821907404134, guid: 668a898832c51fd4fbdd8e63d7382879, type: 3}
+      propertyPath: allLogs.Array.data[17]
+      value: 
+      objectReference: {fileID: 11400000, guid: 642a696edeeb31440bb35fcf004e6525, type: 2}
+    - target: {fileID: 3013705821907404134, guid: 668a898832c51fd4fbdd8e63d7382879, type: 3}
+      propertyPath: allLogs.Array.data[18]
+      value: 
+      objectReference: {fileID: 11400000, guid: e1261629a8f27364888c80aa82753e6b, type: 2}
+    - target: {fileID: 3013705821907404134, guid: 668a898832c51fd4fbdd8e63d7382879, type: 3}
+      propertyPath: allLogs.Array.data[19]
+      value: 
+      objectReference: {fileID: 11400000, guid: 19df54f377a5ed649b3bdd530e88a310, type: 2}
+    - target: {fileID: 3013705821907404134, guid: 668a898832c51fd4fbdd8e63d7382879, type: 3}
+      propertyPath: allLogs.Array.data[20]
+      value: 
+      objectReference: {fileID: 11400000, guid: a442e24c12306964dae32670e24534a5, type: 2}
+    - target: {fileID: 3013705821907404134, guid: 668a898832c51fd4fbdd8e63d7382879, type: 3}
+      propertyPath: allLogs.Array.data[21]
+      value: 
+      objectReference: {fileID: 11400000, guid: 34ec083e78bde584082c23f6c48ea0fc, type: 2}
+    - target: {fileID: 3013705821907404134, guid: 668a898832c51fd4fbdd8e63d7382879, type: 3}
+      propertyPath: allLogs.Array.data[22]
+      value: 
+      objectReference: {fileID: 11400000, guid: 751eb486cafbfdd4ca9bca648bee1e62, type: 2}
+    - target: {fileID: 3013705821907404134, guid: 668a898832c51fd4fbdd8e63d7382879, type: 3}
+      propertyPath: allLogs.Array.data[23]
+      value: 
+      objectReference: {fileID: 11400000, guid: 6208d89c895055f41abd0805080e17c9, type: 2}
+    - target: {fileID: 3013705821907404134, guid: 668a898832c51fd4fbdd8e63d7382879, type: 3}
+      propertyPath: allLogs.Array.data[24]
+      value: 
+      objectReference: {fileID: 11400000, guid: 0806f4563f82c9848a1806fd512672da, type: 2}
+    - target: {fileID: 3013705821907404134, guid: 668a898832c51fd4fbdd8e63d7382879, type: 3}
+      propertyPath: startLogs.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 4903fbafbbd487543bb0f6b3fb97c38c, type: 2}
+    - target: {fileID: 3013705821907404134, guid: 668a898832c51fd4fbdd8e63d7382879, type: 3}
+      propertyPath: startLogs.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 738f2cddb94db6d47bbb942e7b426539, type: 2}
+    - target: {fileID: 3013705821907404134, guid: 668a898832c51fd4fbdd8e63d7382879, type: 3}
+      propertyPath: startLogs.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 2d69180169e50f1469428e19e32b51e0, type: 2}
+    - target: {fileID: 3013705821907404134, guid: 668a898832c51fd4fbdd8e63d7382879, type: 3}
+      propertyPath: startLogs.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: de2f230c7e2cf8146946967234468987, type: 2}
+    - target: {fileID: 3013705821907404134, guid: 668a898832c51fd4fbdd8e63d7382879, type: 3}
+      propertyPath: startLogs.Array.data[4]
+      value: 
+      objectReference: {fileID: 11400000, guid: d71a995ef79b9fa42a0b6ceeed1a6c51, type: 2}
+    - target: {fileID: 3013705821907404134, guid: 668a898832c51fd4fbdd8e63d7382879, type: 3}
+      propertyPath: startLogs.Array.data[5]
+      value: 
+      objectReference: {fileID: 11400000, guid: 642a696edeeb31440bb35fcf004e6525, type: 2}
     - target: {fileID: 3555058375086643297, guid: 668a898832c51fd4fbdd8e63d7382879, type: 3}
       propertyPath: m_LocalPosition.x
       value: 19.346651

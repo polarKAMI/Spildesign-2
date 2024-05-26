@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7217e05988107de438afd6edcd4e29bb, type: 3}
+  m_Name: Explorer Suit Mk III
+  m_EditorClassIdentifier: 
+  <Name>k__BackingField: Explorer Suit Mk III
+  <Description>k__BackingField: "As stated in your training programme, the Explorer
+    Suit Mk III is absolutely state of the art. It is a full body survival suit,
+    designed to sustain our explorers on foreign planets for up to 2 months without
+    recharging. The suit has several features meant to allow for exploration in extremely
+    hostile environments for sustained periods of time. The suit features a breathing
+    apparatus that filters out harmful gasses, or supplements the intake with useful
+    gasses such as oxygen. As an added bonus, this feature also filters out any unpleasant
+    smells. The breathing apparatus will even allow for exploration of planets without
+    an atmosphere.\r\n\r\nThe Explorer Suit MK III is created from a steel alloy,
+    which allows for excellent toughness and mobility. As such, the user should feel
+    little to no restriction of movement when wearing the suit. The suit also has
+    servos installed, which allows the user to wear the suit without feeling the
+    weight of the suit.\r\n\r\nThe suit also contains a recorder, which allows for
+    the explorer to create audio logs of their experience. When the explorer records
+    a log it is automatically transcribed and saved. These logs are then shared with
+    our R&D department, to create a more streamlined feedback process. Keep in mind
+    swearing in these logs is against our code of conduct, and will be censored in
+    the transcription. The employee will also be reprimanded. \r"
+  <Specs>k__BackingField: "Height: 180 cm\r\nWeight: 110 kg\r"
+  <LogImage>k__BackingField: {fileID: 0}
+  isNote: 0
+  isItem: 0
+  isEntity: 0
+  isFederation: 1
+  isMisc: 0
+  collected: 0

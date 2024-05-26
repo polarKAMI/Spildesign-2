@@ -8,6 +8,19 @@ public class LogManager : MonoBehaviour
     public List<LogSO> entitiesLogs = new List<LogSO>();
     public List<LogSO> federationLogs = new List<LogSO>();
     public List<LogSO> miscLogs = new List<LogSO>();
+    public List<LogSO> allLogs;
+    public List<LogSO> startLogs;
+    private void Start()
+    {
+        foreach (var log in allLogs) 
+        { 
+        log.ResetCollected();
+        }
+        foreach (var log in startLogs)
+        {
+            AddLog(log);
+        }
+    }
 
     public static void AddLog(LogSO log)
     {

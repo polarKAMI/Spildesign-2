@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7217e05988107de438afd6edcd4e29bb, type: 3}
+  m_Name: Mission Statement
+  m_EditorClassIdentifier: 
+  <Name>k__BackingField: Mission Statement
+  <Description>k__BackingField: "Hello brave explorer!\r\n\r\nAs a forward scout
+    you have been tasked with performing one of the most important tasks in The Federation.
+    It is your responsibility to explore distant systems to determine if they can
+    become valuable members of The Federation. Below is your specific mission. Onwards,
+    for the greater good!\r\n\r\nMission Statement:\r\nYou have been assigned to
+    explore the planet known as \u201CEarth\u201D, located in the Milky Way. Earth
+    used to be home of the human race, before the Exodus of Humans in 2277. You will
+    land in a territory formerly known as the Kingdom of Denmark, in a region formerly
+    known as \u201CM\xF8n\u201D. Your objective is to observe and record the state
+    of the planet, to determine if it is suitable for habitation. You are to study
+    the local wildlife and any local civilizations, should they exist. Since \u201CEarth\u201D
+    has been abandoned by humans for a substantial period of time, it is unknown
+    how the ecosystem has adjusted to this change. If you are to encounter hostile
+    lifeforms, you are not to harm them as they could prove valuable to the research
+    of The Federation. \r\n"
+  <Specs>k__BackingField: Federation issued data.
+  <LogImage>k__BackingField: {fileID: 0}
+  isNote: 0
+  isItem: 0
+  isEntity: 0
+  isFederation: 1
+  isMisc: 0
+  collected: 0

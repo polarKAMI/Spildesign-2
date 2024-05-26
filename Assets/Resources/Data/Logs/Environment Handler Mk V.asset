@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7217e05988107de438afd6edcd4e29bb, type: 3}
+  m_Name: Environment Handler Mk V
+  m_EditorClassIdentifier: 
+  <Name>k__BackingField: Environment Handler Mk V
+  <Description>k__BackingField: "The Environment Handler Mk V is the latest in the
+    line of Handler technology, which provides invaluable assistance to the Forward
+    Scouts on their mission to expand the ideals of The Federation. The Mk V follows
+    its predecessors in having the ability to shoot a large blast in front of itself.
+    This blast can be used to clear out obstacles in a Scouts path, and can also
+    be used in self-defense. However, this feature is only to be used in emergencies
+    as the local ecosystems are not to be disturbed by a Scout. The EnHan is to be
+    used primarily to scan the local environment, to determine if it is fit for habitation.
+    When scanning objects, the EnHan will automatically check if something similar
+    is already detected in the database, and release this information to the Scout.
+    \r\n\r\nThe Mk V also includes the new Recycling technology, which allows the
+    user to convert almost any item into ammunition, should the issued amount fail
+    to provide enough.\r\n"
+  <Specs>k__BackingField: "\rWeight: 8 kg\r"
+  <LogImage>k__BackingField: {fileID: 0}
+  isNote: 0
+  isItem: 0
+  isEntity: 0
+  isFederation: 1
+  isMisc: 0
+  collected: 0

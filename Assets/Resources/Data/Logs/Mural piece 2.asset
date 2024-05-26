@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: Mural piece 2
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Mural piece
-  <Description>k__BackingField: 
-  <Specs>k__BackingField: 
+  <Description>k__BackingField: "I found this rock lying around. It looks to be part
+    of a painting or something, there\u2019s a pattern on it. The edges seem very
+    clean, almost like it was cut out of a wall somewhere.\r"
+  <Specs>k__BackingField: New database entry
   <LogImage>k__BackingField: {fileID: 21300000, guid: 1e31bb7c7b22259458b9751a2051fdf8, type: 3}
-  isNote: 0
+  isNote: 1
   isItem: 0
   isEntity: 0
   isFederation: 0

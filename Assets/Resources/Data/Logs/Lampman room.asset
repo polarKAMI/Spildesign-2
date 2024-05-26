@@ -20,11 +20,11 @@ MonoBehaviour:
     something weird to me, my ears are still ringing. Maybe this is the Ignis Fatuus
     I was reading about. It looks nothing like the description, maybe it\u2019s changed
     since the Exodus. If I ever get back, I\u2019ll have to update the database."
-  <Specs>k__BackingField: 
+  <Specs>k__BackingField: New database entry
   <LogImage>k__BackingField: {fileID: 21300000, guid: 61724c85deda61e43832f62db0fcbad3, type: 3}
   isNote: 1
   isItem: 0
   isEntity: 0
   isFederation: 0
   isMisc: 0
-  collected: 1
+  collected: 0

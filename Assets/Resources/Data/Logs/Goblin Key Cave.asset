@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7217e05988107de438afd6edcd4e29bb, type: 3}
   m_Name: Goblin Key Cave
   m_EditorClassIdentifier: 
-  <Name>k__BackingField: 
+  <Name>k__BackingField: Goblin Key Cave
   <Description>k__BackingField: "I fell in this deep hole which ended up in a cavern.
     Everything has this really weird purple tint to it. Looks like some of the rocks
     have blood on them, I don\u2019t like it. There\u2019s also a dead scout here,
     poor bastard. I found this small thing though, I wonder what it does."
-  <Specs>k__BackingField: 
+  <Specs>k__BackingField: New database entry
   <LogImage>k__BackingField: {fileID: 21300000, guid: 61724c85deda61e43832f62db0fcbad3, type: 3}
   isNote: 1
   isItem: 0

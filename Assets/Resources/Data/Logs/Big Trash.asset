@@ -15,7 +15,7 @@ MonoBehaviour:
   <Name>k__BackingField: Skrald
   <Description>k__BackingField: Comes in all shapes and sized, you can fill your
     gun up with it and use it as ammo.
-  <Specs>k__BackingField: 
+  <Specs>k__BackingField: 'Weigt: 2 kg'
   <LogImage>k__BackingField: {fileID: 21300000, guid: b2f136013daacae4684ef578bf014322, type: 3}
   isNote: 0
   isItem: 1
