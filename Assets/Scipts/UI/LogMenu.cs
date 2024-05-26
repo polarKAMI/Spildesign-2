@@ -14,15 +14,19 @@ public class LogMenu : MonoBehaviour
     private int selectedIndex = 0;
     private int entryIndex = 0;
     public bool entryList = false;
+    public bool logSelected = false;
 
     [SerializeField] GameObject logEntryPrefab;
     [SerializeField] Transform viewportContent;
+    [SerializeField] ScrollRect scrollRect;
 
     [Header("Description Box Elements")]
     public TMP_Text specsTXT;
     public TMP_Text descTXT;
     public TMP_Text logNameTXT;
     public Image itemImage;
+    public Image logSelectedBorder;
+    public float scrollSpeed = 0.1f;
 
     private void Start()
     {
@@ -144,12 +148,35 @@ public class LogMenu : MonoBehaviour
                 descTXT.text = log.Description;
                 logNameTXT.text = log.Name;
                 itemImage.sprite = log.LogImage;
+                
+                float contentHeight = LayoutUtility.GetPreferredHeight(descTXT.rectTransform);
+
+                RectTransform descRT = descTXT.rectTransform;
+                descRT.sizeDelta = new Vector2(descRT.sizeDelta.x, contentHeight);
             }
             CanvasGroup canvasGroup = itemImage.GetComponent<CanvasGroup>();
             if (canvasGroup != null)
             {
                 canvasGroup.alpha = 1f;
             }
+        }
+    }
+
+    public void SelectLog()
+    {
+        logSelected = true;
+        if (logSelectedBorder != null)
+        {
+            logSelectedBorder.gameObject.SetActive(true);
+        }
+    }
+
+    public void DeselectLog()
+    {
+        logSelected = false;
+        if (logSelectedBorder != null)
+        {
+            logSelectedBorder.gameObject.SetActive(false);
         }
     }
 
@@ -193,6 +220,7 @@ public class LogMenu : MonoBehaviour
 
         HighlightLogEntry(entryIndex);
         DescriptionBoxDisplay(entryIndex);
+
     }
 
     private void DisableBorderOnEntry(int index)
@@ -210,5 +238,12 @@ public class LogMenu : MonoBehaviour
                 }
             }
         }
+    }
+    public void ScrollContent(int direction)
+    {
+        float scrollSpeed = 0.1f; // Adjust this value to control the speed of scrolling
+        float newY = scrollRect.verticalNormalizedPosition + direction * scrollSpeed;
+        newY = Mathf.Clamp01(newY); // Ensure the value stays between 0 and 1
+        scrollRect.verticalNormalizedPosition = newY;
     }
 }

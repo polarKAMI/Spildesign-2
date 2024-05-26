@@ -20,7 +20,7 @@ MonoBehaviour:
 
     1 kg'
   <LogImage>k__BackingField: {fileID: 21300000, guid: 8cd09d0332d5d4b40acbbd4c417930db, type: 3}
-  isNote: 0
+  isNote: 1
   isItem: 1
   isEntity: 0
   isFederation: 0

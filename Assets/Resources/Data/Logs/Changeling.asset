@@ -18,9 +18,9 @@ MonoBehaviour:
     humans.
   <Specs>k__BackingField: "The Shadow Pok\xE9mon"
   <LogImage>k__BackingField: {fileID: 21300000, guid: 86c322300bdc18e4488bce47d1fe62b0, type: 3}
-  isNote: 0
+  isNote: 1
   isItem: 0
   isEntity: 1
   isFederation: 0
   isMisc: 0
-  collected: 1
+  collected: 0
