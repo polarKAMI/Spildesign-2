@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7727714798818539018}
   - component: {fileID: 1584380386078998684}
   m_Layer: 0
-  m_Name: Av for helvede
+  m_Name: Nisse bite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -56,15 +56,15 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 38893e682d95df140a6b4528c3078a78, type: 3}
+  m_audioClip: {fileID: 8300000, guid: bfa585066218b3d4285e9cfb52ae4823, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.549
+  m_Volume: 0.085
   m_Pitch: 1
   Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 52
+  Priority: 256
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500

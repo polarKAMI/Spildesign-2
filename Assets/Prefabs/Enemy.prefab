@@ -177,6 +177,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Maxhealth: 10
   currentenemyhealth: 10
+  Nisseavsound: {fileID: 6894784377503402860, guid: ae3dc961090a62c43a33e30b234e80dc, type: 3}
 --- !u!114 &2239738546294574519
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -194,6 +195,7 @@ MonoBehaviour:
   - {fileID: 0}
   Movespeed: 5
   patroldestination: 0
+  animator: {fileID: 0}
 --- !u!114 &7075128103608045482
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -324,3 +326,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: {fileID: 0}
   PlayerHasBeenDamaged: 0
+  Bitesound: {fileID: 6894784377503402860, guid: 71bb2cee0e589d74f98f33e8834ac052, type: 3}

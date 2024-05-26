@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7727714798818539018}
   - component: {fileID: 1584380386078998684}
   m_Layer: 0
-  m_Name: Av for helvede
+  m_Name: Nisse Damage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -56,15 +56,15 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 38893e682d95df140a6b4528c3078a78, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 61bf485619f20f14ba8850cdfb4ece1b, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.549
+  m_Volume: 0.219
   m_Pitch: 1
   Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 52
+  Priority: 172
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
