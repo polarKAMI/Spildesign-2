@@ -80,32 +80,47 @@ public class Enemy_Chase : MonoBehaviour
 
         void MoveTowards(Vector2 targetPosition)
         {
-            // Calculate the direction towards the player
-            // Calculate the direction towards the player
-            Vector2 moveDirection = (targetPosition - (Vector2)transform.position).normalized;
+            // Calculate the distance between the object and the target
+            float distance = Vector2.Distance(transform.position, targetPosition);
 
-            // Change the scale based on the direction
-            if (moveDirection.x > 0)
+            // Determine the side the enemy is coming from and set the offset
+            Vector2 offset;
+            if (transform.position.x < targetPosition.x)
             {
-                // Facing right
-                transform.localScale = new Vector3(1.7f, transform.localScale.y, transform.localScale.z);
+                // Enemy is coming from the left, stop on the left side of the player
+                offset = new Vector2(-0.5f, 0.0f); // Adjust the values as needed
             }
-            else if (moveDirection.x < 0)
+            else
             {
-                // Facing left
-                transform.localScale = new Vector3(-1.7f, transform.localScale.y, transform.localScale.z);
+                // Enemy is coming from the right, stop on the right side of the player
+                offset = new Vector2(0.5f, 0.0f); // Adjust the values as needed
+            }
+
+            // Calculate the new target position with the offset
+            Vector2 offsetTargetPosition = targetPosition + offset;
+
+            // Change the scale based on the distance
+            if (distance > 0)
+            {
+                // Adjust the scale based on the relative position of the target
+                if (transform.position.x < targetPosition.x)
+                {
+                    // Facing right
+                    transform.localScale = new Vector3(1.7f, transform.localScale.y, transform.localScale.z);
+                }
+                else
+                {
+                    // Facing left
+                    transform.localScale = new Vector3(-1.7f, transform.localScale.y, transform.localScale.z);
+                }
             }
 
             // Check if the enemy is on the ground (optional)
             if (IsGrounded())
             {
-                // Apply movement force in the direction of the player
-                rb.velocity = moveDirection * moveSpeed;
+                // Apply movement force towards the target
+                rb.velocity = (offsetTargetPosition - (Vector2)transform.position).normalized * moveSpeed;
             }
-            // Check if the enemy is on the ground (optional)
-
-           
-
         }
 
 
@@ -221,7 +236,10 @@ public class Enemy_Chase : MonoBehaviour
 
     public void FaceTarget(Vector2 targetPosition)
     {
+        // Calculate the direction towards the target
         Vector2 direction = targetPosition - (Vector2)transform.position;
+
+        // Change the scale based on the direction
         if (direction.x > 0)
         {
             transform.localScale = new Vector3(1.7f, transform.localScale.y, transform.localScale.z);

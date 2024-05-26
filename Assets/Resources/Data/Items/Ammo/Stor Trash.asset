@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Item: {fileID: 11400000, guid: a746edad24b7daf4090f513190fdffeb, type: 2}
   isKey: 0
-  AmmoRestoreAmount: 20
+  AmmoRestoreAmount: 10

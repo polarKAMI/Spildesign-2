@@ -6,11 +6,12 @@ public class SlotController : MonoBehaviour
     public GameObject door;
 
     private bool[] isSlotMatched; // Array to store the match status of each slot
-
+    public Animator animator;
     private void Start()
     {
         // Initialize the array to store the match status of each slot
         isSlotMatched = new bool[itemSlots.Length];
+        
     }
 
     private void Update()
@@ -26,9 +27,11 @@ public class SlotController : MonoBehaviour
             }
         }
 
+
         // If all slots match, execute the OpenDoor function
         if (allSlotsMatched)
         {
+            animator.SetBool("KeyPlaced", true);
             OpenDoor();
             foreach (var slot in itemSlots)
             {
@@ -45,7 +48,6 @@ public class SlotController : MonoBehaviour
         // Disable the door GameObject
         if (door != null)
         {
-            door.SetActive(false);
         }
         else
         {

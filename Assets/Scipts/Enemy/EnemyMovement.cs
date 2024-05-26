@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
-    // Start is called before the first frame update
-
     public Transform[] Patrolpoints;
     public float Movespeed;
     public int patroldestination;
 
+    public Animator animator;
     Enemy_Chase enemymovement;
 
     private void Start()
@@ -17,6 +16,19 @@ public class EnemyMovement : MonoBehaviour
         enemymovement = GetComponent<Enemy_Chase>();
         IgnorePlayerCollision();
     }
+
+    private void OnEnable()
+    {
+        // When the script is enabled, stop the animation
+        animator.SetBool("IsTransformed", false);
+    }
+
+    private void OnDisable()
+    {
+        // When the script is disabled, play the animation
+        animator.SetBool("IsTransformed", true);
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -26,7 +38,6 @@ public class EnemyMovement : MonoBehaviour
             enemymovement.FaceTarget(Patrolpoints[0].position);
             if (Vector2.Distance(transform.position, Patrolpoints[0].position) < .2f)
             {
-              
                 patroldestination = 1;
             }
         }
@@ -37,12 +48,10 @@ public class EnemyMovement : MonoBehaviour
             enemymovement.FaceTarget(Patrolpoints[1].position);
             if (Vector2.Distance(transform.position, Patrolpoints[1].position) < .2f)
             {
-               
                 patroldestination = 0;
             }
         }
     }
-
 
     void IgnorePlayerCollision()
     {

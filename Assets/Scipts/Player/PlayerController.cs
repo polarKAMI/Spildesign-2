@@ -11,14 +11,13 @@ public class PlayerController : MonoBehaviour
     private LogMenu logMenu;
     private LadderMovement ladderMovement;
     public GameOverMenu GameOverMenu;
-
+    
     private bool isInventoryOpen = false; // Flag to track inventory state
-
     private KeyCode moveLeftKey;
     private KeyCode moveRightKey;
     private KeyCode ladderUp;
     private KeyCode ladderDown;
-
+   
     bool leftKeyPressed = false;
     bool rightKeyPressed = false;
     bool rightKeyDormant = false;
@@ -188,7 +187,7 @@ public class PlayerController : MonoBehaviour
                         if (interactable != null)
                         {
                             interactable.Interact();
-                            Debug.Log("Hejsa");
+                           
                         }
                     }
                 }

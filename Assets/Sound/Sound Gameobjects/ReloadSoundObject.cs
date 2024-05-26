@@ -10,7 +10,7 @@ public class ReloadSoundObject : MonoBehaviour
     {
 
         // Invoke the PlayAudio method after a delay of 3 seconds
-        Invoke("PlayAudio2", 5f);
+        PlayAudio2();
     }
 
     void PlayAudio2()

@@ -16,6 +16,8 @@ public class LadderMovement : MonoBehaviour, IInteractable
     private Collider2D platformCollider;
     private Collider2D ladderCollider; // Add this field
 
+    public Animator animator;
+
     [SerializeField] private float climbSpeed = 3f;
 
     void Start()
@@ -46,7 +48,7 @@ public class LadderMovement : MonoBehaviour, IInteractable
         ladderTransform = ladder;
         SnapToLadder();
         Debug.Log("Started climbing");
-
+        Debug.Log("AnimationClimbing");
         // Get the ladder collider
         ladderCollider = ladder.GetComponent<Collider2D>();
         if (ladderCollider != null)
@@ -63,7 +65,8 @@ public class LadderMovement : MonoBehaviour, IInteractable
             platformCollider.isTrigger = true; // Set the platform collider to trigger
             ladderTopY = platformCollider.bounds.max.y; // Override ladderTopY if platformCollider is found
         }
-
+        
+        animator.SetBool("IsClimbing", true);
         Debug.Log("Ladder top Y: " + ladderTopY);
     }
 
@@ -73,7 +76,6 @@ public class LadderMovement : MonoBehaviour, IInteractable
         rb.gravityScale = 2f;
         playerMovement.EnableMovement();
         GlobalInputMapping.SetActiveInputMappings(GlobalInputMapping.inGameInputMapping);
-
         Debug.Log("Stopped climbing");
 
         // Reset the push-off flag and velocity
@@ -85,7 +87,9 @@ public class LadderMovement : MonoBehaviour, IInteractable
         {
             platformCollider.isTrigger = false;
         }
+        animator.SetBool("IsClimbing", false);
     }
+
 
     public void PushOffLadder(int direction)
     {
