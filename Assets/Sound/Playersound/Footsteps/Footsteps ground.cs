@@ -8,9 +8,12 @@ public class Footstepsground : MonoBehaviour
     public AudioClip[] soundEffects; // Array of sound effects to play
     public float minPitch = 0.8f; // Minimum pitch for randomization
     public float maxPitch = 1.2f; // Maximum pitch for randomization
+    public float footstepDelay = 0.5f; // Delay between footstep sounds
 
     public AudioSource audioSource;
     public Rigidbody2D rb;
+
+    private bool isPlayingFootsteps = false;
 
     void Start()
     {
@@ -31,14 +34,16 @@ public class Footstepsground : MonoBehaviour
         if (IsMovingOnGround() && rb.velocity.magnitude > 0.1f)
         {
             // Start playing sound effects if not already playing
-            if (!audioSource.isPlaying)
+            if (!isPlayingFootsteps)
             {
-                PlayRandomSound();
+                StartCoroutine(PlayFootstepSounds());
             }
         }
         else
         {
             // Stop playing sound effects if not moving on the ground
+            StopCoroutine(PlayFootstepSounds());
+            isPlayingFootsteps = false;
             audioSource.Stop();
         }
     }
@@ -48,6 +53,22 @@ public class Footstepsground : MonoBehaviour
         // Raycast downward to detect if the object is on the ground layer
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 1f, groundLayer);
         return hit.collider != null;
+    }
+
+    IEnumerator PlayFootstepSounds()
+    {
+        isPlayingFootsteps = true;
+
+        while (IsMovingOnGround() && rb.velocity.magnitude > 0.1f)
+        {
+            if (!audioSource.isPlaying)
+            {
+                PlayRandomSound();
+            }
+            yield return new WaitForSeconds(footstepDelay);
+        }
+
+        isPlayingFootsteps = false;
     }
 
     void PlayRandomSound()

@@ -17,6 +17,8 @@ public class Health : MonoBehaviour
 
     public GameObject DamageOverlay;
 
+    public AudioManager audioManagerObject;
+
     void Start()
     {
         currentHealth = MaxHealth;
@@ -26,6 +28,8 @@ public class Health : MonoBehaviour
         {
             gameOverMenu = FindObjectOfType<GameOverMenu>();
         }
+
+        
     }
 
 
@@ -92,8 +96,15 @@ public class Health : MonoBehaviour
             if (currentHealth <= 0)
             {
                 Time.timeScale = 0;
-                if (gameOverMenu != null) { gameOverMenu.GameOver(); }
+                if (gameOverMenu != null)
+                {
+                    gameOverMenu.GameOver();
+                }
+                audioManagerObject.StopAllSoundsExceptPlayerHurt(); //Stop all sounds except player hurt
+               
             }
+           
+            
             else
             {
                 if (flickerCoroutine != null)
