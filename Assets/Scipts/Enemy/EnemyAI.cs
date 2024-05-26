@@ -17,6 +17,8 @@ public class EnemyAI : MonoBehaviour
     public float launchAngle = 45f;
     public float minLaunchForce = 10f;
     public float maxLaunchForce = 20f;
+    public GameObject tempSkft;
+    private Rigidbody2D[] allRigidbodies;
 
     [Header("Custom Behavior")]
     public Color startColor = Color.grey;
@@ -62,6 +64,7 @@ public class EnemyAI : MonoBehaviour
         currentHealth = maxHealth;
         InvokeRepeating("UpdatePath", 0f, pathUpdateSeconds);
 
+        allRigidbodies = FindObjectsOfType<Rigidbody2D>();
     }
 
     private void FixedUpdate()
@@ -183,28 +186,25 @@ public class EnemyAI : MonoBehaviour
 
     private Vector2 PredictedLandingPosition(Vector2 launchDirection, float launchForce)
     {
+        CircleCollider2D enemyCollider = GetComponent<CircleCollider2D>();
+        Rigidbody2D enemyRB = GetComponent<Rigidbody2D>();
+        enemyRB.GetComponent<Rigidbody2D>().simulated = false;
+        tempSkft.GetComponent<CircleCollider2D>().enabled = false;
+        enemyCollider.enabled = false;
         // Create a new GameObject as a child of the enemy GameObject
-        GameObject tempObject = new GameObject("TempRigidbody");
-        tempObject.transform.parent = transform; // Set the enemy as the parent
-        Rigidbody2D tempRb = tempObject.AddComponent<Rigidbody2D>();
-        tempRb.isKinematic = false;
-        CircleCollider2D parentCollider = GetComponent<CircleCollider2D>();
-        Debug.Log("parent collider radius: " + parentCollider.radius);
-        
-        if (parentCollider != null)
-        {
-            CircleCollider2D circleCollider = tempObject.AddComponent<CircleCollider2D>();
-            circleCollider.radius = parentCollider.radius;
-        }
-        else
-        {
-            Debug.LogWarning("Parent does not have a Collider2D component.");
-        }
+        GameObject tempObject = Instantiate(tempSkft, transform.position, Quaternion.identity);
 
-        tempRb.gravityScale = rb.gravityScale; // Use the same gravity scale as the actual Rigidbody
+        tempObject.GetComponent<CircleCollider2D>().enabled = true;
+        tempObject.GetComponent<Rigidbody2D>().simulated = true;
+
+
+        Rigidbody2D tempRb = tempObject.GetComponent<Rigidbody2D>();
+        
         Debug.Log("tempRb: " + tempRb.transform.position);
         // Apply launch force to the temporary Rigidbody
-        tempRb.velocity = launchDirection.normalized * launchForce;
+
+        tempRb.velocity = Vector2.zero;
+        tempRb.AddForce(launchDirection.normalized * launchForce, ForceMode2D.Impulse);
 
         // Store the current simulation mode
         var prevSimulationMode = Physics2D.simulationMode;
@@ -212,12 +212,27 @@ public class EnemyAI : MonoBehaviour
         // Set the simulation mode to Script
         Physics2D.simulationMode = SimulationMode2D.Script;
         Debug.Log("tempRb2: " + tempRb.transform.position);
-        
-        float simulationTime = 21.0f; // seconds
-        bool didSim = Physics2D.Simulate(Time.fixedDeltaTime * simulationTime);
-        Debug.Log("didSim: " + didSim);
-        
-        Vector2 predictedPosition = tempObject.transform.position + transform.position;
+
+        foreach (Rigidbody2D rb in allRigidbodies)
+        {
+            rb.simulated = false;
+        }
+
+        int simulationSteps = 200;
+        for (int i = 1; i < simulationSteps; i++)
+        {
+            //using Time.fixedDeltaTime as the time step to match SimulationMode2D.FixedUpdate
+            Physics2D.Simulate(Time.fixedDeltaTime);
+        }
+        enemyCollider.enabled = true;
+        tempSkft.GetComponent<CircleCollider2D>().enabled = true;
+
+        Vector2 predictedPosition = tempRb.transform.position;
+
+        foreach (Rigidbody2D rb in allRigidbodies)
+        {
+            rb.simulated = true;
+        }
 
         Physics2D.simulationMode = prevSimulationMode;
         Debug.Log("tempRb3: " + tempRb.transform.position);
@@ -242,7 +257,7 @@ public class EnemyAI : MonoBehaviour
         Vector2 launchDirection = Quaternion.Euler(0, 0, adjustedLaunchAngle) * Vector2.right;
 
         // Calculate launch force based on distance to target
-        float launchForce = Mathf.Clamp(Mathf.Abs(distanceToTarget), minLaunchForce, maxLaunchForce);
+        float launchForce = Mathf.Clamp(Mathf.Abs(distanceToTarget) * 2.8f, minLaunchForce, maxLaunchForce);
         
         Vector2 predictedLandingPos = PredictedLandingPosition(launchDirection, launchForce);
         Debug.Log("AAA predicted x pos: " + predictedLandingPos.x + " predicted y pos: " + predictedLandingPos.y + " calculated launch force: " + launchForce + " launch direction: " + launchDirection);
@@ -252,10 +267,10 @@ public class EnemyAI : MonoBehaviour
         Debug.Log("BBB y pos: " + initialYpos);
         Debug.Log("CCC predicted y hit: " + hit.point.y + " collider: " + hit.collider);
 
-        if (hit.collider != null && Mathf.Abs(hit.point.y - initialYpos) < 1f)
+        if (hit.collider != null && Mathf.Abs(hit.point.y - initialYpos) < .7f)
         {
             Debug.Log("ez jump");
-            rb.velocity = launchDirection.normalized * launchForce;
+            rb.AddForce(launchDirection.normalized * launchForce, ForceMode2D.Impulse);
         }
         else
         {
@@ -290,12 +305,12 @@ public class EnemyAI : MonoBehaviour
             if (cand1 == -1f || Mathf.Abs(cand1 - launchForce) > Mathf.Abs(cand2 - launchForce))
             {
                 Debug.Log("cand2 jump " + cand2);
-                rb.velocity = launchDirection.normalized * cand2;
+                rb.AddForce(launchDirection.normalized * cand2, ForceMode2D.Impulse);
             }
             else
             {
                 Debug.Log("cand1 jump " + cand1);
-                rb.velocity = launchDirection.normalized * cand1;
+                rb.AddForce(launchDirection.normalized * cand1, ForceMode2D.Impulse);
             }
         }
 
@@ -305,7 +320,7 @@ public class EnemyAI : MonoBehaviour
     private float findBestBetween(float hitsGround, float hitsHole, Vector2 launchDirection, float initialYpos)
     {
         Debug.Log("leder efter sted at lande :D" + hitsGround + ", " + hitsHole);
-        if (Mathf.Abs(hitsGround - hitsHole) > 0.1f)
+        if (Mathf.Abs(hitsGround - hitsHole) > 1f)
         {
             float mid = hitsHole + (hitsGround - hitsHole) / 2;
             Vector2 midLandPos = PredictedLandingPosition(launchDirection, mid);
