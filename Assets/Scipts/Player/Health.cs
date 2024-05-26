@@ -21,7 +21,7 @@ public class Health : MonoBehaviour
 
     public GameObject Avsound;
 
-    public GameObject spillerdørsound;
+    public GameObject spillerdursound;
 
     void Start()
     {
@@ -110,7 +110,7 @@ public class Health : MonoBehaviour
                 {
                     gameOverMenu.GameOver();
                 }
-                Instantiate(spillerdørsound);
+                Instantiate(spillerdursound);
 
                 audioManagerObject.StopAllSoundsExceptPlayerHurt(); //Stop all sounds except player hurt
                

@@ -16,6 +16,12 @@ public class IntroScript : MonoBehaviour
     public string secondaryMessage; // Second message to be displayed
     public float pauseDuration = 0.5f; // Duration for each pause
 
+
+    public AudioSource audioSource; // AudioSource for playing sound effects
+    public AudioClip typingSound; // Sound effect for typing
+    public float minPitch = 0.8f; // Minimum pitch for randomization
+    public float maxPitch = 1.2f; // Maximum pitch for randomization
+
     void Start()
     {
         if (uiText == null || timeText == null || logText == null)
@@ -55,6 +61,10 @@ public class IntroScript : MonoBehaviour
             else
             {
                 textComponent.text += letter; // Add one letter at a time
+                // Play typing sound with random pitch
+                audioSource.pitch = Random.Range(minPitch, maxPitch);
+                audioSource.PlayOneShot(typingSound);
+
                 yield return new WaitForSeconds(typingSpeed); // Wait before adding the next letter
             }
         }

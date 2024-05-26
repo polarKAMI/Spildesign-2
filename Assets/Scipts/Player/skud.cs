@@ -24,6 +24,7 @@ public class skud : MonoBehaviour
             if (enemyHealth != null)
             {
                 enemyHealth.Takedamage(5);
+                Debug.Log("Nisse took damage");
 
                 if (enemyHealth.currentenemyhealth <= 0)
                 {
