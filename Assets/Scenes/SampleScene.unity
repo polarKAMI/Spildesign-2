@@ -8463,6 +8463,10 @@ PrefabInstance:
       value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 1348542731904493002, guid: 91c2682628b903f4087f1199c6451f20, type: 3}
+      propertyPath: Avsound
+      value: 
+      objectReference: {fileID: 6894784377503402860, guid: a9c68105103d76846a270aa371b65736, type: 3}
+    - target: {fileID: 1348542731904493002, guid: 91c2682628b903f4087f1199c6451f20, type: 3}
       propertyPath: gameOverMenu
       value: 
       objectReference: {fileID: 1801755937}
@@ -58450,6 +58454,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1826583407}
     - target: {fileID: 2578552140132584954, guid: a2aed6dae82ad2a4b8d86f5e312408a6, type: 3}
+      propertyPath: allAudioSources.Array.size
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2578552140132584954, guid: a2aed6dae82ad2a4b8d86f5e312408a6, type: 3}
       propertyPath: allAudioSources.Array.data[0]
       value: 
       objectReference: {fileID: 950270600}
@@ -58457,6 +58465,10 @@ PrefabInstance:
       propertyPath: allAudioSources.Array.data[1]
       value: 
       objectReference: {fileID: 950270600}
+    - target: {fileID: 2578552140132584954, guid: a2aed6dae82ad2a4b8d86f5e312408a6, type: 3}
+      propertyPath: allAudioSources.Array.data[6]
+      value: 
+      objectReference: {fileID: 1584380386078998684, guid: a9c68105103d76846a270aa371b65736, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

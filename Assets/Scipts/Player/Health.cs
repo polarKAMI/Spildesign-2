@@ -19,6 +19,10 @@ public class Health : MonoBehaviour
 
     public AudioManager audioManagerObject;
 
+    public GameObject Avsound;
+
+    public GameObject spillerdørsound;
+
     void Start()
     {
         currentHealth = MaxHealth;
@@ -92,6 +96,12 @@ public class Health : MonoBehaviour
             currentHealth -= amount;
             Debug.Log(currentHealth);
             UpdateDamageOverlay();
+            
+
+            if (currentHealth > 0)
+            {
+                Instantiate(Avsound);
+            }
 
             if (currentHealth <= 0)
             {
@@ -100,6 +110,8 @@ public class Health : MonoBehaviour
                 {
                     gameOverMenu.GameOver();
                 }
+                Instantiate(spillerdørsound);
+
                 audioManagerObject.StopAllSoundsExceptPlayerHurt(); //Stop all sounds except player hurt
                
             }
