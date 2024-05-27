@@ -40,9 +40,5 @@ public class Lygtemandenmovement : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter2D(Collision2D other)
-    {
-        // If the Lygtemanden collides with an obstacle, resume patrolling after a delay
-        lygtemandenScript.ResumePatrollingAfterDelay();
-    }
+   
 }
