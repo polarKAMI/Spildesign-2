@@ -173,7 +173,7 @@ public class PlayerMovement : MonoBehaviour
             StartCoroutine(lygtemandenscript.HandleBushCollision());
         }
     }
-    private void Flip()
+    public void Flip()
     {
         if ((horizontal > 0 && !isFacingRight) || (horizontal < 0 && isFacingRight))
         {

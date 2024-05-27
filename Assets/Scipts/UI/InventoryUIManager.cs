@@ -41,6 +41,7 @@ public class InventoryUIManager : MonoBehaviour
     }
     public void OpenInventory()
     {
+
         if (playerMovement != null)
         {
             playerMovement.DisableMovement();

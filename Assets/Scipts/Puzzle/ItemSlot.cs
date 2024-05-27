@@ -11,6 +11,7 @@ public class ItemSlot : MonoBehaviour, IInteractable
     private InventoryItem currentItem; // The item currently inserted into this slot
 
     public SpriteRenderer itemRenderer;
+    public PlayerController playerController;
 
     public bool isMatch = false;
     private bool doorOpened = false;
@@ -72,6 +73,13 @@ public class ItemSlot : MonoBehaviour, IInteractable
             if (itemRenderer != null)
             {
                 itemRenderer.sprite = null;
+            }
+        }
+        else
+        {
+            if(playerController != null)
+            {
+                playerController.ToggleInventory();
             }
         }
     }
