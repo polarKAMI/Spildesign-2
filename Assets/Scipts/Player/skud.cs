@@ -9,7 +9,7 @@ public class skud : MonoBehaviour
         Invoke("DestroyObject", 0.5f);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
@@ -33,9 +33,8 @@ public class skud : MonoBehaviour
                 }
             }
 
-        
-        // Destroy the projectile regardless of whether damage was applied
-        Destroy(gameObject);
+            // Destroy the projectile regardless of whether damage was applied
+            Destroy(gameObject);
         }
     }
 
