@@ -230,7 +230,11 @@ public class EnemyAI : MonoBehaviour
 
         foreach (Rigidbody2D rb in allRigidbodies)
         {
+            if (rb != null)
+            {
             rb.simulated = true;
+            }
+           
         }
 
         Physics2D.simulationMode = prevSimulationMode;

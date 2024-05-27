@@ -27,7 +27,7 @@ MonoBehaviour:
     user to convert almost any item into ammunition, should the issued amount fail
     to provide enough.\r\n"
   <Specs>k__BackingField: "\rWeight: 8 kg\r"
-  <LogImage>k__BackingField: {fileID: 0}
+  <LogImage>k__BackingField: {fileID: 21300000, guid: 3b585b35e8eba504a82d935d3b639657, type: 3}
   isNote: 0
   isItem: 0
   isEntity: 0

@@ -1014,9 +1014,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   optionsPanel: {fileID: 3316170263060174607}
   optionBorders:
+  - {fileID: 2670849310216375774}
   - {fileID: 858013024340953762}
   - {fileID: 2055146920243584958}
-  - {fileID: 2670849310216375774}
   slotsPanel: {fileID: 3584200793305196336}
   inventoryUIManager: {fileID: 8533119159983381853}
   isOptionsPanelActive: 0

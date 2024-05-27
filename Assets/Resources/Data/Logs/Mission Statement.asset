@@ -29,7 +29,7 @@ MonoBehaviour:
     lifeforms, you are not to harm them as they could prove valuable to the research
     of The Federation. \r\n"
   <Specs>k__BackingField: Federation issued data.
-  <LogImage>k__BackingField: {fileID: 0}
+  <LogImage>k__BackingField: {fileID: 21300000, guid: 3b585b35e8eba504a82d935d3b639657, type: 3}
   isNote: 0
   isItem: 0
   isEntity: 0
