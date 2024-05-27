@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Svamp SO
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Svamp
-  <Description>k__BackingField: Restores alil health
+  <Description>k__BackingField: Restores a little bit of health
   <ItemImage>k__BackingField: {fileID: 21300000, guid: 3cd4eb1a408bdc745824e858b52c394e, type: 3}
