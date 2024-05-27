@@ -30,6 +30,10 @@ public class Lygtemanden : MonoBehaviour
     public bool isHidingHandled = false; // Flag to check if hiding is handled
     public Animator animator;
 
+    public GameObject Awakesound;
+
+    private bool hasPlayedAwakeSound = false;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -69,6 +73,11 @@ public class Lygtemanden : MonoBehaviour
                     else
                     {
                         isChasing = true;
+                        if (!hasPlayedAwakeSound)
+                        {
+                            Instantiate(Awakesound);
+                            hasPlayedAwakeSound = true;
+                        }
                         // Disable Lygtemandenmovement script when chasing
                         movementScript.enabled = false;
                     animator.SetBool("IsSpawned", true);

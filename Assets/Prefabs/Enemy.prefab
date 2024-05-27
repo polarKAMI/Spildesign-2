@@ -132,6 +132,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Maxhealth: 10
   currentenemyhealth: 10
+  Nissedudsound: {fileID: 6894784377503402860, guid: db07e251cfd34d9429ba6d6099872ca2, type: 3}
   Nisseavsound: {fileID: 6894784377503402860, guid: ae3dc961090a62c43a33e30b234e80dc, type: 3}
 --- !u!114 &2239738546294574519
 MonoBehaviour:
@@ -168,6 +169,7 @@ MonoBehaviour:
   detectionRange: 5
   resumePatrollingDistance: 10
   Jumpforce: 2.5
+  Nissechaselyd: {fileID: 6894784377503402860, guid: 031d2686f31d7d042ad262cc4ee1ff7e, type: 3}
 --- !u!95 &8999029443547015183
 Animator:
   serializedVersion: 5

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7727714798818539018}
   - component: {fileID: 1584380386078998684}
   m_Layer: 0
-  m_Name: Nisse dud
+  m_Name: Lygte Awake
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -56,7 +56,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 733528c7dae6e074792665205d60eb2d, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 95c081e805bd7634bbade1890dbf57b3, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.23
   m_Pitch: 1

@@ -6,6 +6,8 @@ public class enemyhealth : MonoBehaviour
     public int Maxhealth = 10;
     public int currentenemyhealth;
 
+    public GameObject Nissedudsound;
+
     public GameObject Nisseavsound;
     void Start()
     {
@@ -15,10 +17,21 @@ public class enemyhealth : MonoBehaviour
 
     public void Takedamage(int amount)
     {
-        Instantiate(Nisseavsound);
+        currentenemyhealth -= amount;
+
+        if (currentenemyhealth < Maxhealth)
+        {
+            Instantiate(Nissedudsound);
+        }
+        else
+        {
+            Instantiate(Nisseavsound);
+        }
+        
 
         currentenemyhealth -= amount;
         Debug.Log("Nisse tog squ skade");
+
 
         
         
