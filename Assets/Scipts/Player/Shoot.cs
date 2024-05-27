@@ -76,7 +76,7 @@ public class Shoot : MonoBehaviour
 
             Instantiate(Firesoundobject);
             Instantiate(Projectile, fireposition.position, fireposition.rotation);
-            //currentAmmo -= 10;
+            currentAmmo -= 10;
             UpdateAmmoUI();
             animator.SetBool("IsShooting", true); // Start shooting animation
             PlayerMovement.enabled = false;
