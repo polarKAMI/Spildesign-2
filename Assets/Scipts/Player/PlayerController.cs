@@ -238,6 +238,13 @@ public class PlayerController : MonoBehaviour
                 {
                     pauseMenu.Menu();
                 }
+                else if (Input.GetKeyDown(GlobalInputMapping.activeInputMappings["Close"]))
+            {
+                if (isInventoryOpen)
+                {
+                    ToggleInventory();
+                }
+            }
             }
             else if (GlobalInputMapping.activeInputMappings == GlobalInputMapping.optionsInputMapping)
             {
