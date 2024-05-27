@@ -79,7 +79,6 @@ public class PlayerJump : MonoBehaviour
 
     private void Update()
     {
-        
         // Check if the player is grounded only if they are not climbing
         if (!ladderMovement.isClimbing)
         {
@@ -116,19 +115,24 @@ public class PlayerJump : MonoBehaviour
 
         if (isGrounded)
         {
-            isFalling = false;
+            if (isFalling)
+            {
+                isFalling = false;
+                animator.SetBool("IsLanded", true);
+                animator.SetBool("IsFalling", false);
+            }
         }
-
-        if (isFalling)
+        else if (isFalling)
         {
-            fallTime += Time.deltaTime;
             animator.SetBool("IsFalling", true);
         }
+
         if (isSliding)
         {
             // Allow a short delay before checking velocity
             StartCoroutine(DelayedSlideCheck());
         }
+
         // Enable movement after sliding is complete
         if (!ladderMovement.isClimbing)
         {
@@ -174,8 +178,8 @@ public class PlayerJump : MonoBehaviour
                     playerMovement.DisableMovement();
                     Slide(jumpTime);
                     cameraFollow.StartShake();
-                    Debug.Log("SLIDEMENISTER")
-;                }
+                    Debug.Log("SLIDEMENISTER");
+                }
                 else if (isFalling && fallTime > 2f)
                 {
                     cameraFollow.StartViolentShake();
@@ -184,7 +188,6 @@ public class PlayerJump : MonoBehaviour
                     Invoke("StopShake", 0.3f);
                     isFalling = false;
                     animator.SetBool("IsLanded", true);
-
                 }
                 else if (isFalling)
                 {
