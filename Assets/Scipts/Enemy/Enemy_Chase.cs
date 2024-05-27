@@ -12,6 +12,7 @@ public class Enemy_Chase : MonoBehaviour
     private Rigidbody2D rb;
   
     private bool isChasing = false;
+    private bool soundPlayed = false;
 
     public float resumePatrollingDistance = 10f;
     public float Jumpforce;
@@ -22,6 +23,7 @@ public class Enemy_Chase : MonoBehaviour
 
     private Damagescript damagescript;
 
+    public GameObject Nissechaselyd;
     
 
     void Start()
@@ -49,6 +51,14 @@ public class Enemy_Chase : MonoBehaviour
                
                 
                     isChasing = true;
+
+                isChasing = true;
+                if (!soundPlayed)
+                {
+                    Instantiate(Nissechaselyd);
+                    soundPlayed = true; // Mark the sound as played
+                }
+                
                     // Disable Lygtemandenmovement script when chasing
                     movementScript.enabled = false;
                 
@@ -198,6 +208,7 @@ public class Enemy_Chase : MonoBehaviour
     {
         yield return new WaitForSeconds(2f); // Wait for 1 second
         isChasing = false;
+        soundPlayed = false;
         movementScript.enabled = true; // Enable Enemymovement script after the delay
     }
 

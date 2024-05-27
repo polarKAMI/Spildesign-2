@@ -13,6 +13,7 @@ public class Shoot : MonoBehaviour
     public Rigidbody2D rb;
 
     public MonoBehaviour PlayerMovement;
+
     public Animator animator;
     public Image ammoBar;
 
@@ -29,7 +30,6 @@ public class Shoot : MonoBehaviour
         {
             Debug.LogError("Rigidbody2D component not found. This script requires a Rigidbody2D component.");
         }
-
         UpdateAmmoUI();
     }
 
@@ -52,11 +52,6 @@ public class Shoot : MonoBehaviour
        
     }
 
-    void Startscript()
-    {
-        PlayerMovement.enabled = true;
-    }
-
     IEnumerator StopShootingCoroutine()
     {
        
@@ -64,7 +59,9 @@ public class Shoot : MonoBehaviour
         yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(1).length);
         // Reset shooting flag after animation is finished
         animator.SetBool("IsShooting", false);
+        PlayerMovement.enabled = true;
         IsShooting = false;
+
     }
 
     public void Shooting()
@@ -79,7 +76,7 @@ public class Shoot : MonoBehaviour
 
             Instantiate(Firesoundobject);
             Instantiate(Projectile, fireposition.position, fireposition.rotation);
-            currentAmmo -= 10;
+            //currentAmmo -= 10;
             UpdateAmmoUI();
             animator.SetBool("IsShooting", true); // Start shooting animation
             PlayerMovement.enabled = false;
@@ -93,6 +90,7 @@ public class Shoot : MonoBehaviour
 
             StartCoroutine(StopShootingCoroutine()); // Start the coroutine to stop shooting animation
             IsShooting = true; // Set shooting flag to true
+
         }
     }
 
