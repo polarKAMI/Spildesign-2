@@ -9621,11 +9621,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2103752632763426906, guid: 91c2682628b903f4087f1199c6451f20, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 58.65
+      value: 35.56
       objectReference: {fileID: 0}
     - target: {fileID: 2103752632763426906, guid: 91c2682628b903f4087f1199c6451f20, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -64.29
+      value: -45.4
       objectReference: {fileID: 0}
     - target: {fileID: 2103752632763426906, guid: 91c2682628b903f4087f1199c6451f20, type: 3}
       propertyPath: m_LocalPosition.z
@@ -13895,7 +13895,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6155622518229512949, guid: 81075c6e1b4e3be49a2a026e6ff29f1a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.39115703
+      value: -0.1
       objectReference: {fileID: 0}
     - target: {fileID: 6155622518229512949, guid: 81075c6e1b4e3be49a2a026e6ff29f1a, type: 3}
       propertyPath: m_LocalRotation.w
@@ -37491,6 +37491,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7409919097269214043, guid: 3db0f8d4c33eab743844bd21cd38bd1f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -56364,7 +56368,7 @@ Transform:
   m_GameObject: {fileID: 1792926855}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 69.15481, y: -12.142, z: 0}
+  m_LocalPosition: {x: 69.15481, y: -12.142, z: -0.1}
   m_LocalScale: {x: 1, y: 0.9209685, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -57868,7 +57872,7 @@ Transform:
   m_GameObject: {fileID: 1868551632}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 20.935, y: -45.775, z: 0}
+  m_LocalPosition: {x: 20.935, y: -45.775, z: -0.1}
   m_LocalScale: {x: 0.5514, y: 0.5447699, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
