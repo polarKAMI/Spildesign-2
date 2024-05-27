@@ -10,10 +10,21 @@ public class Lygtemandenmovement : MonoBehaviour
 
     // Reference to Lygtemanden script
     private Lygtemanden lygtemandenScript;
-  
+
+    // Reference to the AudioSource
+    private AudioSource audioSource;
+
     void Start()
     {
         lygtemandenScript = GetComponent<Lygtemanden>();
+
+        audioSource = GetComponent<AudioSource>();
+
+        // Set the audio clip to loop
+        if (audioSource != null)
+        {
+            audioSource.loop = true;
+        }
     }
 
     // Update is called once per frame
@@ -40,5 +51,24 @@ public class Lygtemandenmovement : MonoBehaviour
         }
     }
 
-   
+
+    // Called by the child trigger script
+    public void OnPlayerEnterTrigger()
+    {
+        if (audioSource != null && !audioSource.isPlaying)
+        {
+            audioSource.Play();
+        }
+    }
+
+    // Called by the child trigger script
+    public void OnPlayerExitTrigger()
+    {
+        if (audioSource != null && audioSource.isPlaying)
+        {
+            audioSource.Stop();
+        }
+    }
 }
+   
+
