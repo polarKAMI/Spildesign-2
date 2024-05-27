@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 
 public class Lygtemanden : MonoBehaviour
 {
     public Transform player; // Reference to the player object
-    public float moveSpeed = 5f; // Movement speed of the enemy
+    public float moveSpeed = 4.5f; // Movement speed of the enemy
     public float detectionRange = 5f; // Range within which the enemy detects the player
-    public float stopRange = 2f; // Range within which the enemy stops chasing
+    public float stopRange = 2.5f; // Range within which the enemy stops chasing
     public LayerMask obstacleLayer; // Layer mask for the obstacles (e.g., bush)
 
     public PlayerMovement Playermovement_script;
@@ -48,7 +49,7 @@ public class Lygtemanden : MonoBehaviour
     {
         movementScript.enabled = false;
         disabled = true;
-        Debug.Log("Er jeg i kørestol ven");
+        UnityEngine.Debug.Log("Er jeg i kørestol ven");
     }
 
     void FixedUpdate()
@@ -68,7 +69,7 @@ public class Lygtemanden : MonoBehaviour
                     {
                         // spiller er hidden, alt sker i player script som kigger p handlebushcollision
                         Collider2D[] obstacles = Physics2D.OverlapCircleAll(player.position, 0.5f, obstacleLayer);
-                    Debug.Log(" Lygte kan ikke se dig");
+                        UnityEngine.Debug.Log(" Lygte kan ikke se dig");
                         //mangler function til audio her
                     }
                     else
@@ -85,7 +86,7 @@ public class Lygtemanden : MonoBehaviour
                         movementScript.enabled = false;
                     animator.SetBool("IsSpawned", true);
                     animator.SetBool("HasCaught", true);
-                    Debug.Log("Lygte chaser");
+                        UnityEngine.Debug.Log("Lygte chaser");
                     }
                 
 
@@ -159,7 +160,7 @@ public class Lygtemanden : MonoBehaviour
 
     void MoveTowards(Vector2 targetPosition) // This handles the chase
     {
-        Debug.Log("Is chasing");
+        UnityEngine.Debug.Log("Is chasing");
         // Calculate the direction towards the player
         Vector2 moveDirection = (targetPosition - (Vector2)transform.position).normalized;
 
@@ -180,7 +181,10 @@ public class Lygtemanden : MonoBehaviour
         {
             // Apply movement force in the direction of the player
             rb.velocity = moveDirection * moveSpeed;
+            UnityEngine.Debug.Log("movespeed " + rb.velocity.x);
+            
         }
+       
     }
 
     IEnumerator FlipTowardsPlayerDelayed() //  flips the enemy towards the player if they have moved and if the lygtemanden is stooped.
@@ -188,7 +192,7 @@ public class Lygtemanden : MonoBehaviour
         while (isStopped)
         {
             yield return new WaitForSeconds(2f);
-            Debug.Log("Has flipped when stopped after 4 seconds");
+            UnityEngine.Debug.Log("Has flipped when stopped after 4 seconds");
 
             // Check if player has moved since the last check
             if ((player.position - (Vector3)lastPlayerPosition).sqrMagnitude > 0.01f)
@@ -230,9 +234,9 @@ public class Lygtemanden : MonoBehaviour
         if (hit.collider != null)
         {
             // Optionally, you can debug draw the raycast for visualization
-            Debug.DrawRay(raycastOrigin, Vector2.down * raycastDistance, Color.green);
+            UnityEngine.Debug.DrawRay(raycastOrigin, Vector2.down * raycastDistance, Color.green);
 
-            Debug.Log("Has hit ground");
+            UnityEngine.Debug.Log("Has hit ground");
 
             // Return true indicating that the enemy is grounded
             return true;
@@ -240,7 +244,7 @@ public class Lygtemanden : MonoBehaviour
         else
         {
             // Optionally, you can debug draw the raycast for visualization
-            Debug.DrawRay(raycastOrigin, Vector2.down * raycastDistance, Color.red);
+            UnityEngine.Debug.DrawRay(raycastOrigin, Vector2.down * raycastDistance, Color.red);
 
             // Return false indicating that the enemy is not grounded
             return false;
@@ -259,7 +263,7 @@ public class Lygtemanden : MonoBehaviour
         isChasing = false;
         movementScript.enabled = true; // Enable Enemymovement script after the delay
         movementScript.StartPatrolling();
-        Debug.Log("Is patrolling again");
+        UnityEngine.Debug.Log("Is patrolling again");
         
     }
 
@@ -281,15 +285,15 @@ public class Lygtemanden : MonoBehaviour
     IEnumerator StopMovementCoroutine() // stops the enemy's movement.
     {
         rb.velocity = Vector2.zero;
-        Debug.Log("Is stopped");
+        UnityEngine.Debug.Log("Is stopped");
         yield return null; // Ensure movement is stopped immediately
     }
 
     IEnumerator ResumeMovementAfterDelay() //  resumes the enemy's movement after a delay.
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(0.1f);
         isStopped = false;
-        Debug.Log("Ischasing again");
+        UnityEngine.Debug.Log("Ischasing again");
     }
 
 
@@ -302,7 +306,7 @@ public class Lygtemanden : MonoBehaviour
 
         // Step 1: Stop all movement
         rb.velocity = Vector2.zero;
-        Debug.Log("Is trying to find player");
+        UnityEngine.Debug.Log("Is trying to find player");
 
         StartCoroutine(Getpatrollingbitch());
 
@@ -311,14 +315,14 @@ public class Lygtemanden : MonoBehaviour
         {
             // Flip the x scale
             transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
-            Debug.Log("Flipped " + (i + 1) + " time(s)");
+            UnityEngine.Debug.Log("Flipped " + (i + 1) + " time(s)");
             // Wait for 3 seconds between each flip
             yield return new WaitForSeconds(3f);
         }
 
         // Reset the flipCoroutine reference to null after finishing
         flipCoroutine3 = null;
-        Debug.Log("Flip coroutine finished");
+        UnityEngine.Debug.Log("Flip coroutine finished");
 
         
 
@@ -330,7 +334,7 @@ public class Lygtemanden : MonoBehaviour
         if (flipCoroutine3 == null)
         {
             flipCoroutine3 = StartCoroutine(FlipGameObjectCoroutine()); // idk det er weird at det fungere
-            Debug.Log("Flip has started");
+            UnityEngine.Debug.Log("Flip has started");
             // Wait for the flipping to finish
             yield return flipCoroutine3;
         }
@@ -339,7 +343,7 @@ public class Lygtemanden : MonoBehaviour
     IEnumerator Getpatrollingbitch()
     {
         yield return new WaitForSeconds(7f);
-        Debug.Log("Started patrolling after 7 seconds");
+        UnityEngine.Debug.Log("Started patrolling after 7 seconds");
         movementScript.enabled = true;
         // After flipping, set isChasing to false and enable the movement script
         isChasing = false;

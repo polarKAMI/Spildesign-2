@@ -95,17 +95,17 @@ public class LygteAOE : MonoBehaviour
     {
         if (audioCoroutine == null) // Ensure only one audio coroutine is running at a time
         {
-            if (timeInCollider >= 31f && audioSource.clip != Lygte4)
+            if (timeInCollider >= 6f && audioSource.clip != Lygte4)
             {
                 ReplaceInstantiatedObject(Lygte4);
                 Debug.Log("Lyd 4 er igang");
             }
-            else if (timeInCollider >= 24f && audioSource.clip != Lygte3)
+            else if (timeInCollider >= 4f && audioSource.clip != Lygte3)
             {
                 ReplaceInstantiatedObject(Lygte3);
                 Debug.Log("Lyd 3 er igang");
             }
-            else if (timeInCollider >= 10f && audioSource.clip != Lygte2)
+            else if (timeInCollider >= 2f && audioSource.clip != Lygte2)
             {
                 ReplaceInstantiatedObject(Lygte2);
                 Debug.Log("Lyd 2 er igang");
@@ -134,7 +134,7 @@ public class LygteAOE : MonoBehaviour
     IEnumerator PlayAudioClip(AudioClip clip)
     {
         audioSource.Play();
-        yield return new WaitForSeconds(clip.length);
+        yield return new WaitForSeconds(2f);
         audioSource.Stop();
         audioCoroutine = null; // Reset the coroutine reference to allow the next clip to play
 
