@@ -25,12 +25,6 @@ public class skud : MonoBehaviour
             {
                 enemyHealth.Takedamage(5);
                 Debug.Log("Nisse took damage");
-
-                if (enemyHealth.currentenemyhealth <= 0)
-                {
-                    Destroy(collision.gameObject);
-                    enemyHealth.currentenemyhealth = enemyHealth.Maxhealth;
-                }
             }
 
             // Destroy the projectile regardless of whether damage was applied
