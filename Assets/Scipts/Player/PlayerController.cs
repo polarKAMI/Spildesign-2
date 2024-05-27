@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     private Shoot Shoot;
     public PauseMenu pauseMenu;
     private LogMenu logMenu;
+    private LogManager logManager;
     private LadderMovement ladderMovement;
     public GameOverMenu GameOverMenu;
     
@@ -43,6 +44,7 @@ public class PlayerController : MonoBehaviour
         pauseMenu = GameObject.FindObjectOfType<PauseMenu>();
         logMenu = GameObject.FindObjectOfType<LogMenu>();
         ladderMovement = GetComponent<LadderMovement>();
+        logManager = GameObject.FindObjectOfType<LogManager>();
 
         if (pauseMenu != null)
         {

@@ -127,6 +127,8 @@ public class OptionsPanelManager : MonoBehaviour
             itemUI.inventoryItem.Use(); // Use the non-key item
             RemoveSelectedItemFromInventory(); // Remove the non-key item from inventory
         }
+
+        selectedIndex = 0;
     }
 
 
@@ -141,6 +143,7 @@ public class OptionsPanelManager : MonoBehaviour
         {
             Debug.Log("Cannot remove key item.");
         }
+        selectedIndex = 0;
     }
 
     private void HandleOptionThree(ItemUI itemUI)
@@ -153,6 +156,7 @@ public class OptionsPanelManager : MonoBehaviour
         {
             Debug.Log("Cannot remove key item.");
         }
+        selectedIndex = 0;
     }
 
     public ItemUI GetHighlightedItem()
