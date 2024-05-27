@@ -169,6 +169,7 @@ MonoBehaviour:
   detectionRange: 5
   resumePatrollingDistance: 10
   Jumpforce: 2.5
+  Nissechaselyd: {fileID: 6894784377503402860, guid: 031d2686f31d7d042ad262cc4ee1ff7e, type: 3}
 --- !u!95 &8999029443547015183
 Animator:
   serializedVersion: 5
