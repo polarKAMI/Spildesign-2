@@ -44,7 +44,7 @@ public class Lygtemanden : MonoBehaviour
         Playermovement_script = player.GetComponent<PlayerMovement>();
     }
 
-    void DisableMovement()
+    void DisableMovement() // furste encaunter
     {
         movementScript.enabled = false;
         disabled = true;
@@ -66,9 +66,10 @@ public class Lygtemanden : MonoBehaviour
                 
                     if (Playermovement_script.PlayerHidden == true)
                     {
-                        // keep patrolling??
+                        // spiller er hidden, alt sker i player script som kigger p handlebushcollision
                         Collider2D[] obstacles = Physics2D.OverlapCircleAll(player.position, 0.5f, obstacleLayer);
                     Debug.Log(" Lygte kan ikke se dig");
+                        //mangler function til audio her
                     }
                     else
                     {
@@ -78,6 +79,8 @@ public class Lygtemanden : MonoBehaviour
                             Instantiate(Awakesound);
                             hasPlayedAwakeSound = true;
                         }
+
+                        movementScript.StopAudio();
                         // Disable Lygtemandenmovement script when chasing
                         movementScript.enabled = false;
                     animator.SetBool("IsSpawned", true);
@@ -117,7 +120,7 @@ public class Lygtemanden : MonoBehaviour
                 if (isStopped)
                 {
 
-                    StartCoroutine(ResumeMovementAfterDelay()); // might be this
+                    StartCoroutine(ResumeMovementAfterDelay()); // den stopper mens den chaser.
                 }
 
                 // Check if player is further away than resumePatrollingDistance
@@ -255,6 +258,7 @@ public class Lygtemanden : MonoBehaviour
         yield return new WaitForSeconds(1f); // Wait for 1 second
         isChasing = false;
         movementScript.enabled = true; // Enable Enemymovement script after the delay
+        movementScript.StartPatrolling();
         Debug.Log("Is patrolling again");
         
     }
@@ -320,12 +324,12 @@ public class Lygtemanden : MonoBehaviour
 
     }
 
-    public IEnumerator HandleBushCollision() // handles the logic when the enemy collides with a bush, including stopping chasing and resuming patrolling.
+    public IEnumerator HandleBushCollision() // handles the logic when the player hides in a bush, including stopping chasing and resuming patrolling.
     {
         // Perform the flipping first
         if (flipCoroutine3 == null)
         {
-            flipCoroutine3 = StartCoroutine(FlipGameObjectCoroutine());
+            flipCoroutine3 = StartCoroutine(FlipGameObjectCoroutine()); // idk det er weird at det fungere
             Debug.Log("Flip has started");
             // Wait for the flipping to finish
             yield return flipCoroutine3;
@@ -336,11 +340,14 @@ public class Lygtemanden : MonoBehaviour
     {
         yield return new WaitForSeconds(7f);
         Debug.Log("Started patrolling after 7 seconds");
+        movementScript.enabled = true;
         // After flipping, set isChasing to false and enable the movement script
         isChasing = false;
         isStopped = false;
-        movementScript.enabled = true;
+        movementScript.funderundedone = true;
         isHidingHandled = false;
+        yield return new WaitForSeconds(1f);
+        movementScript.OnPlayerEnterTrigger();
 
     }
 
