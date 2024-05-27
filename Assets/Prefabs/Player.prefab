@@ -389,7 +389,6 @@ MonoBehaviour:
   isGrounded: 0
   isJumping: 0
   isSliding: 0
-  isSideStep: 0
   isFalling: 0
   maxJumpForce: 5.5
   minJumpForce: 4
@@ -454,6 +453,7 @@ MonoBehaviour:
   reloadobject: {fileID: 6894784377503402860, guid: dfbd0b93a0da8aa4aad5dac701e0e962, type: 3}
   Firesoundobject: {fileID: 4003435803897587946, guid: 5a48a3cfdaed54848851403fb4ed961c, type: 3}
   addammosound: {fileID: 6894784377503402860, guid: 625875688226ea44abb139627a4b4838, type: 3}
+  emptyclip: {fileID: 6894784377503402860, guid: c617a32beac9b3b42b73f872822ca935, type: 3}
 --- !u!114 &1348542731904493002
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -530,6 +530,7 @@ MonoBehaviour:
   inventoryUIManager: {fileID: 0}
   pauseMenu: {fileID: 0}
   GameOverMenu: {fileID: 0}
+  isInventoryOpen: 0
 --- !u!70 &3548167950121879583
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

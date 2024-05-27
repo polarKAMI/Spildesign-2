@@ -44,7 +44,13 @@ public class EnemyAI : MonoBehaviour
     public int attackDamage = 2;
     public bool hasDealtDamage;
 
-    public Animator animator; 
+    public Animator animator;
+
+
+    public GameObject avsound;
+    public GameObject attacksound;
+    public GameObject dudsound;
+
 
     private void Awake()
     {
@@ -93,13 +99,13 @@ public class EnemyAI : MonoBehaviour
             StartCoroutine(CheckAndConceal()); // Call the function when the player is outside target range
         }
         if (rb.velocity.x > 0.05f)
-            {
-                transform.localScale = new Vector3(-1f * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
-            }
-            else if (rb.velocity.x < -0.05f)
-            {
-                transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
-            }       
+        {
+            transform.localScale = new Vector3(-1f * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+        }
+        else if (rb.velocity.x < -0.05f)
+        {
+            transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+        }
         if (currentHealth <= 0)
         {
             Die();
@@ -142,7 +148,7 @@ public class EnemyAI : MonoBehaviour
     }
 
     private IEnumerator ChangeColorAndActivate()
-    { 
+    {
         yield return new WaitForSeconds(1f);
         isConcealed = false;
     }
@@ -194,7 +200,7 @@ public class EnemyAI : MonoBehaviour
 
 
         Rigidbody2D tempRb = tempObject.GetComponent<Rigidbody2D>();
-        
+
         Debug.Log("tempRb: " + tempRb.transform.position);
         // Apply launch force to the temporary Rigidbody
 
@@ -210,11 +216,11 @@ public class EnemyAI : MonoBehaviour
 
         foreach (Rigidbody2D rb in allRigidbodies)
         {
-            if (rb != null) 
+            if (rb != null)
             {
                 rb.simulated = false;
             }
-            
+
         }
 
         int simulationSteps = 200;
@@ -232,14 +238,14 @@ public class EnemyAI : MonoBehaviour
         {
             if (rb != null)
             {
-            rb.simulated = true;
+                rb.simulated = true;
             }
-           
+
         }
 
         Physics2D.simulationMode = prevSimulationMode;
         Debug.Log("tempRb3: " + tempRb.transform.position);
-       
+
         Destroy(tempObject);
         return predictedPosition;
     }
@@ -262,10 +268,10 @@ public class EnemyAI : MonoBehaviour
 
         // Calculate launch force based on distance to target
         float launchForce = Mathf.Clamp(Mathf.Abs(distanceToTarget) * 2.8f, minLaunchForce, maxLaunchForce);
-        
+
         Vector2 predictedLandingPos = PredictedLandingPosition(launchDirection, launchForce);
         Debug.Log("AAA predicted x pos: " + predictedLandingPos.x + " predicted y pos: " + predictedLandingPos.y + " calculated launch force: " + launchForce + " launch direction: " + launchDirection);
-        
+
         // Check if there's ground at the predicted landing position
         RaycastHit2D hit = Physics2D.Raycast(predictedLandingPos, Vector2.down, 10f, groundLayer);
         Debug.Log("BBB y pos: " + initialYpos);
@@ -363,11 +369,14 @@ public class EnemyAI : MonoBehaviour
     public void Attack()
     {
         health.TakeDamage(attackDamage);
+        Instantiate(attacksound);
     }
 
     public void TakeDamage(int amount)
     {
+        Instantiate(avsound);
         currentHealth -= amount;
+
     }
 
     public void Die()
@@ -380,6 +389,7 @@ public class EnemyAI : MonoBehaviour
             log.Collected = true;
             notificationManager.ShowNotification("new log;");
         }
+        Instantiate(dudsound);
         Destroy(gameObject);
     }
 }
