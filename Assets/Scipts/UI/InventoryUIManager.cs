@@ -34,6 +34,10 @@ public class InventoryUIManager : MonoBehaviour
         playerMovement = FindObjectOfType<PlayerMovement>(); // Find the PlayerMovement script in the scene
         ammoBar.SetActive(false);
         ammoBarBoarder.SetActive(false);
+        if (inventorySO != null)
+        {
+            inventorySO.WipeInventory();
+        }
     }
     public void OpenInventory()
     {
@@ -171,7 +175,7 @@ public class InventoryUIManager : MonoBehaviour
                 inventorySlots.Add(slot);
 
                 // Set position of inventory slot
-                slot.transform.localPosition = new Vector3(x / 1.5f, 0f, z / 2f);
+                slot.transform.localPosition = new Vector3(x, 0f, z / 2f);
 
                 InventoryItem inventoryItem = inventorySO.GetItemAt(i);
 
