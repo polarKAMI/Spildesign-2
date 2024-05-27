@@ -32,7 +32,7 @@ MonoBehaviour:
     swearing in these logs is against our code of conduct, and will be censored in
     the transcription. The employee will also be reprimanded. \r"
   <Specs>k__BackingField: "Height: 180 cm\r\nWeight: 110 kg\r"
-  <LogImage>k__BackingField: {fileID: 0}
+  <LogImage>k__BackingField: {fileID: 21300000, guid: 3b585b35e8eba504a82d935d3b639657, type: 3}
   isNote: 0
   isItem: 0
   isEntity: 0
