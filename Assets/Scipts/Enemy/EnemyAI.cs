@@ -210,7 +210,11 @@ public class EnemyAI : MonoBehaviour
 
         foreach (Rigidbody2D rb in allRigidbodies)
         {
-            rb.simulated = false;
+            if (rb != null) 
+            {
+                rb.simulated = false;
+            }
+            
         }
 
         int simulationSteps = 200;
