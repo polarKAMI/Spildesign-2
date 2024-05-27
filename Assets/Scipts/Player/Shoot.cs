@@ -20,6 +20,7 @@ public class Shoot : MonoBehaviour
     public GameObject reloadobject;
     public GameObject Firesoundobject;
     public GameObject addammosound;
+    public GameObject emptyclip;
 
    private bool IsShooting = false; // Define IsShooting variable
 
@@ -71,6 +72,7 @@ public class Shoot : MonoBehaviour
             if (currentAmmo != maxAmmo)
             {
                 Debug.Log("Cannot shoot: Ammo is not at max");
+                Instantiate(emptyclip);
                 return;
             }
 

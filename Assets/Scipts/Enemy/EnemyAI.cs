@@ -44,7 +44,13 @@ public class EnemyAI : MonoBehaviour
     public int attackDamage = 2;
     public bool hasDealtDamage;
 
-    public Animator animator; 
+    public Animator animator;
+
+
+    public GameObject avsound;
+    public GameObject attacksound;
+    public GameObject dudsound;
+
 
     private void Awake()
     {
@@ -363,11 +369,14 @@ public class EnemyAI : MonoBehaviour
     public void Attack()
     {
         health.TakeDamage(attackDamage);
+        Instantiate(attacksound);
     }
 
     public void TakeDamage(int amount)
     {
+        Instantiate(avsound);
         currentHealth -= amount;
+        
     }
 
     public void Die()
@@ -380,6 +389,7 @@ public class EnemyAI : MonoBehaviour
             log.Collected = true;
             notificationManager.ShowNotification("new log;");
         }
+        Instantiate(dudsound);
         Destroy(gameObject);
     }
 }

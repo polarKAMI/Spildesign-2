@@ -143,9 +143,11 @@ MonoBehaviour:
   activeDistance: 6
   chaseDistance: 6
   pathUpdateSeconds: 0.5
+  isJumping: 0
   launchAngle: 45
   minLaunchForce: 1
   maxLaunchForce: 15
+  tempSkft: {fileID: 0}
   startColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   endColor: {r: 1, g: 1, b: 1, a: 1}
   colorChangeDuration: 1
@@ -160,6 +162,10 @@ MonoBehaviour:
   health: {fileID: 0}
   attackDamage: 2
   hasDealtDamage: 0
+  animator: {fileID: 0}
+  avsound: {fileID: 6894784377503402860, guid: 03b10042e4680b7489216fc5d497fb50, type: 3}
+  attacksound: {fileID: 6894784377503402860, guid: e04406376d2260f41a6b205244c62fc6, type: 3}
+  dudsound: {fileID: 6894784377503402860, guid: 3eca0967757e78f4ca160b03a73c50ab, type: 3}
 --- !u!1 &5039859837291352936
 GameObject:
   m_ObjectHideFlags: 0
