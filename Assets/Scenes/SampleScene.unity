@@ -62249,6 +62249,14 @@ PrefabInstance:
       propertyPath: m_SpriteTilingProperty.oldSize.y
       value: 1.28
       objectReference: {fileID: 0}
+    - target: {fileID: 4020939518934635826, guid: 03082abe237912a44b5cfcac83dc827f, type: 3}
+      propertyPath: log
+      value: 
+      objectReference: {fileID: 11400000, guid: d2c85c11faff33a449d16caf564cac5c, type: 2}
+    - target: {fileID: 4020939518934635826, guid: 03082abe237912a44b5cfcac83dc827f, type: 3}
+      propertyPath: notificationManager
+      value: 
+      objectReference: {fileID: 1017895309}
     - target: {fileID: 4628840537286302580, guid: 03082abe237912a44b5cfcac83dc827f, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.7
