@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7217e05988107de438afd6edcd4e29bb, type: 3}
+  m_Name: Lygtemanden
+  m_EditorClassIdentifier: 
+  <Name>k__BackingField: Lygtemanden
+  <Description>k__BackingField: "The Ignis Fatuus, known as \u201CLygtemanden\u201D
+    in contemporary local sources, is a creature rumoured to be stalking the bogs
+    and swamps at night. Sources differ wildly in descriptions of the creature, and
+    no sightings have ever been confirmed to be true. However, the creature features
+    often in local sources and as such it is recommended to be on the lookout for
+    it. The creature has locally been described as a short man, no larger than a
+    child of 6 years, holding a lantern with a strong lightsource. However, descriptions
+    of the creature vary, so the physical description might not be fully accurate.
+    According to legend, the creature will light its lantern to lure travelers into
+    bogs and swamps in an attempt to drown and rob these travelers. If the creature
+    is spotted, it is to be observed and not harmed in accordance with the \u201CForeign
+    System Act\u201D of 2674. If you are spotted by the creature, it is recommended
+    to turn your clothes inside out, as this would force the creature to show you
+    the correct way out of the bog. Note: The Explorer Suit MK III cannot be inverted,
+    any attempts to do so will result in termination. Should the creature become
+    hostile to you, it is recommended to hide as the creature is rumored to be incredibly
+    powerful. According to legend, the creature will turn hostile if confronted with
+    steel.\r"
+  <Specs>k__BackingField: "Height: 220 cm\r\nWeight: 90 kg\r"
+  <LogImage>k__BackingField: {fileID: 21300000, guid: 6d0ad898327e0f8408012a7ab4ce9c3e, type: 3}
+  isNote: 0
+  isItem: 0
+  isEntity: 0
+  isFederation: 1
+  isMisc: 0
+  collected: 0

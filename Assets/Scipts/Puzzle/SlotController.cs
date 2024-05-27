@@ -1,12 +1,16 @@
 using UnityEngine;
+using System.Collections;
+using System;
+using UnityEngine.SceneManagement;
 
 public class SlotController : MonoBehaviour
 {
     public ItemSlot[] itemSlots; // Array to store references to all item slots
-    public GameObject door;
-
     private bool[] isSlotMatched; // Array to store the match status of each slot
     public Animator animator;
+    public PlayerController playerController;
+    private bool once;
+    public GameObject endScreen;
     private void Start()
     {
         // Initialize the array to store the match status of each slot
@@ -29,29 +33,59 @@ public class SlotController : MonoBehaviour
 
 
         // If all slots match, execute the OpenDoor function
-        if (allSlotsMatched)
+        if (allSlotsMatched && !once)
         {
+            once = true;
             animator.SetBool("KeyPlaced", true);
-            OpenDoor();
             foreach (var slot in itemSlots)
             {
                 slot.SetDoorOpened(true);
             }
+            PlayerMovement playermovement = FindAnyObjectByType<PlayerMovement>();
+            if (playermovement != null)
+            {
+                playermovement.DisableMovement();
+                StartCoroutine(EndGame());
+            }
         }
     }
 
-    private void OpenDoor()
+    private IEnumerator EndGame()
     {
-        // Execute the logic to open the door
-        Debug.Log("All slots matched! Opening the door...");
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        CanvasGroup endScreenCanvasGroup = endScreen.GetComponent<CanvasGroup>();
+        float startAlpha = 0f;
+        // Final alpha value
+        float targetAlpha = 1f;
+        // Duration of the transition
+        float duration = 1f;
+        // Time elapsed during the transition
+        float elapsedTime = 0f;
+        // Close inventory if open
+        if (playerController.isInventoryOpen)
+        {
+            playerController.ToggleInventory();
+        }
+        yield return new WaitForSeconds(5f);
+        while (elapsedTime < duration)
+        {
+            // Calculate the current alpha value based on the lerp function
+            float currentAlpha = Mathf.Lerp(startAlpha, targetAlpha, elapsedTime / duration);
 
-        // Disable the door GameObject
-        if (door != null)
-        {
+            // Set the alpha value of the CanvasGroup component
+            endScreenCanvasGroup.alpha = currentAlpha;
+
+            // Increment the elapsed time
+            elapsedTime += Time.deltaTime;
         }
-        else
-        {
-            Debug.LogError("Door GameObject reference is not set.");
-        }
+        endScreenCanvasGroup.alpha = targetAlpha;
+        yield return new WaitForSeconds(8f); // Adjust the delay duration as needed
+        // Load the specified scene
+        LoadScene("MainMenu");
+    }
+    private void LoadScene(string sceneName)
+    {
+        // Load the specified scene
+        SceneManager.LoadScene(sceneName);
     }
 }

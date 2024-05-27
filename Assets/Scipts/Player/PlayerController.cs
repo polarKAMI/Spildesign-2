@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     private LadderMovement ladderMovement;
     public GameOverMenu GameOverMenu;
     
-    private bool isInventoryOpen = false; // Flag to track inventory state
+    public bool isInventoryOpen = false; // Flag to track inventory state
     private KeyCode moveLeftKey;
     private KeyCode moveRightKey;
     private KeyCode ladderUp;
@@ -238,6 +238,13 @@ public class PlayerController : MonoBehaviour
                 {
                     pauseMenu.Menu();
                 }
+                else if (Input.GetKeyDown(GlobalInputMapping.activeInputMappings["Close"]))
+            {
+                if (isInventoryOpen)
+                {
+                    ToggleInventory();
+                }
+            }
             }
             else if (GlobalInputMapping.activeInputMappings == GlobalInputMapping.optionsInputMapping)
             {

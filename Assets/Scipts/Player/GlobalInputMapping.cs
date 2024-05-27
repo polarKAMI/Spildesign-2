@@ -36,6 +36,7 @@ public static class GlobalInputMapping
             inventoryInputMapping["Select"] = KeyCode.E;
             inventoryInputMapping["Inventory"] = KeyCode.I;
             inventoryInputMapping["Menu"] = KeyCode.Escape;
+            inventoryInputMapping["Close"] = KeyCode.Q;
 
             optionsInputMapping["ScrollUp"] = KeyCode.W;
             optionsInputMapping["ScrollDown"] = KeyCode.S;

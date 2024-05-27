@@ -34,9 +34,14 @@ public class InventoryUIManager : MonoBehaviour
         playerMovement = FindObjectOfType<PlayerMovement>(); // Find the PlayerMovement script in the scene
         ammoBar.SetActive(false);
         ammoBarBoarder.SetActive(false);
+        if (inventorySO != null)
+        {
+            inventorySO.WipeInventory();
+        }
     }
     public void OpenInventory()
     {
+
         if (playerMovement != null)
         {
             playerMovement.DisableMovement();
@@ -171,7 +176,7 @@ public class InventoryUIManager : MonoBehaviour
                 inventorySlots.Add(slot);
 
                 // Set position of inventory slot
-                slot.transform.localPosition = new Vector3(x / 1.5f, 0f, z / 2f);
+                slot.transform.localPosition = new Vector3(x, 0f, z / 2f);
 
                 InventoryItem inventoryItem = inventorySO.GetItemAt(i);
 
@@ -320,7 +325,10 @@ public class InventoryUIManager : MonoBehaviour
             {
                 for (int i = 0; i < itemUITransforms.Count; i++)
                 {
-                    itemUITransforms[i].localPosition = Vector3.Lerp(itemUITransforms[i].localPosition, targetPositions[i], elapsedTime / duration);
+                    if (itemUITransforms[i] != null)
+                    {
+                        itemUITransforms[i].localPosition = Vector3.Lerp(itemUITransforms[i].localPosition, targetPositions[i], elapsedTime / duration);
+                    }
                 }
             }
             elapsedTime += Time.deltaTime;
@@ -331,7 +339,10 @@ public class InventoryUIManager : MonoBehaviour
         // Ensure items reach their final positions
         for (int i = 0; i < itemUITransforms.Count; i++)
         {
-            itemUITransforms[i].localPosition = targetPositions[i];
+            if (itemUITransforms[i] != null)
+            {
+                itemUITransforms[i].localPosition = targetPositions[i];
+            }
         }
     }
 

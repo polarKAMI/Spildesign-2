@@ -21,7 +21,7 @@ MonoBehaviour:
     be able to loop my way back to the ship eventually. Hopefully I can gather a
     bunch of data while I\u2019m at it."
   <Specs>k__BackingField: Audio log recorded by Scout.
-  <LogImage>k__BackingField: {fileID: 0}
+  <LogImage>k__BackingField: {fileID: 21300000, guid: 61724c85deda61e43832f62db0fcbad3, type: 3}
   isNote: 0
   isItem: 0
   isEntity: 0
