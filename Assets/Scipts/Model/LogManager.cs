@@ -16,7 +16,7 @@ public class LogManager : MonoBehaviour
         { 
         log.ResetCollected();
         }
-        foreach (var log in startLogs)
+        foreach (var log in allLogs)
         {
             AddLog(log);
         }

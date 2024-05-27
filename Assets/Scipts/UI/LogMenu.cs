@@ -148,11 +148,14 @@ public class LogMenu : MonoBehaviour
                 descTXT.text = log.Description;
                 logNameTXT.text = log.Name;
                 itemImage.sprite = log.LogImage;
-                
-                float contentHeight = LayoutUtility.GetPreferredHeight(descTXT.rectTransform);
 
+                float contentHeight = LayoutUtility.GetPreferredHeight(descTXT.rectTransform);
                 RectTransform descRT = descTXT.rectTransform;
                 descRT.sizeDelta = new Vector2(descRT.sizeDelta.x, contentHeight);
+
+                // Adjust the anchored position to ensure the top of the box is at a fixed height
+                float fixedYPosition = 0f; // Set this to your desired fixed Y position
+                descRT.anchoredPosition = new Vector2(descRT.anchoredPosition.x, fixedYPosition);
             }
             CanvasGroup canvasGroup = itemImage.GetComponent<CanvasGroup>();
             if (canvasGroup != null)
