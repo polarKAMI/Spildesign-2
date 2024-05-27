@@ -324,7 +324,10 @@ public class InventoryUIManager : MonoBehaviour
             {
                 for (int i = 0; i < itemUITransforms.Count; i++)
                 {
-                    itemUITransforms[i].localPosition = Vector3.Lerp(itemUITransforms[i].localPosition, targetPositions[i], elapsedTime / duration);
+                    if (itemUITransforms[i] != null)
+                    {
+                        itemUITransforms[i].localPosition = Vector3.Lerp(itemUITransforms[i].localPosition, targetPositions[i], elapsedTime / duration);
+                    }
                 }
             }
             elapsedTime += Time.deltaTime;
@@ -335,7 +338,10 @@ public class InventoryUIManager : MonoBehaviour
         // Ensure items reach their final positions
         for (int i = 0; i < itemUITransforms.Count; i++)
         {
-            itemUITransforms[i].localPosition = targetPositions[i];
+            if (itemUITransforms[i] != null)
+            {
+                itemUITransforms[i].localPosition = targetPositions[i];
+            }
         }
     }
 
