@@ -9526,11 +9526,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2103752632763426906, guid: 91c2682628b903f4087f1199c6451f20, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 11.1
+      value: 14.51
       objectReference: {fileID: 0}
     - target: {fileID: 2103752632763426906, guid: 91c2682628b903f4087f1199c6451f20, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -52.6
+      value: -53.83
       objectReference: {fileID: 0}
     - target: {fileID: 2103752632763426906, guid: 91c2682628b903f4087f1199c6451f20, type: 3}
       propertyPath: m_LocalPosition.z
@@ -9572,6 +9572,14 @@ PrefabInstance:
       propertyPath: ammoBar
       value: 
       objectReference: {fileID: 474159740}
+    - target: {fileID: 4429717636188149152, guid: 91c2682628b903f4087f1199c6451f20, type: 3}
+      propertyPath: maxAmmo
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4429717636188149152, guid: 91c2682628b903f4087f1199c6451f20, type: 3}
+      propertyPath: currentAmmo
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8409016707700205266, guid: 91c2682628b903f4087f1199c6451f20, type: 3}
       propertyPath: inventoryUIManager
       value: 
@@ -15839,6 +15847,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 421342492782024947, guid: f8fe8259094b8a146b263e962acd9625, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2681872270502719563, guid: f8fe8259094b8a146b263e962acd9625, type: 3}
       propertyPath: m_Name
       value: Inventory
@@ -47369,6 +47381,10 @@ PrefabInstance:
     - target: {fileID: 1231223771223771894, guid: 118a9fac9d0500541b04f3ad37c27f03, type: 3}
       propertyPath: m_Name
       value: UI Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 2935834904233750753, guid: 118a9fac9d0500541b04f3ad37c27f03, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4977470341782276864, guid: 118a9fac9d0500541b04f3ad37c27f03, type: 3}
       propertyPath: m_Pivot.x

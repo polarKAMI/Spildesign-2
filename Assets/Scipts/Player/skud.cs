@@ -16,6 +16,7 @@ public class skud : MonoBehaviour
             // Check if the collided object has the EnemyAI script
             EnemyAI enemyAI = collision.gameObject.GetComponent<EnemyAI>();
             enemyhealth enemyHealth = collision.gameObject.GetComponent<enemyhealth>();
+            Lygtehealth lygtehealth = collision.gameObject.GetComponent<Lygtehealth>();
             if (enemyAI != null)
             {
                 // If the collided object has the EnemyAI script, apply damage
@@ -26,7 +27,11 @@ public class skud : MonoBehaviour
                 enemyHealth.Takedamage(5);
                 Debug.Log("Nisse took damage");
             }
+            if (lygtehealth != null)
+            {
+                lygtehealth.Takedamage(5);
 
+            }
             // Destroy the projectile regardless of whether damage was applied
             Destroy(gameObject);
         }
