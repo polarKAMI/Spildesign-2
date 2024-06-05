@@ -7,6 +7,7 @@ public class OptionsPanelManager : MonoBehaviour
     public GameObject[] optionBorders; // Array of GameObjects representing the borders for each option
     public GameObject slotsPanel; // Reference to the slots panel GameObject
     public InventoryUIManager inventoryUIManager;
+    public PlayerController playerController;
 
     private int selectedIndex = 0; // Index of the currently selected option
     public bool isOptionsPanelActive = false; // Flag to track if the options panel is active
@@ -121,11 +122,14 @@ public class OptionsPanelManager : MonoBehaviour
         if (itemUI.inventoryItem.isKey)
         {
             itemUI.inventoryItem.Use(); // Use the key directly without removing it
+            playerController.ToggleInventory();
         }
         else
         {
             itemUI.inventoryItem.Use(); // Use the non-key item
             RemoveSelectedItemFromInventory(); // Remove the non-key item from inventory
+            playerController.ToggleInventory();
+            
         }
 
         selectedIndex = 0;
@@ -138,6 +142,7 @@ public class OptionsPanelManager : MonoBehaviour
         {
             itemUI.inventoryItem.Ammo();
             RemoveSelectedItemFromInventory();
+            playerController.ToggleInventory();
         }
         else
         {
@@ -151,6 +156,7 @@ public class OptionsPanelManager : MonoBehaviour
         if (!itemUI.inventoryItem.isKey)
         {
             RemoveSelectedItemFromInventory();
+            playerController.ToggleInventory();
         }
         else
         {
