@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 1283440088078514529}
   - component: {fileID: 2998480137845806992}
   - component: {fileID: 1617145447985419241}
-  - component: {fileID: 4253429467735741085}
-  - component: {fileID: 3994945180618445247}
+  - component: {fileID: 3253762610449039664}
+  - component: {fileID: 3022416205590807757}
   m_Layer: 9
   m_Name: Enemy_skft
   m_TagString: Enemy
@@ -147,7 +147,7 @@ MonoBehaviour:
   isJumping: 0
   launchAngle: 45
   minLaunchForce: 8
-  maxLaunchForce: 18
+  maxLaunchForce: 16
   tempSkft: {fileID: 1272960728101447501, guid: e9327ec5f9222c14a8a7b6500cdc4cfd, type: 3}
   startColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   endColor: {r: 1, g: 1, b: 1, a: 1}
@@ -163,11 +163,11 @@ MonoBehaviour:
   health: {fileID: 0}
   attackDamage: 2
   hasDealtDamage: 0
-  animator: {fileID: 4253429467735741085}
+  animator: {fileID: 3253762610449039664}
   avsound: {fileID: 6894784377503402860, guid: ceb37c71282948b468dca3e83d5feaa5, type: 3}
   attacksound: {fileID: 6894784377503402860, guid: 93bcc958f44677d47867a25807378c03, type: 3}
   dudsound: {fileID: 6894784377503402860, guid: c681c35a8296b074bb0f8e5cc33ccbf5, type: 3}
---- !u!95 &4253429467735741085
+--- !u!95 &3253762610449039664
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0
@@ -177,7 +177,7 @@ Animator:
   m_GameObject: {fileID: 1272960728101447501}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 40cf0fb35aaee994bbeb5be851bfad4a, type: 2}
+  m_Controller: {fileID: 9100000, guid: 02d7b76048fc5144f91db5ada64f92a8, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -188,7 +188,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!212 &3994945180618445247
+--- !u!212 &3022416205590807757
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -228,10 +228,10 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 5
-  m_Sprite: {fileID: 21300000, guid: a9e58eb681b5e1d4395092f617615627, type: 3}
+  m_SortingOrder: 2
+  m_Sprite: {fileID: 21300000, guid: fc85ca3489bbbef48b5dd35930e0ecb2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1.28, y: 1.28}

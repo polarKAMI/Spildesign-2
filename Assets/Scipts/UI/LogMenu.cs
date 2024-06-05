@@ -27,6 +27,7 @@ public class LogMenu : MonoBehaviour
     public Image itemImage;
     public Image logSelectedBorder;
     public float scrollSpeed = 0.1f;
+    [SerializeField] private RectTransform viewport;
 
     private void Start()
     {
@@ -43,6 +44,7 @@ public class LogMenu : MonoBehaviour
     public void LogOpen()
     {
         entryList = false;
+        logSelected = false;
         logMenu.SetActive(true);
         ResetOptions();
         selectedIndex = 0; // Ensure the selected index is reset to 0
@@ -153,9 +155,7 @@ public class LogMenu : MonoBehaviour
                 RectTransform descRT = descTXT.rectTransform;
                 descRT.sizeDelta = new Vector2(descRT.sizeDelta.x, contentHeight);
 
-                // Adjust the anchored position to ensure the top of the box is at a fixed height
-                float fixedYPosition = 0f; // Set this to your desired fixed Y position
-                descRT.anchoredPosition = new Vector2(descRT.anchoredPosition.x, fixedYPosition);
+                descRT.anchoredPosition = new Vector2(descRT.anchoredPosition.x, 0);
             }
             CanvasGroup canvasGroup = itemImage.GetComponent<CanvasGroup>();
             if (canvasGroup != null)
