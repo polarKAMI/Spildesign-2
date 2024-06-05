@@ -8,6 +8,8 @@ public class MainMenu : MonoBehaviour
 {
     public GameObject[] menuBorders;
     private int selectedIndex = 0;
+    public bool controlsOpen = false;
+    public GameObject controls;
 
     private void Start()
     {
@@ -20,15 +22,47 @@ public class MainMenu : MonoBehaviour
     {
         if (Input.GetKeyDown(GlobalInputMapping.activeInputMappings["Up"]))
         {
-            ChangeSelectedIndex(-1);
+            if (controlsOpen)
+            {
+            }
+            else
+            {
+                ChangeSelectedIndex(-1);
+            }
+
         }
         else if (Input.GetKeyDown(GlobalInputMapping.activeInputMappings["Down"]))
         {
-            ChangeSelectedIndex(1);
+            if (controlsOpen)
+            {
+            }
+            else
+            {
+                ChangeSelectedIndex(1);
+            }
+
         }
         else if (Input.GetKeyDown(GlobalInputMapping.activeInputMappings["Select"]))
         {
-            MenuOptionSelect();
+            if (controlsOpen)
+            {
+            }
+            else
+            {
+                MenuOptionSelect();
+            }
+            
+        }
+        else if (Input.GetKeyDown(GlobalInputMapping.activeInputMappings["Deselect"]))
+        {
+            if (controlsOpen)
+            {
+                CloseControls();
+            }
+            else
+            {
+               
+            }
         }
     }
     // Method to start the game
@@ -54,7 +88,7 @@ public class MainMenu : MonoBehaviour
                 PlayGame();
                 break;
             case 1: // Second option selected
-                //options
+                Controls();
                 break;
             case 2: // Third option selected
                 QuitGame();
@@ -108,5 +142,17 @@ public class MainMenu : MonoBehaviour
     {
         Application.Quit();
         Debug.Log("Game closed");
+    }
+
+    public void Controls()
+    {
+        controlsOpen = true;
+        controls.SetActive(true);
+    }
+
+    public void CloseControls()
+    {
+        controlsOpen = false;
+        controls.SetActive(false);
     }
 }

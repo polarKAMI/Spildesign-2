@@ -22,7 +22,7 @@ public class Shoot : MonoBehaviour
     public GameObject addammosound;
     public GameObject emptyclip;
 
-   private bool IsShooting = false; // Define IsShooting variable
+    private bool IsShooting = false; // Define IsShooting variable
 
     private void Start()
     {
@@ -50,12 +50,12 @@ public class Shoot : MonoBehaviour
         {
             Instantiate(reloadobject);
         }
-       
+
     }
 
     IEnumerator StopShootingCoroutine()
     {
-       
+
         // Wait for the duration of the shooting animation
         yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(1).length);
         // Reset shooting flag after animation is finished
@@ -88,7 +88,7 @@ public class Shoot : MonoBehaviour
             Vector2 pushbackDirection = localScale.x > 0 ? Vector2.left : Vector2.right;
             rb.AddForce(pushbackDirection * pushbackForce, ForceMode2D.Impulse);
 
-           
+
 
             StartCoroutine(StopShootingCoroutine()); // Start the coroutine to stop shooting animation
             IsShooting = true; // Set shooting flag to true

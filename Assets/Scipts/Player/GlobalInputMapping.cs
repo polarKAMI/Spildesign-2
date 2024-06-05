@@ -72,6 +72,7 @@ public static class GlobalInputMapping
             mainMenuInputMapping["Up"] = KeyCode.W;
             mainMenuInputMapping["Down"] = KeyCode.S;
             mainMenuInputMapping["Select"] = KeyCode.E;
+            mainMenuInputMapping["Deselect"] = KeyCode.Q;
 
             SetActiveInputMappings(inGameInputMapping);
             isInitialized = true;
