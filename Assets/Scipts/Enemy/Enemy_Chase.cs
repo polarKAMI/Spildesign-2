@@ -14,7 +14,7 @@ public class Enemy_Chase : MonoBehaviour
     private bool isChasing = false;
     private bool soundPlayed = false;
 
-    public float resumePatrollingDistance = 5f;
+    public float resumePatrollingDistance = 10f;
     public float Jumpforce;
 
     // Reference to Lygtemandenmovement script
@@ -46,10 +46,8 @@ public class Enemy_Chase : MonoBehaviour
         if (!isChasing)
         {
             // Check for player within detection range
-            if (player.position.y >= transform.position.y - yOffset && player.position.y <= transform.position.y + yOffset)
+            if (Vector2.Distance(transform.position, player.position) <= detectionRange && player.position.y >= transform.position.y - yOffset && player.position.y <= transform.position.y + yOffset)
             {
-
-                if (player.position.y >= transform.position.y)
                 {
                     isChasing = true;
                     if (!soundPlayed)
