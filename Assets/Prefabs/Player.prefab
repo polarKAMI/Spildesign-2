@@ -456,6 +456,7 @@ MonoBehaviour:
   Firesoundobject: {fileID: 4003435803897587946, guid: 5a48a3cfdaed54848851403fb4ed961c, type: 3}
   addammosound: {fileID: 6894784377503402860, guid: 625875688226ea44abb139627a4b4838, type: 3}
   emptyclip: {fileID: 6894784377503402860, guid: c617a32beac9b3b42b73f872822ca935, type: 3}
+  playerJump: {fileID: 1748848850549437778}
 --- !u!114 &1348542731904493002
 MonoBehaviour:
   m_ObjectHideFlags: 0

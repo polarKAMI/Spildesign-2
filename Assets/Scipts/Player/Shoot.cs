@@ -21,6 +21,7 @@ public class Shoot : MonoBehaviour
     public GameObject Firesoundobject;
     public GameObject addammosound;
     public GameObject emptyclip;
+    public PlayerJump playerJump;
 
     private bool IsShooting = false; // Define IsShooting variable
 
@@ -67,7 +68,7 @@ public class Shoot : MonoBehaviour
 
     public void Shooting()
     {
-        if (!IsShooting) // Check if shooting animation is already triggered
+        if (!IsShooting && !playerJump.isJumping && !playerJump.isFalling) // Check if shooting animation is already triggered
         {
             if (currentAmmo != maxAmmo)
             {

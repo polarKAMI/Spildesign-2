@@ -12,6 +12,10 @@ public class InventoryItem : ScriptableObject, IUsable
 
     public bool isKey;
 
+    [field: SerializeField]
+    [field: TextArea]
+    public string Specs { get; set; }
+
     // Implement Use() from IUsable
     public virtual void Use()
     {
