@@ -263,6 +263,8 @@ GameObject:
   - component: {fileID: 5781418862852197915}
   - component: {fileID: 1016706145289938405}
   - component: {fileID: 2499530314978655961}
+  - component: {fileID: 3088904027670261833}
+  - component: {fileID: 4292763042832721316}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -505,15 +507,15 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   soundEffects:
-  - {fileID: 8300000, guid: 3e2696b98cc06664c8da0571728e5006, type: 3}
-  - {fileID: 8300000, guid: 063e6415de01bac4e8db7d8d20aa0359, type: 3}
-  - {fileID: 8300000, guid: faef3c238396eb441b7527eb7e2d12f6, type: 3}
-  - {fileID: 8300000, guid: 563b5c78da582ef4c97b36a4079ef416, type: 3}
-  - {fileID: 8300000, guid: f1843380c1d29fc44b924ffeb133489c, type: 3}
+  - {fileID: 8300000, guid: 35d05adc414c9de4ebca4f073857dfc4, type: 3}
+  - {fileID: 8300000, guid: c8e0a6ca6a6443d44b61fb3f282fa25d, type: 3}
+  - {fileID: 8300000, guid: c07762158b12a52418b891d7a74ba8aa, type: 3}
+  - {fileID: 8300000, guid: a94cf6aaf40eebc41824f59ee482f72d, type: 3}
+  - {fileID: 8300000, guid: d1f796870108fa54da70560ab48a1774, type: 3}
   minPitch: 0.8
   maxPitch: 1.2
   footstepDelay: 0.5
-  audioSource: {fileID: 0}
+  audioSource: {fileID: 3088904027670261833}
   rb: {fileID: 1917689589979223453}
 --- !u!114 &119915670931505567
 MonoBehaviour:
@@ -727,6 +729,110 @@ CapsuleCollider2D:
   m_Offset: {x: 0.06671333, y: 0.007212281}
   m_Size: {x: 0.64892197, y: 1.2655754}
   m_Direction: 0
+--- !u!82 &3088904027670261833
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1644882701374204269}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 0.23
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 238
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!81 &4292763042832721316
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1644882701374204269}
+  m_Enabled: 1
 --- !u!1 &2005773436325338582
 GameObject:
   m_ObjectHideFlags: 0
@@ -998,7 +1104,7 @@ Transform:
   m_GameObject: {fileID: 6869590306758707312}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.05, y: -0.59, z: 0}
+  m_LocalPosition: {x: 0.05, y: -0.6307, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
