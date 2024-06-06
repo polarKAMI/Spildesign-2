@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 4020939518934635826}
   - component: {fileID: 2239738546294574519}
   - component: {fileID: 7075128103608045482}
-  - component: {fileID: 8999029443547015183}
   - component: {fileID: 4045237314220437700}
+  - component: {fileID: 7336033878718272263}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -133,7 +133,9 @@ MonoBehaviour:
   Maxhealth: 10
   currentenemyhealth: 10
   Nissedudsound: {fileID: 6894784377503402860, guid: db07e251cfd34d9429ba6d6099872ca2, type: 3}
+  log: {fileID: 11400000, guid: d2c85c11faff33a449d16caf564cac5c, type: 2}
   Nisseavsound: {fileID: 6894784377503402860, guid: ae3dc961090a62c43a33e30b234e80dc, type: 3}
+  notificationManager: {fileID: 0}
 --- !u!114 &2239738546294574519
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -151,7 +153,7 @@ MonoBehaviour:
   - {fileID: 0}
   Movespeed: 5
   patroldestination: 0
-  animator: {fileID: 8999029443547015183}
+  animator: {fileID: 7336033878718272263}
 --- !u!114 &7075128103608045482
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -170,27 +172,6 @@ MonoBehaviour:
   resumePatrollingDistance: 10
   Jumpforce: 2.5
   Nissechaselyd: {fileID: 6894784377503402860, guid: 031d2686f31d7d042ad262cc4ee1ff7e, type: 3}
---- !u!95 &8999029443547015183
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2952199648344862858}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 1816c619bdbe05b41914c4e9fa21db67, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!70 &4045237314220437700
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -226,6 +207,27 @@ CapsuleCollider2D:
   m_Offset: {x: -0.0057220454, y: -0.06346679}
   m_Size: {x: 0.4521224, y: 0.8339075}
   m_Direction: 0
+--- !u!95 &7336033878718272263
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2952199648344862858}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1816c619bdbe05b41914c4e9fa21db67, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &4386382970520650292
 GameObject:
   m_ObjectHideFlags: 0
