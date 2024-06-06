@@ -11,11 +11,22 @@ public class MainMenu : MonoBehaviour
     public bool controlsOpen = false;
     public GameObject controls;
 
+    public AudioClip indexChangeSound; // Sound effect for index change
+    private AudioSource audioSource; // AudioSource component
+    public AudioClip Entersound;
+
     private void Start()
     {
         ResetOptions();
         SelectOption(0);
         GlobalInputMapping.SetActiveInputMappings(GlobalInputMapping.mainMenuInputMapping);
+
+        // Get or add the AudioSource component
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
     }
 
     private void Update()
@@ -51,7 +62,7 @@ public class MainMenu : MonoBehaviour
             {
                 MenuOptionSelect();
             }
-            
+
         }
         else if (Input.GetKeyDown(GlobalInputMapping.activeInputMappings["Deselect"]))
         {
@@ -61,13 +72,14 @@ public class MainMenu : MonoBehaviour
             }
             else
             {
-               
+
             }
         }
     }
     // Method to start the game
     public void PlayGame()
-    {  
+    {
+        PlaySound(Entersound);
         StartCoroutine(WaitAndLoadScene("Intro", 1f));
     }
 
@@ -135,24 +147,38 @@ public class MainMenu : MonoBehaviour
 
         // Update the selected index
         selectedIndex = newIndex;
+
+        // Play the index change sound effect
+        PlaySound(indexChangeSound);
     }
 
     // Method to quit the game
     public void QuitGame()
     {
+        PlaySound(Entersound);
         Application.Quit();
         Debug.Log("Game closed");
     }
 
     public void Controls()
     {
+        PlaySound(Entersound);
         controlsOpen = true;
         controls.SetActive(true);
     }
 
     public void CloseControls()
     {
+        PlaySound(Entersound);
         controlsOpen = false;
         controls.SetActive(false);
+    }
+
+    private void PlaySound(AudioClip clip)
+    {
+        if (audioSource != null && clip != null)
+        {
+            audioSource.PlayOneShot(clip);
+        }
     }
 }
