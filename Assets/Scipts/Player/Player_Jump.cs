@@ -172,7 +172,7 @@ public class PlayerJump : MonoBehaviour
             {
                 collideonce = true;
                 // Check if the jump time is above 0.9 and slide if true
-                if (isJumping && jumpTime > .5f && rb.velocity.x > 0.1f)
+                if (isJumping && jumpTime > .5f && Mathf.Abs(rb.velocity.x) > 0.1f)
                 {
                     isSliding = true;
                     playerMovement.DisableMovement();
