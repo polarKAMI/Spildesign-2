@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Item: {fileID: 11400000, guid: b77d3f5223f5ddc4790181fb7867b993, type: 2}
   isKey: 0
+  <Specs>k__BackingField: Heals a small amount
   ammoRestoreAmount: 2

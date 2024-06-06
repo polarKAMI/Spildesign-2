@@ -10,6 +10,7 @@ public class InventoryUIManager : MonoBehaviour
     public GameObject inventoryPanelObject;
     public InventorySO inventorySO; // Reference to the InventorySO scriptable object
 
+
     private List<GameObject> inventorySlots = new List<GameObject>(); // Keep track of inventory slots
 
     private bool isMoving = false;
@@ -27,6 +28,8 @@ public class InventoryUIManager : MonoBehaviour
 
     public GameObject ammoBar; // Reference to the AmmoBar UI GameObject
     public GameObject ammoBarBoarder; // Reference to the AmmoBar UI GameObject
+
+    public TMP_Text specTXT;
 
     private PlayerMovement playerMovement;
     private void Start()
@@ -59,6 +62,11 @@ public class InventoryUIManager : MonoBehaviour
         {
             ammoBarBoarder.SetActive(true);
         }
+
+        currentIndex = 0;
+
+        // Update specs text
+        SetSpecs();
     }
 
     public void CloseInventory()
@@ -333,6 +341,7 @@ public class InventoryUIManager : MonoBehaviour
             }
             elapsedTime += Time.deltaTime;
             SortInventorySlotsByZPosition();
+            
             yield return null;
         }
 
@@ -344,28 +353,27 @@ public class InventoryUIManager : MonoBehaviour
                 itemUITransforms[i].localPosition = targetPositions[i];
             }
         }
+
+        SetSpecs();
     }
 
     private void ShiftInventorySlots(int direction)
     {
-        // Don't proceed if movement is already in progress
         if (isMoving)
         {
             return;
         }
 
-        isMoving = true; // Set the flag to indicate movement has started
+        isMoving = true;
 
-        // Gather the transforms and indices of ItemUI instances
         List<Transform> itemUITransforms = new List<Transform>();
         List<int> itemUIIndices = new List<int>();
         foreach (var slot in inventoryPanel.GetComponentsInChildren<ItemUI>())
         {
-            itemUITransforms.Add(slot.GetCachedTransform()); // Use cached transform
+            itemUITransforms.Add(slot.GetCachedTransform());
             itemUIIndices.Add(slot.GetIndex());
         }
 
-        // Gather initial positions of all ItemUIs
         List<Vector3> initialPositions = new List<Vector3>();
         foreach (var transform in itemUITransforms)
         {
@@ -374,38 +382,36 @@ public class InventoryUIManager : MonoBehaviour
 
         int itemCount = itemUITransforms.Count;
 
-        // Calculate new positions based on direction
         List<Vector3> newPositions = new List<Vector3>();
         for (int i = 0; i < itemCount; i++)
         {
             int currentIndex = itemUIIndices[i];
             int targetIndex = (currentIndex + direction + itemCount) % itemCount;
 
-            // Adjust for wrapping around when reaching the end of the list
             if (targetIndex < 0)
             {
-                targetIndex = itemCount - 1; // Set target index to last index
+                targetIndex = itemCount - 1;
             }
             else if (targetIndex >= itemCount)
             {
-                targetIndex = 0; // Wrap around to index 0 if targetIndex exceeds itemCount
+                targetIndex = 0;
             }
 
-            // Find the initial position of the ItemUI with the target index
             Vector3 targetPosition = initialPositions[itemUIIndices.IndexOf(targetIndex)];
-
-            // Store the new position
             newPositions.Add(targetPosition);
         }
 
-        // Smoothly move items to their new positions
-        StartCoroutine(SmoothMoveItems(itemUITransforms, newPositions, 0.13f)); // Adjust duration as needed
+        StartCoroutine(SmoothMoveItems(itemUITransforms, newPositions, 0.13f));
 
-        // Update the item at highest z-position after moving
         UpdateInventoryItems(direction);
 
-        // Set a coroutine to reset the isMoving flag after a delay
-        StartCoroutine(ResetIsMovingFlag(0.14f)); // Adjust delay to match the animation duration
+        StartCoroutine(ResetIsMovingFlag(0.14f));
+
+        int specIndex = (currentIndex + direction + itemCount) % itemCount;
+        if (specIndex < 0)
+        {
+            specIndex = itemCount - 1;
+        }
     }
 
     // Coroutine to reset the isMoving flag after a delay
@@ -413,5 +419,32 @@ public class InventoryUIManager : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         isMoving = false; // Reset the flag to indicate movement has finished
+        
+    }
+
+    private void SetSpecs()
+    {
+        foreach (var slot in inventorySlots)
+        {
+            ItemUI itemUI = slot.GetComponentInChildren<ItemUI>();
+            if (itemUI != null && Mathf.Approximately(slot.transform.localPosition.z, 0f))
+            {
+                InventoryItem item = itemUI.inventoryItem;
+                if (item != null && specTXT != null)
+                {
+                    specTXT.text = item.Specs;
+                    Debug.Log($"SetSpecs: Index = {itemUI.GetIndex()}, Item Name = {item.name}, Specs = {item.Specs}");
+                }
+                else
+                {
+                    specTXT.text = string.Empty;
+                    Debug.Log("SetSpecs: Item or specTXT is null");
+                }
+                return; // Exit once we've found the item at z=0
+            }
+        }
+        // In case no item is found at z=0
+        specTXT.text = string.Empty;
+        Debug.Log("SetSpecs: No item found at z=0");
     }
 }
