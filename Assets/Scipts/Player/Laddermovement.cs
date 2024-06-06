@@ -15,17 +15,41 @@ public class LadderMovement : MonoBehaviour, IInteractable
     private float pushOffVelocityX = 0f;
     private bool isPushingOff = false;
     private Collider2D platformCollider;
-    private Collider2D ladderCollider; // Add this field
+    private Collider2D ladderCollider;
 
     public Animator animator;
 
     [SerializeField] private float climbSpeed = 3f;
+
+    // Footstep sound variables
+
+    public AudioClip[] soundEffects; // Array of sound effects to play
+    public float minPitch = 0.8f; // Minimum pitch for randomization
+    public float maxPitch = 1.2f; // Maximum pitch for randomization
+    public float footstepDelay = 0.5f; // Delay between footstep sounds
+    public AudioSource audioSource2;
+
+    public AudioClip startClimbSound; // Sound to play when starting to climb
+    public AudioClip stopClimbSound; // Sound to play when stopping to climb
+
+    private bool isPlayingFootsteps = false;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         playerMovement = GetComponent<PlayerMovement>();
         playerJump = GetComponent<PlayerJump>();
+
+        // Get the second AudioSource component
+        AudioSource[] audioSources = GetComponents<AudioSource>();
+        if (audioSources.Length > 1)
+        {
+            audioSource2 = audioSources[1]; // Use the second AudioSource
+        }
+        else
+        {
+            Debug.LogError("Not enough AudioSource components found. Ensure there are at least two AudioSources on the GameObject.");
+        }
     }
 
     public void Interact()
@@ -54,25 +78,27 @@ public class LadderMovement : MonoBehaviour, IInteractable
         SnapToLadder();
         Debug.Log("Started climbing");
         Debug.Log("AnimationClimbing");
-        // Get the ladder collider
         ladderCollider = ladder.GetComponent<Collider2D>();
         if (ladderCollider != null)
         {
             Debug.Log("Climbing on ladder collider: " + ladderCollider.name);
-            ladderTopY = ladderCollider.bounds.max.y; // Set ladderTopY based on the ladder collider bounds
+            ladderTopY = ladderCollider.bounds.max.y;
         }
 
-        // Get the platform collider
         platformCollider = ladder.Find("ladderPlatform")?.GetComponent<Collider2D>();
         if (platformCollider != null)
         {
             Debug.Log("Platform collider detected: " + platformCollider.name);
-            platformCollider.isTrigger = true; // Set the platform collider to trigger
-            ladderTopY = platformCollider.bounds.max.y; // Override ladderTopY if platformCollider is found
+            platformCollider.isTrigger = true;
+            ladderTopY = platformCollider.bounds.max.y;
         }
-        
+
         animator.SetBool("IsClimbing", true);
         Debug.Log("Ladder top Y: " + ladderTopY);
+
+        // Play start climbing sound
+        PlaySound(startClimbSound);
+
     }
 
     public void StopClimbing()
@@ -83,30 +109,32 @@ public class LadderMovement : MonoBehaviour, IInteractable
         GlobalInputMapping.SetActiveInputMappings(GlobalInputMapping.inGameInputMapping);
         Debug.Log("Stopped climbing");
 
-        // Reset the push-off flag and velocity
         isPushingOff = false;
         pushOffVelocityX = 0f;
 
-        // Reset the platform collider to non-trigger
         if (platformCollider != null)
         {
             platformCollider.isTrigger = false;
         }
         animator.SetBool("IsClimbing", false);
-    }
 
+
+        // Play stop climbing sound
+        PlaySound(stopClimbSound);
+
+        // Stop playing footstep sounds
+        if (isPlayingFootsteps)
+        {
+            StopCoroutine(PlayFootstepSounds());
+            isPlayingFootsteps = false;
+        }
+    }
 
     public void PushOffLadder(int direction)
     {
-        // Set flag to indicate the player is pushing off the ladder
         isPushingOff = true;
-        // Determine the direction of the push
         pushOffVelocityX = direction * climbSpeed * 1.3f;
-
-        // Apply the impulse force to push the player off the ladder
         rb.AddForce(new Vector2(pushOffVelocityX, 0f), ForceMode2D.Impulse);
-
-        // Stop climbing
         StopClimbing();
     }
 
@@ -125,7 +153,7 @@ public class LadderMovement : MonoBehaviour, IInteractable
         }
         else
         {
-            vertical = 0f; // No input, stop climbing
+            vertical = 0f;
         }
     }
 
@@ -133,27 +161,76 @@ public class LadderMovement : MonoBehaviour, IInteractable
     {
         if (isClimbing)
         {
-            // Log the ladder collider
             if (ladderCollider != null)
             {
                 Debug.Log("Currently climbing on ladder collider: " + ladderCollider.name);
             }
 
-            // Set vertical velocity based on climbing input
             rb.velocity = new Vector2(0, vertical * climbSpeed);
             Debug.Log("Player Y Position: " + transform.position.y);
             Debug.Log("ladderTopY + ladderTopYOffSet: " + (ladderTopY + ladderTopYOffSet));
-
 
             if (transform.position.y >= ladderTopY + ladderTopYOffSet)
             {
                 StopClimbing();
             }
+
+            // Start playing footstep sounds
+            if (!isPlayingFootsteps)
+            {
+                StartCoroutine(PlayFootstepSounds());
+            }
+
         }
         else if (isPushingOff)
         {
-            // Set velocity based on push-off direction
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y);
         }
     }
+
+    IEnumerator PlayFootstepSounds()
+    {
+        isPlayingFootsteps = true;
+
+        while (isClimbing)
+        {
+            if (Mathf.Abs(vertical) > 0.1f)
+            {
+                PlayRandomSound();
+                Debug.Log("One climbing sound");
+                yield return new WaitForSeconds(footstepDelay);
+            }
+            else
+            {
+                yield return null; // wait until next frame
+            }
+        }
+
+        isPlayingFootsteps = false;
+    }
+
+    void PlayRandomSound()
+    {
+        AudioClip soundEffect = soundEffects[Random.Range(0, soundEffects.Length)];
+        float randomPitch = Random.Range(minPitch, maxPitch);
+        audioSource2.pitch = randomPitch;
+        audioSource2.clip = soundEffect;
+        audioSource2.Play();
+    }
+
+    void PlaySound(AudioClip clip)
+    {
+        if (audioSource2 != null && clip != null)
+        {
+            audioSource2.clip = clip;
+            audioSource2.pitch = 1.0f; // Reset pitch to normal for these specific sounds
+            audioSource2.Play();
+            Debug.Log("Playing sound: " + clip.name);
+        }
+        else
+        {
+            Debug.LogError("audioSource2 or audio clip is not assigned.");
+        }
+    }
+
 }
