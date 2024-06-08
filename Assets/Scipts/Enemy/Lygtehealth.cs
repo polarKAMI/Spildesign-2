@@ -55,6 +55,7 @@ public class Lygtehealth : MonoBehaviour
             log.Collected = true;
             notificationManager.ShowNotification("new log;");
         }
+
         lygtemanden.enabled = false;
         lygtemandenmovement.enabled = false;
         triangle.SetActive(false);
