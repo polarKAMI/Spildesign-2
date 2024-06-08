@@ -19,7 +19,6 @@ public class enemyhealth : MonoBehaviour
     void Start()
     {
         currentenemyhealth = Maxhealth;
-        animator.SetBool("IsDead", false);
     }
 
     private void FixedUpdate()
