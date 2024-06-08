@@ -10,6 +10,8 @@ public class enemyhealth : MonoBehaviour
     public LogSO log;
     public GameObject Nisseavsound;
     public NotificationManager notificationManager;
+    public EnemyMovement enemyMovement;
+    public Enemy_Chase enemyChase;
     void Start()
     {
         currentenemyhealth = Maxhealth;
@@ -49,6 +51,15 @@ public class enemyhealth : MonoBehaviour
             log.Collected = true;
             notificationManager.ShowNotification("new log;");
         }
-        Destroy(gameObject);
+        if (enemyMovement != null)
+        {
+            enemyMovement.enabled = false;
+        }
+
+        if (enemyChase != null)
+        {
+            enemyChase.enabled = false;
+        }
+
     }
 }
