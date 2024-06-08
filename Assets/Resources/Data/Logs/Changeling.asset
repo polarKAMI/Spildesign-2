@@ -13,21 +13,21 @@ MonoBehaviour:
   m_Name: Changeling
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Skiftling
-  <Description>k__BackingField: "A changeling, known as a \u201Cskiftling\u201D in
-    contemporary sources, is a human-like creature rumored to be found throughout
-    the European continent. According to legends, changelings are enchanted troll
-    children left in human settlements. They take on the form of huma children, who
-    are then kidnapped by the trolls. According to the lore, changelings have the
-    ability to almost perfectly mimic humans, and as such can be hiding in plain
-    sight. It is not known how the changelings would have reacted following the Exodus
-    of Humans. The ruling opinion among modern folklorists is that changelings have
-    further developed their mimicking abilities beyond just mimicking humans. It
-    is possible, but not probable, that changelings can now alter their appearance
-    to become anything, even inanimate objects. However, this is merely speculation
-    as the existence of changelings has never been confirmed.\r\nIf one believes
-    a changeling to be in the vicinity, there are methods to make them reveal themselves.
-    One of these methods is brewing ale in a broken eggshell. Note: Standard scout
-    equipment does not contain brewing supplies nor eggs.\r"
+  <Description>k__BackingField: "A changeling, known as a Skiftling in contemporary
+    sources, is a human-like creature rumored to be found throughout the European
+    continent. According to legends, changelings are enchanted troll children left
+    in human settlements. They take on the form of huma children, who are then kidnapped
+    by the trolls. According to the lore, changelings have the ability to almost
+    perfectly mimic humans, and as such can be hiding in plain sight. It is not known
+    how the changelings would have reacted following the Exodus of Humans. The ruling
+    opinion among modern folklorists is that changelings have further developed their
+    mimicking abilities beyond just mimicking humans. It is possible, but not probable,
+    that changelings can now alter their appearance to become anything, even inanimate
+    objects. However, this is merely speculation as the existence of changelings
+    has never been confirmed.\r\nIf one believes a changeling to be in the vicinity,
+    there are methods to make them reveal themselves. One of these methods is brewing
+    ale in a broken eggshell. Note: Standard scout equipment does not contain brewing
+    supplies nor eggs.\r"
   <Specs>k__BackingField: "Height: Varies\r\nWeight: Varies\r"
   <LogImage>k__BackingField: {fileID: 21300000, guid: 07b5a124739102249bae0c28586c1570, type: 3}
   isNote: 0

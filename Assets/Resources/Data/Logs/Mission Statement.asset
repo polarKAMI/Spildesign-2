@@ -18,16 +18,16 @@ MonoBehaviour:
     It is your responsibility to explore distant systems to determine if they can
     become valuable members of The Federation. Below is your specific mission. Onwards,
     for the greater good!\r\n\r\nMission Statement:\r\nYou have been assigned to
-    explore the planet known as \u201CEarth\u201D, located in the Milky Way. Earth
-    used to be home of the human race, before the Exodus of Humans in 2277. You will
-    land in a territory formerly known as the Kingdom of Denmark, in a region formerly
-    known as \u201CM\xF8n\u201D. Your objective is to observe and record the state
-    of the planet, to determine if it is suitable for habitation. You are to study
-    the local wildlife and any local civilizations, should they exist. Since \u201CEarth\u201D
-    has been abandoned by humans for a substantial period of time, it is unknown
-    how the ecosystem has adjusted to this change. If you are to encounter hostile
-    lifeforms, you are not to harm them as they could prove valuable to the research
-    of The Federation. \r\n"
+    explore the planet known as Earth, located in the Milky Way. Earth used to be
+    home of the human race, before the Exodus of Humans in 2277. You will land in
+    a territory formerly known as the Kingdom of Denmark, in a region formerly known
+    as M\xF8n. Your objective is to observe and record the state of the planet, to
+    determine if it is suitable for habitation. You are to study the local wildlife
+    and any local civilizations, should they exist. Since Earth has been abandoned
+    by humans for a substantial period of time, it is unknown how the ecosystem has
+    adjusted to this change. If you are to encounter hostile lifeforms, you are not
+    to harm them as they could prove valuable to the research of The Federation.
+    \r\n"
   <Specs>k__BackingField: Federation issued data.
   <LogImage>k__BackingField: {fileID: 21300000, guid: 3b585b35e8eba504a82d935d3b639657, type: 3}
   isNote: 0

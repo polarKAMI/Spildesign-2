@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Small Trash
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Small trash
-  <Description>k__BackingField: "Description:\r\nThis is a small pile of random items
-    from before the Exodus of Humans. These items have little to no value, as their
-    former owners are no longer around to appreciate them. These items are simply
-    leftovers from a forgotten time. However, they could be used  emergency ammunition,
-    due to your EnHan\u2019s patented Recycling technology \r\n"
+  <Description>k__BackingField: "\rThis is a small pile of random items from before
+    the Exodus of Humans. These items have little to no value, as their former owners
+    are no longer around to appreciate them. These items are simply leftovers from
+    a forgotten time. However, they could be used  emergency ammunition, due to your
+    EnHan\u2019s patented Recycling technology \r\n"
   <Specs>k__BackingField: 'Weight: 50 g'
   <LogImage>k__BackingField: {fileID: 21300000, guid: 0e0cb1d1e402a3544969f42b4c51e61e, type: 3}
   isNote: 0
