@@ -252,7 +252,7 @@ GameObject:
   - component: {fileID: 2499530314978655961}
   - component: {fileID: 3088904027670261833}
   - component: {fileID: 4292763042832721316}
-  - component: {fileID: 3449321540696900310}
+  - component: {fileID: 8806760017200837742}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -480,22 +480,6 @@ MonoBehaviour:
   ladderTopYOffSet: 0.7
   animator: {fileID: 1016706145289938405}
   climbSpeed: 3
-  soundEffects:
-  - {fileID: 8300000, guid: fd328dc9b121986499ca3343b13680d0, type: 3}
-  - {fileID: 8300000, guid: 7cb6510aad0f5e842ad2bd6a036d421b, type: 3}
-  - {fileID: 8300000, guid: 28f4fa2c83d9cb146a11176dec84e690, type: 3}
-  - {fileID: 8300000, guid: 795e3a64a4eb67240ad6e3c6729b81e1, type: 3}
-  - {fileID: 8300000, guid: ade660ce741eb1842b341fd328e3e44a, type: 3}
-  - {fileID: 8300000, guid: 1b708efcd9bcbda4dbb2917cb06f06f5, type: 3}
-  - {fileID: 8300000, guid: 5962db9f37245774d86f57f7f65b2fe3, type: 3}
-  - {fileID: 8300000, guid: 4ab66632cb214ce45a4c9c21d682c0c0, type: 3}
-  - {fileID: 8300000, guid: efb945b7d8b6ef142a30e38c38c3d54a, type: 3}
-  minPitch: 0.8
-  maxPitch: 1.2
-  footstepDelay: 0.5
-  audioSource2: {fileID: 0}
-  startClimbSound: {fileID: 8300000, guid: d9b0452984c2589429b242f481079aee, type: 3}
-  stopClimbSound: {fileID: 8300000, guid: 93b3fe71c0c342543bb5d5062afdab3e, type: 3}
 --- !u!114 &5068230747265035539
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -698,7 +682,7 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1644882701374204269}
   m_Enabled: 1
---- !u!82 &3449321540696900310
+--- !u!82 &8806760017200837742
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
