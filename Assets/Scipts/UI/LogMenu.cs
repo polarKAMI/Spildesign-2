@@ -90,9 +90,20 @@ public class LogMenu : MonoBehaviour
 
     public void SelectCategory()
     {
+        // Get the list of logs for the selected category
+        List<LogSO> logs = LogManager.GetLogsForCategory(selectedIndex);
+
+        // Check if the list is not empty
+        if (logs == null || logs.Count == 0)
+        {
+            // Exit the method if the list is empty
+            return;
+        }
+
         entryList = true;
-        HighlightLogEntry(0); // Select the first log entry
+        HighlightLogEntry(0);
     }
+
 
     private void DisplayLogs(List<LogSO> logs)
     {
