@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: Medkit
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Medkit
-  <Description>k__BackingField: "Description:\r\nThis civilian survival kit was one
-    of the most produced survival equipment during the Exodus of Humans. Produced
-    by the company \u201CREDACTED\u201D, this kit was extremely popular among the
-    civilians of the former Kingdom of Denmark. As such, this kit was widely available
-    in many stores at the time, and many can still be found littering the land. Contained
-    within this are several items believed to help people survive the societal collapse
+  <Description>k__BackingField: "\rThis civilian survival kit was one of the most
+    produced survival equipment during the Exodus of Humans. Produced by the company
+    \u201CREDACTED\u201D, this kit was extremely popular among the civilians of the
+    former Kingdom of Denmark. As such, this kit was widely available in many stores
+    at the time, and many can still be found littering the land. Contained within
+    this are several items believed to help people survive the societal collapse
     following the Exodus of Humans. These items include, but are not limited to:
     \r\nCompass\r\nBandaids\r\nPainkillers\r\nAntibiotics\r\nBatteries\r\nRope\r\nInstructional
     survival manual\r"
