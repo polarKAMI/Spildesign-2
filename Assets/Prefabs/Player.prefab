@@ -442,7 +442,7 @@ MonoBehaviour:
   maxAmmo: 10
   pushbackForce: 6
   rb: {fileID: 1917689589979223453}
-  PlayerMovement: {fileID: 1748848850549437778}
+  PlayerMovement: {fileID: 8409016707700205266}
   animator: {fileID: 1016706145289938405}
   ammoBar: {fileID: 0}
   reloadobject: {fileID: 6894784377503402860, guid: dfbd0b93a0da8aa4aad5dac701e0e962, type: 3}

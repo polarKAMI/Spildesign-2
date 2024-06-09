@@ -12,7 +12,7 @@ public class Shoot : MonoBehaviour
     public float pushbackForce = 150f;
     public Rigidbody2D rb;
 
-    public MonoBehaviour PlayerMovement;
+    public PlayerMovement PlayerMovement;
 
     public Animator animator;
     public Image ammoBar;
@@ -42,12 +42,12 @@ public class Shoot : MonoBehaviour
         UpdateAmmoUI();
         Debug.Log(currentAmmo);
 
-        if (currentAmmo != maxAmmo)
+        if (currentAmmo < 5)
         {
             Instantiate(addammosound);
         }
 
-        if (currentAmmo == maxAmmo)
+        if (currentAmmo >= 5)
         {
             Instantiate(reloadobject);
         }
@@ -61,8 +61,13 @@ public class Shoot : MonoBehaviour
         yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(1).length);
         // Reset shooting flag after animation is finished
         animator.SetBool("IsShooting", false);
+
+        yield return new WaitForSeconds(1f);
         PlayerMovement.enabled = true;
         IsShooting = false;
+
+
+
 
     }
 
@@ -70,7 +75,7 @@ public class Shoot : MonoBehaviour
     {
         if (!IsShooting && !playerJump.isJumping && !playerJump.isFalling) // Check if shooting animation is already triggered
         {
-            if (currentAmmo != maxAmmo)
+            if (currentAmmo < 5)
             {
                 Debug.Log("Cannot shoot: Ammo is not at max");
                 Instantiate(emptyclip);
@@ -79,16 +84,20 @@ public class Shoot : MonoBehaviour
 
             Instantiate(Firesoundobject);
             Instantiate(Projectile, fireposition.position, fireposition.rotation);
-            currentAmmo -= 10;
+            currentAmmo -= 5;
             UpdateAmmoUI();
             animator.SetBool("IsShooting", true); // Start shooting animation
-            PlayerMovement.enabled = false;
+
+            Debug.Log("Disabling PlayerMovement");
+            PlayerMovement.enabled = false; // Disable PlayerMovement
+            Debug.Log($"PlayerMovement enabled state: {PlayerMovement.enabled}");
+
 
             // Apply pushback force based on the direction
             Vector3 localScale = transform.localScale;
-            Vector2 pushbackDirection = localScale.x > 0 ? Vector2.left : Vector2.right;
+            Vector2 pushbackDirection = localScale.x < 0 ? Vector2.left : Vector2.right;
+            Debug.Log($"Applying pushback force: {pushbackDirection * pushbackForce}");
             rb.AddForce(pushbackDirection * pushbackForce, ForceMode2D.Impulse);
-
 
 
             StartCoroutine(StopShootingCoroutine()); // Start the coroutine to stop shooting animation
