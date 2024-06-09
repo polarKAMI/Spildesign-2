@@ -29,6 +29,12 @@ public class LogMenu : MonoBehaviour
     public float scrollSpeed = 0.1f;
     [SerializeField] private RectTransform viewport;
 
+
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip indexChangeClip;
+    [SerializeField] private AudioClip indexEnterClip;
+
+
     private void Start()
     {
         pauseMenu = FindObjectOfType<PauseMenu>();
@@ -59,6 +65,7 @@ public class LogMenu : MonoBehaviour
     {
         ResetOptions();
         categoryBorders[index].SetActive(true);
+        PlayIndexChangeSound();
     }
 
     void ResetOptions()
@@ -67,6 +74,8 @@ public class LogMenu : MonoBehaviour
         {
             border.SetActive(false);
         }
+
+        
     }
 
     public void ChangeSelectedIndex(int changeAmount)
@@ -90,9 +99,21 @@ public class LogMenu : MonoBehaviour
 
     public void SelectCategory()
     {
+        // Get the list of logs for the selected category
+        List<LogSO> logs = LogManager.GetLogsForCategory(selectedIndex);
+
+        // Check if the list is not empty
+        if (logs == null || logs.Count == 0)
+        {
+            // Exit the method if the list is empty
+            return;
+        }
+
         entryList = true;
-        HighlightLogEntry(0); // Select the first log entry
+        HighlightLogEntry(0);
+        PlayIndexEnterSound();
     }
+
 
     private void DisplayLogs(List<LogSO> logs)
     {
@@ -172,6 +193,7 @@ public class LogMenu : MonoBehaviour
         {
             logSelectedBorder.gameObject.SetActive(true);
         }
+        PlayIndexEnterSound();
     }
 
     public void DeselectLog()
@@ -223,6 +245,8 @@ public class LogMenu : MonoBehaviour
 
         HighlightLogEntry(entryIndex);
         DescriptionBoxDisplay(entryIndex);
+        PlayIndexChangeSound();
+
 
     }
 
@@ -248,5 +272,24 @@ public class LogMenu : MonoBehaviour
         float newY = scrollRect.verticalNormalizedPosition + direction * scrollSpeed;
         newY = Mathf.Clamp01(newY); // Ensure the value stays between 0 and 1
         scrollRect.verticalNormalizedPosition = newY;
+    }
+
+
+
+    private void PlayIndexChangeSound()
+    {
+        if (audioSource != null && indexChangeClip != null)
+        {
+            audioSource.PlayOneShot(indexChangeClip);
+        }
+    }
+
+
+    private void PlayIndexEnterSound()
+    {
+        if (audioSource != null && indexEnterClip != null)
+        {
+            audioSource.PlayOneShot(indexEnterClip);
+        }
     }
 }
