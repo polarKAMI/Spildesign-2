@@ -144,12 +144,17 @@ public class PlayerJump : MonoBehaviour
         {
             if (isSliding && Mathf.Abs(rb.velocity.x) < 0.01f)
             {
-                rb.drag = 0f;
-                isSliding = false;
-                cameraFollow.StopShake();
+                StopSlide();
                 playerMovement.EnableMovement();
             }
         }
+    }
+
+    public void StopSlide()
+    {
+        rb.drag = 0f;
+        isSliding = false;
+        cameraFollow.StopShake();  
     }
 
     private IEnumerator DelayedSlideCheck()
@@ -215,7 +220,7 @@ public class PlayerJump : MonoBehaviour
         }
     }
 
-    private void StopShake()
+    public void StopShake()
     {
         cameraFollow.StopShake();
     }

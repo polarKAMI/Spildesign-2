@@ -71,7 +71,7 @@ public class LadderMovement : MonoBehaviour, IInteractable
         isClimbing = true;
         playerJump.isFalling = false;
         playerJump.isJumping = false;
-        playerJump.isSliding = false;
+        playerJump.StopSlide();
         rb.gravityScale = 0f;
         rb.velocity = new Vector2(0, 0);
         ladderTransform = ladder;

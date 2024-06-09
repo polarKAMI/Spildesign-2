@@ -407,30 +407,34 @@ public class InventoryUIManager : MonoBehaviour
             initialPositions.Add(transform.localPosition);
         }
 
-        int itemCount = itemUITransforms.Count;
+        int itemCount = inventorySO.Size;
+        int slotCount = itemUITransforms.Count;
 
         List<Vector3> newPositions = new List<Vector3>();
-        for (int i = 0; i < itemCount; i++)
+        for (int i = 0; i < slotCount; i++)
         {
-            int currentIndex = itemUIIndices[i];
-            int targetIndex = (currentIndex + direction + itemCount) % itemCount;
-
-            if (targetIndex < 0)
-            {
-                targetIndex = itemCount - 1;
-            }
-            else if (targetIndex >= itemCount)
-            {
-                targetIndex = 0;
-            }
-
-            Vector3 targetPosition = initialPositions[itemUIIndices.IndexOf(targetIndex)];
+            Vector3 targetPosition = initialPositions[(i + direction + slotCount) % slotCount];
             newPositions.Add(targetPosition);
+
+            // Update the inventory item at the highest Z position (z = 100)
+            if (Mathf.Approximately(targetPosition.z, 100f))
+            {
+                int newIndex = (itemUIIndices[(i + direction + slotCount) % slotCount] - direction + itemCount) % itemCount;
+                ItemUI targetItemUI = inventorySlots[i].GetComponentInChildren<ItemUI>();
+                InventoryItem newItem = inventorySO.GetItemAt(newIndex);
+                if (targetItemUI != null)
+                {
+                    targetItemUI.UpdateItem(newItem);
+                    Debug.LogFormat("Updating slot at Z position 100 to display item at index {0}: {1}", newIndex, newItem.name);
+                }
+                else
+                {
+                    Debug.LogWarning("Slot at Z position 100 not found.");
+                }
+            }
         }
 
         StartCoroutine(SmoothMoveItems(itemUITransforms, newPositions, 0.13f));
-
-        UpdateInventoryItems(direction);
 
         StartCoroutine(ResetIsMovingFlag(0.14f));
 
