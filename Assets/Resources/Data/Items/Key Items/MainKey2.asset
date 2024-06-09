@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Item: {fileID: 11400000, guid: e730705ba1445f34887a0db41abd2707, type: 2}
   isKey: 1
+  <Specs>k__BackingField: Piece of a wall
   inventory: {fileID: 11400000, guid: 11e48b70b9dbf6844882d31264001a4f, type: 2}

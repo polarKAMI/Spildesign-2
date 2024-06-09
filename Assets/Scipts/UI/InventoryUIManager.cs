@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System.Linq;
 
 public class InventoryUIManager : MonoBehaviour
 {
@@ -192,18 +193,43 @@ public class InventoryUIManager : MonoBehaviour
                 ItemUI itemUI = slot.GetComponentInChildren<ItemUI>();
                 itemUI.SetIndex(i);
                 itemUI.SetActualIndex(i);
+                
+                    // Update the item image
 
-                // Update the item image
-                itemUI.UpdateItem(inventoryItem);
 
                 // Store the transform of the ItemUI instance
                 itemUITransforms.Add(itemUI.GetCachedTransform());
             }
+            for (int i = 0; i <= 8; i++)
+            {
+                InventoryItem inventoryItem = inventorySO.GetItemAt(i);
+                ItemUI itemUI = inventorySlots[i].GetComponentInChildren<ItemUI>();
+                itemUI.SetActualIndex(i);
+                itemUI.UpdateItem(inventoryItem);
+            }
+
+            int reverseIndex = inventorySize - 1; // Start from the last item
+            for (int i = slotCount - 1; i >= 9; i--)
+            {
+                if (reverseIndex < 0)
+                    reverseIndex = inventorySize - 1;
+
+                InventoryItem inventoryItem = inventorySO.GetItemAt(reverseIndex);
+                ItemUI itemUI = inventorySlots[i].GetComponentInChildren<ItemUI>();
+                itemUI.SetActualIndex(reverseIndex);
+                itemUI.UpdateItem(inventoryItem);
+
+                reverseIndex--; // Move to the previous item
+            }
+
             SortInventorySlotsByZPosition();
             UpdateItemCounter();
         }
-
+        SortInventorySlotsByZPosition();
+            UpdateItemCounter();
     }
+
+    
     private void UpdateItemCounter()
     {
         if (itemCounterText != null && inventorySO != null)
@@ -238,54 +264,55 @@ public class InventoryUIManager : MonoBehaviour
     }
     public void UpdateInventoryItems(int direction)
     {
-        // Get the current inventory state
-        Dictionary<int, InventoryItem> currentInventoryState = inventorySO.GetCurrentInventoryState();
-        int itemCount = currentInventoryState.Count;
+        // Find the items in the slots with a Z position approximately equal to 30.86583
+        InventoryItem[] itemsAtZ30_8 = FindItemsAtZPosition(30.86583f);
 
-        // Calculate the start index based on the middle of the inventory list
-        int startIndex = itemCount / 2;
+        // Log the count of items found at Z position 30.86583
+        Debug.Log("Items found at Z position 30.86583 count: " + itemsAtZ30_8.Length);
 
-        // If itemCount is odd, round down to the nearest integer
-        if (itemCount % 2 == 1)
+        // Ensure that itemsAtZ30_8 array is not empty before accessing its elements
+        if (itemsAtZ30_8.Length > 0)
         {
-            startIndex = Mathf.FloorToInt((float)itemCount / 2);
-        }
-        else
-        {
-            startIndex = Mathf.FloorToInt((float)itemCount / 2) - 1;
-        }
+            // Get the current item displayed in the slots with Z = 30.86583
+            InventoryItem currentItem = itemsAtZ30_8[0];
 
-        // If currentIndex is not initialized or out of bounds, set it to startIndex
-        if (currentIndex == -1 || currentIndex >= itemCount || currentIndex < 0)
-        {
-            currentIndex = startIndex;
-        }
-        else
-        {
-            // Update currentIndex based on the direction
-            currentIndex += direction;
+            // Find the index of the current item in the inventory
+            int currentIndex = inventorySO.GetCurrentInventoryState().Keys.FirstOrDefault(index => inventorySO.GetCurrentInventoryState()[index] == currentItem);
 
-            // Loop around the inventory list if currentIndex goes out of bounds
-            while (currentIndex < 0)
+            // Calculate the index of the next item based on the direction
+            int nextIndex = (currentIndex + direction + inventorySO.Size) % inventorySO.Size;
+
+            // Get the next inventory item to display
+            InventoryItem nextItem = inventorySO.GetItemAt(nextIndex);
+
+            // Update the item image in the UI with the next inventory item
+            foreach (var item in itemsAtZ30_8)
             {
-                currentIndex += itemCount;
+ 
             }
+        }
+        else
+        {
+            Debug.LogWarning("No items found at Z position 30.86583");
+        }
+    }
 
-            currentIndex %= itemCount;
+    private InventoryItem[] FindItemsAtZPosition(float zPosition)
+    {
+        List<InventoryItem> items = new List<InventoryItem>();
+
+        foreach (var slot in inventorySlots)
+        {
+            ItemUI itemUI = slot.GetComponentInChildren<ItemUI>();
+            if (itemUI != null && Mathf.Approximately(slot.transform.localPosition.z, zPosition))
+            {
+                items.Add(itemUI.inventoryItem);
+            }
         }
 
-        // Find the index of the item at the highest z-position
-        int highestZIndex = GetHighestZIndex();
-
-        // Get the inventory item at the current index
-        InventoryItem inventoryItem = currentInventoryState[currentIndex];
-
-        // Get the ItemUI component from the inventory slot at highest z-position
-        ItemUI itemUI = inventorySlots[highestZIndex].GetComponentInChildren<ItemUI>();
-
-        // Update the item image with the inventory item at the current index
-        itemUI.UpdateItem(inventoryItem);
+        return items.ToArray();
     }
+
 
     private int GetHighestZIndex()
     {
