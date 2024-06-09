@@ -149,6 +149,7 @@ MonoBehaviour:
   itemRenderer: {fileID: 2479035407104836851}
   playerController: {fileID: 0}
   isMatch: 0
+  keyinputsound: {fileID: 8750353194646838534, guid: 71d650a790dfa804eb421427632d3f0b, type: 3}
 --- !u!1 &2178368482105165899
 GameObject:
   m_ObjectHideFlags: 0
@@ -298,6 +299,7 @@ MonoBehaviour:
   itemRenderer: {fileID: 6130547759686402158}
   playerController: {fileID: 0}
   isMatch: 0
+  keyinputsound: {fileID: 8750353194646838534, guid: 71d650a790dfa804eb421427632d3f0b, type: 3}
 --- !u!1 &2563125524427228101
 GameObject:
   m_ObjectHideFlags: 0
@@ -702,6 +704,7 @@ MonoBehaviour:
   itemRenderer: {fileID: 4350702127966626855}
   playerController: {fileID: 0}
   isMatch: 0
+  keyinputsound: {fileID: 8750353194646838534, guid: 71d650a790dfa804eb421427632d3f0b, type: 3}
 --- !u!1 &5383157422564584864
 GameObject:
   m_ObjectHideFlags: 0
@@ -754,6 +757,8 @@ MonoBehaviour:
   animator: {fileID: 0}
   playerController: {fileID: 0}
   endScreen: {fileID: 0}
+  endsongye: 0
+  endsong: {fileID: 8750353194646838534, guid: 7320d4e30357b5b449bd8e645f7fea41, type: 3}
 --- !u!1 &6607306513452434208
 GameObject:
   m_ObjectHideFlags: 0

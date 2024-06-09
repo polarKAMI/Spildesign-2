@@ -7,6 +7,8 @@ public class Door : MonoBehaviour, IInteractable
     private bool isOpen = false;
     public PlayerController playerController;
 
+    public GameObject Doorsound;
+
     public void TryOpenDoor(GoblinKey key)
     {
         if (!isOpen && key == requiredKey && key is GoblinKey)
@@ -30,6 +32,7 @@ public class Door : MonoBehaviour, IInteractable
         gameObject.SetActive(false);
         isOpen = true;
         Debug.Log("Door opened!");
+        Instantiate(Doorsound);
     }
 
     public void Interact()

@@ -11,10 +11,13 @@ public class SlotController : MonoBehaviour
     public PlayerController playerController;
     private bool once;
     public GameObject endScreen;
+    public bool endsongye = false;
+    public GameObject endsong;
     private void Start()
     {
         // Initialize the array to store the match status of each slot
         isSlotMatched = new bool[itemSlots.Length];
+        endsongye = false;
         
     }
 
@@ -45,6 +48,7 @@ public class SlotController : MonoBehaviour
             if (playermovement != null)
             {
                 playermovement.DisableMovement();
+                Instantiate(endsong);
                 StartCoroutine(EndGame());
             }
         }
@@ -54,6 +58,7 @@ public class SlotController : MonoBehaviour
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         CanvasGroup endScreenCanvasGroup = endScreen.GetComponent<CanvasGroup>();
+        endsongye = true;
         float startAlpha = 0f;
         // Final alpha value
         float targetAlpha = 1f;
@@ -79,7 +84,7 @@ public class SlotController : MonoBehaviour
             elapsedTime += Time.deltaTime;
         }
         endScreenCanvasGroup.alpha = targetAlpha;
-        yield return new WaitForSeconds(8f); // Adjust the delay duration as needed
+        yield return new WaitForSeconds(15f); // Adjust the delay duration as needed
         // Load the specified scene
         LoadScene("MainMenu");
     }
