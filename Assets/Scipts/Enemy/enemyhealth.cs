@@ -10,6 +10,12 @@ public class enemyhealth : MonoBehaviour
     public LogSO log;
     public GameObject Nisseavsound;
     public NotificationManager notificationManager;
+    public EnemyMovement enemyMovement;
+    public Enemy_Chase enemyChase;
+    public GameObject damagescript;
+    public Animator animator;
+
+    private bool isDead = false;
     void Start()
     {
         currentenemyhealth = Maxhealth;
@@ -24,20 +30,23 @@ public class enemyhealth : MonoBehaviour
     }
     public void Takedamage(int amount)
     {
-        currentenemyhealth -= amount;
-
-        if (currentenemyhealth < Maxhealth)
+        if (!isDead)
         {
-            Instantiate(Nissedudsound);
-        }
-        else
-        {
-            Instantiate(Nisseavsound);
-        }
-        
+            currentenemyhealth -= amount;
 
-        currentenemyhealth -= amount;
-        Debug.Log("Nisse tog squ skade");
+            if (currentenemyhealth < Maxhealth)
+            {
+                Instantiate(Nissedudsound);
+            }
+            else
+            {
+                Instantiate(Nisseavsound);
+            }
+
+
+            currentenemyhealth -= amount;
+            Debug.Log("Nisse tog squ skade");
+        }
     }
     public void Die()
     {
@@ -49,6 +58,21 @@ public class enemyhealth : MonoBehaviour
             log.Collected = true;
             notificationManager.ShowNotification("new log;");
         }
-        Destroy(gameObject);
+        if (enemyMovement != null)
+        {
+            enemyMovement.enabled = false;
+        }
+
+        if (enemyChase != null)
+        {
+            enemyChase.enabled = false;
+        }
+        if(damagescript != null)
+        {
+            damagescript.SetActive(false);
+        }
+        isDead = true;
+
+        animator.SetBool("IsDead", true);
     }
 }

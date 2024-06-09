@@ -136,6 +136,10 @@ MonoBehaviour:
   log: {fileID: 11400000, guid: d2c85c11faff33a449d16caf564cac5c, type: 2}
   Nisseavsound: {fileID: 6894784377503402860, guid: ae3dc961090a62c43a33e30b234e80dc, type: 3}
   notificationManager: {fileID: 0}
+  enemyMovement: {fileID: 0}
+  enemyChase: {fileID: 0}
+  damagescript: {fileID: 0}
+  animator: {fileID: 0}
 --- !u!114 &2239738546294574519
 MonoBehaviour:
   m_ObjectHideFlags: 0

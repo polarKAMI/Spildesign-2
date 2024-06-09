@@ -45,7 +45,7 @@ public class EnemyAI : MonoBehaviour
     public bool hasDealtDamage;
 
     public Animator animator;
-
+    private bool IsDead = false;
 
     public GameObject avsound;
     public GameObject attacksound;
@@ -77,38 +77,41 @@ public class EnemyAI : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (TargetInDistance() && seeker.IsDone())
+        if (!IsDead)
         {
-            if (isConcealed)
+            if (TargetInDistance() && seeker.IsDone())
             {
-                animator.SetBool("IsTransformed", true);
-                StartCoroutine(ChangeColorAndActivate());
+                if (isConcealed)
+                {
+                    animator.SetBool("IsTransformed", true);
+                    StartCoroutine(ChangeColorAndActivate());
+                }
+                else if (TargetInDistance() && seeker.IsDone() && IsGrounded() && !isJumping)
+                {
+                    LaunchEnemy();
+                    animator.SetBool("IsGrounded", false);
+                }
+                else if (TargetInDistance() && seeker.IsDone() && IsGrounded() && isJumping)
+                {
+                    animator.SetBool("IsGrounded", true);
+                }
             }
-            else if (TargetInDistance() && seeker.IsDone() && IsGrounded() && !isJumping)
+            else if (!TargetInDistance() && !isConcealed)
             {
-                LaunchEnemy();
-                animator.SetBool("IsGrounded", false);
+                StartCoroutine(CheckAndConceal()); // Call the function when the player is outside target range
             }
-            else if (TargetInDistance() && seeker.IsDone() && IsGrounded() && isJumping)
+            if (rb.velocity.x > 0.05f)
             {
-                animator.SetBool("IsGrounded", true);
+                transform.localScale = new Vector3(-1f * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
             }
-        }
-        else if (!TargetInDistance() && !isConcealed)
-        {
-            StartCoroutine(CheckAndConceal()); // Call the function when the player is outside target range
-        }
-        if (rb.velocity.x > 0.05f)
-        {
-            transform.localScale = new Vector3(-1f * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
-        }
-        else if (rb.velocity.x < -0.05f)
-        {
-            transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
-        }
-        if (currentHealth <= 0)
-        {
-            Die();
+            else if (rb.velocity.x < -0.05f)
+            {
+                transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+            }
+            if (currentHealth <= 0)
+            {
+                Die();
+            }
         }
     }
 
@@ -360,10 +363,13 @@ public class EnemyAI : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player") && !IsGrounded() && !hasDealtDamage)
+        if (!IsDead)
         {
-            Attack();
-            hasDealtDamage = true; // Set the flag to true after dealing damage during a jump
+            if (other.CompareTag("Player") && !IsGrounded() && !hasDealtDamage)
+            {
+                Attack();
+                hasDealtDamage = true; // Set the flag to true after dealing damage during a jump
+            }
         }
     }
     public void Attack()
@@ -390,6 +396,7 @@ public class EnemyAI : MonoBehaviour
             notificationManager.ShowNotification("new log;");
         }
         Instantiate(dudsound);
-        Destroy(gameObject);
+        IsDead = true;
+        animator.SetBool("IsDead", true);
     }
 }

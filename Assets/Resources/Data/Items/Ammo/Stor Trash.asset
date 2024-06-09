@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Stor Trash
   m_EditorClassIdentifier: 
   Item: {fileID: 11400000, guid: a746edad24b7daf4090f513190fdffeb, type: 2}
-  isKey: 0
+  isKey: 1
   <Specs>k__BackingField: Ammo for 2 shots
   AmmoRestoreAmount: 10
