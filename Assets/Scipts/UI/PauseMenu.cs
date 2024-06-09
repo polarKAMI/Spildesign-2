@@ -18,6 +18,11 @@ public class PauseMenu : MonoBehaviour
     private int selectedIndex = 0;
 
 
+
+    private AudioSource audioSource;
+    private AudioClip indexChangeClip;
+    private AudioClip indexEnterClip;
+
     private void Start()
     {
         playerMovement = FindObjectOfType<PlayerMovement>();
@@ -59,15 +64,19 @@ public class PauseMenu : MonoBehaviour
         {
             case 0: // First option selected
                 Resume();
+               
                 break;
             case 1: // Second option selected
                 Logopen();
+               
                 break;
             case 2: // Third option selected
                 Restart();
+               
                 break;
             case 3:
                 MainMenu();
+               
                 break;
             default:
                 Debug.LogError("Invalid option selected!");
@@ -95,24 +104,28 @@ public class PauseMenu : MonoBehaviour
 
     public void Pause()
     {
+        PlayIndexEnterSound();
         pauseMenu.SetActive(true);
         Time.timeScale = 0;
     }
 
     public void MainMenu()
     {
+        PlayIndexEnterSound();
         SceneManager.LoadScene("MainMenu");
         Time.timeScale = 1;
     }
 
    public void Logopen()
     {
+        PlayIndexEnterSound();
         pauseMenu.SetActive(false);
         ResetOptions();
         logMenu.LogOpen();
     }
     public void Resume()
     {
+        PlayIndexEnterSound();
         pauseMenu.SetActive(false);
         Time.timeScale = 1;
 
@@ -137,6 +150,7 @@ public class PauseMenu : MonoBehaviour
 
     public void Restart()
     {
+        PlayIndexEnterSound();
         GlobalInputMapping.SetActiveInputMappings(GlobalInputMapping.inGameInputMapping);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         Time.timeScale = 1;
@@ -150,11 +164,13 @@ public class PauseMenu : MonoBehaviour
         if (newIndex < 0)
         {
             newIndex = menuBorders.Length - 1;
+            PlayIndexChangeSound();
         }
         // Loop back to the first option if it exceeds the maximum index
         else if (newIndex >= menuBorders.Length)
         {
             newIndex = 0;
+            PlayIndexChangeSound();
         }
 
         // Deactivate the previously selected border
@@ -165,6 +181,24 @@ public class PauseMenu : MonoBehaviour
 
         // Update the selected index
         selectedIndex = newIndex;
+    }
+
+
+    private void PlayIndexChangeSound()
+    {
+        if (audioSource != null && indexChangeClip != null)
+        {
+            audioSource.PlayOneShot(indexChangeClip);
+        }
+    }
+
+
+    private void PlayIndexEnterSound()
+    {
+        if (audioSource != null && indexEnterClip != null)
+        {
+            audioSource.PlayOneShot(indexEnterClip);
+        }
     }
 }
 

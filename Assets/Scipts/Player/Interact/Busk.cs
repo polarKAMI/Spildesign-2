@@ -10,14 +10,19 @@ public class Busk : MonoBehaviour, IInteractable
     private Vector3 originalPosition; // Store the original position
     public SpriteRenderer spriteRenderer; // Reference to the sprite renderer component
 
+    private AudioSource audioSource;
+    public AudioClip Busklyd;
+
     void Start()
     {
         originalPosition = transform.position; // Store the original position
         spriteRenderer = GetComponent<SpriteRenderer>(); // Get the sprite renderer component
+        audioSource = GetComponent<AudioSource>();
     }
     public void Interact()
     {
         EnterLayer();
+        PlayIndexEnterSound();
         Debug.Log("Har trykket E for busk");
     }
 
@@ -71,5 +76,12 @@ public class Busk : MonoBehaviour, IInteractable
     }
 
 
+    private void PlayIndexEnterSound()
+    {
+
+
+        audioSource.PlayOneShot(Busklyd);
+
+    }
     // bush er forkert
 }

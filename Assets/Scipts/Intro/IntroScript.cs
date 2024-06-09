@@ -8,19 +8,22 @@ public class IntroScript : MonoBehaviour
     public TMP_Text uiText; // First TextMeshPro text component
     public TMP_Text timeText; // Second TextMeshPro text component for the time
     public TMP_Text logText; // Third TextMeshPro text component for the second message
-    public float typingSpeed = 0.05f; // Speed at which characters are displayed
+    public float typingSpeed = 0.015f; // Speed at which characters are displayed
     [TextArea(3, 10)]
     public string message; // First message to be displayed
     public string newTime = "17:47"; // New time to display after the first message
     [TextArea(3, 10)]
     public string secondaryMessage; // Second message to be displayed
-    public float pauseDuration = 0.5f; // Duration for each pause
+    public float pauseDuration = 1.5f; // Duration for each pause
 
 
     public AudioSource audioSource; // AudioSource for playing sound effects
     public AudioClip typingSound; // Sound effect for typing
     public float minPitch = 0.8f; // Minimum pitch for randomization
     public float maxPitch = 1.2f; // Maximum pitch for randomization
+
+    private Coroutine typingCoroutine; // Reference to the typing coroutine
+    private bool isCursorVisible = true; // Flag to track cursor visibility
 
     void Start()
     {
@@ -44,6 +47,14 @@ public class IntroScript : MonoBehaviour
         });
     }
 
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            SceneManager.LoadScene("SampleScene");
+            GlobalInputMapping.SetActiveInputMappings(GlobalInputMapping.inGameInputMapping);
+        }
+    }
     public void StartTyping(string message, TMP_Text textComponent, System.Action onComplete)
     {
         StartCoroutine(TypeMessage(message, textComponent, onComplete));
@@ -65,12 +76,15 @@ public class IntroScript : MonoBehaviour
                 audioSource.pitch = Random.Range(minPitch, maxPitch);
                 audioSource.PlayOneShot(typingSound);
 
+              
+
                 yield return new WaitForSeconds(typingSpeed); // Wait before adding the next letter
             }
         }
 
         onComplete?.Invoke();
     }
+
 
     private IEnumerator LoadNextSceneAfterDelay(float delay)
     {

@@ -8,12 +8,11 @@ public class Lygtehealth : MonoBehaviour
     public int currentenemyhealth;
 
     public GameObject lygtedudsound;
-
     public GameObject lygteavsound;
     public GameObject triangle;
     public Lygtemanden lygtemanden;
     public Lygtemandenmovement lygtemandenmovement;
-
+    public Animator animator;
 
     public LogSO log;
     public NotificationManager notificationManager;
@@ -22,7 +21,6 @@ public class Lygtehealth : MonoBehaviour
     {
         currentenemyhealth = Maxhealth;
     }
-
 
     public void Takedamage(int amount)
     {
@@ -37,18 +35,18 @@ public class Lygtehealth : MonoBehaviour
             Instantiate(lygteavsound);
         }
 
-
         currentenemyhealth -= amount;
         Debug.Log("Nisse tog squ skade");
 
-
-
-
+        if (currentenemyhealth <= 0)
+        {
+            Die();
+        }
     }
-
 
     public void Die()
     {
+        lygtemanden.isChasing = false;
         if (!log.Collected)
         {
             // Add the log to the LogManager
@@ -57,9 +55,30 @@ public class Lygtehealth : MonoBehaviour
             log.Collected = true;
             notificationManager.ShowNotification("new log;");
         }
+
         lygtemanden.enabled = false;
         lygtemandenmovement.enabled = false;
         triangle.SetActive(false);
+        animator.SetBool("IsDead", true);
+        animator.SetBool("HasCaught", false);
+        animator.SetBool("IsSpawned", false);
+
+        // Start the UnDie coroutine
+        StartCoroutine(UnDie());
+    }
+
+    private IEnumerator UnDie()
+    {
+        // Wait for 30 seconds
+        yield return new WaitForSeconds(30);
+
+        // Re-enable the components and set the necessary states
+        lygtemanden.enabled = true;
+        lygtemandenmovement.enabled = true;
+        triangle.SetActive(true);
+        animator.SetBool("IsDead", false);
+
+        // Reset health or any other state if necessary
+        currentenemyhealth = Maxhealth;
     }
 }
-

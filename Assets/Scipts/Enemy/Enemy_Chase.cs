@@ -7,10 +7,10 @@ public class Enemy_Chase : MonoBehaviour
     public Transform player; // Reference to the player object
     public float moveSpeed = 5f; // Movement speed of the enemy
     public float detectionRange = 5f; // Range within which the enemy detects the player
-   
+    float yOffset = 0.5f;
 
     private Rigidbody2D rb;
-  
+
     private bool isChasing = false;
     private bool soundPlayed = false;
 
@@ -24,16 +24,16 @@ public class Enemy_Chase : MonoBehaviour
     private Damagescript damagescript;
 
     public GameObject Nissechaselyd;
-    
+
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-      
+
         movementScript = GetComponent<EnemyMovement>();
         iScriptEnabled = GetComponent<Enemy_Chase>();
 
-      damagescript = GetComponentInChildren<Damagescript>();
+        damagescript = GetComponentInChildren<Damagescript>();
         IgnorePlayerCollision();
 
 
@@ -46,22 +46,19 @@ public class Enemy_Chase : MonoBehaviour
         if (!isChasing)
         {
             // Check for player within detection range
-            if (player != null && Vector2.Distance(transform.position, player.position) <= detectionRange)
+            if (Vector2.Distance(transform.position, player.position) <= detectionRange && player.position.y >= transform.position.y - yOffset && player.position.y <= transform.position.y + yOffset)
             {
-               
-                
-                    isChasing = true;
-
-                isChasing = true;
-                if (!soundPlayed)
                 {
-                    Instantiate(Nissechaselyd);
-                    soundPlayed = true; // Mark the sound as played
-                }
-                
+                    isChasing = true;
+                    if (!soundPlayed)
+                    {
+                        Instantiate(Nissechaselyd);
+                        soundPlayed = true; // Mark the sound as played
+                    }
+
                     // Disable Lygtemandenmovement script when chasing
                     movementScript.enabled = false;
-                
+                }
             }
         }
         else
@@ -90,6 +87,9 @@ public class Enemy_Chase : MonoBehaviour
 
         void MoveTowards(Vector2 targetPosition)
         {
+            // Adjust the target position to have the same y-coordinate as the enemy
+            targetPosition.y = transform.position.y;
+
             // Calculate the distance between the object and the target
             float distance = Vector2.Distance(transform.position, targetPosition);
 
@@ -212,7 +212,7 @@ public class Enemy_Chase : MonoBehaviour
         movementScript.enabled = true; // Enable Enemymovement script after the delay
     }
 
-   
+
 
 
     private void OnTriggerEnter2D(Collider2D col)
