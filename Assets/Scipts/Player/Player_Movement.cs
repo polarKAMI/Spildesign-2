@@ -33,7 +33,8 @@ public class PlayerMovement : MonoBehaviour
     public float staminaRecoveryRate = 5f; // Rate at which stamina recovers when not sprinting
     public GameObject breathingGameObject;
 
-    private AudioSource audioSourceRun;
+    private AudioSource audioSource;
+    
     public Animator animator;
     private bool isRecoveringStamina = true;
 
@@ -53,7 +54,7 @@ public class PlayerMovement : MonoBehaviour
             Debug.LogError("Lygtemanden script not found in the scene.");
         }
 
-        audioSourceRun = GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
 
         // Initialize stamina
         currentStamina = maxStamina;
@@ -160,6 +161,7 @@ public class PlayerMovement : MonoBehaviour
         {
             Debug.Log("Player hidden");
             PlayerHidden = true;
+           
         }
         else
         {
@@ -210,6 +212,7 @@ public class PlayerMovement : MonoBehaviour
             if (currentBusk != null)
             {
                 Debug.Log("Entered bush");
+               
             }
         }
     }
@@ -249,5 +252,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+
+    
 
 }
