@@ -17,6 +17,7 @@ public class Busk : MonoBehaviour, IInteractable
     {
         originalPosition = transform.position; // Store the original position
         spriteRenderer = GetComponent<SpriteRenderer>(); // Get the sprite renderer component
+        audioSource = GetComponent<AudioSource>();
     }
     public void Interact()
     {
