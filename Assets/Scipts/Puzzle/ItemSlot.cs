@@ -16,6 +16,8 @@ public class ItemSlot : MonoBehaviour, IInteractable
     public bool isMatch = false;
     private bool doorOpened = false;
 
+    public GameObject keyinputsound;
+
     // Method to insert an item into the slot
 
     public void Interact()
@@ -44,6 +46,7 @@ public class ItemSlot : MonoBehaviour, IInteractable
             {
                 MainKey mainKey = item as MainKey;
                 mainKey.RemoveFromInventory();
+                Instantiate(keyinputsound);
             }
 
             CheckCombination();

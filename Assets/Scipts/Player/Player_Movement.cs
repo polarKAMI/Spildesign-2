@@ -33,8 +33,8 @@ public class PlayerMovement : MonoBehaviour
     public float staminaRecoveryRate = 5f; // Rate at which stamina recovers when not sprinting
     public GameObject breathingGameObject;
 
-    private AudioSource audioSource;
-    
+    public AudioSource audioSource;
+    public AudioClip Sprintsclip;
     public Animator animator;
     private bool isRecoveringStamina = true;
 
@@ -71,11 +71,13 @@ public class PlayerMovement : MonoBehaviour
 
     public void Sprinting()
     {
-       
+        PlaySprintSound();
 
         if (isSprinting)
         {
-
+           
+            
+            Debug.Log("Audioclip burde virke");
         }
         else
         {
@@ -86,9 +88,12 @@ public class PlayerMovement : MonoBehaviour
 
     public void NotSprinting()
     {
+        StopSprintSound();
+
         if (!isSprinting)
         {
-
+            
+           
         }
         else
         {
@@ -252,7 +257,22 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    private void PlaySprintSound()
+    {
+        if (Sprintsclip != null && audioSource != null)
+        {
+            audioSource.clip = Sprintsclip;
+            audioSource.Play();
+        }
+    }
 
-    
+    private void StopSprintSound()
+    {
+        if (audioSource != null && audioSource.clip == Sprintsclip)
+        {
+            audioSource.Stop();
+        }
+    }
+
 
 }

@@ -25,12 +25,16 @@ public class PlayerJump : MonoBehaviour
     public Animator animator;
     private bool collideonce = false;
 
+    
+    public GameObject Jumpaudio;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         playerMovement = GetComponent<PlayerMovement>();
         ladderMovement = GetComponent<LadderMovement>();
         cameraFollow = Camera.main.GetComponent<CameraFollow>();
+        
     }
 
     public void StartChargingJump()
@@ -61,6 +65,8 @@ public class PlayerJump : MonoBehaviour
     private void Jump(float jumpForce)
     {
         playerMovement.DisableMovement();
+
+        Instantiate(Jumpaudio);
         // Apply the jump force in both x and y directions
         if (playerMovement.isFacingRight)
         {

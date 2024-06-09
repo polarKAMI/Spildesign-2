@@ -3,7 +3,12 @@ guid: 5aa4a8e84a3db614d9685bea2ef739fb
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - requiredItem: {instanceID: 0}
+  - inventory: {instanceID: 0}
+  - itemRenderer: {instanceID: 0}
+  - playerController: {instanceID: 0}
+  - keyinputsound: {fileID: 8750353194646838534, guid: 71d650a790dfa804eb421427632d3f0b, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
