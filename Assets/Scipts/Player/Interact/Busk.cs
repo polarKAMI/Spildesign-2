@@ -42,6 +42,11 @@ public class Busk : MonoBehaviour, IInteractable
         Color color = spriteRenderer.color;
         color.a = 0.5f;
         spriteRenderer.color = color;
+
+        // Change the sorting order to 7
+        spriteRenderer.sortingOrder = 7;
+
+
     }
 
     void OnTriggerEnter2D(Collider2D other) // ved ikke hvad g'r
@@ -72,6 +77,9 @@ public class Busk : MonoBehaviour, IInteractable
             Color color = spriteRenderer.color;
             color.a = 1f;
             spriteRenderer.color = color;
+
+            // Change the sorting order to 7
+            spriteRenderer.sortingOrder = 5;
         }
     }
 

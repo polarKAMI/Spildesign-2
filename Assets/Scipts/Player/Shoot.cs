@@ -15,7 +15,8 @@ public class Shoot : MonoBehaviour
     public PlayerMovement PlayerMovement;
 
     public Animator animator;
-    public Image ammoBar;
+    public Image ammoBar5;
+    public Image ammoBar10;
 
     public GameObject reloadobject;
     public GameObject Firesoundobject;
@@ -108,10 +109,15 @@ public class Shoot : MonoBehaviour
 
     private void UpdateAmmoUI()
     {
-        if (ammoBar != null)
+        if (ammoBar5 != null && ammoBar10 != null)
         {
-            ammoBar.fillAmount = (float)currentAmmo / maxAmmo;
-            ammoBar.color = currentAmmo == maxAmmo ? Color.red : Color.white;
+            // Update the first ammo bar (up to 5 ammo)
+            ammoBar5.fillAmount = Mathf.Clamp01((float)currentAmmo / 5);
+            ammoBar5.color = currentAmmo >= 5 ? Color.green : Color.white;
+
+            // Update the second ammo bar (up to 10 ammo)
+            ammoBar10.fillAmount = Mathf.Clamp01((float)(currentAmmo - 5) / 5);
+            ammoBar10.color = currentAmmo == maxAmmo ? Color.green : Color.white;
         }
     }
 }
