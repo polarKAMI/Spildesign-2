@@ -1102,6 +1102,7 @@ MonoBehaviour:
   itemCounterText: {fileID: 2500784290906216589}
   itemCounter: {fileID: 8889379660870414837}
   isOpen: 0
+  doLogSlots: 0
   ammoBar: {fileID: 2324251069788245253}
   ammoBarBoarder: {fileID: 4029509723230554654}
   specTXT: {fileID: 4303328110010916279}
@@ -2703,7 +2704,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1994041947092322795, guid: beac9767ae44c484986f3d9e01b9287d, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4493062216011858127, guid: beac9767ae44c484986f3d9e01b9287d, type: 3}
       propertyPath: m_Pivot.x
